@@ -20,5 +20,13 @@
   "openNav": "Navigatie openen",
   "closeNav": "Navigatie sluiten",
   "quickLog": "Snel loggen",
-  "quickLogAria": "Snel een activiteit loggen"
+  "quickLogAria": "Snel een activiteit loggen",
+  "groups": {
+    "overview": "Overzicht",
+    "field": "Perceel",
+    "operations": "Werk",
+    "resources": "Middelen",
+    "financeCompliance": "Financiën & compliance",
+    "more": "Overig"
+  }
 }

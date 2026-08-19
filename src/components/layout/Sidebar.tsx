@@ -9,27 +9,60 @@ import { LanguageSwitcher } from './LanguageSwitcher';
 import { useTranslations } from '@/i18n/LocaleProvider';
 import styles from './Sidebar.module.css';
 
-// href + icon are stable; the visible label comes from the `navigation`
-// namespace (translation key), never a hardcoded string.
-const navItems = [
-  { href: '/dashboard', key: 'today', symbol: '◈' },
-  { href: '/fields', key: 'fields', symbol: '▦' },
-  { href: '/fields/map', key: 'fieldMap', symbol: '⌖' },
-  { href: '/soil', key: 'soil', symbol: '⬢' },
-  { href: '/nutrients', key: 'nutrients', symbol: '❋' },
-  { href: '/scouting', key: 'scouting', symbol: '◎' },
-  { href: '/reports', key: 'reports', symbol: '▤' },
-  { href: '/planning', key: 'seasonPlan', symbol: '▤' },
-  { href: '/work-orders', key: 'workOrders', symbol: '✓' },
-  { href: '/activities', key: 'activities', symbol: '✎' },
-  { href: '/inventory', key: 'inventory', symbol: '◫' },
-  { href: '/team', key: 'team', symbol: '☺' },
-  { href: '/machines', key: 'machines', symbol: '⚙' },
-  { href: '/finance', key: 'finance', symbol: '€' },
-  { href: '/weather', key: 'weather', symbol: '◌' },
-  { href: '/compliance', key: 'compliance', symbol: '✓' },
-  { href: '/ai', key: 'insights', symbol: '✦' },
-  { href: '/offline', key: 'offlineSync', symbol: '↻' },
+// href + icon are stable; every visible label (item and group) comes from
+// the `navigation` namespace (translation key), never a hardcoded string.
+// Grouped by how a farmer actually works the list, not by the order features
+// were built in — a flat 18-item list stopped being scannable once Soil,
+// Nutrients, Team and Machines landed in the same sprint (see the European
+// market pain-point review: 77% of farmers cite complex navigation as a
+// daily slowdown).
+const navGroups = [
+  {
+    key: 'overview',
+    items: [{ href: '/dashboard', key: 'today', symbol: '◈' }],
+  },
+  {
+    key: 'field',
+    items: [
+      { href: '/fields', key: 'fields', symbol: '▦' },
+      { href: '/fields/map', key: 'fieldMap', symbol: '⌖' },
+      { href: '/soil', key: 'soil', symbol: '⬢' },
+      { href: '/nutrients', key: 'nutrients', symbol: '❋' },
+    ],
+  },
+  {
+    key: 'operations',
+    items: [
+      { href: '/scouting', key: 'scouting', symbol: '◎' },
+      { href: '/planning', key: 'seasonPlan', symbol: '▤' },
+      { href: '/work-orders', key: 'workOrders', symbol: '✓' },
+      { href: '/activities', key: 'activities', symbol: '✎' },
+    ],
+  },
+  {
+    key: 'resources',
+    items: [
+      { href: '/inventory', key: 'inventory', symbol: '◫' },
+      { href: '/team', key: 'team', symbol: '☺' },
+      { href: '/machines', key: 'machines', symbol: '⚙' },
+    ],
+  },
+  {
+    key: 'financeCompliance',
+    items: [
+      { href: '/finance', key: 'finance', symbol: '€' },
+      { href: '/compliance', key: 'compliance', symbol: '✓' },
+      { href: '/reports', key: 'reports', symbol: '▤' },
+    ],
+  },
+  {
+    key: 'more',
+    items: [
+      { href: '/weather', key: 'weather', symbol: '◌' },
+      { href: '/ai', key: 'insights', symbol: '✦' },
+      { href: '/offline', key: 'offlineSync', symbol: '↻' },
+    ],
+  },
 ] as const;
 
 export function Sidebar() {
@@ -84,22 +117,27 @@ export function Sidebar() {
 
         {/* Navigation */}
         <nav className={styles.nav}>
-          <ul className={styles.navList}>
-            {navItems.map((item) => {
-              const isActive = pathname === item.href || pathname.startsWith(item.href + '/');
-              return (
-                <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    className={`${styles.navItem} ${isActive ? styles.active : ''}`}
-                  >
-                    <span className={styles.navSymbol}>{item.symbol}</span>
-                    <span className={styles.navLabel}>{t(item.key)}</span>
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
+          {navGroups.map((group) => (
+            <div key={group.key} className={styles.navGroup}>
+              <span className={styles.navGroupLabel}>{t(`groups.${group.key}`)}</span>
+              <ul className={styles.navList}>
+                {group.items.map((item) => {
+                  const isActive = pathname === item.href || pathname.startsWith(item.href + '/');
+                  return (
+                    <li key={item.href}>
+                      <Link
+                        href={item.href}
+                        className={`${styles.navItem} ${isActive ? styles.active : ''}`}
+                      >
+                        <span className={styles.navSymbol}>{item.symbol}</span>
+                        <span className={styles.navLabel}>{t(item.key)}</span>
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          ))}
         </nav>
 
         {/* Footer */}

@@ -20,5 +20,13 @@
   "openNav": "Navigation öffnen",
   "closeNav": "Navigation schließen",
   "quickLog": "Schnellerfassung",
-  "quickLogAria": "Tätigkeit schnell erfassen"
+  "quickLogAria": "Tätigkeit schnell erfassen",
+  "groups": {
+    "overview": "Übersicht",
+    "field": "Schlag",
+    "operations": "Arbeit",
+    "resources": "Ressourcen",
+    "financeCompliance": "Finanzen & Compliance",
+    "more": "Weiteres"
+  }
 }

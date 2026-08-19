@@ -45,6 +45,20 @@
   overflow-y: auto;
 }
 
+.navGroup + .navGroup {
+  margin-top: var(--space-3);
+}
+
+.navGroupLabel {
+  display: block;
+  padding: 2px var(--space-3) 4px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
 .navList {
   list-style: none;
   display: flex;

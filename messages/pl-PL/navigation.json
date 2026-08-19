@@ -20,5 +20,13 @@
   "openNav": "Otwórz nawigację",
   "closeNav": "Zamknij nawigację",
   "quickLog": "Szybki wpis",
-  "quickLogAria": "Szybko zarejestruj czynność"
+  "quickLogAria": "Szybko zarejestruj czynność",
+  "groups": {
+    "overview": "Przegląd",
+    "field": "Działka",
+    "operations": "Praca",
+    "resources": "Zasoby",
+    "financeCompliance": "Finanse i zgodność",
+    "more": "Więcej"
+  }
 }

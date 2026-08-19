@@ -20,5 +20,13 @@
   "openNav": "Open navigation",
   "closeNav": "Close navigation",
   "quickLog": "Quick Log",
-  "quickLogAria": "Quick log an activity"
+  "quickLogAria": "Quick log an activity",
+  "groups": {
+    "overview": "Overview",
+    "field": "Field",
+    "operations": "Operations",
+    "resources": "Resources",
+    "financeCompliance": "Finance & compliance",
+    "more": "More"
+  }
 }
