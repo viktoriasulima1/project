@@ -1,0 +1,24 @@
+{
+  "title": "Grondanalyses",
+  "subtitle": "Laboratoriumresultaten per perceel — pH, P/K/Mg-getal en organische stof.",
+  "empty": "Nog geen grondanalyses geregistreerd.",
+  "create": {
+    "title": "Labresultaat toevoegen",
+    "button": "Labresultaat toevoegen"
+  },
+  "fields": {
+    "field": "Perceel",
+    "analysisDate": "Bemonsteringsdatum",
+    "phLevel": "pH",
+    "pIndex": "P-getal (fosfaat)",
+    "kIndex": "K-getal (kalium)",
+    "mgIndex": "Mg-getal (magnesium)",
+    "organicMatterPct": "Organische stof (%)",
+    "notes": "Notities"
+  },
+  "actions": {
+    "delete": "Verwijderen"
+  },
+  "confirmDelete": "Deze grondanalyse verwijderen?",
+  "noValue": "niet geregistreerd"
+}

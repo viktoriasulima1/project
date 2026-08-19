@@ -15,6 +15,7 @@ const navItems = [
   { href: '/dashboard', key: 'today', symbol: '◈' },
   { href: '/fields', key: 'fields', symbol: '▦' },
   { href: '/fields/map', key: 'fieldMap', symbol: '⌖' },
+  { href: '/soil', key: 'soil', symbol: '⬢' },
   { href: '/scouting', key: 'scouting', symbol: '◎' },
   { href: '/reports', key: 'reports', symbol: '▤' },
   { href: '/planning', key: 'seasonPlan', symbol: '▤' },

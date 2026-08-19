@@ -1,0 +1,24 @@
+{
+  "title": "Analizy gleby",
+  "subtitle": "Wyniki laboratoryjne dla działki — pH, zawartość P/K/Mg i materia organiczna.",
+  "empty": "Brak zarejestrowanych analiz gleby.",
+  "create": {
+    "title": "Dodaj wynik laboratoryjny",
+    "button": "Dodaj wynik laboratoryjny"
+  },
+  "fields": {
+    "field": "Działka",
+    "analysisDate": "Data pobrania próbki",
+    "phLevel": "pH",
+    "pIndex": "Wskaźnik P (fosfor)",
+    "kIndex": "Wskaźnik K (potas)",
+    "mgIndex": "Wskaźnik Mg (magnez)",
+    "organicMatterPct": "Materia organiczna (%)",
+    "notes": "Uwagi"
+  },
+  "actions": {
+    "delete": "Usuń"
+  },
+  "confirmDelete": "Usunąć tę analizę gleby?",
+  "noValue": "brak danych"
+}

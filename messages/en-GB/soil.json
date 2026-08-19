@@ -1,0 +1,24 @@
+{
+  "title": "Soil analyses",
+  "subtitle": "Lab results per field — pH, P/K/Mg index and organic matter.",
+  "empty": "No soil analyses recorded yet.",
+  "create": {
+    "title": "Add lab result",
+    "button": "Add lab result"
+  },
+  "fields": {
+    "field": "Field",
+    "analysisDate": "Sample date",
+    "phLevel": "pH",
+    "pIndex": "P index (phosphate)",
+    "kIndex": "K index (potassium)",
+    "mgIndex": "Mg index (magnesium)",
+    "organicMatterPct": "Organic matter (%)",
+    "notes": "Notes"
+  },
+  "actions": {
+    "delete": "Delete"
+  },
+  "confirmDelete": "Delete this soil analysis?",
+  "noValue": "not recorded"
+}

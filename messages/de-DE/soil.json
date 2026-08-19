@@ -1,0 +1,24 @@
+{
+  "title": "Bodenanalysen",
+  "subtitle": "Laborergebnisse je Schlag — pH, P/K/Mg-Gehalt und organische Substanz.",
+  "empty": "Noch keine Bodenanalysen erfasst.",
+  "create": {
+    "title": "Laborergebnis hinzufügen",
+    "button": "Laborergebnis hinzufügen"
+  },
+  "fields": {
+    "field": "Schlag",
+    "analysisDate": "Probenahmedatum",
+    "phLevel": "pH-Wert",
+    "pIndex": "P-Gehalt (Phosphat)",
+    "kIndex": "K-Gehalt (Kalium)",
+    "mgIndex": "Mg-Gehalt (Magnesium)",
+    "organicMatterPct": "Organische Substanz (%)",
+    "notes": "Notizen"
+  },
+  "actions": {
+    "delete": "Löschen"
+  },
+  "confirmDelete": "Diese Bodenanalyse löschen?",
+  "noValue": "nicht erfasst"
+}
