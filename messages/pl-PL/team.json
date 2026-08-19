@@ -1,0 +1,33 @@
+{
+  "title": "Zespół i uprawnienia",
+  "subtitle": "Zarządzaj pracownikami i statusem ich licencji na opryski.",
+  "empty": "Brak członków zespołu.",
+  "disclaimer": "Dane certyfikatu są zapisywane tak, jak zostały wprowadzone — nie są weryfikowane w żadnym oficjalnym rejestrze.",
+  "create": {
+    "title": "Dodaj członka zespołu",
+    "button": "Dodaj członka zespołu"
+  },
+  "edit": {
+    "title": "Edytuj członka zespołu",
+    "button": "Zapisz zmiany"
+  },
+  "cancel": "Anuluj",
+  "fields": {
+    "name": "Imię i nazwisko",
+    "role": "Rola",
+    "hasSpraying": "Uprawniony do opryskiwania",
+    "certNumber": "Numer certyfikatu",
+    "certExpiry": "Data ważności certyfikatu",
+    "isActive": "Aktywny"
+  },
+  "status": {
+    "certExpiresOn": "Wygasa {date}",
+    "noCertOnFile": "Brak zarejestrowanego certyfikatu"
+  },
+  "actions": {
+    "edit": "Edytuj",
+    "deactivate": "Dezaktywuj",
+    "activate": "Aktywuj ponownie"
+  },
+  "inactiveBadge": "Nieaktywny"
+}

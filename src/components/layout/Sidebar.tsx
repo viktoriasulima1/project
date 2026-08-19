@@ -21,6 +21,8 @@ const navItems = [
   { href: '/work-orders', key: 'workOrders', symbol: '✓' },
   { href: '/activities', key: 'activities', symbol: '✎' },
   { href: '/inventory', key: 'inventory', symbol: '◫' },
+  { href: '/team', key: 'team', symbol: '☺' },
+  { href: '/machines', key: 'machines', symbol: '⚙' },
   { href: '/finance', key: 'finance', symbol: '€' },
   { href: '/weather', key: 'weather', symbol: '◌' },
   { href: '/compliance', key: 'compliance', symbol: '✓' },

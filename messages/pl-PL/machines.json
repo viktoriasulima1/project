@@ -1,0 +1,33 @@
+{
+  "title": "Maszyny",
+  "subtitle": "Rejestruj maszyny, śledź terminy przeglądów i certyfikację.",
+  "empty": "Brak zarejestrowanych maszyn.",
+  "create": {
+    "title": "Dodaj maszynę",
+    "button": "Dodaj maszynę"
+  },
+  "edit": {
+    "title": "Edytuj maszynę",
+    "button": "Zapisz zmiany"
+  },
+  "cancel": "Anuluj",
+  "fields": {
+    "name": "Nazwa",
+    "type": "Typ",
+    "make": "Marka",
+    "model": "Model",
+    "year": "Rok produkcji",
+    "hoursSinceService": "Godziny od ostatniego przeglądu",
+    "nextServiceDueHours": "Następny przegląd (godziny)",
+    "isCertified": "Certyfikowana / dopuszczona"
+  },
+  "status": {
+    "serviceOverdue": "Przegląd zaległy",
+    "serviceDueSoon": "Przegląd wkrótce",
+    "serviceOk": "Po przeglądzie",
+    "notCertified": "Brak certyfikacji"
+  },
+  "actions": {
+    "edit": "Edytuj"
+  }
+}

@@ -8,6 +8,8 @@
   "workOrders": "Zlecenia",
   "activities": "Czynności",
   "inventory": "Magazyn",
+  "team": "Zespół",
+  "machines": "Maszyny",
   "finance": "Finanse",
   "weather": "Pogoda",
   "compliance": "Zgodność",

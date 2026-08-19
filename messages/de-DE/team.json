@@ -1,0 +1,33 @@
+{
+  "title": "Team & Zertifikate",
+  "subtitle": "Mitarbeiter und den Status ihrer Spritzlizenz verwalten.",
+  "empty": "Noch keine Teammitglieder.",
+  "disclaimer": "Zertifikatsdaten werden wie eingegeben gespeichert — nicht bei einem offiziellen Register überprüft.",
+  "create": {
+    "title": "Teammitglied hinzufügen",
+    "button": "Teammitglied hinzufügen"
+  },
+  "edit": {
+    "title": "Teammitglied bearbeiten",
+    "button": "Änderungen speichern"
+  },
+  "cancel": "Abbrechen",
+  "fields": {
+    "name": "Name",
+    "role": "Rolle",
+    "hasSpraying": "Zum Spritzen zertifiziert",
+    "certNumber": "Zertifikatsnummer",
+    "certExpiry": "Ablaufdatum des Zertifikats",
+    "isActive": "Aktiv"
+  },
+  "status": {
+    "certExpiresOn": "Läuft ab am {date}",
+    "noCertOnFile": "Kein Zertifikat hinterlegt"
+  },
+  "actions": {
+    "edit": "Bearbeiten",
+    "deactivate": "Deaktivieren",
+    "activate": "Reaktivieren"
+  },
+  "inactiveBadge": "Inaktiv"
+}

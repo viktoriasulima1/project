@@ -1,0 +1,33 @@
+{
+  "title": "Maschinen",
+  "subtitle": "Maschinen registrieren, Wartungsintervalle und Zertifizierung verfolgen.",
+  "empty": "Noch keine Maschinen registriert.",
+  "create": {
+    "title": "Maschine hinzufügen",
+    "button": "Maschine hinzufügen"
+  },
+  "edit": {
+    "title": "Maschine bearbeiten",
+    "button": "Änderungen speichern"
+  },
+  "cancel": "Abbrechen",
+  "fields": {
+    "name": "Name",
+    "type": "Typ",
+    "make": "Hersteller",
+    "model": "Modell",
+    "year": "Baujahr",
+    "hoursSinceService": "Stunden seit letzter Wartung",
+    "nextServiceDueHours": "Nächste Wartung (Stunden)",
+    "isCertified": "Zertifiziert / verkehrstauglich"
+  },
+  "status": {
+    "serviceOverdue": "Wartung überfällig",
+    "serviceDueSoon": "Wartung bald fällig",
+    "serviceOk": "Gewartet",
+    "notCertified": "Nicht zertifiziert"
+  },
+  "actions": {
+    "edit": "Bearbeiten"
+  }
+}

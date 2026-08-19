@@ -1,20 +1,178 @@
 {
-  "condition": { "good": "Gut", "satisfactory": "Zufriedenstellend", "poor": "Schlecht", "critical": "Kritisch" },
-  "severity": { "low": "Niedrig", "moderate": "Mittel", "high": "Hoch", "critical": "Kritisch" },
-  "observationStatus": { "open": "Offen", "monitoring": "Beobachtung", "action_planned": "Maßnahme geplant", "resolved": "Behoben", "dismissed": "Verworfen", "superseded": "Ersetzt" },
-  "priority": { "urgent": "Dringend", "critical": "Kritisch", "high": "Hoch", "medium": "Mittel", "low": "Niedrig" },
-  "activityType": { "spray": "Spritzen", "fertilise": "Düngen", "sow": "Aussaat", "tillage": "Bodenbearbeitung", "scout": "Monitoring", "harvest": "Ernte", "irrigate": "Bewässerung", "soil_sample": "Bodenprobe", "other": "Sonstiges" },
-  "operationType": { "soil_preparation": "Saatbettbereitung", "sow": "Aussaat", "fertilise": "Düngen", "spray": "Spritzen", "irrigate": "Bewässerung", "scout": "Monitoring", "tillage": "Bodenbearbeitung", "harvest": "Ernte", "custom": "Benutzerdefiniert" },
-  "workOrderStatus": { "draft": "Entwurf", "ready": "Bereit", "assigned": "Zugewiesen", "in_progress": "In Bearbeitung", "blocked": "Blockiert", "completed": "Abgeschlossen", "cancelled": "Abgebrochen" },
-  "complianceStatus": { "compliant": "Konform", "warning": "Warnung", "incomplete": "Unvollständig", "non_compliant": "Nicht konform" },
-  "syncState": { "draft": "Entwurf", "ready_to_sync": "Bereit zur Synchronisierung", "syncing": "Synchronisierung", "synced": "Synchronisiert", "conflict": "Konflikt", "failed": "Fehlgeschlagen", "needs_review": "Prüfung nötig", "cancelled": "Abgebrochen" },
-  "soilType": { "clay": "Ton", "sandy": "Sand", "loam": "Lehm", "peat": "Moor", "silt": "Schluff" },
-  "crop": { "wheat": "Weizen", "potato": "Kartoffel", "onion": "Zwiebel", "sugar_beet": "Zuckerrübe", "barley": "Gerste", "oilseed_rape": "Raps", "cover_crop": "Zwischenfrucht", "grass": "Gras", "other": "Sonstiges" },
-  "inventoryCategory": { "herbicide": "Herbizid", "fungicide": "Fungizid", "insecticide": "Insektizid", "fertiliser": "Dünger", "seed": "Saatgut", "fuel": "Kraftstoff", "other": "Sonstiges" },
-  "unit": { "L": "L", "kg": "kg", "T": "T", "bag": "Sack", "box": "Karton" },
-  "fieldStatus": { "healthy": "Gesund", "attention": "Aufmerksamkeit", "critical": "Kritisch", "fallow": "Brache" },
-  "costCategory": { "crop_protection": "Pflanzenschutz", "fertiliser": "Düngemittel", "seed": "Saat- und Pflanzgut", "labour": "Arbeit", "machinery": "Maschinen", "fuel": "Kraftstoff", "contractor": "Lohnunternehmen", "irrigation_utilities": "Bewässerung und Versorgung", "field_expenses": "Feldkosten", "allocated_overhead": "Zugeordnete Gemeinkosten", "other": "Sonstige" },
-  "financialSourceType": { "inventory_input": "Betriebsmittel aus Aktivität", "labour": "Arbeit aus Aktivität", "machinery": "Maschine aus Aktivität", "fuel": "Kraftstoff aus Aktivität", "contractor": "Lohnunternehmen", "field_rent": "Feldpacht", "utilities": "Versorgung", "soil_lab": "Boden und Labor", "miscellaneous": "Sonstige Ausgabe", "manual_expense": "Ausgabe", "crop_sale": "Ernteverkauf", "subsidy": "Förderung", "contract_income": "Vertragsertrag", "insurance_compensation": "Versicherungsleistung", "other_income": "Sonstiger Ertrag", "unknown": "Unbekannte Quelle" },
-  "financialAttribution": { "direct": "Direkt", "allocated": "Zugeordnet", "unallocated": "Nicht zugeordnet", "partially_allocated": "Teilweise zugeordnet", "unknown": "Unbekannte Zuordnung" },
-  "financialVersionState": { "original": "Original", "corrected": "Korrigiert", "reversed": "Storniert", "effective": "Aktuell wirksam", "superseded": "Ersetzt", "unknown": "Unbekannter Status" }
+  "condition": {
+    "good": "Gut",
+    "satisfactory": "Zufriedenstellend",
+    "poor": "Schlecht",
+    "critical": "Kritisch"
+  },
+  "severity": {
+    "low": "Niedrig",
+    "moderate": "Mittel",
+    "high": "Hoch",
+    "critical": "Kritisch"
+  },
+  "observationStatus": {
+    "open": "Offen",
+    "monitoring": "Beobachtung",
+    "action_planned": "Maßnahme geplant",
+    "resolved": "Behoben",
+    "dismissed": "Verworfen",
+    "superseded": "Ersetzt"
+  },
+  "priority": {
+    "urgent": "Dringend",
+    "critical": "Kritisch",
+    "high": "Hoch",
+    "medium": "Mittel",
+    "low": "Niedrig"
+  },
+  "activityType": {
+    "spray": "Spritzen",
+    "fertilise": "Düngen",
+    "sow": "Aussaat",
+    "tillage": "Bodenbearbeitung",
+    "scout": "Monitoring",
+    "harvest": "Ernte",
+    "irrigate": "Bewässerung",
+    "soil_sample": "Bodenprobe",
+    "other": "Sonstiges"
+  },
+  "operationType": {
+    "soil_preparation": "Saatbettbereitung",
+    "sow": "Aussaat",
+    "fertilise": "Düngen",
+    "spray": "Spritzen",
+    "irrigate": "Bewässerung",
+    "scout": "Monitoring",
+    "tillage": "Bodenbearbeitung",
+    "harvest": "Ernte",
+    "custom": "Benutzerdefiniert"
+  },
+  "workOrderStatus": {
+    "draft": "Entwurf",
+    "ready": "Bereit",
+    "assigned": "Zugewiesen",
+    "in_progress": "In Bearbeitung",
+    "blocked": "Blockiert",
+    "completed": "Abgeschlossen",
+    "cancelled": "Abgebrochen"
+  },
+  "complianceStatus": {
+    "compliant": "Konform",
+    "warning": "Warnung",
+    "incomplete": "Unvollständig",
+    "non_compliant": "Nicht konform"
+  },
+  "syncState": {
+    "draft": "Entwurf",
+    "ready_to_sync": "Bereit zur Synchronisierung",
+    "syncing": "Synchronisierung",
+    "synced": "Synchronisiert",
+    "conflict": "Konflikt",
+    "failed": "Fehlgeschlagen",
+    "needs_review": "Prüfung nötig",
+    "cancelled": "Abgebrochen"
+  },
+  "soilType": {
+    "clay": "Ton",
+    "sandy": "Sand",
+    "loam": "Lehm",
+    "peat": "Moor",
+    "silt": "Schluff"
+  },
+  "crop": {
+    "wheat": "Weizen",
+    "potato": "Kartoffel",
+    "onion": "Zwiebel",
+    "sugar_beet": "Zuckerrübe",
+    "barley": "Gerste",
+    "oilseed_rape": "Raps",
+    "cover_crop": "Zwischenfrucht",
+    "grass": "Gras",
+    "other": "Sonstiges"
+  },
+  "inventoryCategory": {
+    "herbicide": "Herbizid",
+    "fungicide": "Fungizid",
+    "insecticide": "Insektizid",
+    "fertiliser": "Dünger",
+    "seed": "Saatgut",
+    "fuel": "Kraftstoff",
+    "other": "Sonstiges"
+  },
+  "unit": {
+    "L": "L",
+    "kg": "kg",
+    "T": "T",
+    "bag": "Sack",
+    "box": "Karton"
+  },
+  "fieldStatus": {
+    "healthy": "Gesund",
+    "attention": "Aufmerksamkeit",
+    "critical": "Kritisch",
+    "fallow": "Brache"
+  },
+  "costCategory": {
+    "crop_protection": "Pflanzenschutz",
+    "fertiliser": "Düngemittel",
+    "seed": "Saat- und Pflanzgut",
+    "labour": "Arbeit",
+    "machinery": "Maschinen",
+    "fuel": "Kraftstoff",
+    "contractor": "Lohnunternehmen",
+    "irrigation_utilities": "Bewässerung und Versorgung",
+    "field_expenses": "Feldkosten",
+    "allocated_overhead": "Zugeordnete Gemeinkosten",
+    "other": "Sonstige"
+  },
+  "financialSourceType": {
+    "inventory_input": "Betriebsmittel aus Aktivität",
+    "labour": "Arbeit aus Aktivität",
+    "machinery": "Maschine aus Aktivität",
+    "fuel": "Kraftstoff aus Aktivität",
+    "contractor": "Lohnunternehmen",
+    "field_rent": "Feldpacht",
+    "utilities": "Versorgung",
+    "soil_lab": "Boden und Labor",
+    "miscellaneous": "Sonstige Ausgabe",
+    "manual_expense": "Ausgabe",
+    "crop_sale": "Ernteverkauf",
+    "subsidy": "Förderung",
+    "contract_income": "Vertragsertrag",
+    "insurance_compensation": "Versicherungsleistung",
+    "other_income": "Sonstiger Ertrag",
+    "unknown": "Unbekannte Quelle"
+  },
+  "financialAttribution": {
+    "direct": "Direkt",
+    "allocated": "Zugeordnet",
+    "unallocated": "Nicht zugeordnet",
+    "partially_allocated": "Teilweise zugeordnet",
+    "unknown": "Unbekannte Zuordnung"
+  },
+  "financialVersionState": {
+    "original": "Original",
+    "corrected": "Korrigiert",
+    "reversed": "Storniert",
+    "effective": "Aktuell wirksam",
+    "superseded": "Ersetzt",
+    "unknown": "Unbekannter Status"
+  },
+  "machineType": {
+    "tractor": "Traktor",
+    "sprayer": "Spritze",
+    "combine": "Mähdrescher",
+    "drill": "Sämaschine",
+    "cultivator": "Kultivator",
+    "loader": "Lader",
+    "trailer": "Anhänger",
+    "other": "Sonstiges"
+  },
+  "certStatus": {
+    "valid": "Gültig",
+    "expiring_soon": "Läuft bald ab",
+    "expired": "Abgelaufen",
+    "not_certified": "Nicht zertifiziert"
+  }
 }

@@ -1,20 +1,178 @@
 {
-  "condition": { "good": "Good", "satisfactory": "Satisfactory", "poor": "Poor", "critical": "Critical" },
-  "severity": { "low": "Low", "moderate": "Moderate", "high": "High", "critical": "Critical" },
-  "observationStatus": { "open": "Open", "monitoring": "Monitoring", "action_planned": "Action planned", "resolved": "Resolved", "dismissed": "Dismissed", "superseded": "Superseded" },
-  "priority": { "urgent": "Urgent", "critical": "Critical", "high": "High", "medium": "Medium", "low": "Low" },
-  "activityType": { "spray": "Spraying", "fertilise": "Fertilising", "sow": "Sowing", "tillage": "Tillage", "scout": "Scouting", "harvest": "Harvesting", "irrigate": "Irrigation", "soil_sample": "Soil sample", "other": "Other" },
-  "operationType": { "soil_preparation": "Soil preparation", "sow": "Sowing", "fertilise": "Fertilising", "spray": "Spraying", "irrigate": "Irrigation", "scout": "Scouting", "tillage": "Tillage", "harvest": "Harvesting", "custom": "Custom" },
-  "workOrderStatus": { "draft": "Draft", "ready": "Ready", "assigned": "Assigned", "in_progress": "In progress", "blocked": "Blocked", "completed": "Completed", "cancelled": "Cancelled" },
-  "complianceStatus": { "compliant": "Compliant", "warning": "Warning", "incomplete": "Incomplete", "non_compliant": "Non-compliant" },
-  "syncState": { "draft": "Draft", "ready_to_sync": "Ready to sync", "syncing": "Syncing", "synced": "Synced", "conflict": "Conflict", "failed": "Failed", "needs_review": "Needs review", "cancelled": "Cancelled" },
-  "soilType": { "clay": "Clay", "sandy": "Sandy", "loam": "Loam", "peat": "Peat", "silt": "Silt" },
-  "crop": { "wheat": "Wheat", "potato": "Potato", "onion": "Onion", "sugar_beet": "Sugar beet", "barley": "Barley", "oilseed_rape": "Oilseed rape", "cover_crop": "Cover crop", "grass": "Grass", "other": "Other" },
-  "inventoryCategory": { "herbicide": "Herbicide", "fungicide": "Fungicide", "insecticide": "Insecticide", "fertiliser": "Fertiliser", "seed": "Seed", "fuel": "Fuel", "other": "Other" },
-  "unit": { "L": "L", "kg": "kg", "T": "T", "bag": "Bag", "box": "Box" },
-  "fieldStatus": { "healthy": "Healthy", "attention": "Attention", "critical": "Critical", "fallow": "Fallow" },
-  "costCategory": { "crop_protection": "Crop protection", "fertiliser": "Fertiliser", "seed": "Seed and planting material", "labour": "Labour", "machinery": "Machinery", "fuel": "Fuel", "contractor": "Contractor", "irrigation_utilities": "Irrigation and utilities", "field_expenses": "Field expenses", "allocated_overhead": "Allocated overhead", "other": "Other" },
-  "financialSourceType": { "inventory_input": "Activity input", "labour": "Activity labour", "machinery": "Activity machinery", "fuel": "Activity fuel", "contractor": "Contractor", "field_rent": "Field rent", "utilities": "Utilities", "soil_lab": "Soil and laboratory", "miscellaneous": "Miscellaneous expense", "manual_expense": "Expense", "crop_sale": "Crop sale", "subsidy": "Subsidy", "contract_income": "Contract income", "insurance_compensation": "Insurance compensation", "other_income": "Other income", "unknown": "Unknown source" },
-  "financialAttribution": { "direct": "Direct", "allocated": "Allocated", "unallocated": "Unallocated", "partially_allocated": "Partially allocated", "unknown": "Unknown attribution" },
-  "financialVersionState": { "original": "Original", "corrected": "Corrected", "reversed": "Reversed", "effective": "Current effective", "superseded": "Superseded", "unknown": "Unknown state" }
+  "condition": {
+    "good": "Good",
+    "satisfactory": "Satisfactory",
+    "poor": "Poor",
+    "critical": "Critical"
+  },
+  "severity": {
+    "low": "Low",
+    "moderate": "Moderate",
+    "high": "High",
+    "critical": "Critical"
+  },
+  "observationStatus": {
+    "open": "Open",
+    "monitoring": "Monitoring",
+    "action_planned": "Action planned",
+    "resolved": "Resolved",
+    "dismissed": "Dismissed",
+    "superseded": "Superseded"
+  },
+  "priority": {
+    "urgent": "Urgent",
+    "critical": "Critical",
+    "high": "High",
+    "medium": "Medium",
+    "low": "Low"
+  },
+  "activityType": {
+    "spray": "Spraying",
+    "fertilise": "Fertilising",
+    "sow": "Sowing",
+    "tillage": "Tillage",
+    "scout": "Scouting",
+    "harvest": "Harvesting",
+    "irrigate": "Irrigation",
+    "soil_sample": "Soil sample",
+    "other": "Other"
+  },
+  "operationType": {
+    "soil_preparation": "Soil preparation",
+    "sow": "Sowing",
+    "fertilise": "Fertilising",
+    "spray": "Spraying",
+    "irrigate": "Irrigation",
+    "scout": "Scouting",
+    "tillage": "Tillage",
+    "harvest": "Harvesting",
+    "custom": "Custom"
+  },
+  "workOrderStatus": {
+    "draft": "Draft",
+    "ready": "Ready",
+    "assigned": "Assigned",
+    "in_progress": "In progress",
+    "blocked": "Blocked",
+    "completed": "Completed",
+    "cancelled": "Cancelled"
+  },
+  "complianceStatus": {
+    "compliant": "Compliant",
+    "warning": "Warning",
+    "incomplete": "Incomplete",
+    "non_compliant": "Non-compliant"
+  },
+  "syncState": {
+    "draft": "Draft",
+    "ready_to_sync": "Ready to sync",
+    "syncing": "Syncing",
+    "synced": "Synced",
+    "conflict": "Conflict",
+    "failed": "Failed",
+    "needs_review": "Needs review",
+    "cancelled": "Cancelled"
+  },
+  "soilType": {
+    "clay": "Clay",
+    "sandy": "Sandy",
+    "loam": "Loam",
+    "peat": "Peat",
+    "silt": "Silt"
+  },
+  "crop": {
+    "wheat": "Wheat",
+    "potato": "Potato",
+    "onion": "Onion",
+    "sugar_beet": "Sugar beet",
+    "barley": "Barley",
+    "oilseed_rape": "Oilseed rape",
+    "cover_crop": "Cover crop",
+    "grass": "Grass",
+    "other": "Other"
+  },
+  "inventoryCategory": {
+    "herbicide": "Herbicide",
+    "fungicide": "Fungicide",
+    "insecticide": "Insecticide",
+    "fertiliser": "Fertiliser",
+    "seed": "Seed",
+    "fuel": "Fuel",
+    "other": "Other"
+  },
+  "unit": {
+    "L": "L",
+    "kg": "kg",
+    "T": "T",
+    "bag": "Bag",
+    "box": "Box"
+  },
+  "fieldStatus": {
+    "healthy": "Healthy",
+    "attention": "Attention",
+    "critical": "Critical",
+    "fallow": "Fallow"
+  },
+  "costCategory": {
+    "crop_protection": "Crop protection",
+    "fertiliser": "Fertiliser",
+    "seed": "Seed and planting material",
+    "labour": "Labour",
+    "machinery": "Machinery",
+    "fuel": "Fuel",
+    "contractor": "Contractor",
+    "irrigation_utilities": "Irrigation and utilities",
+    "field_expenses": "Field expenses",
+    "allocated_overhead": "Allocated overhead",
+    "other": "Other"
+  },
+  "financialSourceType": {
+    "inventory_input": "Activity input",
+    "labour": "Activity labour",
+    "machinery": "Activity machinery",
+    "fuel": "Activity fuel",
+    "contractor": "Contractor",
+    "field_rent": "Field rent",
+    "utilities": "Utilities",
+    "soil_lab": "Soil and laboratory",
+    "miscellaneous": "Miscellaneous expense",
+    "manual_expense": "Expense",
+    "crop_sale": "Crop sale",
+    "subsidy": "Subsidy",
+    "contract_income": "Contract income",
+    "insurance_compensation": "Insurance compensation",
+    "other_income": "Other income",
+    "unknown": "Unknown source"
+  },
+  "financialAttribution": {
+    "direct": "Direct",
+    "allocated": "Allocated",
+    "unallocated": "Unallocated",
+    "partially_allocated": "Partially allocated",
+    "unknown": "Unknown attribution"
+  },
+  "financialVersionState": {
+    "original": "Original",
+    "corrected": "Corrected",
+    "reversed": "Reversed",
+    "effective": "Current effective",
+    "superseded": "Superseded",
+    "unknown": "Unknown state"
+  },
+  "machineType": {
+    "tractor": "Tractor",
+    "sprayer": "Sprayer",
+    "combine": "Combine harvester",
+    "drill": "Seed drill",
+    "cultivator": "Cultivator",
+    "loader": "Loader",
+    "trailer": "Trailer",
+    "other": "Other"
+  },
+  "certStatus": {
+    "valid": "Valid",
+    "expiring_soon": "Expiring soon",
+    "expired": "Expired",
+    "not_certified": "Not certified"
+  }
 }

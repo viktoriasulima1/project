@@ -1,0 +1,33 @@
+{
+  "title": "Team & certificaten",
+  "subtitle": "Beheer medewerkers en de status van hun spuitlicentie.",
+  "empty": "Nog geen teamleden toegevoegd.",
+  "disclaimer": "Certificaatgegevens worden opgeslagen zoals ingevoerd — niet geverifieerd bij een officieel register.",
+  "create": {
+    "title": "Teamlid toevoegen",
+    "button": "Teamlid toevoegen"
+  },
+  "edit": {
+    "title": "Teamlid bewerken",
+    "button": "Wijzigingen opslaan"
+  },
+  "cancel": "Annuleren",
+  "fields": {
+    "name": "Naam",
+    "role": "Functie",
+    "hasSpraying": "Gecertificeerd voor spuiten",
+    "certNumber": "Certificaatnummer",
+    "certExpiry": "Vervaldatum certificaat",
+    "isActive": "Actief"
+  },
+  "status": {
+    "certExpiresOn": "Verloopt {date}",
+    "noCertOnFile": "Geen certificaat geregistreerd"
+  },
+  "actions": {
+    "edit": "Bewerken",
+    "deactivate": "Deactiveren",
+    "activate": "Heractiveren"
+  },
+  "inactiveBadge": "Inactief"
+}

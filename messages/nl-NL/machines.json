@@ -1,0 +1,33 @@
+{
+  "title": "Machines",
+  "subtitle": "Registreer machines en houd onderhoudsintervallen en certificering bij.",
+  "empty": "Nog geen machines geregistreerd.",
+  "create": {
+    "title": "Machine toevoegen",
+    "button": "Machine toevoegen"
+  },
+  "edit": {
+    "title": "Machine bewerken",
+    "button": "Wijzigingen opslaan"
+  },
+  "cancel": "Annuleren",
+  "fields": {
+    "name": "Naam",
+    "type": "Type",
+    "make": "Merk",
+    "model": "Model",
+    "year": "Bouwjaar",
+    "hoursSinceService": "Uren sinds laatste onderhoud",
+    "nextServiceDueHours": "Volgend onderhoud (uren)",
+    "isCertified": "Gecertificeerd / keuringsgeldig"
+  },
+  "status": {
+    "serviceOverdue": "Onderhoud verlopen",
+    "serviceDueSoon": "Onderhoud binnenkort nodig",
+    "serviceOk": "Onderhouden",
+    "notCertified": "Niet gecertificeerd"
+  },
+  "actions": {
+    "edit": "Bewerken"
+  }
+}

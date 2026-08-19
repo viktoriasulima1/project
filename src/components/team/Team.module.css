@@ -1,0 +1,24 @@
+.page { padding: 24px; display: grid; gap: 20px; }
+.card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 12px; padding: 18px; color: var(--color-text); }
+.card h2 { margin: 0 0 12px; }
+.form { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); align-items: end; }
+.form label { display: grid; gap: 5px; font-size: 13px; color: var(--color-text-secondary); }
+.form input, .form select { width: 100%; border: 1px solid var(--color-border); border-radius: 7px; padding: 9px; background: var(--color-bg); color: var(--color-text); }
+.checkboxLabel { flex-direction: row; align-items: center; gap: 8px; }
+.checkboxLabel input { width: auto; }
+.formActions { display: flex; gap: 8px; grid-column: 1 / -1; }
+.button { border: 0; border-radius: 7px; padding: 9px 13px; background: var(--color-primary); color: white; cursor: pointer; }
+.buttonSecondary { border: 1px solid var(--color-border); border-radius: 7px; padding: 9px 13px; background: transparent; color: var(--color-text); cursor: pointer; }
+.muted { color: var(--color-text-secondary); font-size: 13px; }
+.error { color: #dc2626; font-size: 13px; grid-column: 1 / -1; }
+.success { color: #15803d; font-size: 13px; grid-column: 1 / -1; }
+.list { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+.row { padding: 12px 14px; border: 1px solid var(--color-border); border-radius: 8px; display: flex; justify-content: space-between; gap: 12px; align-items: center; flex-wrap: wrap; }
+.rowInactive { opacity: 0.6; }
+.rowActions { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.badge { border-radius: 999px; padding: 3px 10px; font-size: 12px; white-space: nowrap; font-weight: 500; }
+.badgeValid { background: color-mix(in srgb, #15803d 16%, transparent); color: #15803d; }
+.badgeExpiringSoon { background: color-mix(in srgb, #b45309 16%, transparent); color: #b45309; }
+.badgeExpired { background: color-mix(in srgb, #dc2626 16%, transparent); color: #dc2626; }
+.badgeNotCertified { background: var(--color-bg); color: var(--color-text-secondary); }
+.badgeInactive { background: var(--color-bg); color: var(--color-text-secondary); }

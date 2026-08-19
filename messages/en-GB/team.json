@@ -1,0 +1,33 @@
+{
+  "title": "Team & certifications",
+  "subtitle": "Manage employees and spray-license (spuitlicentie) status.",
+  "empty": "No team members yet.",
+  "disclaimer": "Certificate details are recorded as entered — not verified against any official registry.",
+  "create": {
+    "title": "Add team member",
+    "button": "Add team member"
+  },
+  "edit": {
+    "title": "Edit team member",
+    "button": "Save changes"
+  },
+  "cancel": "Cancel",
+  "fields": {
+    "name": "Name",
+    "role": "Role",
+    "hasSpraying": "Certified to spray",
+    "certNumber": "Certificate number",
+    "certExpiry": "Certificate expiry",
+    "isActive": "Active"
+  },
+  "status": {
+    "certExpiresOn": "Expires {date}",
+    "noCertOnFile": "No certificate on file"
+  },
+  "actions": {
+    "edit": "Edit",
+    "deactivate": "Deactivate",
+    "activate": "Reactivate"
+  },
+  "inactiveBadge": "Inactive"
+}

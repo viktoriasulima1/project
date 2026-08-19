@@ -30,7 +30,9 @@ export type EnumKind =
   | 'costCategory'
   | 'financialSourceType'
   | 'financialAttribution'
-  | 'financialVersionState';
+  | 'financialVersionState'
+  | 'machineType'
+  | 'certStatus';
 
 function lookupLabel(locale: Locale, kind: EnumKind, value: string): string | undefined {
   const kindTree = getNamespace(locale, 'enums')[kind];

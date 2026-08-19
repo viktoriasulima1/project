@@ -1,0 +1,33 @@
+{
+  "title": "Machinery",
+  "subtitle": "Register machines, track service intervals and certification.",
+  "empty": "No machinery registered yet.",
+  "create": {
+    "title": "Add machine",
+    "button": "Add machine"
+  },
+  "edit": {
+    "title": "Edit machine",
+    "button": "Save changes"
+  },
+  "cancel": "Cancel",
+  "fields": {
+    "name": "Name",
+    "type": "Type",
+    "make": "Make",
+    "model": "Model",
+    "year": "Year",
+    "hoursSinceService": "Hours since last service",
+    "nextServiceDueHours": "Next service due (hours)",
+    "isCertified": "Certified / roadworthy"
+  },
+  "status": {
+    "serviceOverdue": "Service overdue",
+    "serviceDueSoon": "Service due soon",
+    "serviceOk": "Serviced",
+    "notCertified": "Not certified"
+  },
+  "actions": {
+    "edit": "Edit"
+  }
+}
