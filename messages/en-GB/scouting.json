@@ -1,0 +1,37 @@
+{
+  "page": {
+    "title": "Field scouting",
+    "subtitle": "Observed evidence, growth stages and explainable crop-health priority",
+    "fieldHealthPriority": "Field health priority",
+    "noActiveSeason": { "title": "No active crop season", "body": "Plan a crop for a field before recording a scouting visit." },
+    "recentVisits": "Recent visits",
+    "noVisits": "No scouting visits recorded yet."
+  },
+  "form": {
+    "fieldAndCrop": "Field and crop",
+    "visitDate": "Visit date",
+    "overallCondition": "Overall condition",
+    "useGps": "Use current GPS",
+    "locating": "Locating…",
+    "retryLocation": "Retry location",
+    "growthStageLegend": "Observed growth stage (optional)",
+    "growthStageHelp": "Only an explicitly confirmed observation becomes current.",
+    "bbchCode": "BBCH code",
+    "humanLabel": "Human-readable label",
+    "observationsLegend": "Observations and private photos",
+    "category": "Category",
+    "observedIssue": "Observed issue",
+    "severity": "Severity",
+    "affectedArea": "Affected area (%)",
+    "description": "Description",
+    "takePhoto": "Take photo or choose existing",
+    "pointAnnotation": "Point annotation",
+    "annotationPlaceholder": "Brown spots on lower leaf",
+    "removeBeforeSave": "Remove before save",
+    "addObservation": "+ Add observation",
+    "visitNotes": "Visit notes",
+    "privacyNotice": "Photos are private. Original images are preserved. Suggestions remain unconfirmed and never authorize treatment; Ctgb remains authoritative.",
+    "reviewSave": "Review and save visit",
+    "saving": "Saving…"
+  }
+}

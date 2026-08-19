@@ -1,0 +1,20 @@
+{
+  "condition": { "good": "Dobry", "satisfactory": "Zadowalający", "poor": "Słaby", "critical": "Krytyczny" },
+  "severity": { "low": "Niski", "moderate": "Umiarkowany", "high": "Wysoki", "critical": "Krytyczny" },
+  "observationStatus": { "open": "Otwarta", "monitoring": "Monitorowanie", "action_planned": "Zaplanowano działanie", "resolved": "Rozwiązana", "dismissed": "Odrzucona", "superseded": "Zastąpiona" },
+  "priority": { "urgent": "Pilne", "critical": "Krytyczny", "high": "Wysoki", "medium": "Średni", "low": "Niski" },
+  "activityType": { "spray": "Oprysk", "fertilise": "Nawożenie", "sow": "Siew", "tillage": "Uprawa gleby", "scout": "Lustracja", "harvest": "Zbiór", "irrigate": "Nawadnianie", "soil_sample": "Próbka gleby", "other": "Inne" },
+  "operationType": { "soil_preparation": "Przygotowanie gleby", "sow": "Siew", "fertilise": "Nawożenie", "spray": "Oprysk", "irrigate": "Nawadnianie", "scout": "Lustracja", "tillage": "Uprawa gleby", "harvest": "Zbiór", "custom": "Niestandardowe" },
+  "workOrderStatus": { "draft": "Szkic", "ready": "Gotowe", "assigned": "Przypisane", "in_progress": "W toku", "blocked": "Zablokowane", "completed": "Zakończone", "cancelled": "Anulowane" },
+  "complianceStatus": { "compliant": "Zgodny", "warning": "Ostrzeżenie", "incomplete": "Niekompletny", "non_compliant": "Niezgodny" },
+  "syncState": { "draft": "Szkic", "ready_to_sync": "Gotowe do synchronizacji", "syncing": "Synchronizacja", "synced": "Zsynchronizowano", "conflict": "Konflikt", "failed": "Niepowodzenie", "needs_review": "Wymaga przeglądu", "cancelled": "Anulowano" },
+  "soilType": { "clay": "Ilasta", "sandy": "Piaszczysta", "loam": "Gliniasta", "peat": "Torfowa", "silt": "Pylasta" },
+  "crop": { "wheat": "Pszenica", "potato": "Ziemniak", "onion": "Cebula", "sugar_beet": "Burak cukrowy", "barley": "Jęczmień", "oilseed_rape": "Rzepak", "cover_crop": "Międzyplon", "grass": "Trawa", "other": "Inne" },
+  "inventoryCategory": { "herbicide": "Herbicyd", "fungicide": "Fungicyd", "insecticide": "Insektycyd", "fertiliser": "Nawóz", "seed": "Nasiona", "fuel": "Paliwo", "other": "Inne" },
+  "unit": { "L": "L", "kg": "kg", "T": "T", "bag": "Worek", "box": "Pudełko" },
+  "fieldStatus": { "healthy": "Zdrowe", "attention": "Uwaga", "critical": "Krytyczne", "fallow": "Ugór" },
+  "costCategory": { "crop_protection": "Ochrona roślin", "fertiliser": "Nawozy", "seed": "Nasiona i materiał sadzeniowy", "labour": "Praca", "machinery": "Maszyny", "fuel": "Paliwo", "contractor": "Usługi zewnętrzne", "irrigation_utilities": "Nawadnianie i media", "field_expenses": "Koszty pola", "allocated_overhead": "Rozliczone koszty pośrednie", "other": "Inne" },
+  "financialSourceType": { "inventory_input": "Środek z zabiegu", "labour": "Praca z zabiegu", "machinery": "Maszyna z zabiegu", "fuel": "Paliwo z zabiegu", "contractor": "Usługa zewnętrzna", "field_rent": "Dzierżawa pola", "utilities": "Media", "soil_lab": "Gleba i laboratorium", "miscellaneous": "Pozostały wydatek", "manual_expense": "Wydatek", "crop_sale": "Sprzedaż plonu", "subsidy": "Dotacja", "contract_income": "Przychód kontraktowy", "insurance_compensation": "Odszkodowanie", "other_income": "Inny przychód", "unknown": "Nieznane źródło" },
+  "financialAttribution": { "direct": "Bezpośrednie", "allocated": "Rozliczone", "unallocated": "Nierozliczone", "partially_allocated": "Częściowo rozliczone", "unknown": "Nieznane przypisanie" },
+  "financialVersionState": { "original": "Oryginał", "corrected": "Skorygowana", "reversed": "Odwrócona", "effective": "Aktualna obowiązująca", "superseded": "Zastąpiona", "unknown": "Nieznany stan" }
+}

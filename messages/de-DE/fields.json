@@ -1,0 +1,152 @@
+{
+  "title": "Schläge",
+  "sprayWindow":{"status":{"blocked":"Gesperrt","poor":"Schlecht","marginal":"Grenzwertig","good":"Gut","excellent":"Ausgezeichnet"},"confidence":{"low":"Niedrige Konfidenz","medium":"Mittlere Konfidenz","high":"Hohe Konfidenz"},"summary":{"BLOCKED":"Gesperrt: {primary}","CONDITIONS":"Bedingungen: {primary}. Bestes Fenster {start}–{end}.","NO_FORECAST_DATA":"Keine Wetterdaten verfügbar."},"genericProfile":"Generisches Orientierungsprofil","unknown":"Bedingung nicht verfügbar","disclaimer":{"INDICATIVE_ONLY":"Nur indikativ. Zulassungsetikett und rechtliche Vorgaben prüfen."},"signals":{"WIND_SPEED_EXCEEDS_LIMIT":"Wind {observedKmh} km/h überschreitet {limitKmh} km/h.","WIND_GUST_EXCEEDS_LIMIT":"Böen {observedKmh} km/h überschreiten {limitKmh} km/h.","WIND_GUST_UNAVAILABLE":"Böendaten fehlen.","TEMPERATURE_BELOW_MINIMUM":"Temperatur {observedC} °C unter {limitC} °C.","TEMPERATURE_ABOVE_MAXIMUM":"Temperatur {observedC} °C über {limitC} °C.","HUMIDITY_EXCEEDS_PRODUCT_LIMIT":"Luftfeuchte {observedPercent}% überschreitet {limitPercent}%.","RAINFAST_HORIZON_INCOMPLETE":"Regenfestprognose deckt {availableHours}/{requiredHours} h ab.","RAINFAST_PRECIPITATION_EXCEEDS_LIMIT":"Regen {observedMm} mm überschreitet {limitMm} mm in {periodHours} h.","PRODUCT_NOT_SELECTED":"Kein verifiziertes Mittel ausgewählt.","GENERIC_PROFILE_USED":"Generische Richtwerte verwendet; Etikett prüfen.","PRODUCT_REGISTRATION_INVALID":"Zulassung für {productName} ist ungültig.","OPERATOR_CERTIFICATION_INVALID":"Sachkunde fehlt oder ist abgelaufen.","OPERATOR_CONTEXT_MISSING":"Sachkunde nicht angegeben.","OPERATOR_UNVERIFIED":"Sachkunde nicht geprüft.","INSUFFICIENT_STOCK":"{requiredQuantity} {unit} benötigt; {availableStock} {unit} vorhanden.","INVENTORY_CONTEXT_MISSING":"Bestand nicht angegeben.","INVENTORY_UNVERIFIED":"Bestand nicht geprüft.","CROP_INELIGIBLE":"Kultur {crop} ist nicht zugelassen.","BBCH_OUTSIDE_RANGE":"BBCH {stage} außerhalb {min}–{max}.","CROP_BBCH_CONTEXT_MISSING":"Kultur/BBCH nicht angegeben.","CROP_BBCH_UNVERIFIED":"Kultur/BBCH nicht geprüft.","DRIFT_REDUCTION_NOZZLE_REQUIRED":"Erforderliche abdriftmindernde Düse nicht bestätigt.","DRIFT_CONTEXT_MISSING":"Maschine/Düse nicht angegeben.","DRIFT_REQUIREMENT_UNVERIFIED":"Abdriftminderung nicht geprüft.","LOW_WIND":"Schwacher Wind ({observedKmh} km/h).","WIND_APPROACHING_LIMIT":"Wind nahe Grenzwert ({observedKmh}/{limitKmh} km/h).","NO_RAIN_FORECAST_THIS_HOUR":"In dieser Stunde kein Regen erwartet.","LOW_HUMIDITY":"Niedrige Luftfeuchte ({observedPercent}%).","HUMIDITY_ELEVATED":"Erhöhte Luftfeuchte ({observedPercent}%).","WIDE_DEW_POINT_MARGIN":"Großer Taupunktabstand.","NARROW_DEW_POINT_MARGIN":"Kleiner Taupunktabstand.","LEAF_WETNESS_ELEVATED":"Erhöhte Blattnässe."}},
+  "weatherRisk": {
+    "status": { "low": "Niedriges Wetterrisiko", "moderate": "Mäßiges Wetterrisiko", "high": "Hohes Wetterrisiko", "unavailable": "Wetterrisiko nicht verfügbar" },
+    "reasons": { "BELOW_RISK_THRESHOLDS": "Die Messwerte liegen unter den Risikoschwellen dieses Regelwerks.", "SOME_FAVOURABLE_CONDITIONS": "Einige gemessene Bedingungen können das Risiko für die Pflanzengesundheit erhöhen.", "FAVOURABLE_WARM_HUMID_WET_CONDITIONS": "Warme, feuchte und nasse Messbedingungen können das Risiko für die Pflanzengesundheit erhöhen.", "INSUFFICIENT_MEASURED_INPUTS": "Das Wetterrisiko kann nicht berechnet werden, weil {count} erforderliche Eingabe(n) fehlen.", "UNKNOWN": "Das Wetterrisiko ist nicht verfügbar und darf nicht als kein Risiko verstanden werden." },
+    "actions": { "CONTINUE_NORMAL_SCOUTING": "Normale Feldkontrolle fortsetzen", "INSPECT_FIELD": "Schlag kontrollieren und sichtbare Beobachtungen erfassen", "SCOUT_MANUALLY": "Schlag manuell kontrollieren" },
+    "confidence": { "medium": "Mittlere Konfidenz", "low": "Niedrige Konfidenz" },
+    "freshness": { "current": "Aktuelle Messwerte", "unavailable": "Aktualität der Eingaben nicht verfügbar" },
+    "evidence": { "cropStage": "{crop}, Entwicklungsstadium {stage}", "temperature": "Gemessene Temperatur: {value} °C", "humidity": "Gemessene Luftfeuchtigkeit: {value}%", "rain": "Gemessener Niederschlag: {value} mm", "missing": "{count} erforderliche Wettereingabe(n) fehlen" },
+    "disclaimer": "Das Wetterrisiko ist ein Indikator, keine Diagnose. Bedingungen vor einer Maßnahme im Schlag bestätigen."
+  },
+  "summary": { "totalFields": "Schläge gesamt", "totalArea": "Gesamtfläche", "healthy": "Gesund", "needAttention": "Aufmerksamkeit nötig" },
+  "table": { "name": "Name", "area": "Fläche", "soil": "Boden", "status": "Status", "ndvi": "NDVI" },
+  "empty": { "title": "Noch keine Schläge", "desc": "Fügen Sie Ihren ersten Schlag hinzu, um Kulturen zu planen und Arbeiten zu erfassen." },
+  "addField": "+ Schlag hinzufügen",
+  "importBrp": "Aus BRP importieren",
+  "archive": "Archivieren",
+  "archiveConfirm": "„{name}“ archivieren?\n\nSchläge mit Spritztagebuch-Einträgen werden archiviert (ausgeblendet) statt dauerhaft gelöscht, um EU-Compliance-Aufzeichnungen zu erhalten.",
+  "actions": {
+    "reasons": {
+      "offlineOnly": "Diese Aktion erfordert eine Internetverbindung und ist offline nicht verfügbar.",
+      "noActiveSeason": "Starten Sie eine Saison, bevor Sie Erlöse erfassen.",
+      "unavailable": "Diese Aktion ist derzeit nicht verfügbar."
+    },
+    "labels": {
+      "add_expense": "Ausgabe hinzufügen",
+      "add_harvest": "Ernte hinzufügen",
+      "add_revenue": "Erlös hinzufügen",
+      "allocate": "Kosten zuweisen",
+      "correct": "Datensatz korrigieren",
+      "reverse": "Datensatz stornieren",
+      "review_breakdown": "Kostenaufschlüsselung prüfen",
+      "view_history": "Wirtschaftsverlauf anzeigen",
+      "export_report": "Schlagbericht exportieren"
+    },
+    "lastSyncedAt": "Basierend auf Daten, die zuletzt am {date} synchronisiert wurden."
+  },
+  "health": {
+    "status": { "attention_required": "Aufmerksamkeit nötig", "inspect_soon": "Bald prüfen", "monitoring": "Beobachtung", "no_current_issue": "Kein aktuelles Problem", "insufficient_data": "Unzureichende Daten" },
+    "reasons": {
+      "NO_ACTIVE_CROP_SEASON": "Keine aktive Anbausaison.",
+      "RECENT_SEVERE_OBSERVATION": "{count} schwerwiegende Beobachtung(en) erfordern eine Prüfung.",
+      "SCOUTING_OVERDUE": "Eine Monitoring-Inspektion ist überfällig.",
+      "WEATHER_RISK_INDICATOR": "Die Wetterbedingungen deuten auf ein erhöhtes Risiko hin; dies ist keine Diagnose.",
+      "MULTIPLE_OPEN_OBSERVATIONS": "{count} offene Beobachtungen erfordern eine Prüfung.",
+      "UNRESOLVED_OBSERVATION": "Eine offene Beobachtung sollte beobachtet werden.",
+      "NO_SCOUTING_DATA": "Kein aktuelles Wachstumsstadium oder Monitoring-Beleg.",
+      "LOW_CONFIDENCE_EVIDENCE": "Das erfasste Wachstumsstadium ist veraltet.",
+      "NO_CURRENT_ISSUE": "Kein ungelöstes Problem in den aktuellen Belegen."
+    },
+    "actions": {
+      "PLAN_SEASON": "Anbausaison planen",
+      "INSPECT_FIELD": "Schlag inspizieren",
+      "RECORD_STAGE_AND_VISIT": "Stadium und Besuch erfassen",
+      "CONTINUE_MONITORING": "Weiter beobachten",
+      "CONTINUE_SCHEDULE": "Monitoring-Plan fortsetzen"
+    },
+    "evidence": {
+      "noActiveSeason": "Keine aktive Schlagsaison",
+      "severeObservations": "{count} schwerwiegende ungelöste Beobachtung(en)",
+      "overdueScouting": "{count} überfällige Monitoring-Aufträge",
+      "weatherRisk": "Erklärbares Wetterrisiko-Signal",
+      "openObservations": "{count} ungelöste Beobachtung(en)",
+      "stageMissing": "Kein aktuelles Wachstumsstadium erfasst",
+      "stageStale": "Wachstumsstadium-Eintrag ist {count} Tage alt",
+      "clean": "Keine ungelösten Beobachtungen"
+    }
+  },
+  "economics": {
+    "completeness": {
+      "title": "Datenvollständigkeit", "summary": "{percentage}% vollständig", "recordedLabel": "Erfasst", "missingLabel": "Fehlt", "unknown": "Details sind nicht verfügbar.",
+      "status": {"insufficient_data":"Nicht verfügbar","cost_tracking_active":"Kostenerfassung aktiv","partial_profitability":"Teilweise Rentabilität","profitability_ready":"Vollständig"},
+      "recorded": {"PRODUCT_PRICES_RECORDED":"Produktpreise","LABOUR_RATES_RECORDED":"Arbeitskostensätze","MACHINE_RATES_RECORDED":"Maschinensätze","CONTRACTOR_COSTS_RECORDED":"Lohnunternehmerkosten","HARVEST_RECORDED":"Ernte","REVENUE_RECORDED":"Erlös","OVERHEAD_CHOICE_RECORDED":"Gemeinkostenwahl","UNITS_COMPATIBLE":"Kompatible Einheiten"},
+      "reasons": {"MISSING_PRODUCT_PRICE":"Einkaufspreis fehlt","MISSING_LABOUR_RATE":"Arbeitskostensatz fehlt","MISSING_MACHINE_RATE":"Maschinensatz fehlt","MISSING_CONTRACTOR_COST":"Lohnunternehmerkosten fehlen","MISSING_HARVEST":"Ernteertrag fehlt","MISSING_REVENUE":"Kulturerlös fehlt","MISSING_OVERHEAD_CHOICE":"Wahl der Gemeinkostenzuordnung fehlt","INCOMPATIBLE_UNITS":"Ertrags- und Erlöseinheiten sind nicht kompatibel"},
+      "actions": {"ADD_PURCHASE_PRICE":"Einkaufspreis hinzufügen","ADD_LABOUR_RATE":"Arbeitskostensatz hinzufügen","ADD_MACHINE_RATE":"Maschinensatz hinzufügen","ADD_CONTRACTOR_COST":"Lohnunternehmerkosten hinzufügen","ADD_HARVEST":"Ernte erfassen","ADD_REVENUE":"Erlös erfassen","RECORD_OVERHEAD_CHOICE":"Gemeinkostenwahl erfassen","ALIGN_UNITS":"Einheiten angleichen"}
+    },
+    "breakEven": {
+      "title": "Break-even",
+      "price": "Break-even-Preis",
+      "yield": "Break-even-Ertrag",
+      "unavailable": "Nicht verfügbar",
+      "formula": {
+        "COST_PER_YIELD": "erfasste Gesamtkosten ÷ verkaufsfähiger Ertrag",
+        "COST_PER_PRICE": "erfasste Gesamtkosten ÷ erfasster Verkaufspreis"
+      },
+      "reasons": {
+        "INCOMPLETE_COST": "Materialkosten sind unvollständig.",
+        "MISSING_HARVEST": "Ernte ist nicht erfasst.",
+        "MISSING_SALE_PRICE": "Verkaufspreis fehlt.",
+        "INCOMPATIBLE_UNITS": "Ertrags- und Umsatzeinheiten stimmen nicht überein.",
+        "UNALLOCATED_COSTS": "Nicht zugewiesene Kosten verbleiben auf diesem Schlag."
+      },
+      "actions": {
+        "ADD_COST": "Kostendaten hinzufügen",
+        "ADD_HARVEST": "Ernte hinzufügen",
+        "ADD_SALE_PRICE": "Verkaufspreis hinzufügen",
+        "ALIGN_UNITS": "Ertrags- und Umsatzeinheiten angleichen",
+        "REVIEW_ALLOCATIONS": "Zuordnung prüfen"
+      }
+    },
+    "grossMargin": { "title":"Bruttomarge", "notRecorded":"Nicht erfasst", "labels":{"revenue":"Erfasster Erlös","totalCost":"Gesamte erfasste Kosten","margin":"Bruttomarge","perHa":"Marge je Hektar"}, "status":{"positive":"Positive Marge","zero":"Nullmarge","negative":"Negative Marge","unavailable":"Bruttomarge nicht verfügbar","partial":"Bruttomarge unvollständig"}, "reasons":{"POSITIVE_MARGIN":"Der erfasste Erlös übersteigt die berücksichtigten Betriebskosten. Dies ist kein Nettogewinn.","ZERO_MARGIN":"Der erfasste Erlös entspricht den berücksichtigten Betriebskosten.","NEGATIVE_MARGIN":"Die berücksichtigten Betriebskosten übersteigen den erfassten Erlös.","MISSING_REVENUE":"Für dieses Feld wurde kein Erlös erfasst.","MISSING_COST":"Es wurden keine vollständigen Feldkosten erfasst.","INCOMPLETE_COST":"Einige Kosten sind nicht bewertet; die Bruttomarge kann daher nicht zuverlässig berechnet werden."}, "actions":{"ADD_REVENUE":"Erlös hinzufügen","ADD_EXPENSE":"Ausgabe hinzufügen","REVIEW_UNPRICED_COSTS":"Fehlende Preise prüfen","NO_ACTION_REQUIRED":"Kostenaufschlüsselung anzeigen"} },
+    "costCategories": { "title":"Kostenaufschlüsselung", "empty":"Für dieses Feld wurden noch keine Kosten erfasst.", "caption":"Kosten nach Kategorie. Prozentwerte beziehen sich auf die erfassten Kosten.", "category":"Kategorie", "amount":"Betrag", "share":"Anteil der erfassten Kosten", "records":"Datensätze", "attribution":"Zuordnung", "completeness":"Vollständig", "directAndAllocated":"Direkt und zugeordnet", "complete":"Ja", "partial":"Teilweise", "note":"Prozentwerte basieren auf erfassten Kosten. Unvollständige Kategorien werden bis zur Preisfestlegung von der Summe ausgeschlossen." },
+    "attribution": { "title":"Direkt versus zugeordnet", "direct":"Direkt auf diesem Feld erfasst", "allocated":"Diesem Feld zugeordnet", "total":"Gesamte erfasste Feldkosten", "reversed":"Ausgeschlossen (storniert)", "unallocated":"Nicht zugeordnete Betriebskosten (nicht in der Feldmarge)", "note":"Nicht zugeordnete Betriebskosten werden niemals stillschweigend in die Feldmarge einbezogen." },
+    "signals":{"title":"Wirtschaftliche Entscheidungen","calculated":"Berechnet {date}","recordedCosts":"Erfasste Kosten","recordedRevenue":"Erfasster Erlös","grossMargin":"Deckungsbeitrag","completeness":"Vollständigkeit","notRecorded":"Nicht erfasst","unit":"Einheit","noSeason":"Noch keine Wirtschaftsdaten der aktiven Saison.","none":"Kein wirtschaftliches Signal erfordert Aufmerksamkeit.","more":"Alle {count} wirtschaftlichen Signale anzeigen","incomplete":"Kostenerfassung aktiv; Wirtschaftlichkeit unvollständig.","ruleBased":"Regelbasiert · Vertrauen {confidence}","field":"Feld: {field}","severity":{"critical":"Kritisch","high":"Hoch","medium":"Mittel","low":"Niedrig"},"actions":{"OPEN_FIELD_DETAIL":"Feld prüfen","OPEN_FINANCE":"Finanzen öffnen","ADD_PURCHASE_PRICE":"Fehlenden Preis ergänzen","ADD_LABOUR_RATE":"Arbeitskostensatz festlegen","ADD_MACHINE_RATE":"Maschinensatz festlegen","ALLOCATE_COST":"Kosten zuordnen","ALLOCATE_REVENUE":"Erlös zuordnen","ADD_HARVEST":"Ernte erfassen","ADD_REVENUE":"Erlös erfassen","REVIEW_BREAK_EVEN":"Feld prüfen","REVIEW_COMPLETENESS":"Vollständigkeit prüfen"},"types":{"BUDGET_OVER_LIMIT":{"title":"{count} Feld/Felder über Kostenplan","explanation":"{field}: {amount} ({percent}%) über Plan.","evidence":"Erfasste Kosten gegenüber Feldbudget."},"MISSING_PURCHASE_PRICE":{"title":"{count} Produkt(e) ohne Einkaufspreis","explanation":"{products} haben keinen Preis; fehlende Kosten sind nicht null.","evidence":"Einkaufspreisabdeckung der Produktzeilen."},"MISSING_LABOUR_RATE":{"title":"Arbeitskostensatz fehlt auf {count} Feld/Feldern","explanation":"{field} enthält Arbeit ohne gültigen Satz.","evidence":"Kanonische Vollständigkeit: Arbeitskostensatz fehlt."},"MISSING_MACHINE_RATE":{"title":"Maschinensatz fehlt auf {count} Feld/Feldern","explanation":"{field} enthält Maschinenarbeit ohne gültigen Satz.","evidence":"Kanonische Vollständigkeit: Maschinensatz fehlt."},"UNALLOCATED_COST":{"title":"{amount} Kosten nicht zugeordnet","explanation":"Bis zur Zuordnung aus Feldmargen ausgeschlossen.","evidence":"Erfasste nicht zugeordnete Betriebskosten."},"UNALLOCATED_REVENUE":{"title":"{amount} Erlös nicht zugeordnet","explanation":"Bis zur Zuordnung aus Feldmargen ausgeschlossen.","evidence":"Erfasster nicht zugeordneter Erlös."},"BREAK_EVEN_ABOVE_SALE_PRICE":{"title":"Break-even über Verkaufspreis auf {field}","explanation":"{breakEven} je {unit} gegenüber {salePrice}.","evidence":"Kanonischer Break-even gegenüber Verkaufspreis."},"INCOMPLETE_PROFITABILITY":{"title":"Unvollständige Wirtschaftlichkeit auf {count} Feld/Feldern","explanation":"{field}: {completeness}% vollständig; fehlend ist nicht null.","evidence":"Kanonisches Ergebnis der finanziellen Vollständigkeit."},"MARGIN_ON_INCOMPLETE_DATA":{"title":"{count} Marge(n) auf unvollständigen Daten","explanation":"{field}: vorläufig {amount} bei {completeness}% Vollständigkeit.","evidence":"Kanonischer Deckungsbeitrag und Vollständigkeit."},"MISSING_HARVEST":{"title":"{count} Feld/Felder mit Kosten ohne Ernte","explanation":"{field} kann noch keinen Break-even zeigen.","evidence":"Keine Ernte erfasst."},"MISSING_REVENUE":{"title":"{count} geerntete Feld/Felder ohne Erlös","explanation":"{field} hat keinen Erlös; Marge nicht verfügbar.","evidence":"Kein erhaltener Erlös erfasst."},"STRONGEST_COMPLETE_MARGIN":{"title":"{field} hat den stärksten vollständigen Deckungsbeitrag","explanation":"{field} ({crop}): {amount} je Hektar.","evidence":"Höchster kanonischer Deckungsbeitrag je Hektar vollständiger Felder."}}},
+    "budgetVariance": {
+      "title": "Budget im Vergleich zu Istkosten", "notRecorded": "Nicht erfasst",
+      "labels": {"budget":"Budget","actual":"Istkosten","variance":"Abweichung","line":"Position"},
+      "status": {"within_budget":"Im Budget","over_budget":"Über dem Budget","under_budget":"Unter dem Budget","unavailable":"Nicht verfügbar"},
+      "reasons": {"WITHIN_BUDGET":"Die Istkosten entsprechen dem Budget.","OVER_BUDGET":"Die Istkosten überschreiten das Schlagbudget.","UNDER_BUDGET":"Die Ausgaben liegen unter dem Plan.","BUDGET_NOT_RECORDED":"Das Budget ist nicht erfasst.","ACTUAL_COST_NOT_RECORDED":"Die Istkosten sind nicht erfasst.","BUDGET_AND_ACTUAL_NOT_RECORDED":"Budget und Istkosten sind nicht erfasst.","ACTUAL_COST_INCOMPLETE":"Die Istkostendaten sind unvollständig.","CURRENCY_MISMATCH":"Budget und Istkosten verwenden unterschiedliche Währungen."},
+      "actions": {"ADD_BUDGET":"Budget hinzufügen","RECORD_ACTUAL_COST":"Istkosten erfassen","REVIEW_COSTS":"Kosten prüfen","REVIEW_UNPRICED_COSTS":"Fehlende Preise prüfen","OPEN_FINANCE":"Finanzen öffnen","NO_ACTION_REQUIRED":"Keine Aktion erforderlich"},
+      "rows": {"INPUT_COST":"Betriebsmittelkosten","LABOUR":"Arbeit","MACHINERY":"Maschinen","CONTRACTOR":"Lohnunternehmen","TOTAL_COST":"Gesamtkosten","YIELD":"Ertrag","REVENUE":"Erlös","GROSS_MARGIN":"Bruttomarge"},
+      "notes": {"PLANNED_NOT_RECORDED":"Der Planwert ist nicht erfasst.","ACTUAL_INCOMPLETE":"Die Istkosten sind unvollständig.","HARVEST_NOT_RECORDED":"Die Ernte ist nicht erfasst.","REVENUE_NOT_RECORDED":"Der Erlös ist nicht erfasst.","GROSS_MARGIN_INCOMPLETE":"Die Bruttomarge ist unvollständig."},
+      "signal": {"title":"{count} Schlag/Schläge über den Plankosten","explanation":"{field} weist die größte Überschreitung auf: {amount} ({percent}) über Plan.","whyItMatters":"Ein Schlag über dem Kostenplan kann die Marge schmälern; eine Prüfung während der Saison unterstützt fundierte Ausgabenentscheidungen.","evidence":"Erfasste Kosten gegenüber den erwarteten Kosten des Saisonplans für den Schlag."}
+    }
+  },
+  "dialog": {
+    "title": "Neuer Schlag",
+    "nameLabel": "Schlagname",
+    "namePlaceholder": "z. B. Oosterpolder Noord",
+    "area": "Fläche (ha)",
+    "soilType": "Bodenart",
+    "cancel": "Abbrechen",
+    "create": "Schlag erstellen"
+  },
+  "detail": {
+    "allFields": "← Alle Schläge",
+    "noActiveSeason": "Keine aktive Saison",
+    "soil": "Boden",
+    "status": "Status",
+    "completeness": "Vollständigkeit",
+    "calculated": "Berechnet {date}",
+    "noEconomics": "Für diesen Schlag ist in der aktiven Saison keine Kultur geplant, daher gibt es noch keine Wirtschaftsdaten. Planen Sie eine Saison für diesen Schlag, um die Kostenerfassung zu starten.",
+    "cropHealth": "Bestandesgesundheit",
+    "healthMeta": "Konfidenz {confidence} · Belege {freshness}",
+    "startScouting": "Monitoring starten",
+    "addObservation": "Beobachtung hinzufügen",
+    "currentGrowthStage": "Aktuelles Wachstumsstadium",
+    "observed": "Beobachtet {date} · {source} · {confidence}",
+    "viewStageHistory": "Stadienverlauf anzeigen",
+    "current": "(aktuell)",
+    "superseded": "(ersetzt)",
+    "noGrowthStage": "Das Wachstumsstadium der Kultur ist nicht erfasst. Die Erfassung verbessert Timing- und Compliance-Prüfungen.",
+    "recentScouting": "Letzte Monitorings",
+    "visitSummary": "{observations} Beobachtung(en) · {open} offen · {photos} Fotos",
+    "noScoutingVisits": "Es wurden keine Monitorings erfasst.",
+    "scoutingDisclaimer": "Symptome und automatische Vorschläge sind keine bestätigten Diagnosen und genehmigen keine Behandlung.",
+    "actions": "Aktionen",
+    "offlineActions": "{lastSynced} Neuzuweisung, Korrekturen, Stornierungen und Export erfordern eine Verbindung und sind offline nicht verfügbar.",
+    "actionsDisclaimer": "Käufe können nach Verbrauch des Bestands nicht bearbeitet werden — stattdessen stornieren und ersetzen. Schlag-Ökonomie ist erfasste betriebliche Ökonomie, keine gesetzliche Buchführung."
+  }
+}

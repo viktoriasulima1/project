@@ -1,0 +1,2 @@
+export const OBSERVATION_CATEGORIES = ['disease_symptom','pest_insect','weed','nutrient_deficiency_symptom','water_stress','drought_stress','frost_damage','hail_wind_damage','lodging','emergence_problem','stand_density','soil_condition','drainage_issue','machinery_damage','wildlife_damage','crop_development','general_note','custom'] as const;
+export type ObservationCategory = typeof OBSERVATION_CATEGORIES[number];

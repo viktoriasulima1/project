@@ -1,0 +1,17 @@
+export const PHOTO_LIMITS={maxOriginalBytes:8*1024*1024,maxPhotosPerObservation:5,maxPhotosPerVisit:20,maxLocalBytes:100*1024*1024,maxDimension:6000,signedReadSeconds:300} as const;
+export type SupportedPhotoMime='image/jpeg'|'image/png'|'image/webp';
+export function detectImageMime(bytes:Uint8Array):SupportedPhotoMime|null{if(bytes.length>=3&&bytes[0]===0xff&&bytes[1]===0xd8&&bytes[2]===0xff)return'image/jpeg';if(bytes.length>=8&&bytes[0]===0x89&&bytes[1]===0x50&&bytes[2]===0x4e&&bytes[3]===0x47)return'image/png';if(bytes.length>=12&&new TextDecoder().decode(bytes.slice(0,4))==='RIFF'&&new TextDecoder().decode(bytes.slice(8,12))==='WEBP')return'image/webp';return null;}
+export function validatePhoto(bytes:Uint8Array,claimedMime:string){if(bytes.byteLength>PHOTO_LIMITS.maxOriginalBytes)throw new Error('Photo exceeds the 8 MB limit.');const mime=detectImageMime(bytes);if(!mime)throw new Error('Unsupported or invalid image bytes. JPEG, PNG and WebP are supported.');if(claimedMime&&claimedMime!==mime)throw new Error('Image content does not match its declared MIME type.');return mime;}
+export function sanitizePhotoName(name:string){const base=name.normalize('NFKC').replace(/[^a-zA-Z0-9._-]+/g,'-').replace(/^[-.]+/,'').slice(0,80);return base||'scouting-photo';}
+export type PhotoAnnotation={id:string;type:'point'|'rectangle'|'text';x:number;y:number;width?:number;height?:number;label:string;relatedAnnotationId?:string};
+const finiteUnit=(value:unknown,name:string)=>{if(typeof value!=='number'||!Number.isFinite(value)||value<0||value>1)throw new Error(`${name} must be a finite normalized value between 0 and 1.`);return value};
+export function normalizeAnnotation(value:PhotoAnnotation):PhotoAnnotation{
+ if(!value||typeof value!=='object')throw new Error('Every annotation requires a value.');
+ if(!['point','rectangle','text'].includes(value.type))throw new Error('Unsupported annotation type.');
+ const unit=(number:number)=>Math.min(1,Math.max(0,number)),x=unit(value.x),y=unit(value.y),label=String(value.label??'').normalize('NFKC').replace(/[<>]/g,'').trim().slice(0,240);
+ const result:PhotoAnnotation={id:value.id,type:value.type,x,y,label};
+ if(value.type==='rectangle'){result.width=Math.min(1-x,unit(value.width??0));result.height=Math.min(1-y,unit(value.height??0));}
+ if(value.relatedAnnotationId){if(!/^[0-9a-f-]{36}$/i.test(value.relatedAnnotationId))throw new Error('Related annotation ID is invalid.');result.relatedAnnotationId=value.relatedAnnotationId;}
+ return result;
+}
+export function validateAnnotationSet(input:unknown){if(!Array.isArray(input)||input.length>30)throw new Error('Annotations must be an array of at most 30 items.');const result=input.map(item=>{const value=item as PhotoAnnotation;if(!value||typeof value!=='object'||!/^[0-9a-f-]{36}$/i.test(value.id))throw new Error('Every annotation requires a valid stable ID.');const x=finiteUnit(value.x,'x'),y=finiteUnit(value.y,'y');if(value.type==='text'&&!String(value.label??'').trim())throw new Error('Text annotations require a label.');if(value.type==='rectangle'){const width=finiteUnit(value.width,'width'),height=finiteUnit(value.height,'height');if(width<=0||height<=0||x+width>1||y+height>1)throw new Error('Rectangle must remain inside the image bounds.')}return normalizeAnnotation(value)}),ids=new Set<string>();for(const item of result){if(ids.has(item.id))throw new Error('Duplicate annotation IDs are not allowed.');ids.add(item.id)}return result;}

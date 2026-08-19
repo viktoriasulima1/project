@@ -1,0 +1,97 @@
+.empty {
+  padding: var(--space-5);
+  color: var(--color-text-muted);
+  font-size: var(--font-base);
+}
+
+.list {
+  list-style: none;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+  transition: background var(--transition);
+}
+
+.item:hover {
+  background: var(--color-surface-elevated);
+}
+
+.itemHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.itemName {
+  font-size: var(--font-base);
+  color: var(--color-text-primary);
+  font-weight: 450;
+}
+
+.badges {
+  display: flex;
+  gap: var(--space-1);
+  flex-shrink: 0;
+}
+
+.itemMeta {
+  display: flex;
+  justify-content: space-between;
+}
+
+.category {
+  font-size: var(--font-xs);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.stock {
+  font-size: var(--font-xs);
+  color: var(--color-text-secondary);
+}
+
+.barTrack {
+  height: 3px;
+  background: var(--color-border-subtle);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.barFill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.barOk {
+  background: var(--color-green);
+}
+
+.barLow {
+  background: var(--color-red);
+}
+
+.expiry {
+  font-size: var(--font-xs);
+  color: var(--color-amber);
+}
+
+.viewAll {
+  display: block;
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--font-sm);
+  color: var(--color-blue);
+  font-weight: 500;
+  transition: color var(--transition);
+}
+
+.viewAll:hover {
+  color: var(--color-blue-hover);
+}

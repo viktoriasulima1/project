@@ -1,0 +1,17 @@
+{
+  "appName": "FarmOS",
+  "language": { "label": "Taal", "choose": "Kies taal" },
+  "actions": {
+    "save": "Opslaan",
+    "cancel": "Annuleren",
+    "retry": "Opnieuw",
+    "tryAgain": "Opnieuw proberen",
+    "returnToToday": "Terug naar Vandaag",
+    "close": "Sluiten",
+    "add": "Toevoegen",
+    "remove": "Verwijderen",
+    "copyDiagnosticId": "Diagnose-ID kopiëren"
+  },
+  "states": { "loading": "Laden…", "saving": "Opslaan…", "empty": "Nog niets hier." },
+  "pendingSync": "{count} in wachtrij"
+}

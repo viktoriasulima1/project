@@ -1,0 +1,21 @@
+.container { padding: var(--space-6); display: flex; flex-direction: column; gap: var(--space-4); }
+.explanation, .warning { padding: var(--space-4); background: var(--color-blue-subtle); border: 1px solid var(--color-blue-border); border-radius: var(--radius-md); color: var(--color-text-secondary); }
+.diagnostics { padding: var(--space-4); border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-surface); }
+.diagnostics h2 { margin-bottom: var(--space-3); font-size: var(--font-lg); }
+.diagnostics dl { display: grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap: var(--space-3); }
+.diagnostics dt { color: var(--color-text-muted); font-size: var(--font-sm); }
+.diagnostics dd { margin: 2px 0 0; overflow-wrap: anywhere; }
+.switch { display: flex; align-items: center; gap: var(--space-2); font-weight: 600; }
+.switch input { width: 20px; height: 20px; }
+.hidden { display: none; }
+.toolbar { display: flex; align-items: center; flex-wrap: wrap; gap: var(--space-2); color: var(--color-text-secondary); }
+.toolbar button, .actions button, .actions a { padding: 6px 10px; border: 1px solid var(--color-border-subtle); border-radius: var(--radius-md); background: var(--color-surface-elevated); color: var(--color-text-primary); font-size: var(--font-sm); }
+.toolbar button:disabled { opacity: .5; }
+.list { list-style: none; display: grid; gap: var(--space-3); }
+.item { padding: var(--space-4); border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-surface); }
+.item > div:first-child { display: flex; justify-content: space-between; gap: var(--space-3); text-transform: capitalize; }
+.item span { color: var(--color-text-secondary); }
+.meta, .empty { margin-top: var(--space-2); color: var(--color-text-muted); font-size: var(--font-sm); }
+.error { margin-top: var(--space-2); color: var(--color-red); }
+.actions { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-3); }
+@media(max-width:767px) { .container { padding: var(--space-4); } .toolbar { align-items: stretch; flex-direction: column; } .actions > * { min-height: 44px; } }

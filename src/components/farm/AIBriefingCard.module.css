@@ -1,0 +1,81 @@
+.body {
+  padding: var(--space-2) 0;
+}
+
+.empty {
+  padding: var(--space-5);
+  color: var(--color-text-muted);
+  font-size: var(--font-base);
+}
+
+.list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-3) var(--space-5);
+  border-bottom: 1px solid var(--color-border);
+  position: relative;
+}
+
+.item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  border-radius: 0 2px 2px 0;
+}
+
+.item.high::before {
+  background: var(--color-red);
+}
+
+.item.medium::before {
+  background: var(--color-amber);
+}
+
+.item.low::before {
+  background: var(--color-blue);
+}
+
+.item:last-child {
+  border-bottom: none;
+}
+
+.itemTop {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.itemTitle {
+  font-size: var(--font-md);
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+
+.itemExplanation {
+  font-size: var(--font-sm);
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+}
+
+.itemAction {
+  font-size: var(--font-sm);
+  color: var(--color-blue);
+  font-weight: 500;
+  width: fit-content;
+  transition: color var(--transition);
+}
+
+.itemAction:hover {
+  color: var(--color-blue-hover);
+}

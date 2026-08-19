@@ -1,0 +1,117 @@
+{
+  "brand": "Konfiguracja FarmOS",
+  "progress": "Krok {current} z {total} · {label}",
+  "steps": {
+    "welcome": "Powitanie",
+    "farm": "Dane gospodarstwa",
+    "season": "Aktywny sezon",
+    "field": "Pierwsze pole",
+    "crop": "Przypisanie uprawy",
+    "inventory": "Magazyn (opcjonalnie)",
+    "employee": "Pracownik i licencja (opcjonalnie)",
+    "review": "Przegląd",
+    "complete": "Gotowe"
+  },
+  "buttons": { "continue": "Dalej", "back": "Wstecz", "skip": "Pomiń na razie", "getStarted": "Rozpocznij" },
+  "welcome": {
+    "title": "Witamy w FarmOS",
+    "desc": "Skonfigurujmy Twoje gospodarstwo. Utworzysz gospodarstwo, aktywny sezon, pierwsze pole i jego uprawę — reszta jest opcjonalna i można ją dodać później. Większość rolników kończy to w niecałe 5 minut."
+  },
+  "farm": {
+    "title": "Twoje gospodarstwo",
+    "desc": "Podstawowe dane oraz lokalizacja, jeśli ją masz — współrzędne możesz dodać później.",
+    "nameLabel": "Nazwa gospodarstwa *",
+    "namePlaceholder": "np. Maatschap De Ridder",
+    "locationLabel": "Lokalizacja (miasto, region) *",
+    "locationPlaceholder": "np. Westervoort, Gelderland",
+    "country": "Kraj",
+    "totalHectares": "Łączna powierzchnia (ha, opcjonalnie)",
+    "brpNumber": "Numer BRP (opcjonalnie)",
+    "vatNumber": "Numer VAT (opcjonalnie)",
+    "latitude": "Szerokość geogr. (opcjonalnie)",
+    "longitude": "Długość geogr. (opcjonalnie)",
+    "coordsHint": "Brak współrzędnych? Nie szkodzi — kontynuuj bez nich. Strona Pogoda wyjaśni, że ich brakuje i pozwoli dodać je później."
+  },
+  "season": {
+    "title": "Aktywny sezon",
+    "desc": "FarmOS porządkuje wszystko według sezonu. Utwórz bieżący.",
+    "year": "Rok",
+    "startDate": "Data początkowa",
+    "endDate": "Data końcowa"
+  },
+  "field": {
+    "title": "Twoje pierwsze pole",
+    "desc": "Dodaj jedno pole na początek — więcej możesz dodać w każdej chwili na stronie Pola.",
+    "nameLabel": "Nazwa pola *",
+    "namePlaceholder": "np. Keetje Noord",
+    "hectares": "Hektary *",
+    "hectaresPlaceholder": "np. 12,5",
+    "soilType": "Rodzaj gleby"
+  },
+  "crop": {
+    "title": "Co tam rośnie?",
+    "desc": "Przypisz uprawę do pola w tym sezonie.",
+    "fieldLabel": "Pole",
+    "newFieldOption": "Twoje nowe pole",
+    "cropLabel": "Uprawa"
+  },
+  "inventory": {
+    "title": "Dodać pierwszy produkt? (opcjonalnie)",
+    "desc": "Podstawowe dane zajmują mniej niż 30 sekund — pola zaawansowane są opcjonalne.",
+    "productName": "Nazwa produktu",
+    "productPlaceholder": "np. Amistar Opti",
+    "category": "Kategoria",
+    "cropProtectionGroup": "Ochrona roślin",
+    "unit": "Jednostka",
+    "currentStock": "Bieżący stan",
+    "minimumStock": "Stan minimalny (opcjonalnie)",
+    "advancedShow": "+ Pola zaawansowane (opcjonalnie)",
+    "advancedHide": "− Ukryj pola zaawansowane",
+    "purchasePrice": "Cena zakupu / jednostka",
+    "supplier": "Dostawca",
+    "expiryDate": "Data ważności",
+    "registrationNumber": "Numer rejestracyjny",
+    "regPlaceholder": "np. CTB 13093N",
+    "activeIngredient": "Substancja czynna",
+    "fracCode": "Kod FRAC (opcjonalnie)",
+    "hracCode": "Kod HRAC (opcjonalnie)",
+    "phiDays": "Karencja (dni, opcjonalnie)",
+    "nitrogen": "Azot %",
+    "phosphorus": "Fosfor %",
+    "potassium": "Potas %",
+    "addProduct": "Dodaj produkt"
+  },
+  "employee": {
+    "title": "Dodać operatora? (opcjonalnie)",
+    "desc": "Zapisz właściciela gospodarstwa, operatora maszyn lub operatora oprysków. Dane certyfikatu są zapisywane tak jak wprowadzone, do Twojej ewidencji — nie są weryfikowane w żadnym rejestrze.",
+    "name": "Imię i nazwisko",
+    "namePlaceholder": "np. Jan de Vries",
+    "role": "Rola",
+    "rolePlaceholder": "np. Operator oprysków",
+    "hasSpraying": "Posiada licencję na opryski",
+    "certNumber": "Numer certyfikatu",
+    "certPlaceholder": "np. NL-123456",
+    "certExpiry": "Ważność certyfikatu",
+    "addOperator": "Dodaj operatora"
+  },
+  "review": {
+    "title": "Przegląd",
+    "desc": "Wszystko poniżej jest już zapisane. Zakończ, aby przejść do panelu.",
+    "farm": "Gospodarstwo",
+    "activeSeason": "Aktywny sezon",
+    "fields": "Pola",
+    "cropAssigned": "Uprawa przypisana",
+    "inventory": "Magazyn",
+    "operator": "Operator",
+    "yes": "Tak",
+    "no": "Nie",
+    "added": "Dodano",
+    "skipped": "Pominięto",
+    "finish": "Zakończ"
+  },
+  "complete": {
+    "title": "Wszystko gotowe",
+    "desc": "Twoje gospodarstwo jest gotowe. Więcej pól, produktów i operatorów możesz dodać w każdej chwili na ich stronach.",
+    "goToDashboard": "Przejdź do panelu"
+  }
+}

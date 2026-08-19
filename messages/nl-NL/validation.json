@@ -1,0 +1,10 @@
+{
+  "required": {
+    "overallCondition": "Kies de algemene gewasconditie voordat u opslaat.",
+    "field": "Selecteer een perceel voordat u opslaat.",
+    "visitDate": "Voer een geldige bezoekdatum in.",
+    "observation": "Voeg ten minste één waarneming met omschrijving toe voordat u opslaat."
+  },
+  "invalid": { "overallCondition": "Kies een geldige algemene gewasconditie voordat u opslaat." },
+  "generic": "Controleer het gemarkeerde veld voordat u opslaat."
+}

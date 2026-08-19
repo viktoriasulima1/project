@@ -1,0 +1,178 @@
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-border);
+}
+
+.metric {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: var(--space-3) var(--space-2);
+  background: var(--color-surface);
+}
+
+.metricLabel {
+  font-size: var(--font-xs);
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  text-align: center;
+}
+
+.metricValue {
+  font-size: var(--font-base);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  white-space: nowrap;
+}
+
+.metricAlert .metricValue {
+  color: var(--color-red);
+}
+
+.metricPositive .metricValue {
+  color: var(--color-green);
+}
+
+.marginSection {
+  padding: var(--space-3) var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.marginHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.marginLabel {
+  font-size: var(--font-sm);
+  color: var(--color-text-secondary);
+}
+
+.marginRight {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.marginValue {
+  font-size: var(--font-base);
+  font-weight: 600;
+}
+
+.positive {
+  color: var(--color-green);
+}
+
+.negative {
+  color: var(--color-red);
+}
+
+.cropList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cropItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.cropInfo {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+}
+
+.cropName {
+  font-size: var(--font-sm);
+  color: var(--color-text-primary);
+  text-transform: capitalize;
+}
+
+.cropHa {
+  font-size: var(--font-xs);
+  color: var(--color-text-muted);
+}
+
+.cropNumbers {
+  display: flex;
+  gap: var(--space-3);
+  align-items: center;
+}
+
+.cropCost {
+  font-size: var(--font-xs);
+  color: var(--color-text-muted);
+}
+
+.cropMargin {
+  font-size: var(--font-sm);
+  font-weight: 500;
+}
+
+.marginPerHa {
+  font-size: var(--font-sm);
+  font-weight: 400;
+  opacity: 0.8;
+}
+
+.budgetBar {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.budgetLabel {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--font-xs);
+  color: var(--color-text-secondary);
+}
+
+.barTrack {
+  height: 4px;
+  background: var(--color-border-subtle);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.barFill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.barOk {
+  background: var(--color-green);
+}
+
+.barOver {
+  background: var(--color-amber);
+}
+
+.viewAll {
+  display: block;
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--font-sm);
+  color: var(--color-blue);
+  font-weight: 500;
+  transition: color var(--transition);
+}
+
+.viewAll:hover {
+  color: var(--color-blue-hover);
+}

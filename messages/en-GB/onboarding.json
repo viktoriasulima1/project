@@ -1,0 +1,117 @@
+{
+  "brand": "FarmOS setup",
+  "progress": "Step {current} of {total} · {label}",
+  "steps": {
+    "welcome": "Welcome",
+    "farm": "Farm details",
+    "season": "Active season",
+    "field": "First field",
+    "crop": "Crop assignment",
+    "inventory": "Inventory (optional)",
+    "employee": "Employee & licence (optional)",
+    "review": "Review",
+    "complete": "Done"
+  },
+  "buttons": { "continue": "Continue", "back": "Back", "skip": "Skip for now", "getStarted": "Get started" },
+  "welcome": {
+    "title": "Welcome to FarmOS",
+    "desc": "Let's get your farm set up. You'll create your farm, an active season, your first field and its crop — the rest is optional and can be added later. Most farmers finish this in under 5 minutes."
+  },
+  "farm": {
+    "title": "Your farm",
+    "desc": "Basic details, plus location if you have it — you can add coordinates later.",
+    "nameLabel": "Farm name *",
+    "namePlaceholder": "e.g. Maatschap De Ridder",
+    "locationLabel": "Location (city, province) *",
+    "locationPlaceholder": "e.g. Westervoort, Gelderland",
+    "country": "Country",
+    "totalHectares": "Total hectares (optional)",
+    "brpNumber": "BRP number (optional)",
+    "vatNumber": "VAT number (optional)",
+    "latitude": "Latitude (optional)",
+    "longitude": "Longitude (optional)",
+    "coordsHint": "No coordinates? No problem — continue without them. The Weather page will explain they're missing and let you add them later."
+  },
+  "season": {
+    "title": "Active season",
+    "desc": "FarmOS organises everything by season. Create the current one.",
+    "year": "Year",
+    "startDate": "Start date",
+    "endDate": "End date"
+  },
+  "field": {
+    "title": "Your first field",
+    "desc": "Add one field to get started — you can add more any time from the Fields page.",
+    "nameLabel": "Field name *",
+    "namePlaceholder": "e.g. Keetje Noord",
+    "hectares": "Hectares *",
+    "hectaresPlaceholder": "e.g. 12.5",
+    "soilType": "Soil type"
+  },
+  "crop": {
+    "title": "What's growing there?",
+    "desc": "Assign a crop to the field for this season.",
+    "fieldLabel": "Field",
+    "newFieldOption": "Your new field",
+    "cropLabel": "Crop"
+  },
+  "inventory": {
+    "title": "Add your first product? (optional)",
+    "desc": "Basic details take under 30 seconds — advanced fields are optional.",
+    "productName": "Product name",
+    "productPlaceholder": "e.g. Amistar Opti",
+    "category": "Category",
+    "cropProtectionGroup": "Crop protection",
+    "unit": "Unit",
+    "currentStock": "Current stock",
+    "minimumStock": "Minimum stock (optional)",
+    "advancedShow": "+ Advanced fields (optional)",
+    "advancedHide": "− Hide advanced fields",
+    "purchasePrice": "Purchase price / unit",
+    "supplier": "Supplier",
+    "expiryDate": "Expiry date",
+    "registrationNumber": "Registration number",
+    "regPlaceholder": "e.g. CTB 13093N",
+    "activeIngredient": "Active ingredient",
+    "fracCode": "FRAC code (optional)",
+    "hracCode": "HRAC code (optional)",
+    "phiDays": "PHI days (optional)",
+    "nitrogen": "Nitrogen %",
+    "phosphorus": "Phosphorus %",
+    "potassium": "Potassium %",
+    "addProduct": "Add product"
+  },
+  "employee": {
+    "title": "Add an operator? (optional)",
+    "desc": "Record the farm owner, machine operator, or spray operator. Certificate details are stored as entered for your own records — not verified against any registry.",
+    "name": "Name",
+    "namePlaceholder": "e.g. Jan de Vries",
+    "role": "Role",
+    "rolePlaceholder": "e.g. Spray operator",
+    "hasSpraying": "Has spraying licence",
+    "certNumber": "Certificate number",
+    "certPlaceholder": "e.g. NL-123456",
+    "certExpiry": "Certificate expiry",
+    "addOperator": "Add operator"
+  },
+  "review": {
+    "title": "Review",
+    "desc": "Everything below is already saved. Finish to go to your dashboard.",
+    "farm": "Farm",
+    "activeSeason": "Active season",
+    "fields": "Fields",
+    "cropAssigned": "Crop assigned",
+    "inventory": "Inventory",
+    "operator": "Operator",
+    "yes": "Yes",
+    "no": "No",
+    "added": "Added",
+    "skipped": "Skipped",
+    "finish": "Finish"
+  },
+  "complete": {
+    "title": "You're all set",
+    "desc": "Your farm is ready. You can add more fields, products, and operators any time from their pages.",
+    "goToDashboard": "Go to dashboard"
+  }
+}

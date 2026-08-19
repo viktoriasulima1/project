@@ -1,0 +1,20 @@
+{
+  "today": "Vandaag",
+  "fields": "Percelen",
+  "fieldMap": "Perceelkaart",
+  "scouting": "Scouten",
+  "reports": "Rapporten",
+  "seasonPlan": "Seizoensplan",
+  "workOrders": "Werkorders",
+  "activities": "Activiteiten",
+  "inventory": "Voorraad",
+  "finance": "Financiën",
+  "weather": "Weer",
+  "compliance": "Compliance",
+  "insights": "Bedrijfsinzichten",
+  "offlineSync": "Offline & synchronisatie",
+  "openNav": "Navigatie openen",
+  "closeNav": "Navigatie sluiten",
+  "quickLog": "Snel loggen",
+  "quickLogAria": "Snel een activiteit loggen"
+}

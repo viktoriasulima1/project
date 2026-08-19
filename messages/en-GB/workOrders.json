@@ -1,0 +1,37 @@
+{
+  "title": "Work orders",
+  "subtitle": "Assign, prepare and execute field operations",
+  "tabs": { "today": "Today", "allWork": "All work", "seasonPlan": "Season plan" },
+  "create": { "title": "Create work order" },
+  "form": {
+    "fieldAndSeason": "Field and season",
+    "operation": "Operation",
+    "title": "Title",
+    "priority": "Priority",
+    "dueDate": "Due date",
+    "machine": "Machine",
+    "employee": "Employee",
+    "reserveInventory": "Reserve inventory",
+    "reservationQuantity": "Reservation quantity",
+    "instructions": "Instructions",
+    "notAssigned": "Not assigned",
+    "none": "None",
+    "submit": "Create work order",
+    "saving": "Saving…",
+    "created": "Work order created.",
+    "noFieldSeasons": "No active field seasons are available."
+  },
+  "readiness": {
+    "title": "Readiness rules",
+    "explanation": "Reserved inventory is excluded from other orders. Machine and operator assignments are shown before field execution. Completion requires an actual completed Activity; changing a work-order status alone never creates one."
+  },
+  "queue": { "title": "Operational queue", "today": "Today", "empty": "No matching work orders." },
+  "row": {
+    "resourcesReady": "Resources ready",
+    "blocked": "Blocked: {blockers}",
+    "due": "due {date}",
+    "recordActual": "Record actual activity",
+    "actualRecord": "Actual activity record"
+  },
+  "actions": { "start": "Start", "block": "Block", "cancel": "Cancel" }
+}

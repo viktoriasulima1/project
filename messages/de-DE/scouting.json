@@ -1,0 +1,37 @@
+{
+  "page": {
+    "title": "Feldmonitoring",
+    "subtitle": "Beobachtete Belege, Wachstumsstadien und nachvollziehbare Bestandesgesundheits-Priorität",
+    "fieldHealthPriority": "Priorität Bestandesgesundheit",
+    "noActiveSeason": { "title": "Keine aktive Anbausaison", "body": "Planen Sie eine Kultur für einen Schlag, bevor Sie ein Monitoring erfassen." },
+    "recentVisits": "Letzte Besuche",
+    "noVisits": "Noch keine Monitorings erfasst."
+  },
+  "form": {
+    "fieldAndCrop": "Schlag und Kultur",
+    "visitDate": "Besuchsdatum",
+    "overallCondition": "Allgemeiner Zustand",
+    "useGps": "Aktuelles GPS verwenden",
+    "locating": "Standort wird ermittelt…",
+    "retryLocation": "Standort erneut",
+    "growthStageLegend": "Beobachtetes Wachstumsstadium (optional)",
+    "growthStageHelp": "Nur eine ausdrücklich bestätigte Beobachtung wird aktuell.",
+    "bbchCode": "BBCH-Code",
+    "humanLabel": "Lesbare Bezeichnung",
+    "observationsLegend": "Beobachtungen und private Fotos",
+    "category": "Kategorie",
+    "observedIssue": "Beobachtetes Problem",
+    "severity": "Schweregrad",
+    "affectedArea": "Betroffene Fläche (%)",
+    "description": "Beschreibung",
+    "takePhoto": "Foto aufnehmen oder vorhandenes wählen",
+    "pointAnnotation": "Punkt-Annotation",
+    "annotationPlaceholder": "Braune Flecken am unteren Blatt",
+    "removeBeforeSave": "Vor dem Speichern entfernen",
+    "addObservation": "+ Beobachtung hinzufügen",
+    "visitNotes": "Besuchsnotizen",
+    "privacyNotice": "Fotos sind privat. Originalbilder bleiben erhalten. Vorschläge bleiben unbestätigt und genehmigen niemals eine Behandlung; Ctgb bleibt maßgeblich.",
+    "reviewSave": "Besuch prüfen und speichern",
+    "saving": "Speichern…"
+  }
+}

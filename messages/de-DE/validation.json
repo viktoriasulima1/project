@@ -1,0 +1,10 @@
+{
+  "required": {
+    "overallCondition": "Wählen Sie den allgemeinen Bestandeszustand vor dem Speichern.",
+    "field": "Wählen Sie einen Schlag vor dem Speichern.",
+    "visitDate": "Geben Sie ein gültiges Besuchsdatum ein.",
+    "observation": "Fügen Sie vor dem Speichern mindestens eine Beobachtung mit Beschreibung hinzu."
+  },
+  "invalid": { "overallCondition": "Wählen Sie einen gültigen allgemeinen Bestandeszustand vor dem Speichern." },
+  "generic": "Bitte prüfen Sie das markierte Feld vor dem Speichern."
+}

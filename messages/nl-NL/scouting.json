@@ -1,0 +1,37 @@
+{
+  "page": {
+    "title": "Gewasinspectie",
+    "subtitle": "Waargenomen bewijs, groeistadia en verklaarbare gewasgezondheidsprioriteit",
+    "fieldHealthPriority": "Prioriteit gewasgezondheid",
+    "noActiveSeason": { "title": "Geen actief teeltseizoen", "body": "Plan een gewas voor een perceel voordat u een inspectiebezoek vastlegt." },
+    "recentVisits": "Recente bezoeken",
+    "noVisits": "Nog geen inspectiebezoeken vastgelegd."
+  },
+  "form": {
+    "fieldAndCrop": "Perceel en gewas",
+    "visitDate": "Bezoekdatum",
+    "overallCondition": "Algemene conditie",
+    "useGps": "Huidige GPS gebruiken",
+    "locating": "Locatie bepalen…",
+    "retryLocation": "Locatie opnieuw",
+    "growthStageLegend": "Waargenomen groeistadium (optioneel)",
+    "growthStageHelp": "Alleen een expliciet bevestigde waarneming wordt actueel.",
+    "bbchCode": "BBCH-code",
+    "humanLabel": "Leesbare omschrijving",
+    "observationsLegend": "Waarnemingen en privéfoto's",
+    "category": "Categorie",
+    "observedIssue": "Waargenomen probleem",
+    "severity": "Ernst",
+    "affectedArea": "Aangetast gebied (%)",
+    "description": "Omschrijving",
+    "takePhoto": "Foto maken of bestaande kiezen",
+    "pointAnnotation": "Puntannotatie",
+    "annotationPlaceholder": "Bruine vlekken op onderste blad",
+    "removeBeforeSave": "Verwijderen vóór opslaan",
+    "addObservation": "+ Waarneming toevoegen",
+    "visitNotes": "Bezoeknotities",
+    "privacyNotice": "Foto's zijn privé. Originele afbeeldingen blijven behouden. Suggesties blijven onbevestigd en autoriseren nooit een behandeling; Ctgb blijft leidend.",
+    "reviewSave": "Bezoek controleren en opslaan",
+    "saving": "Opslaan…"
+  }
+}

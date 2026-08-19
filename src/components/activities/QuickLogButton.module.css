@@ -1,0 +1,92 @@
+/* Desktop trigger — floats bottom-right, same corner as the mobile FAB.
+   Sprint 12 finding: originally placed top-right below the topbar, which
+   directly overlapped every page's own top-right toolbar button (e.g.
+   Activities' "+ Record activity") — confirmed via real E2E testing
+   (Playwright's own retry log showed it intercepting pointer events).
+   Bottom-right is a corner no page's own content occupies. */
+.desktopTrigger {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .desktopTrigger {
+    display: inline-flex;
+    align-items: center;
+    position: fixed;
+    bottom: var(--space-5);
+    right: var(--space-5);
+    z-index: var(--z-fab); /* above the map, below the mobile drawer backdrop */
+    padding: 10px 18px;
+    background: var(--color-green);
+    color: var(--color-on-accent);
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: var(--font-sm);
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  }
+
+  .desktopTrigger:hover {
+    background: var(--color-green-hover);
+  }
+
+  .desktopTrigger:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+/* Mobile floating action button — bottom-right, thumb-reachable, above any
+   content but never covering the primary save action inside a dialog
+   (dialogs render in their own overlay above this). 56px — comfortably
+   above the 44px minimum tap target. */
+.fab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  /* Keep the FAB above the iOS Safari bottom browser controls. */
+  bottom: calc(var(--space-5) + env(safe-area-inset-bottom, 0px));
+  right: var(--space-5);
+  z-index: var(--z-fab); /* above the map, below the mobile drawer backdrop */
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--color-green);
+  color: var(--color-on-accent);
+  border: none;
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.fab:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@media (min-width: 768px) {
+  .fab {
+    display: none;
+  }
+}
+
+.errorToast {
+  position: fixed;
+  /* Sit clear above the 56px FAB (and its safe-area offset) instead of
+     overlapping it — physical-mobile defect from the iPhone test. */
+  bottom: calc(var(--space-5) + 56px + var(--space-3) + env(safe-area-inset-bottom, 0px));
+  right: var(--space-5);
+  left: var(--space-5);
+  z-index: 30;
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-red-subtle);
+  border: 1px solid var(--color-red-border);
+  border-radius: var(--radius-md);
+  color: var(--color-red);
+  font-size: var(--font-sm);
+  max-width: 320px;
+  margin-left: auto;
+}

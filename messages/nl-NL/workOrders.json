@@ -1,0 +1,37 @@
+{
+  "title": "Werkorders",
+  "subtitle": "Veldwerkzaamheden toewijzen, voorbereiden en uitvoeren",
+  "tabs": { "today": "Vandaag", "allWork": "Alle werk", "seasonPlan": "Seizoensplan" },
+  "create": { "title": "Werkorder aanmaken" },
+  "form": {
+    "fieldAndSeason": "Perceel en seizoen",
+    "operation": "Bewerking",
+    "title": "Titel",
+    "priority": "Prioriteit",
+    "dueDate": "Uiterste datum",
+    "machine": "Machine",
+    "employee": "Medewerker",
+    "reserveInventory": "Voorraad reserveren",
+    "reservationQuantity": "Reserveringshoeveelheid",
+    "instructions": "Instructies",
+    "notAssigned": "Niet toegewezen",
+    "none": "Geen",
+    "submit": "Werkorder aanmaken",
+    "saving": "Opslaan…",
+    "created": "Werkorder aangemaakt.",
+    "noFieldSeasons": "Er zijn geen actieve perceelseizoenen beschikbaar."
+  },
+  "readiness": {
+    "title": "Gereedheidsregels",
+    "explanation": "Gereserveerde voorraad wordt uitgesloten van andere orders. Machine- en operatortoewijzingen worden vóór uitvoering op het veld getoond. Afronden vereist een daadwerkelijk voltooide activiteit; alleen de status van een werkorder wijzigen maakt er nooit een aan."
+  },
+  "queue": { "title": "Operationele wachtrij", "today": "Vandaag", "empty": "Geen overeenkomende werkorders." },
+  "row": {
+    "resourcesReady": "Middelen gereed",
+    "blocked": "Geblokkeerd: {blockers}",
+    "due": "uiterlijk {date}",
+    "recordActual": "Werkelijke activiteit vastleggen",
+    "actualRecord": "Werkelijke activiteitsregistratie"
+  },
+  "actions": { "start": "Starten", "block": "Blokkeren", "cancel": "Annuleren" }
+}

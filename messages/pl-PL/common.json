@@ -1,0 +1,17 @@
+{
+  "appName": "FarmOS",
+  "language": { "label": "Język", "choose": "Wybierz język" },
+  "actions": {
+    "save": "Zapisz",
+    "cancel": "Anuluj",
+    "retry": "Ponów",
+    "tryAgain": "Spróbuj ponownie",
+    "returnToToday": "Wróć do Dziś",
+    "close": "Zamknij",
+    "add": "Dodaj",
+    "remove": "Usuń",
+    "copyDiagnosticId": "Kopiuj identyfikator diagnostyczny"
+  },
+  "states": { "loading": "Ładowanie…", "saving": "Zapisywanie…", "empty": "Jeszcze nic tu nie ma." },
+  "pendingSync": "{count} w kolejce"
+}

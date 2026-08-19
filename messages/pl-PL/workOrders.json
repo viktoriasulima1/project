@@ -1,0 +1,37 @@
+{
+  "title": "Zlecenia pracy",
+  "subtitle": "Przydzielaj, przygotowuj i wykonuj prace polowe",
+  "tabs": { "today": "Dziś", "allWork": "Wszystkie prace", "seasonPlan": "Plan sezonu" },
+  "create": { "title": "Utwórz zlecenie" },
+  "form": {
+    "fieldAndSeason": "Pole i sezon",
+    "operation": "Operacja",
+    "title": "Tytuł",
+    "priority": "Priorytet",
+    "dueDate": "Termin",
+    "machine": "Maszyna",
+    "employee": "Pracownik",
+    "reserveInventory": "Rezerwuj zapas",
+    "reservationQuantity": "Ilość rezerwacji",
+    "instructions": "Instrukcje",
+    "notAssigned": "Nie przypisano",
+    "none": "Brak",
+    "submit": "Utwórz zlecenie",
+    "saving": "Zapisywanie…",
+    "created": "Zlecenie utworzone.",
+    "noFieldSeasons": "Brak dostępnych aktywnych sezonów pól."
+  },
+  "readiness": {
+    "title": "Zasady gotowości",
+    "explanation": "Zarezerwowany zapas jest wykluczony z innych zleceń. Przypisania maszyn i operatorów są pokazywane przed wykonaniem prac w polu. Zakończenie wymaga rzeczywiście ukończonej czynności; sama zmiana statusu zlecenia nigdy jej nie tworzy."
+  },
+  "queue": { "title": "Kolejka operacyjna", "today": "Dziś", "empty": "Brak pasujących zleceń." },
+  "row": {
+    "resourcesReady": "Zasoby gotowe",
+    "blocked": "Zablokowane: {blockers}",
+    "due": "termin {date}",
+    "recordActual": "Zarejestruj rzeczywistą czynność",
+    "actualRecord": "Zapis rzeczywistej czynności"
+  },
+  "actions": { "start": "Rozpocznij", "block": "Zablokuj", "cancel": "Anuluj" }
+}

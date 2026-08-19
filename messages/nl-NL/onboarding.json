@@ -1,0 +1,117 @@
+{
+  "brand": "FarmOS instellen",
+  "progress": "Stap {current} van {total} · {label}",
+  "steps": {
+    "welcome": "Welkom",
+    "farm": "Bedrijfsgegevens",
+    "season": "Actief seizoen",
+    "field": "Eerste perceel",
+    "crop": "Gewastoewijzing",
+    "inventory": "Voorraad (optioneel)",
+    "employee": "Medewerker & licentie (optioneel)",
+    "review": "Controleren",
+    "complete": "Klaar"
+  },
+  "buttons": { "continue": "Doorgaan", "back": "Terug", "skip": "Nu overslaan", "getStarted": "Aan de slag" },
+  "welcome": {
+    "title": "Welkom bij FarmOS",
+    "desc": "Laten we uw bedrijf instellen. U maakt uw bedrijf, een actief seizoen, uw eerste perceel en het gewas — de rest is optioneel en kan later worden toegevoegd. De meeste boeren zijn hier binnen 5 minuten mee klaar."
+  },
+  "farm": {
+    "title": "Uw bedrijf",
+    "desc": "Basisgegevens, plus locatie als u die heeft — u kunt coördinaten later toevoegen.",
+    "nameLabel": "Bedrijfsnaam *",
+    "namePlaceholder": "bijv. Maatschap De Ridder",
+    "locationLabel": "Locatie (plaats, provincie) *",
+    "locationPlaceholder": "bijv. Westervoort, Gelderland",
+    "country": "Land",
+    "totalHectares": "Totaal hectare (optioneel)",
+    "brpNumber": "BRP-nummer (optioneel)",
+    "vatNumber": "Btw-nummer (optioneel)",
+    "latitude": "Breedtegraad (optioneel)",
+    "longitude": "Lengtegraad (optioneel)",
+    "coordsHint": "Geen coördinaten? Geen probleem — ga verder zonder. De Weer-pagina legt uit dat ze ontbreken en laat u ze later toevoegen."
+  },
+  "season": {
+    "title": "Actief seizoen",
+    "desc": "FarmOS organiseert alles per seizoen. Maak het huidige seizoen aan.",
+    "year": "Jaar",
+    "startDate": "Startdatum",
+    "endDate": "Einddatum"
+  },
+  "field": {
+    "title": "Uw eerste perceel",
+    "desc": "Voeg één perceel toe om te beginnen — u kunt er altijd meer toevoegen via de Percelen-pagina.",
+    "nameLabel": "Perceelnaam *",
+    "namePlaceholder": "bijv. Keetje Noord",
+    "hectares": "Hectare *",
+    "hectaresPlaceholder": "bijv. 12,5",
+    "soilType": "Grondsoort"
+  },
+  "crop": {
+    "title": "Wat groeit daar?",
+    "desc": "Wijs een gewas toe aan het perceel voor dit seizoen.",
+    "fieldLabel": "Perceel",
+    "newFieldOption": "Uw nieuwe perceel",
+    "cropLabel": "Gewas"
+  },
+  "inventory": {
+    "title": "Uw eerste product toevoegen? (optioneel)",
+    "desc": "Basisgegevens duren minder dan 30 seconden — geavanceerde velden zijn optioneel.",
+    "productName": "Productnaam",
+    "productPlaceholder": "bijv. Amistar Opti",
+    "category": "Categorie",
+    "cropProtectionGroup": "Gewasbescherming",
+    "unit": "Eenheid",
+    "currentStock": "Huidige voorraad",
+    "minimumStock": "Minimumvoorraad (optioneel)",
+    "advancedShow": "+ Geavanceerde velden (optioneel)",
+    "advancedHide": "− Geavanceerde velden verbergen",
+    "purchasePrice": "Aankoopprijs / eenheid",
+    "supplier": "Leverancier",
+    "expiryDate": "Vervaldatum",
+    "registrationNumber": "Registratienummer",
+    "regPlaceholder": "bijv. CTB 13093N",
+    "activeIngredient": "Werkzame stof",
+    "fracCode": "FRAC-code (optioneel)",
+    "hracCode": "HRAC-code (optioneel)",
+    "phiDays": "Veiligheidstermijn (dagen, optioneel)",
+    "nitrogen": "Stikstof %",
+    "phosphorus": "Fosfor %",
+    "potassium": "Kalium %",
+    "addProduct": "Product toevoegen"
+  },
+  "employee": {
+    "title": "Een gebruiker toevoegen? (optioneel)",
+    "desc": "Leg de eigenaar, machinist of spuitgebruiker vast. Certificaatgegevens worden opgeslagen zoals ingevoerd voor uw eigen administratie — niet geverifieerd bij een register.",
+    "name": "Naam",
+    "namePlaceholder": "bijv. Jan de Vries",
+    "role": "Rol",
+    "rolePlaceholder": "bijv. Spuitgebruiker",
+    "hasSpraying": "Heeft spuitlicentie",
+    "certNumber": "Certificaatnummer",
+    "certPlaceholder": "bijv. NL-123456",
+    "certExpiry": "Vervaldatum certificaat",
+    "addOperator": "Gebruiker toevoegen"
+  },
+  "review": {
+    "title": "Controleren",
+    "desc": "Alles hieronder is al opgeslagen. Voltooi om naar uw dashboard te gaan.",
+    "farm": "Bedrijf",
+    "activeSeason": "Actief seizoen",
+    "fields": "Percelen",
+    "cropAssigned": "Gewas toegewezen",
+    "inventory": "Voorraad",
+    "operator": "Gebruiker",
+    "yes": "Ja",
+    "no": "Nee",
+    "added": "Toegevoegd",
+    "skipped": "Overgeslagen",
+    "finish": "Voltooien"
+  },
+  "complete": {
+    "title": "U bent klaar",
+    "desc": "Uw bedrijf is gereed. U kunt altijd meer percelen, producten en gebruikers toevoegen via hun pagina's.",
+    "goToDashboard": "Naar dashboard"
+  }
+}

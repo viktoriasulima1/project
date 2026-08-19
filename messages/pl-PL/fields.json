@@ -1,0 +1,152 @@
+{
+  "title": "Pola",
+  "sprayWindow":{"status":{"blocked":"Zablokowane","poor":"Słabe","marginal":"Graniczne","good":"Dobre","excellent":"Doskonałe"},"confidence":{"low":"Niska pewność","medium":"Średnia pewność","high":"Wysoka pewność"},"summary":{"BLOCKED":"Zablokowane: {primary}","CONDITIONS":"Warunki: {primary}. Najlepsze okno {start}–{end}.","NO_FORECAST_DATA":"Brak danych pogodowych."},"genericProfile":"Ogólny profil orientacyjny","unknown":"Warunek niedostępny","disclaimer":{"INDICATIVE_ONLY":"Tylko orientacyjnie. Sprawdź etykietę środka i wymogi prawne."},"signals":{"WIND_SPEED_EXCEEDS_LIMIT":"Wiatr {observedKmh} km/h przekracza {limitKmh} km/h.","WIND_GUST_EXCEEDS_LIMIT":"Porywy {observedKmh} km/h przekraczają {limitKmh} km/h.","WIND_GUST_UNAVAILABLE":"Brak danych o porywach.","TEMPERATURE_BELOW_MINIMUM":"Temperatura {observedC} °C poniżej {limitC} °C.","TEMPERATURE_ABOVE_MAXIMUM":"Temperatura {observedC} °C powyżej {limitC} °C.","HUMIDITY_EXCEEDS_PRODUCT_LIMIT":"Wilgotność {observedPercent}% przekracza {limitPercent}%.","RAINFAST_HORIZON_INCOMPLETE":"Prognoza odporności na deszcz obejmuje {availableHours}/{requiredHours} h.","RAINFAST_PRECIPITATION_EXCEEDS_LIMIT":"Opad {observedMm} mm przekracza {limitMm} mm w {periodHours} h.","PRODUCT_NOT_SELECTED":"Nie wybrano zweryfikowanego środka.","GENERIC_PROFILE_USED":"Użyto progów orientacyjnych; sprawdź etykietę.","PRODUCT_REGISTRATION_INVALID":"Zezwolenie dla {productName} jest nieważne.","OPERATOR_CERTIFICATION_INVALID":"Brak lub wygaśnięcie uprawnień.","OPERATOR_CONTEXT_MISSING":"Nie podano uprawnień operatora.","OPERATOR_UNVERIFIED":"Nie zweryfikowano uprawnień.","INSUFFICIENT_STOCK":"Potrzeba {requiredQuantity} {unit}; dostępne {availableStock} {unit}.","INVENTORY_CONTEXT_MISSING":"Nie podano stanu zapasu.","INVENTORY_UNVERIFIED":"Nie zweryfikowano zapasu.","CROP_INELIGIBLE":"Uprawa {crop} jest niedopuszczona.","BBCH_OUTSIDE_RANGE":"BBCH {stage} poza {min}–{max}.","CROP_BBCH_CONTEXT_MISSING":"Nie podano uprawy/BBCH.","CROP_BBCH_UNVERIFIED":"Nie zweryfikowano uprawy/BBCH.","DRIFT_REDUCTION_NOZZLE_REQUIRED":"Nie potwierdzono wymaganej dyszy antyznoszeniowej.","DRIFT_CONTEXT_MISSING":"Nie podano maszyny/dyszy.","DRIFT_REQUIREMENT_UNVERIFIED":"Nie zweryfikowano redukcji znoszenia.","LOW_WIND":"Słaby wiatr ({observedKmh} km/h).","WIND_APPROACHING_LIMIT":"Wiatr blisko limitu ({observedKmh}/{limitKmh} km/h).","NO_RAIN_FORECAST_THIS_HOUR":"Brak deszczu w tej godzinie.","LOW_HUMIDITY":"Niska wilgotność ({observedPercent}%).","HUMIDITY_ELEVATED":"Podwyższona wilgotność ({observedPercent}%).","WIDE_DEW_POINT_MARGIN":"Duży margines punktu rosy.","NARROW_DEW_POINT_MARGIN":"Mały margines punktu rosy.","LEAF_WETNESS_ELEVATED":"Podwyższone zwilżenie liści."}},
+  "weatherRisk": {
+    "status": { "low": "Niskie ryzyko pogodowe", "moderate": "Umiarkowane ryzyko pogodowe", "high": "Wysokie ryzyko pogodowe", "unavailable": "Ryzyko pogodowe niedostępne" },
+    "reasons": { "BELOW_RISK_THRESHOLDS": "Zmierzone warunki są poniżej progów ryzyka tego zestawu reguł.", "SOME_FAVOURABLE_CONDITIONS": "Niektóre zmierzone warunki mogą zwiększać ryzyko dla zdrowia uprawy.", "FAVOURABLE_WARM_HUMID_WET_CONDITIONS": "Ciepłe, wilgotne i mokre warunki mogą zwiększać ryzyko dla zdrowia uprawy.", "INSUFFICIENT_MEASURED_INPUTS": "Nie można obliczyć ryzyka pogodowego, ponieważ brakuje {count} wymaganych danych.", "UNKNOWN": "Ryzyko pogodowe jest niedostępne i nie oznacza braku ryzyka." },
+    "actions": { "CONTINUE_NORMAL_SCOUTING": "Kontynuuj zwykłą lustrację", "INSPECT_FIELD": "Sprawdź pole i zapisz widoczne obserwacje", "SCOUT_MANUALLY": "Przeprowadź ręczną lustrację pola" },
+    "confidence": { "medium": "Średnia pewność", "low": "Niska pewność" },
+    "freshness": { "current": "Aktualne dane pomiarowe", "unavailable": "Aktualność danych niedostępna" },
+    "evidence": { "cropStage": "{crop}, faza rozwojowa {stage}", "temperature": "Zmierzona temperatura: {value} °C", "humidity": "Zmierzona wilgotność: {value}%", "rain": "Zmierzony opad: {value} mm", "missing": "Brakuje {count} wymaganych danych pogodowych" },
+    "disclaimer": "Ryzyko pogodowe jest wskaźnikiem, a nie diagnozą. Przed działaniem potwierdź warunki na polu."
+  },
+  "summary": { "totalFields": "Łącznie pól", "totalArea": "Łączna powierzchnia", "healthy": "Zdrowe", "needAttention": "Wymaga uwagi" },
+  "table": { "name": "Nazwa", "area": "Powierzchnia", "soil": "Gleba", "status": "Status", "ndvi": "NDVI" },
+  "empty": { "title": "Brak pól", "desc": "Dodaj pierwsze pole, aby zacząć planować uprawy i rejestrować pracę." },
+  "addField": "+ Dodaj pole",
+  "importBrp": "Importuj z BRP",
+  "archive": "Archiwizuj",
+  "archiveConfirm": "Zarchiwizować „{name}”?\n\nPola z rejestrami oprysków są archiwizowane (ukrywane), a nie trwale usuwane, aby zachować dokumentację zgodności UE.",
+  "actions": {
+    "reasons": {
+      "offlineOnly": "Ta czynność wymaga połączenia z internetem i jest niedostępna offline.",
+      "noActiveSeason": "Rozpocznij sezon przed zarejestrowaniem przychodu.",
+      "unavailable": "Ta czynność jest obecnie niedostępna."
+    },
+    "labels": {
+      "add_expense": "Dodaj wydatek",
+      "add_harvest": "Dodaj zbiór",
+      "add_revenue": "Dodaj przychód",
+      "allocate": "Przydziel koszt",
+      "correct": "Popraw rekord",
+      "reverse": "Storno rekordu",
+      "review_breakdown": "Przejrzyj podział kosztów",
+      "view_history": "Zobacz historię ekonomiczną",
+      "export_report": "Eksportuj raport pola"
+    },
+    "lastSyncedAt": "Na podstawie danych zsynchronizowanych ostatnio o {date}."
+  },
+  "health": {
+    "status": { "attention_required": "Wymaga uwagi", "inspect_soon": "Wkrótce lustracja", "monitoring": "Monitorowanie", "no_current_issue": "Brak bieżącego problemu", "insufficient_data": "Niewystarczające dane" },
+    "reasons": {
+      "NO_ACTIVE_CROP_SEASON": "Brak aktywnego sezonu uprawy.",
+      "RECENT_SEVERE_OBSERVATION": "{count} poważnych obserwacji wymaga przeglądu.",
+      "SCOUTING_OVERDUE": "Lustracja jest zaległa.",
+      "WEATHER_RISK_INDICATOR": "Warunki pogodowe wskazują na zwiększone ryzyko; to nie jest diagnoza.",
+      "MULTIPLE_OPEN_OBSERVATIONS": "{count} otwartych obserwacji wymaga przeglądu.",
+      "UNRESOLVED_OBSERVATION": "Otwartą obserwację należy monitorować.",
+      "NO_SCOUTING_DATA": "Brak bieżącej fazy rozwojowej lub dowodów z lustracji.",
+      "LOW_CONFIDENCE_EVIDENCE": "Zarejestrowana faza rozwojowa jest nieaktualna.",
+      "NO_CURRENT_ISSUE": "Brak nierozwiązanych problemów w bieżących dowodach."
+    },
+    "actions": {
+      "PLAN_SEASON": "Zaplanuj sezon uprawy",
+      "INSPECT_FIELD": "Zlustruj pole",
+      "RECORD_STAGE_AND_VISIT": "Zarejestruj fazę i wizytę",
+      "CONTINUE_MONITORING": "Kontynuuj monitorowanie",
+      "CONTINUE_SCHEDULE": "Kontynuuj harmonogram lustracji"
+    },
+    "evidence": {
+      "noActiveSeason": "Brak aktywnego sezonu pola",
+      "severeObservations": "{count} poważnych nierozwiązanych obserwacji",
+      "overdueScouting": "{count} zaległych zleceń lustracji",
+      "weatherRisk": "Wyjaśnialny sygnał ryzyka pogodowego",
+      "openObservations": "{count} nierozwiązanych obserwacji",
+      "stageMissing": "Brak zapisu bieżącej fazy rozwojowej",
+      "stageStale": "Zapis fazy rozwojowej ma {count} dni",
+      "clean": "Brak nierozwiązanych obserwacji"
+    }
+  },
+  "economics": {
+    "completeness": {
+      "title": "Kompletność danych", "summary": "Kompletność: {percentage}%", "recordedLabel": "Zarejestrowano", "missingLabel": "Brakuje", "unknown": "Szczegóły są niedostępne.",
+      "status": {"insufficient_data":"Niedostępne","cost_tracking_active":"Rejestrowanie kosztów aktywne","partial_profitability":"Częściowa rentowność","profitability_ready":"Kompletne"},
+      "recorded": {"PRODUCT_PRICES_RECORDED":"Ceny produktów","LABOUR_RATES_RECORDED":"Stawki pracy","MACHINE_RATES_RECORDED":"Stawki maszyn","CONTRACTOR_COSTS_RECORDED":"Koszty usług","HARVEST_RECORDED":"Zbiór","REVENUE_RECORDED":"Przychód","OVERHEAD_CHOICE_RECORDED":"Wybór kosztów ogólnych","UNITS_COMPATIBLE":"Zgodne jednostki"},
+      "reasons": {"MISSING_PRODUCT_PRICE":"Brakuje ceny zakupu","MISSING_LABOUR_RATE":"Brakuje stawki pracy","MISSING_MACHINE_RATE":"Brakuje stawki maszyny","MISSING_CONTRACTOR_COST":"Brakuje kosztu usług","MISSING_HARVEST":"Brakuje plonu ze zbioru","MISSING_REVENUE":"Brakuje przychodu z uprawy","MISSING_OVERHEAD_CHOICE":"Brakuje wyboru alokacji kosztów ogólnych","INCOMPATIBLE_UNITS":"Jednostki plonu i przychodu są niezgodne"},
+      "actions": {"ADD_PURCHASE_PRICE":"Dodaj cenę zakupu","ADD_LABOUR_RATE":"Dodaj stawkę pracy","ADD_MACHINE_RATE":"Dodaj stawkę maszyny","ADD_CONTRACTOR_COST":"Dodaj koszt usługi","ADD_HARVEST":"Zarejestruj zbiór","ADD_REVENUE":"Zarejestruj przychód","RECORD_OVERHEAD_CHOICE":"Zarejestruj wybór kosztów ogólnych","ALIGN_UNITS":"Uzgodnij jednostki"}
+    },
+    "breakEven": {
+      "title": "Próg rentowności",
+      "price": "Cena progu rentowności",
+      "yield": "Plon progu rentowności",
+      "unavailable": "Niedostępne",
+      "formula": {
+        "COST_PER_YIELD": "całkowity zarejestrowany koszt ÷ plon do sprzedaży",
+        "COST_PER_PRICE": "całkowity zarejestrowany koszt ÷ zarejestrowana cena sprzedaży"
+      },
+      "reasons": {
+        "INCOMPLETE_COST": "Koszty materiałów są niekompletne.",
+        "MISSING_HARVEST": "Zbiór nie został zarejestrowany.",
+        "MISSING_SALE_PRICE": "Brak ceny sprzedaży.",
+        "INCOMPATIBLE_UNITS": "Jednostki plonu i przychodu nie są zgodne.",
+        "UNALLOCATED_COSTS": "Na tym polu pozostają nieprzypisane koszty."
+      },
+      "actions": {
+        "ADD_COST": "Dodaj dane kosztowe",
+        "ADD_HARVEST": "Dodaj zbiór",
+        "ADD_SALE_PRICE": "Dodaj cenę sprzedaży",
+        "ALIGN_UNITS": "Ujednolić jednostki plonu i przychodu",
+        "REVIEW_ALLOCATIONS": "Przejrzyj przypisanie"
+      }
+    },
+    "grossMargin": { "title":"Marża brutto", "notRecorded":"Nie zarejestrowano", "labels":{"revenue":"Zarejestrowany przychód","totalCost":"Łączny zarejestrowany koszt","margin":"Marża brutto","perHa":"Marża na hektar"}, "status":{"positive":"Dodatnia marża","zero":"Zerowa marża","negative":"Ujemna marża","unavailable":"Marża brutto niedostępna","partial":"Marża brutto niepełna"}, "reasons":{"POSITIVE_MARGIN":"Zarejestrowany przychód przewyższa uwzględnione koszty operacyjne. Nie jest to zysk netto.","ZERO_MARGIN":"Zarejestrowany przychód jest równy uwzględnionym kosztom operacyjnym.","NEGATIVE_MARGIN":"Uwzględnione koszty operacyjne przewyższają zarejestrowany przychód.","MISSING_REVENUE":"Dla tego pola nie zarejestrowano przychodu.","MISSING_COST":"Nie zarejestrowano pełnego kosztu pola.","INCOMPLETE_COST":"Niektóre koszty nie mają ceny, dlatego marży brutto nie można obliczyć wiarygodnie."}, "actions":{"ADD_REVENUE":"Dodaj przychód","ADD_EXPENSE":"Dodaj wydatek","REVIEW_UNPRICED_COSTS":"Sprawdź brakujące ceny","NO_ACTION_REQUIRED":"Zobacz podział kosztów"} },
+    "costCategories": { "title":"Podział kosztów", "empty":"Dla tego pola nie zarejestrowano jeszcze kosztów.", "caption":"Koszty według kategorii. Procenty odnoszą się do zarejestrowanych kosztów.", "category":"Kategoria", "amount":"Kwota", "share":"Udział w zarejestrowanych kosztach", "records":"Rekordy", "attribution":"Przypisanie", "completeness":"Kompletne", "directAndAllocated":"Bezpośrednie i rozliczone", "complete":"Tak", "partial":"Częściowe", "note":"Procenty opierają się na zarejestrowanych kosztach. Niepełne kategorie są wyłączone z sumy do czasu wyceny." },
+    "attribution": { "title":"Koszty bezpośrednie i rozliczone", "direct":"Zarejestrowane bezpośrednio dla tego pola", "allocated":"Rozliczone na to pole", "total":"Łączny zarejestrowany koszt pola", "reversed":"Wyłączone (odwrócone)", "unallocated":"Nierozliczone koszty gospodarstwa (poza marżą pola)", "note":"Nierozliczone koszty gospodarstwa nigdy nie są po cichu włączane do marży tego pola." },
+    "signals":{"title":"Decyzje ekonomiczne","calculated":"Obliczono {date}","recordedCosts":"Zarejestrowane koszty","recordedRevenue":"Zarejestrowany przychód","grossMargin":"Marża brutto","completeness":"Kompletność","notRecorded":"Nie zarejestrowano","unit":"jednostkę","noSeason":"Brak ekonomii aktywnego sezonu.","none":"Żaden sygnał ekonomiczny nie wymaga uwagi.","more":"Zobacz wszystkie sygnały ({count})","incomplete":"Rejestracja kosztów aktywna; rentowność niepełna.","ruleBased":"Regułowy · wiarygodność {confidence}","field":"Pole: {field}","severity":{"critical":"Krytyczny","high":"Wysoki","medium":"Średni","low":"Niski"},"actions":{"OPEN_FIELD_DETAIL":"Sprawdź pole","OPEN_FINANCE":"Otwórz Finanse","ADD_PURCHASE_PRICE":"Dodaj brakującą cenę","ADD_LABOUR_RATE":"Ustaw stawkę pracy","ADD_MACHINE_RATE":"Ustaw stawkę maszyny","ALLOCATE_COST":"Przypisz koszt","ALLOCATE_REVENUE":"Przypisz przychód","ADD_HARVEST":"Zarejestruj zbiór","ADD_REVENUE":"Zarejestruj przychód","REVIEW_BREAK_EVEN":"Sprawdź pole","REVIEW_COMPLETENESS":"Sprawdź kompletność"},"types":{"BUDGET_OVER_LIMIT":{"title":"{count} pól przekracza plan kosztów","explanation":"{field}: {amount} ({percent}%) ponad plan.","evidence":"Koszt zarejestrowany wobec budżetu pola."},"MISSING_PURCHASE_PRICE":{"title":"{count} produktów bez ceny zakupu","explanation":"{products} nie mają ceny; brakujący koszt nie jest zerem.","evidence":"Pokrycie cenami pozycji produktów."},"MISSING_LABOUR_RATE":{"title":"Brak stawki pracy na {count} polach","explanation":"{field} zawiera pracę bez obowiązującej stawki.","evidence":"Kanoniczna kompletność: brak stawki pracy."},"MISSING_MACHINE_RATE":{"title":"Brak stawki maszyny na {count} polach","explanation":"{field} zawiera pracę maszyny bez stawki.","evidence":"Kanoniczna kompletność: brak stawki maszyny."},"UNALLOCATED_COST":{"title":"Nie przypisano kosztu {amount}","explanation":"Wyłączony z marż pól do czasu przypisania.","evidence":"Zarejestrowany nieprzypisany koszt."},"UNALLOCATED_REVENUE":{"title":"Nie przypisano przychodu {amount}","explanation":"Wyłączony z marż pól do czasu przypisania.","evidence":"Zarejestrowany nieprzypisany przychód."},"BREAK_EVEN_ABOVE_SALE_PRICE":{"title":"Próg rentowności wyższy od ceny na {field}","explanation":"{breakEven} za {unit} wobec {salePrice}.","evidence":"Kanoniczny próg wobec ceny sprzedaży."},"INCOMPLETE_PROFITABILITY":{"title":"Niepełna rentowność na {count} polach","explanation":"{field}: kompletność {completeness}%; brak nie jest zerem.","evidence":"Kanoniczny wynik kompletności finansowej."},"MARGIN_ON_INCOMPLETE_DATA":{"title":"{count} marż na niepełnych danych","explanation":"{field}: wstępne {amount} przy kompletności {completeness}%.","evidence":"Kanoniczna marża i kompletność."},"MISSING_HARVEST":{"title":"{count} pól z kosztami bez zbioru","explanation":"{field} nie może jeszcze pokazać progu rentowności.","evidence":"Brak zarejestrowanego zbioru."},"MISSING_REVENUE":{"title":"{count} zebranych pól bez przychodu","explanation":"{field} nie ma przychodu; marża jest niedostępna.","evidence":"Brak otrzymanego przychodu."},"STRONGEST_COMPLETE_MARGIN":{"title":"{field} ma najwyższą pełną marżę","explanation":"{field} ({crop}): {amount} na hektar.","evidence":"Najwyższa kanoniczna marża na hektar wśród pełnych pól."}}},
+    "budgetVariance": {
+      "title": "Budżet a koszty rzeczywiste", "notRecorded": "Nie zarejestrowano",
+      "labels": {"budget":"Budżet","actual":"Wykonanie","variance":"Odchylenie","line":"Pozycja"},
+      "status": {"within_budget":"W ramach budżetu","over_budget":"Powyżej budżetu","under_budget":"Poniżej budżetu","unavailable":"Niedostępne"},
+      "reasons": {"WITHIN_BUDGET":"Koszty rzeczywiste są równe budżetowi.","OVER_BUDGET":"Koszty rzeczywiste przekraczają budżet pola.","UNDER_BUDGET":"Wydatki są niższe od planu.","BUDGET_NOT_RECORDED":"Budżet nie został zarejestrowany.","ACTUAL_COST_NOT_RECORDED":"Koszty rzeczywiste nie zostały zarejestrowane.","BUDGET_AND_ACTUAL_NOT_RECORDED":"Budżet i koszty rzeczywiste nie zostały zarejestrowane.","ACTUAL_COST_INCOMPLETE":"Dane kosztów rzeczywistych są niekompletne.","CURRENCY_MISMATCH":"Budżet i koszty rzeczywiste mają różne waluty."},
+      "actions": {"ADD_BUDGET":"Dodaj budżet","RECORD_ACTUAL_COST":"Zarejestruj koszt rzeczywisty","REVIEW_COSTS":"Przejrzyj koszty","REVIEW_UNPRICED_COSTS":"Przejrzyj brakujące ceny","OPEN_FINANCE":"Otwórz Finanse","NO_ACTION_REQUIRED":"Działanie nie jest wymagane"},
+      "rows": {"INPUT_COST":"Koszt środków","LABOUR":"Praca","MACHINERY":"Maszyny","CONTRACTOR":"Usługi obce","TOTAL_COST":"Koszt całkowity","YIELD":"Plon","REVENUE":"Przychód","GROSS_MARGIN":"Marża brutto"},
+      "notes": {"PLANNED_NOT_RECORDED":"Wartość planowana nie została zarejestrowana.","ACTUAL_INCOMPLETE":"Koszt rzeczywisty jest niekompletny.","HARVEST_NOT_RECORDED":"Zbiór nie został zarejestrowany.","REVENUE_NOT_RECORDED":"Przychód nie został zarejestrowany.","GROSS_MARGIN_INCOMPLETE":"Marża brutto jest niekompletna."},
+      "signal": {"title":"Liczba pól powyżej planowanych kosztów: {count}","explanation":"Największe przekroczenie dotyczy pola {field}: {amount} ({percent}) powyżej planu.","whyItMatters":"Koszty pola powyżej planu mogą obniżyć marżę; przegląd w trakcie sezonu wspiera świadome decyzje o wydatkach.","evidence":"Koszty zarejestrowane wobec oczekiwanych kosztów planu sezonowego dla pola."}
+    }
+  },
+  "dialog": {
+    "title": "Nowe pole",
+    "nameLabel": "Nazwa pola",
+    "namePlaceholder": "np. Oosterpolder Noord",
+    "area": "Powierzchnia (ha)",
+    "soilType": "Rodzaj gleby",
+    "cancel": "Anuluj",
+    "create": "Utwórz pole"
+  },
+  "detail": {
+    "allFields": "← Wszystkie pola",
+    "noActiveSeason": "Brak aktywnego sezonu",
+    "soil": "Gleba",
+    "status": "Status",
+    "completeness": "Kompletność",
+    "calculated": "Obliczono {date}",
+    "noEconomics": "To pole nie ma zaplanowanej uprawy w aktywnym sezonie, więc nie ma jeszcze danych ekonomicznych. Zaplanuj sezon dla tego pola, aby rozpocząć śledzenie kosztów.",
+    "cropHealth": "Zdrowie uprawy",
+    "healthMeta": "pewność {confidence} · dowody {freshness}",
+    "startScouting": "Rozpocznij lustrację",
+    "addObservation": "Dodaj obserwację",
+    "currentGrowthStage": "Bieżąca faza rozwojowa",
+    "observed": "Zaobserwowano {date} · {source} · {confidence}",
+    "viewStageHistory": "Zobacz historię faz",
+    "current": "(bieżąca)",
+    "superseded": "(zastąpiona)",
+    "noGrowthStage": "Faza rozwojowa uprawy nie jest zarejestrowana. Rejestracja poprawia kontrolę terminów i zgodności.",
+    "recentScouting": "Ostatnie lustracje",
+    "visitSummary": "{observations} obserwacji · {open} otwartych · {photos} zdjęć",
+    "noScoutingVisits": "Nie zarejestrowano żadnych lustracji.",
+    "scoutingDisclaimer": "Objawy i automatyczne sugestie nie są potwierdzonymi diagnozami i nie upoważniają do zabiegu.",
+    "actions": "Działania",
+    "offlineActions": "{lastSynced} Realokacja, korekty, storna i eksport wymagają połączenia i są niedostępne offline.",
+    "actionsDisclaimer": "Zakupów nie można edytować po zużyciu zapasu — zamiast tego wykonaj storno i zastąp. Ekonomia pola to zarejestrowana ekonomia operacyjna, a nie rachunkowość ustawowa."
+  }
+}

@@ -1,0 +1,1782 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// User locale preference (i18n Phase 2). Standalone + Clerk-user scoped because
+// FarmOS has no user table (identity is Clerk; Farm is keyed by clerkUserId).
+// Stores only a canonical, supported locale token — never a translated label.
+model UserLocalePreference {
+  id          String   @id @default(uuid())
+  clerkUserId String   @unique
+  locale      String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// ─── Enumerations ─────────────────────────────────────────────────────────────
+
+enum SoilType {
+  clay
+  sandy
+  loam
+  peat
+  silt
+}
+
+enum FieldStatus {
+  healthy
+  attention
+  critical
+  fallow
+}
+
+enum CropName {
+  wheat
+  potato
+  onion
+  sugar_beet
+  barley
+  oilseed_rape
+  cover_crop
+  grass
+  other
+}
+
+enum ActivityType {
+  spray
+  fertilise
+  harvest
+  tillage
+  sow
+  irrigate
+  scout
+  soil_sample
+  other
+}
+
+// Sprint 16: distinguishes a future intent to act (no stock/compliance
+// side-effects yet) from a real record of what happened (stock deducted,
+// compliance record created). Defaults to 'completed' so every activity
+// created before this field existed keeps its original meaning.
+enum ActivityStatus {
+  planned
+  completed
+}
+
+enum OperationType {
+  soil_preparation
+  sow
+  fertilise
+  spray
+  irrigate
+  scout
+  tillage
+  harvest
+  custom
+}
+
+enum SeasonPlanStatus {
+  draft
+  planned
+  converted
+  completed
+  cancelled
+}
+
+enum WorkOrderStatus {
+  draft
+  ready
+  assigned
+  in_progress
+  blocked
+  completed
+  cancelled
+}
+
+enum WorkOrderPriority {
+  critical
+  high
+  medium
+  low
+}
+
+enum ReservationStatus {
+  active
+  released
+  consumed
+}
+
+enum EconomicEntryKind {
+  cost
+  revenue
+}
+
+enum EconomicSourceType {
+  inventory_input
+  labour
+  machinery
+  fuel
+  contractor
+  field_rent
+  utilities
+  soil_lab
+  miscellaneous
+  manual_expense
+  crop_sale
+  subsidy
+  contract_income
+  insurance_compensation
+  other_income
+}
+
+enum CostAllocationMethod {
+  direct_field
+  per_hectare
+  per_crop_area
+  equal_active_field
+  yield_proportional
+  unallocated
+  // Sprint 25 — manual selected-fields allocation (explicit % or amount per
+  // field), distinct from the proportional methods.
+  selected_fields
+}
+
+enum FinancialConfidence {
+  recorded
+  allocated
+  estimated
+  missing
+}
+
+enum EconomicRecordStatus {
+  active
+  corrected
+  reversed
+}
+
+enum HarvestUnit {
+  kg
+  tonnes
+  boxes
+  pieces
+}
+
+enum RevenueType {
+  crop_sale
+  subsidy
+  contract_income
+  insurance_compensation
+  other_farm_income
+}
+
+enum RevenueStatus {
+  expected
+  approved
+  received
+}
+
+enum LabourCostType {
+  employee
+  owner_estimate
+  contractor
+}
+
+enum FuelCostPolicy {
+  included_in_hourly_rate
+  tracked_separately
+}
+
+enum ContractorRateType {
+  total
+  per_hectare
+  per_hour
+  per_tonne
+  per_operation
+}
+
+enum InventoryCategory {
+  herbicide
+  fungicide
+  insecticide
+  fertiliser
+  seed
+  fuel
+  other
+}
+
+enum InventoryUnit {
+  L
+  kg
+  T
+  bag
+  box
+}
+
+enum TaskType {
+  spray
+  fertilise
+  harvest
+  tillage
+  sow
+  check
+  order
+  report
+  other
+}
+
+enum TaskPriority {
+  high
+  medium
+  low
+}
+
+enum TaskStatus {
+  pending
+  in_progress
+  done
+  overdue
+}
+
+enum ComplianceStatus {
+  complete
+  missing
+  expiring
+  expired
+}
+
+enum ComplianceModule {
+  spray_diary
+  cap
+  certificate
+  report
+}
+
+enum FarmType {
+  arable
+  dairy
+  livestock
+  horticulture
+  mixed
+}
+
+enum MachineType {
+  tractor
+  sprayer
+  combine
+  drill
+  cultivator
+  loader
+  trailer
+  other
+}
+
+// Direction of a stock movement
+enum StockDirection {
+  in
+  out
+  correction
+}
+
+// ─── Sprint 19 — Audit trail & compliance export enumerations ─────────────────
+
+// Sprint 19 Part 14: no multi-user roles exist yet — every audit event today
+// is either the farm's own owner acting through the UI, or FarmOS itself
+// acting without a human in the loop (e.g. a scheduled Ctgb sync). See
+// docs/AUDIT_TRAIL_ARCHITECTURE.md for why "farmer" is the only human actor
+// type today and how this should extend when real multi-user roles exist.
+enum AuditActorType {
+  farmer
+  system
+  api
+}
+
+enum AuditAction {
+  created
+  planned
+  completed
+  corrected
+  reversed
+  archived
+  restored
+  exported
+  verification_status_changed
+  inventory_adjusted
+  compliance_snapshot_created
+  allocation_created
+  allocation_changed
+  allocation_reversed
+}
+
+enum AuditSource {
+  web
+  mobile_web
+  quick_log
+  onboarding
+  import
+  system
+  api
+  e2e_test
+  offline_sync
+}
+
+enum AiBriefingMode {
+  grounded_ai
+  rule_based_fallback
+}
+
+enum AiBriefingStatus {
+  current
+  historical
+  stale
+}
+
+enum AiFeedbackType {
+  helpful
+  not_useful
+  incorrect
+  already_knew
+}
+
+enum AiFeedbackReason {
+  wrong_priority
+  wrong_explanation
+  stale_data
+  wrong_field
+  missing_context
+  other
+}
+
+enum AiRequestType {
+  daily_briefing
+  activity_parse
+  voice_transcription
+}
+
+enum AiRequestResult {
+  success
+  fallback
+  validation_failed
+  timeout
+  rate_limited
+  provider_unavailable
+}
+
+// Sprint 19 — an append-only record of every regulated action taken on this
+// farm's data. Deliberately generic (entityType/entityId as strings, not a
+// dozen nullable FK columns) so one table covers Activity corrections,
+// reversals, exports, and future entity types without a schema change each
+// time. Application code NEVER calls .update()/.delete() on this model — see
+// docs/AUDIT_TRAIL_ARCHITECTURE.md for the full append-only enforcement
+// story (application-level + a DB trigger, both, defense in depth).
+model AuditEvent {
+  id                String         @id @default(uuid())
+  farmId            String
+  actorUserId       String?
+  actorType         AuditActorType @default(farmer)
+  entityType        String
+  entityId          String
+  action            AuditAction
+  occurredAt        DateTime       @default(now())
+  source            AuditSource
+  previousVersionId String?
+  correlationId     String
+  reason            String?
+  // Structured, versioned metadata — never a raw request body or full
+  // record dump (Sprint 19 Part 15). Always shaped like
+  // { schemaVersion: 1, ...safe fields }.
+  metadataJson      Json           @default("{}")
+  createdAt         DateTime       @default(now())
+
+  farm Farm @relation(fields: [farmId], references: [id], onDelete: Cascade)
+
+  @@index([farmId])
+  @@index([entityType, entityId])
+  @@index([correlationId])
+  @@index([occurredAt])
+  @@map("audit_events")
+}
+
+enum ComplianceExportFormat {
+  pdf
+  csv
+}
+
+// Sprint 19 Part 13 — provenance for one export request. Never stores the
+// generated file itself (storageReference stays null this sprint — see
+// docs/AUDIT_TRAIL_ARCHITECTURE.md) — only enough metadata to answer "who
+// exported what, when, covering how many records" after the fact.
+model ComplianceExport {
+  id                String                 @id @default(uuid())
+  farmId            String
+  requestedByUserId String?
+  format            ComplianceExportFormat
+  filtersJson       Json
+  recordCount       Int
+  generatedAt       DateTime               @default(now())
+  checksum          String
+  storageReference  String?
+  expiresAt         DateTime?
+  createdAt         DateTime               @default(now())
+
+  farm Farm @relation(fields: [farmId], references: [id], onDelete: Cascade)
+
+  @@index([farmId])
+  @@map("compliance_exports")
+}
+
+// ─── Core Tables ──────────────────────────────────────────────────────────────
+
+model Farm {
+  id                     String    @id @default(uuid())
+  clerkUserId            String    @unique
+  name                   String
+  legalName              String?
+  location               String
+  city                   String?
+  province               String?
+  postalCode             String?
+  country                String    @default("NL") @db.Char(2)
+  farmType               FarmType  @default(arable)
+  timezone               String    @default("Europe/Amsterdam")
+  currency               String    @default("EUR") @db.Char(3)
+  totalHectares          Decimal?  @db.Decimal(8, 2)
+  brpNumber              String?
+  vatNumber              String?
+  latitude               Decimal?  @db.Decimal(9, 6)
+  longitude              Decimal?  @db.Decimal(9, 6)
+  onboardingCompletedAt  DateTime?
+  overheadChoiceRecorded Boolean   @default(false)
+  overheadPolicyNote     String?
+  createdAt              DateTime  @default(now())
+  updatedAt              DateTime  @updatedAt
+
+  seasons                 Season[]
+  fields                  Field[]
+  inventoryItems          InventoryItem[]
+  machines                Machine[]
+  employees               Employee[]
+  complianceItems         ComplianceItem[]
+  tasks                   Task[]
+  auditEvents             AuditEvent[]
+  complianceExports       ComplianceExport[]
+  operationTemplates      OperationTemplate[]
+  seasonPlanItems         SeasonPlanItem[]
+  workOrders              WorkOrder[]
+  inventoryReservations   InventoryReservation[]
+  economicEntries         EconomicEntry[]
+  inventoryPurchases      InventoryPurchase[]
+  financialExpenses       FinancialExpense[]
+  harvestResults          HarvestResult[]
+  revenueEntries          RevenueEntry[]
+  employeeRates           EmployeeRate[]
+  machineRates            MachineRate[]
+  contractorCosts         ContractorCost[]
+  economicAllocations     EconomicAllocation[]
+  aiBriefings             AiBriefing[]
+  aiFeedback              AiBriefingFeedback[]
+  aiRequests              AiRequestMetadata[]
+  scoutingVisits          ScoutingVisit[]
+  scoutingObservations    ScoutingObservation[]
+  scoutingPhotos          ScoutingPhoto[]
+  cropStageRecords        CropStageRecord[]
+  photoAnnotationVersions PhotoAnnotationVersion[]
+
+  @@map("farms")
+}
+
+model AiBriefing {
+  id                     String           @id @default(uuid())
+  farmId                 String
+  generatedForDate       DateTime         @db.Date
+  generatedAt            DateTime         @default(now())
+  mode                   AiBriefingMode
+  contextChecksum        String
+  contextVersion         String
+  promptVersion          String
+  schemaVersion          String
+  provider               String
+  model                  String
+  sourceDataTimestamp    DateTime
+  weatherFreshness       String
+  status                 AiBriefingStatus @default(current)
+  topItemsSnapshot       Json
+  secondaryItemsSnapshot Json
+  whatChangedSnapshot    Json
+  factsSnapshot          Json
+  inputTokenCount        Int?
+  outputTokenCount       Int?
+  estimatedCostEur       Decimal?         @db.Decimal(12, 6)
+  durationMs             Int
+  fallbackReason         String?
+  createdAt              DateTime         @default(now())
+
+  farm     Farm                 @relation(fields: [farmId], references: [id], onDelete: Cascade)
+  feedback AiBriefingFeedback[]
+  requests AiRequestMetadata[]
+
+  @@unique([farmId, generatedForDate, contextChecksum])
+  @@index([farmId, generatedAt(sort: Desc)])
+  @@index([farmId, generatedForDate])
+  @@map("ai_briefings")
+}
+
+model AiBriefingFeedback {
+  id              String            @id @default(uuid())
+  farmId          String
+  briefingId      String
+  itemId          String
+  feedbackType    AiFeedbackType
+  reason          AiFeedbackReason?
+  comment         String?
+  actorUserId     String?
+  contextChecksum String
+  promptVersion   String
+  model           String
+  createdAt       DateTime          @default(now())
+
+  farm     Farm       @relation(fields: [farmId], references: [id], onDelete: Cascade)
+  briefing AiBriefing @relation(fields: [briefingId], references: [id], onDelete: Cascade)
+
+  @@unique([briefingId, itemId, actorUserId])
+  @@index([farmId, createdAt(sort: Desc)])
+  @@index([briefingId, itemId])
+  @@map("ai_briefing_feedback")
+}
+
+model AiRequestMetadata {
+  id               String          @id @default(uuid())
+  farmId           String
+  briefingId       String?
+  userReference    String?
+  requestType      AiRequestType
+  provider         String
+  model            String
+  contextChecksum  String?
+  promptVersion    String
+  schemaVersion    String
+  startedAt        DateTime
+  completedAt      DateTime
+  durationMs       Int
+  inputTokenCount  Int?
+  outputTokenCount Int?
+  estimatedCostEur Decimal?        @db.Decimal(12, 6)
+  result           AiRequestResult
+  retryCount       Int             @default(0)
+  createdAt        DateTime        @default(now())
+
+  farm     Farm        @relation(fields: [farmId], references: [id], onDelete: Cascade)
+  briefing AiBriefing? @relation(fields: [briefingId], references: [id], onDelete: SetNull)
+
+  @@index([farmId, requestType, createdAt(sort: Desc)])
+  @@index([farmId, createdAt])
+  @@index([contextChecksum])
+  @@map("ai_request_metadata")
+}
+
+model Season {
+  id        String   @id @default(uuid())
+  farmId    String
+  year      Int
+  name      String?
+  isActive  Boolean  @default(false)
+  startDate DateTime @db.Date
+  endDate   DateTime @db.Date
+  createdAt DateTime @default(now())
+
+  farm               Farm                @relation(fields: [farmId], references: [id], onDelete: Cascade)
+  fieldSeasons       FieldSeason[]
+  financialSnapshots FinancialSnapshot[]
+  seasonPlanItems    SeasonPlanItem[]
+  economicEntries    EconomicEntry[]
+  inventoryPurchases InventoryPurchase[]
+  financialExpenses  FinancialExpense[]
+  harvestResults     HarvestResult[]
+  revenueEntries     RevenueEntry[]
+  contractorCosts    ContractorCost[]
+
+  @@unique([farmId, year])
+  @@map("seasons")
+}
+
+model Field {
+  id              String      @id @default(uuid())
+  farmId          String
+  name            String
+  hectares        Decimal     @db.Decimal(7, 2)
+  soilType        SoilType    @default(loam)
+  status          FieldStatus @default(healthy)
+  ndviScore       Int?        @db.SmallInt
+  brpParcelNumber String?     @db.VarChar(20)
+  coordinates     Json?
+  deletedAt       DateTime?
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+
+  farm               Farm                     @relation(fields: [farmId], references: [id], onDelete: Cascade)
+  fieldSeasons       FieldSeason[]
+  soilAnalyses       SoilAnalysis[]
+  externalProvenance FieldExternalProvenance?
+  scoutingVisits     ScoutingVisit[]
+
+  @@index([farmId])
+  @@index([deletedAt])
+  @@map("fields")
+}
+
+// Sprint 18 — provenance for a field imported from an official external
+// source (currently only PDOK BRP Gewaspercelen). Deliberately a separate
+// table rather than overloading the existing `brpParcelNumber` string
+// column — a single VarChar can't honestly carry dataset year, an
+// immutable geometry snapshot, area, source URL, and a confirmation
+// timestamp. One row per imported field; a manually-created field has
+// none. `importedGeometry`/`importedAreaHa` are a frozen snapshot of what
+// was imported and are never overwritten by a later farmer edit to
+// `Field.coordinates` — see Sprint_18_Ctgb_BRP_Report.md Part 12.
+model FieldExternalProvenance {
+  id                String    @id @default(uuid())
+  fieldId           String    @unique
+  source            String    @default("PDOK_BRPGewaspercelen")
+  externalParcelId  String?
+  datasetYear       Int
+  importedGeometry  Json
+  importedAreaHa    Decimal   @db.Decimal(7, 2)
+  importedCropValue String?
+  importedCropCode  Int?
+  sourceUrl         String
+  importedAt        DateTime  @default(now())
+  userConfirmedAt   DateTime?
+  geometryChecksum  String
+
+  field Field @relation(fields: [fieldId], references: [id], onDelete: Cascade)
+
+  @@map("field_external_provenance")
+}
+
+model FieldSeason {
+  id               String    @id @default(uuid())
+  fieldId          String
+  seasonId         String
+  crop             CropName
+  variety          String?
+  sowingDate       DateTime? @db.Date
+  harvestDate      DateTime? @db.Date
+  targetYieldTHa   Decimal?  @db.Decimal(5, 2)
+  actualYieldTHa   Decimal?  @db.Decimal(5, 2)
+  bbchStage        Int?      @db.SmallInt
+  diseaseRiskScore Int?      @db.SmallInt
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+
+  field              Field                @relation(fields: [fieldId], references: [id], onDelete: Cascade)
+  season             Season               @relation(fields: [seasonId], references: [id], onDelete: Cascade)
+  activities         Activity[]
+  tasks              Task[]
+  seasonPlanItems    SeasonPlanItem[]
+  workOrders         WorkOrder[]
+  economicEntries    EconomicEntry[]
+  financialExpenses  FinancialExpense[]
+  harvestResults     HarvestResult[]
+  revenueEntries     RevenueEntry[]
+  ContractorCost     ContractorCost[]
+  EconomicAllocation EconomicAllocation[]
+  scoutingVisits     ScoutingVisit[]
+  cropStageRecords   CropStageRecord[]
+
+  @@unique([fieldId, seasonId])
+  @@index([fieldId])
+  @@index([seasonId])
+  @@map("field_seasons")
+}
+
+model Activity {
+  id                  String         @id @default(uuid())
+  fieldSeasonId       String
+  type                ActivityType
+  status              ActivityStatus @default(completed)
+  date                DateTime
+  operatorName        String
+  // Dutch RVO compliance fields
+  certificateNumber   String?        @db.VarChar(50)
+  waterVolumePerHa    Decimal?       @db.Decimal(7, 1)
+  nozzleType          String?        @db.VarChar(50)
+  machineId           String?
+  // Product
+  productId           String?
+  dosePerHa           Decimal?       @db.Decimal(7, 3)
+  doseUnit            String?        @db.VarChar(5)
+  areaHa              Decimal        @db.Decimal(7, 2)
+  // Weather at spray time
+  weatherTempC        Decimal?       @db.Decimal(4, 1)
+  weatherWindKmh      Int?           @db.SmallInt
+  weatherWindDir      String?        @db.VarChar(3)
+  weatherHumidity     Int?           @db.SmallInt
+  weatherRainMm       Decimal?       @db.Decimal(5, 1)
+  // Sprint 19 — BBCH growth stage AT THE TIME of this specific application.
+  // Distinct from FieldSeason.bbchStage (that one tracks the crop's current
+  // stage across the season and changes over time; this one is a frozen
+  // fact about one activity, correctable like any other spray detail).
+  bbchStage           Int?           @db.SmallInt
+  notes               String?
+  actualHours         Decimal?       @db.Decimal(7, 2)
+  machineHours        Decimal?       @db.Decimal(7, 2)
+  fuelUsed            Decimal?       @db.Decimal(10, 3)
+  fuelInventoryItemId String?
+  createdAt           DateTime       @default(now())
+  deletedAt           DateTime?
+
+  // Sprint 20 — stable client identifiers make retries after a lost HTTP
+  // response return the original atomic result instead of applying stock
+  // and compliance effects twice.
+  offlineDraftId    String? @unique
+  idempotencyKey    String? @unique
+  submissionHash    String?
+  syncCorrelationId String?
+
+  // ─── Sprint 19 — regulated-record versioning (Parts 3, 4, 6, 16) ───────────
+  // `version` is an optimistic-locking counter, incremented on every
+  // correction/reversal — see docs/COMPLIANCE_RECORD_CORRECTION_POLICY.md
+  // and Part 16's stale-version rejection.
+  version          Int     @default(1)
+  // Points at the immediately-previous version this row corrects (or, for a
+  // reversal, the version it reverses). Null on an original record.
+  correctionOfId   String?
+  // Points at the ORIGINAL (root) record of this correction chain — equal
+  // to correctionOfId only for the first correction; kept separately so the
+  // whole chain can be queried in one indexed lookup without a recursive
+  // CTE. Null on an original record (meaning "I am my own root").
+  rootActivityId   String?
+  // True only for the specific row created by reverseActivity() — a
+  // reversal is a kind of correction, but one that always fully negates the
+  // application rather than adjusting one or more fields.
+  isReversal       Boolean @default(false)
+  // Required (enforced in application code, not at the DB level, since an
+  // original record legitimately has none) whenever correctionOfId is set.
+  correctionReason String?
+  // { field: { old, new } } for exactly the fields that changed — enough
+  // for the Compliance page's "old vs new" detail view without re-deriving
+  // it from two full row reads every time.
+  correctionDiff   Json?
+
+  fieldSeason         FieldSeason                  @relation(fields: [fieldSeasonId], references: [id], onDelete: Cascade)
+  product             InventoryItem?               @relation(fields: [productId], references: [id], onDelete: SetNull)
+  fuelInventoryItem   InventoryItem?               @relation("ActivityFuelInventory", fields: [fuelInventoryItemId], references: [id], onDelete: SetNull)
+  machine             Machine?                     @relation(fields: [machineId], references: [id], onDelete: SetNull)
+  stockMovements      StockMovement[]
+  complianceRecords   ComplianceRecord[]
+  correctionOf        Activity?                    @relation("ActivityVersionChain", fields: [correctionOfId], references: [id], onDelete: Cascade)
+  corrections         Activity[]                   @relation("ActivityVersionChain")
+  completedWorkOrder  WorkOrder?                   @relation("CompletedWorkOrder")
+  costSnapshots       ActivityCostSnapshot[]
+  labourSnapshots     ActivityLabourCostSnapshot[]
+  machineCostSnapshot ActivityMachineCostSnapshot?
+  contractorCosts     ContractorCost[]
+  harvestResult       HarvestResult?
+
+  @@index([fieldSeasonId])
+  @@index([date(sort: Desc)])
+  @@index([deletedAt])
+  @@index([machineId])
+  @@index([fuelInventoryItemId])
+  @@index([correctionOfId])
+  @@index([rootActivityId])
+  @@map("activities")
+}
+
+model InventoryItem {
+  id                     String            @id @default(uuid())
+  farmId                 String
+  name                   String
+  category               InventoryCategory
+  activeIngredient       String?
+  unit                   InventoryUnit
+  currentStock           Decimal           @db.Decimal(10, 3)
+  minimumStock           Decimal           @default(0) @db.Decimal(10, 3)
+  purchasePricePerUnit   Decimal?          @db.Decimal(8, 2)
+  valuationEffectiveAt   DateTime?
+  expiryDate             DateTime?         @db.Date
+  supplierName           String?
+  registrationNumber     String?
+  fracCode               String?
+  hracCode               String?
+  phiDays                Int?              @db.SmallInt
+  nitrogenPercent        Decimal?          @db.Decimal(5, 2)
+  phosphorusPercent      Decimal?          @db.Decimal(5, 2)
+  potassiumPercent       Decimal?          @db.Decimal(5, 2)
+  // Sprint 18 — Ctgb integration. Defaults to true so every pre-Sprint-18
+  // row (all free-text entry, the only path that ever existed) keeps its
+  // honest meaning: manual/unverified unless explicitly linked to a real
+  // Ctgb authorisation record.
+  isManualEntry          Boolean           @default(true)
+  ctgbProductReferenceId String?
+  createdAt              DateTime          @default(now())
+  updatedAt              DateTime          @updatedAt
+
+  farm                  Farm                          @relation(fields: [farmId], references: [id], onDelete: Cascade)
+  ctgbProductReference  CtgbProductReference?         @relation(fields: [ctgbProductReferenceId], references: [id], onDelete: SetNull)
+  activities            Activity[]
+  stockMovements        StockMovement[]
+  reservations          InventoryReservation[]
+  seasonPlanItems       SeasonPlanItem[]
+  purchases             InventoryPurchase[]
+  activityCostSnapshots ActivityCostSnapshot[]
+  fuelCostSnapshots     ActivityMachineCostSnapshot[] @relation("FuelInventorySnapshots")
+  activityFuelUses      Activity[]                    @relation("ActivityFuelInventory")
+
+  @@index([farmId])
+  @@index([ctgbProductReferenceId])
+  @@map("inventory_items")
+}
+
+enum CtgbAuthorisationStatus {
+  authorised
+  expired
+  withdrawn
+  suspended
+  unknown
+}
+
+// Sprint 18 — a normalized, cached snapshot of one official Ctgb
+// authorisation record. Never the live source of truth (Ctgb itself is);
+// this is what FarmOS last successfully fetched and verified, with enough
+// provenance (source URL, fetchedAt, checksum) to know how stale it is.
+model CtgbProductReference {
+  id                  String                  @id @default(uuid())
+  sourceProductId     String                  @unique
+  authorisationNumber String
+  officialName        String
+  authorisationStatus CtgbAuthorisationStatus @default(unknown)
+  authorisationStart  DateTime?               @db.Date
+  authorisationEnd    DateTime?               @db.Date
+  holder              String?
+  activeSubstances    Json?
+  sourceUrl           String
+  fetchedAt           DateTime
+  sourceVersion       String?
+  rawChecksum         String
+  createdAt           DateTime                @default(now())
+  updatedAt           DateTime                @updatedAt
+
+  uses           CtgbUseAuthorisation[]
+  inventoryItems InventoryItem[]
+
+  @@index([authorisationNumber])
+  @@map("ctgb_product_references")
+}
+
+// One official permitted use (crop/target + its constraints) for a given
+// product. A single product typically has many of these. Every constraint
+// field is nullable and independently sourced — never invented when the
+// official record doesn't state it (Sprint 18 Part 4: "do not assume
+// every field exists in the API").
+model CtgbUseAuthorisation {
+  id                       String   @id @default(uuid())
+  productReferenceId       String
+  cropOrUseTarget          String
+  purpose                  String?
+  dosePerHaMin             Decimal? @db.Decimal(7, 3)
+  dosePerHaMax             Decimal? @db.Decimal(7, 3)
+  doseUnit                 String?  @db.VarChar(10)
+  maxApplicationsPerSeason Int?     @db.SmallInt
+  applicationIntervalDays  Int?     @db.SmallInt
+  bbchMin                  Int?     @db.SmallInt
+  bbchMax                  Int?     @db.SmallInt
+  phiDays                  Int?     @db.SmallInt
+  bufferZoneMetres         Decimal? @db.Decimal(5, 1)
+  otherRestrictions        String?
+  sourceDocumentRef        String?
+  createdAt                DateTime @default(now())
+
+  productReference CtgbProductReference @relation(fields: [productReferenceId], references: [id], onDelete: Cascade)
+
+  @@index([productReferenceId])
+  @@map("ctgb_use_authorisations")
+}
+
+model StockMovement {
+  id              String         @id @default(uuid())
+  inventoryItemId String
+  activityId      String?
+  quantity        Decimal        @db.Decimal(10, 3)
+  direction       StockDirection
+  unitCost        Decimal?       @db.Decimal(8, 2)
+  notes           String?
+  createdAt       DateTime       @default(now())
+  // Sprint 19 Part 5 — links this movement to the specific correction/
+  // reversal business transaction that created it, so every movement from
+  // one correction (which may add more than one row) can be queried
+  // together. Null for movements created before this sprint or by the
+  // original (non-corrective) create/complete flow, which doesn't need it —
+  // those are already unambiguously tied to their activityId alone.
+  correlationId   String?
+  purchaseId      String?
+
+  inventoryItem InventoryItem      @relation(fields: [inventoryItemId], references: [id], onDelete: Cascade)
+  activity      Activity?          @relation(fields: [activityId], references: [id], onDelete: SetNull)
+  purchase      InventoryPurchase? @relation(fields: [purchaseId], references: [id], onDelete: SetNull)
+
+  @@index([inventoryItemId])
+  @@index([activityId])
+  @@index([correlationId])
+  @@index([purchaseId])
+  @@map("stock_movements")
+}
+
+model Task {
+  id             String       @id @default(uuid())
+  fieldSeasonId  String?
+  farmId         String?
+  title          String
+  description    String?
+  type           TaskType
+  priority       TaskPriority @default(medium)
+  status         TaskStatus   @default(pending)
+  dueDate        DateTime     @db.Date
+  assignedTo     String?
+  estimatedHours Decimal?     @db.Decimal(4, 1)
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  fieldSeason FieldSeason? @relation(fields: [fieldSeasonId], references: [id], onDelete: SetNull)
+  farm        Farm?        @relation(fields: [farmId], references: [id], onDelete: Cascade)
+
+  @@index([farmId])
+  @@index([fieldSeasonId])
+  @@map("tasks")
+}
+
+model ComplianceItem {
+  id          String           @id @default(uuid())
+  farmId      String
+  title       String
+  description String
+  status      ComplianceStatus @default(missing)
+  dueDate     DateTime?        @db.Date
+  module      ComplianceModule
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+
+  farm Farm @relation(fields: [farmId], references: [id], onDelete: Cascade)
+
+  @@index([farmId])
+  @@map("compliance_items")
+}
+
+// Regulatory records: RESTRICT deletion to protect 3-year retention requirement
+model ComplianceRecord {
+  id          String    @id @default(uuid())
+  activityId  String
+  framework   String
+  data        Json
+  confirmed   Boolean   @default(false)
+  confirmedAt DateTime?
+  createdAt   DateTime  @default(now())
+
+  activity Activity @relation(fields: [activityId], references: [id], onDelete: Restrict)
+
+  @@index([activityId])
+  @@map("compliance_records")
+}
+
+model FinancialSnapshot {
+  id                      String   @id @default(uuid())
+  seasonId                String
+  costPerHectareEur       Decimal  @db.Decimal(10, 2)
+  totalExpensesEur        Decimal  @db.Decimal(12, 2)
+  totalRevenueEur         Decimal  @db.Decimal(12, 2)
+  estimatedMarginEur      Decimal  @db.Decimal(12, 2)
+  estimatedMarginPerHaEur Decimal  @db.Decimal(10, 2)
+  budgetVarianceEur       Decimal  @db.Decimal(12, 2)
+  createdAt               DateTime @default(now())
+
+  season         Season          @relation(fields: [seasonId], references: [id], onDelete: Cascade)
+  cropFinancials CropFinancial[]
+
+  @@map("financial_snapshots")
+}
+
+model CropFinancial {
+  id             String   @id @default(uuid())
+  snapshotId     String
+  crop           CropName
+  hectares       Decimal  @db.Decimal(7, 2)
+  revenueEur     Decimal  @db.Decimal(12, 2)
+  costEur        Decimal  @db.Decimal(12, 2)
+  marginEur      Decimal  @db.Decimal(12, 2)
+  marginPerHaEur Decimal  @db.Decimal(10, 2)
+
+  snapshot FinancialSnapshot @relation(fields: [snapshotId], references: [id], onDelete: Cascade)
+
+  @@map("crop_financials")
+}
+
+model Machine {
+  id                     String         @id @default(uuid())
+  farmId                 String
+  name                   String
+  type                   MachineType
+  make                   String?
+  model                  String?
+  year                   Int?           @db.SmallInt
+  hoursSinceService      Int?
+  nextServiceDueHours    Int?
+  isCertified            Boolean        @default(true)
+  hourlyOperationalCost  Decimal?       @db.Decimal(10, 2)
+  fuelConsumptionPerHour Decimal?       @db.Decimal(8, 3)
+  contractorRate         Decimal?       @db.Decimal(10, 2)
+  costEffectiveFrom      DateTime?      @db.Date
+  fuelCostPolicy         FuelCostPolicy @default(included_in_hourly_rate)
+  createdAt              DateTime       @default(now())
+  updatedAt              DateTime       @updatedAt
+
+  farm            Farm                          @relation(fields: [farmId], references: [id], onDelete: Cascade)
+  activities      Activity[]
+  workOrders      WorkOrder[]
+  rateVersions    MachineRate[]
+  costSnapshots   ActivityMachineCostSnapshot[]
+  contractorCosts ContractorCost[]
+
+  @@index([farmId])
+  @@map("machines")
+}
+
+model Employee {
+  id                    String         @id @default(uuid())
+  farmId                String
+  name                  String
+  role                  String?
+  hasSpraying           Boolean        @default(false)
+  certNumber            String?        @db.VarChar(50)
+  certExpiry            DateTime?      @db.Date
+  isActive              Boolean        @default(true)
+  hourlyOperationalCost Decimal?       @db.Decimal(10, 2)
+  costEffectiveFrom     DateTime?      @db.Date
+  labourCostType        LabourCostType @default(employee)
+  createdAt             DateTime       @default(now())
+
+  farm                 Farm                         @relation(fields: [farmId], references: [id], onDelete: Cascade)
+  workOrderAssignments WorkOrderEmployee[]
+  rateVersions         EmployeeRate[]
+  costSnapshots        ActivityLabourCostSnapshot[]
+
+  @@index([farmId])
+  @@map("employees")
+}
+
+model OperationTemplate {
+  id                   String        @id @default(uuid())
+  farmId               String
+  name                 String
+  operationType        OperationType
+  defaultDurationHours Decimal?      @db.Decimal(6, 2)
+  defaultInstructions  String?
+  defaultChecklist     Json?
+  createdAt            DateTime      @default(now())
+  updatedAt            DateTime      @updatedAt
+
+  farm Farm @relation(fields: [farmId], references: [id], onDelete: Cascade)
+
+  @@unique([farmId, name])
+  @@index([farmId])
+  @@map("operation_templates")
+}
+
+model SeasonPlanItem {
+  id                        String           @id @default(uuid())
+  farmId                    String
+  fieldSeasonId             String
+  operationType             OperationType
+  title                     String
+  windowStart               DateTime         @db.Date
+  windowEnd                 DateTime         @db.Date
+  expectedAreaHa            Decimal?         @db.Decimal(7, 2)
+  expectedProductId         String?
+  expectedQuantity          Decimal?         @db.Decimal(10, 3)
+  expectedCostEur           Decimal?         @db.Decimal(10, 2)
+  expectedInputCostEur      Decimal?         @db.Decimal(12, 2)
+  expectedLabourCostEur     Decimal?         @db.Decimal(12, 2)
+  expectedMachineCostEur    Decimal?         @db.Decimal(12, 2)
+  expectedContractorCostEur Decimal?         @db.Decimal(12, 2)
+  expectedOverheadEur       Decimal?         @db.Decimal(12, 2)
+  expectedYieldQuantity     Decimal?         @db.Decimal(14, 3)
+  expectedYieldUnit         String?
+  expectedSalePrice         Decimal?         @db.Decimal(12, 4)
+  expectedRevenueEur        Decimal?         @db.Decimal(14, 2)
+  reason                    String?
+  dependencyId              String?
+  status                    SeasonPlanStatus @default(draft)
+  createdAt                 DateTime         @default(now())
+  updatedAt                 DateTime         @updatedAt
+
+  farm            Farm             @relation(fields: [farmId], references: [id], onDelete: Cascade)
+  fieldSeason     FieldSeason      @relation(fields: [fieldSeasonId], references: [id], onDelete: Cascade)
+  expectedProduct InventoryItem?   @relation(fields: [expectedProductId], references: [id], onDelete: SetNull)
+  dependency      SeasonPlanItem?  @relation("PlanDependencies", fields: [dependencyId], references: [id], onDelete: SetNull)
+  dependants      SeasonPlanItem[] @relation("PlanDependencies")
+  workOrders      WorkOrder[]
+  Season          Season?          @relation(fields: [seasonId], references: [id])
+  seasonId        String?
+
+  @@index([farmId, windowStart])
+  @@index([fieldSeasonId])
+  @@map("season_plan_items")
+}
+
+model WorkOrder {
+  id                  String            @id @default(uuid())
+  farmId              String
+  fieldSeasonId       String
+  sourcePlanItemId    String?           @unique
+  completedActivityId String?           @unique
+  operationType       OperationType
+  title               String
+  status              WorkOrderStatus   @default(draft)
+  priority            WorkOrderPriority @default(medium)
+  plannedStart        DateTime?
+  plannedEnd          DateTime?
+  dueDate             DateTime?
+  estimatedHours      Decimal?          @db.Decimal(6, 2)
+  machineId           String?
+  instructions        String?
+  checklist           Json?
+  blockerReason       String?
+  version             Int               @default(1)
+  createdBy           String
+  createdAt           DateTime          @default(now())
+  updatedAt           DateTime          @updatedAt
+
+  farm              Farm                   @relation(fields: [farmId], references: [id], onDelete: Cascade)
+  fieldSeason       FieldSeason            @relation(fields: [fieldSeasonId], references: [id], onDelete: Cascade)
+  sourcePlanItem    SeasonPlanItem?        @relation(fields: [sourcePlanItemId], references: [id], onDelete: SetNull)
+  machine           Machine?               @relation(fields: [machineId], references: [id], onDelete: SetNull)
+  completedActivity Activity?              @relation("CompletedWorkOrder", fields: [completedActivityId], references: [id], onDelete: SetNull)
+  employees         WorkOrderEmployee[]
+  reservations      InventoryReservation[]
+  ContractorCost    ContractorCost[]
+  sourceObservation ScoutingObservation?   @relation("ObservationWorkOrder")
+
+  @@index([farmId, status, dueDate])
+  @@index([fieldSeasonId])
+  @@index([sourcePlanItemId])
+  @@map("work_orders")
+}
+
+// Sprint 27 — an inspection is evidence, not a completed farming Activity.
+model ScoutingVisit {
+  id                String    @id @default(uuid())
+  farmId            String
+  fieldId           String
+  fieldSeasonId     String
+  visitDate         DateTime
+  observerId        String?
+  source            String    @default("manual")
+  latitude          Decimal?  @db.Decimal(9, 6)
+  longitude         Decimal?  @db.Decimal(9, 6)
+  locationAccuracyM Decimal?  @db.Decimal(8, 2)
+  weatherSnapshot   Json?
+  overallCondition  String?
+  notes             String?
+  status            String    @default("completed")
+  completedAt       DateTime?
+  localVisitId      String?   @unique
+  idempotencyKey    String?   @unique
+  submissionHash    String?
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  farm         Farm                  @relation(fields: [farmId], references: [id], onDelete: Cascade)
+  field        Field                 @relation(fields: [fieldId], references: [id], onDelete: Restrict)
+  fieldSeason  FieldSeason           @relation(fields: [fieldSeasonId], references: [id], onDelete: Restrict)
+  observations ScoutingObservation[]
+
+  @@index([farmId, visitDate(sort: Desc)])
+  @@index([fieldSeasonId, visitDate(sort: Desc)])
+  @@map("scouting_visits")
+}
+
+model ScoutingObservation {
+  id                  String    @id @default(uuid())
+  farmId              String
+  visitId             String
+  category            String
+  issueType           String
+  certainty           String    @default("symptom_observed")
+  cropZone            String?
+  severity            String    @default("low")
+  affectedAreaHa      Decimal?  @db.Decimal(8, 3)
+  affectedPercent     Decimal?  @db.Decimal(5, 2)
+  confidence          String    @default("medium")
+  description         String
+  recommendedFollowUp String?
+  status              String    @default("open")
+  resolvedAt          DateTime?
+  resolvedBy          String?
+  resolutionReason    String?
+  sourceObservationId String?
+  followUpWorkOrderId String?   @unique
+  localObservationId  String?   @unique
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
+
+  farm              Farm                  @relation(fields: [farmId], references: [id], onDelete: Cascade)
+  visit             ScoutingVisit         @relation(fields: [visitId], references: [id], onDelete: Cascade)
+  sourceObservation ScoutingObservation?  @relation("ObservationCorrections", fields: [sourceObservationId], references: [id], onDelete: SetNull)
+  corrections       ScoutingObservation[] @relation("ObservationCorrections")
+  followUpWorkOrder WorkOrder?            @relation("ObservationWorkOrder", fields: [followUpWorkOrderId], references: [id], onDelete: SetNull)
+  photos            ScoutingPhoto[]
+  suggestions       PhotoSuggestion[]
+
+  @@index([farmId, status, severity])
+  @@index([visitId])
+  @@map("scouting_observations")
+}
+
+model CropStageRecord {
+  id               String   @id @default(uuid())
+  farmId           String
+  fieldSeasonId    String
+  stageSystem      String   @default("BBCH")
+  stageCode        String
+  label            String
+  observedAt       DateTime
+  source           String   @default("farmer_observed")
+  confidence       String   @default("confirmed")
+  observerId       String?
+  correctsRecordId String?
+  isEffective      Boolean  @default(true)
+  correctionReason String?
+  createdAt        DateTime @default(now())
+
+  farm           Farm              @relation(fields: [farmId], references: [id], onDelete: Cascade)
+  fieldSeason    FieldSeason       @relation(fields: [fieldSeasonId], references: [id], onDelete: Cascade)
+  correctsRecord CropStageRecord?  @relation("CropStageCorrections", fields: [correctsRecordId], references: [id], onDelete: SetNull)
+  corrections    CropStageRecord[] @relation("CropStageCorrections")
+
+  @@index([fieldSeasonId, isEffective, observedAt(sort: Desc)])
+  @@index([farmId, observedAt(sort: Desc)])
+  @@map("crop_stage_records")
+}
+
+model ScoutingPhoto {
+  id              String    @id @default(uuid())
+  farmId          String
+  observationId   String
+  storageKey      String
+  originalName    String
+  mimeType        String
+  sizeBytes       Int
+  checksum        String
+  width           Int?
+  height          Int?
+  uploadStatus    String    @default("temporary")
+  finalizedAt     DateTime?
+  originalPhotoId String?
+  capturedAt      DateTime?
+  latitude        Decimal?  @db.Decimal(9, 6)
+  longitude       Decimal?  @db.Decimal(9, 6)
+  annotationJson  Json?
+  retentionUntil  DateTime?
+  localPhotoId    String?   @unique
+  createdAt       DateTime  @default(now())
+
+  farm               Farm                     @relation(fields: [farmId], references: [id], onDelete: Cascade)
+  observation        ScoutingObservation      @relation(fields: [observationId], references: [id], onDelete: Cascade)
+  suggestions        PhotoSuggestion[]
+  original           ScoutingPhoto?           @relation("PhotoDerivatives", fields: [originalPhotoId], references: [id], onDelete: SetNull)
+  derivatives        ScoutingPhoto[]          @relation("PhotoDerivatives")
+  annotationVersions PhotoAnnotationVersion[]
+
+  @@unique([farmId, checksum])
+  @@index([observationId])
+  @@map("scouting_photos")
+}
+
+model PhotoAnnotationVersion {
+  id               String   @id @default(uuid())
+  farmId           String
+  photoId          String
+  version          Int
+  annotationsJson  Json
+  correctionReason String?
+  previousVersionId String?
+  actorUserId      String?
+  isEffective      Boolean  @default(true)
+  createdAt        DateTime @default(now())
+
+  farm       Farm                     @relation(fields: [farmId], references: [id], onDelete: Cascade)
+  photo      ScoutingPhoto            @relation(fields: [photoId], references: [id], onDelete: Cascade)
+  previous   PhotoAnnotationVersion?  @relation("PhotoAnnotationCorrections", fields: [previousVersionId], references: [id], onDelete: SetNull)
+  corrections PhotoAnnotationVersion[] @relation("PhotoAnnotationCorrections")
+
+  @@unique([photoId, version])
+  @@index([farmId, createdAt(sort: Desc)])
+  @@index([previousVersionId])
+  @@map("photo_annotation_versions")
+}
+
+model PhotoSuggestion {
+  id                  String    @id @default(uuid())
+  observationId       String
+  photoId             String
+  provider            String
+  model               String
+  candidatesJson      Json
+  visibleFeaturesJson Json
+  alternativesJson    Json
+  confidence          String
+  contextChecksum     String?
+  derivedChecksum     String?
+  promptVersion       String    @default("photo-suggestion-v1")
+  schemaVersion       Int       @default(1)
+  cannotDetermine     Boolean   @default(false)
+  farmerAction        String?
+  requestedAt         DateTime  @default(now())
+  status              String    @default("awaiting_review")
+  reviewedBy          String?
+  reviewedAt          DateTime?
+  createdAt           DateTime  @default(now())
+
+  observation ScoutingObservation @relation(fields: [observationId], references: [id], onDelete: Cascade)
+  photo       ScoutingPhoto       @relation(fields: [photoId], references: [id], onDelete: Cascade)
+
+  @@index([observationId, status])
+  @@map("photo_suggestions")
+}
+
+model WorkOrderEmployee {
+  workOrderId  String
+  employeeId   String
+  assignedAt   DateTime @default(now())
+  plannedHours Decimal? @db.Decimal(7, 2)
+  actualHours  Decimal? @db.Decimal(7, 2)
+
+  workOrder WorkOrder @relation(fields: [workOrderId], references: [id], onDelete: Cascade)
+  employee  Employee  @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+
+  @@id([workOrderId, employeeId])
+  @@index([employeeId])
+  @@map("work_order_employees")
+}
+
+model InventoryReservation {
+  id              String            @id @default(uuid())
+  farmId          String
+  workOrderId     String
+  inventoryItemId String
+  quantity        Decimal           @db.Decimal(10, 3)
+  status          ReservationStatus @default(active)
+  releasedAt      DateTime?
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+
+  farm          Farm          @relation(fields: [farmId], references: [id], onDelete: Cascade)
+  workOrder     WorkOrder     @relation(fields: [workOrderId], references: [id], onDelete: Cascade)
+  inventoryItem InventoryItem @relation(fields: [inventoryItemId], references: [id], onDelete: Cascade)
+
+  @@unique([workOrderId, inventoryItemId])
+  @@index([farmId, status])
+  @@index([inventoryItemId, status])
+  @@map("inventory_reservations")
+}
+
+model EconomicEntry {
+  id               String               @id @default(uuid())
+  farmId           String
+  seasonId         String
+  fieldSeasonId    String?
+  fieldId          String?
+  crop             CropName?
+  kind             EconomicEntryKind
+  sourceType       EconomicSourceType
+  sourceEntityId   String
+  amount           Decimal              @db.Decimal(14, 2)
+  currency         String               @default("EUR") @db.Char(3)
+  quantity         Decimal?             @db.Decimal(14, 3)
+  unit             String?
+  unitCost         Decimal?             @db.Decimal(12, 4)
+  costDate         DateTime             @db.Date
+  allocationMethod CostAllocationMethod
+  confidence       FinancialConfidence
+  status           EconomicRecordStatus @default(active)
+  reversalOfId     String?
+  correlationId    String
+  createdAt        DateTime             @default(now())
+
+  farm        Farm                 @relation(fields: [farmId], references: [id], onDelete: Cascade)
+  season      Season               @relation(fields: [seasonId], references: [id], onDelete: Cascade)
+  fieldSeason FieldSeason?         @relation(fields: [fieldSeasonId], references: [id], onDelete: SetNull)
+  reversalOf  EconomicEntry?       @relation("EconomicAdjustments", fields: [reversalOfId], references: [id], onDelete: SetNull)
+  adjustments EconomicEntry[]      @relation("EconomicAdjustments")
+  allocations EconomicAllocation[]
+
+  @@index([farmId, seasonId, kind])
+  @@index([fieldSeasonId])
+  @@index([sourceType, sourceEntityId])
+  @@index([correlationId])
+  @@map("economic_entries")
+}
+
+model ActivityCostSnapshot {
+  id                 String              @id @default(uuid())
+  activityId         String
+  inventoryItemId    String?
+  sourceType         EconomicSourceType
+  itemName           String
+  quantity           Decimal             @db.Decimal(14, 3)
+  unit               String
+  unitCost           Decimal?            @db.Decimal(12, 4)
+  priceSource        String?
+  priceEffectiveDate DateTime?           @db.Date
+  totalCost          Decimal?            @db.Decimal(14, 2)
+  currency           String              @default("EUR") @db.Char(3)
+  confidence         FinancialConfidence
+  createdAt          DateTime            @default(now())
+
+  activity      Activity       @relation(fields: [activityId], references: [id], onDelete: Cascade)
+  inventoryItem InventoryItem? @relation(fields: [inventoryItemId], references: [id], onDelete: SetNull)
+
+  @@unique([activityId, sourceType, itemName])
+  @@index([inventoryItemId])
+  @@map("activity_cost_snapshots")
+}
+
+model EmployeeRate {
+  id                    String         @id @default(uuid())
+  farmId                String
+  employeeId            String
+  hourlyOperationalCost Decimal        @db.Decimal(10, 2)
+  labourCostType        LabourCostType
+  effectiveFrom         DateTime       @db.Date
+  effectiveTo           DateTime?      @db.Date
+  createdAt             DateTime       @default(now())
+
+  farm      Farm                         @relation(fields: [farmId], references: [id], onDelete: Cascade)
+  employee  Employee                     @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  snapshots ActivityLabourCostSnapshot[]
+
+  @@unique([employeeId, effectiveFrom])
+  @@index([farmId, effectiveFrom])
+  @@map("employee_rates")
+}
+
+model MachineRate {
+  id                     String         @id @default(uuid())
+  farmId                 String
+  machineId              String
+  hourlyOperationalCost  Decimal        @db.Decimal(10, 2)
+  fuelCostPolicy         FuelCostPolicy
+  fuelConsumptionPerHour Decimal?       @db.Decimal(8, 3)
+  contractorRate         Decimal?       @db.Decimal(10, 2)
+  effectiveFrom          DateTime       @db.Date
+  effectiveTo            DateTime?      @db.Date
+  createdAt              DateTime       @default(now())
+
+  farm      Farm                          @relation(fields: [farmId], references: [id], onDelete: Cascade)
+  machine   Machine                       @relation(fields: [machineId], references: [id], onDelete: Cascade)
+  snapshots ActivityMachineCostSnapshot[]
+
+  @@unique([machineId, effectiveFrom])
+  @@index([farmId, effectiveFrom])
+  @@map("machine_rates")
+}
+
+model ActivityLabourCostSnapshot {
+  id             String              @id @default(uuid())
+  activityId     String
+  employeeId     String
+  employeeRateId String?
+  employeeName   String
+  labourCostType LabourCostType
+  actualHours    Decimal             @db.Decimal(7, 2)
+  hourlyRate     Decimal?            @db.Decimal(10, 2)
+  totalCost      Decimal?            @db.Decimal(14, 2)
+  effectiveFrom  DateTime?           @db.Date
+  currency       String              @default("EUR") @db.Char(3)
+  confidence     FinancialConfidence
+  createdAt      DateTime            @default(now())
+
+  activity Activity      @relation(fields: [activityId], references: [id], onDelete: Cascade)
+  employee Employee      @relation(fields: [employeeId], references: [id], onDelete: Restrict)
+  rate     EmployeeRate? @relation(fields: [employeeRateId], references: [id], onDelete: SetNull)
+
+  @@unique([activityId, employeeId])
+  @@index([employeeId])
+  @@map("activity_labour_cost_snapshots")
+}
+
+model ActivityMachineCostSnapshot {
+  id                  String              @id @default(uuid())
+  activityId          String              @unique
+  machineId           String
+  machineRateId       String?
+  machineName         String
+  actualHours         Decimal             @db.Decimal(7, 2)
+  hourlyRate          Decimal?            @db.Decimal(10, 2)
+  machineCost         Decimal?            @db.Decimal(14, 2)
+  fuelCostPolicy      FuelCostPolicy
+  fuelInventoryItemId String?
+  fuelLitres          Decimal?            @db.Decimal(10, 3)
+  fuelUnitCost        Decimal?            @db.Decimal(12, 4)
+  fuelCost            Decimal?            @db.Decimal(14, 2)
+  totalCost           Decimal?            @db.Decimal(14, 2)
+  effectiveFrom       DateTime?           @db.Date
+  currency            String              @default("EUR") @db.Char(3)
+  confidence          FinancialConfidence
+  method              String
+  createdAt           DateTime            @default(now())
+
+  activity          Activity       @relation(fields: [activityId], references: [id], onDelete: Cascade)
+  machine           Machine        @relation(fields: [machineId], references: [id], onDelete: Restrict)
+  rate              MachineRate?   @relation(fields: [machineRateId], references: [id], onDelete: SetNull)
+  fuelInventoryItem InventoryItem? @relation("FuelInventorySnapshots", fields: [fuelInventoryItemId], references: [id], onDelete: SetNull)
+
+  @@index([machineId])
+  @@map("activity_machine_cost_snapshots")
+}
+
+model ContractorCost {
+  id               String               @id @default(uuid())
+  farmId           String
+  seasonId         String
+  fieldSeasonId    String?
+  workOrderId      String?
+  activityId       String?
+  contractor       String
+  operation        String
+  costDate         DateTime             @db.Date
+  rateType         ContractorRateType
+  quantity         Decimal              @db.Decimal(14, 3)
+  unit             String
+  rate             Decimal              @db.Decimal(12, 4)
+  totalAmount      Decimal              @db.Decimal(14, 2)
+  reference        String?
+  status           EconomicRecordStatus @default(active)
+  correctionOfId   String?
+  correctionReason String?
+  version          Int                  @default(1)
+  correlationId    String
+  createdAt        DateTime             @default(now())
+
+  farm         Farm             @relation(fields: [farmId], references: [id], onDelete: Cascade)
+  season       Season           @relation(fields: [seasonId], references: [id], onDelete: Cascade)
+  fieldSeason  FieldSeason?     @relation(fields: [fieldSeasonId], references: [id], onDelete: SetNull)
+  workOrder    WorkOrder?       @relation(fields: [workOrderId], references: [id], onDelete: SetNull)
+  activity     Activity?        @relation(fields: [activityId], references: [id], onDelete: SetNull)
+  correctionOf ContractorCost?  @relation("ContractorCostVersions", fields: [correctionOfId], references: [id], onDelete: SetNull)
+  corrections  ContractorCost[] @relation("ContractorCostVersions")
+  Machine      Machine?         @relation(fields: [machineId], references: [id])
+  machineId    String?
+
+  @@unique([activityId, status])
+  @@index([farmId, costDate])
+  @@map("contractor_costs")
+}
+
+model EconomicAllocation {
+  id                  String               @id @default(uuid())
+  farmId              String
+  economicEntryId     String
+  fieldSeasonId       String?
+  percentage          Decimal              @db.Decimal(7, 4)
+  amount              Decimal              @db.Decimal(14, 2)
+  originalAmount      Decimal              @db.Decimal(14, 2)
+  method              CostAllocationMethod
+  version             Int                  @default(1)
+  status              EconomicRecordStatus @default(active)
+  correctionOfId      String?
+  reason              String?
+  createdAt           DateTime             @default(now())
+  // Sprint 25 reallocation write path. idempotencyKey is SHARED across all
+  // destination rows of one reallocation (one reallocation → many rows), so
+  // it is indexed, not unique. submissionHash guards same-key/different-payload.
+  idempotencyKey      String?
+  submissionHash      String?
+  correlationId       String?
+  createdBy           String?
+  sourceRecordVersion Int?
+
+  farm          Farm                 @relation(fields: [farmId], references: [id], onDelete: Cascade)
+  economicEntry EconomicEntry        @relation(fields: [economicEntryId], references: [id], onDelete: Cascade)
+  fieldSeason   FieldSeason?         @relation(fields: [fieldSeasonId], references: [id], onDelete: SetNull)
+  correctionOf  EconomicAllocation?  @relation("AllocationVersions", fields: [correctionOfId], references: [id], onDelete: SetNull)
+  corrections   EconomicAllocation[] @relation("AllocationVersions")
+
+  @@index([farmId, status])
+  @@index([economicEntryId])
+  @@index([farmId, idempotencyKey])
+  @@map("economic_allocations")
+}
+
+model InventoryPurchase {
+  id               String               @id @default(uuid())
+  farmId           String
+  seasonId         String
+  inventoryItemId  String
+  supplier         String?
+  purchaseDate     DateTime             @db.Date
+  quantity         Decimal              @db.Decimal(14, 3)
+  unit             InventoryUnit
+  totalAmount      Decimal              @db.Decimal(14, 2)
+  unitCost         Decimal              @db.Decimal(12, 4)
+  vatAmount        Decimal?             @db.Decimal(12, 2)
+  batchLot         String?
+  invoiceReference String?
+  notes            String?
+  status           EconomicRecordStatus @default(active)
+  correctionOfId   String?
+  correlationId    String
+  createdAt        DateTime             @default(now())
+  offlineDraftId   String?              @unique
+  idempotencyKey   String?              @unique
+  submissionHash   String?
+  correctionReason String?
+  version          Int                  @default(1)
+
+  farm           Farm                @relation(fields: [farmId], references: [id], onDelete: Cascade)
+  season         Season              @relation(fields: [seasonId], references: [id], onDelete: Cascade)
+  inventoryItem  InventoryItem       @relation(fields: [inventoryItemId], references: [id], onDelete: Restrict)
+  correctionOf   InventoryPurchase?  @relation("PurchaseAdjustments", fields: [correctionOfId], references: [id], onDelete: SetNull)
+  corrections    InventoryPurchase[] @relation("PurchaseAdjustments")
+  stockMovements StockMovement[]
+
+  @@unique([farmId, invoiceReference])
+  @@index([farmId, purchaseDate])
+  @@index([inventoryItemId])
+  @@map("inventory_purchases")
+}
+
+model FinancialExpense {
+  id               String               @id @default(uuid())
+  farmId           String
+  seasonId         String
+  fieldSeasonId    String?
+  sourceType       EconomicSourceType
+  description      String
+  expenseDate      DateTime             @db.Date
+  amount           Decimal              @db.Decimal(14, 2)
+  quantity         Decimal?             @db.Decimal(14, 3)
+  unit             String?
+  allocationMethod CostAllocationMethod
+  confidence       FinancialConfidence  @default(recorded)
+  reference        String?
+  notes            String?
+  status           EconomicRecordStatus @default(active)
+  correlationId    String
+  createdAt        DateTime             @default(now())
+  offlineDraftId   String?              @unique
+  idempotencyKey   String?              @unique
+  submissionHash   String?
+  correctionOfId   String?
+  correctionReason String?
+  version          Int                  @default(1)
+
+  farm         Farm               @relation(fields: [farmId], references: [id], onDelete: Cascade)
+  season       Season             @relation(fields: [seasonId], references: [id], onDelete: Cascade)
+  fieldSeason  FieldSeason?       @relation(fields: [fieldSeasonId], references: [id], onDelete: SetNull)
+  correctionOf FinancialExpense?  @relation("ExpenseVersions", fields: [correctionOfId], references: [id], onDelete: SetNull)
+  corrections  FinancialExpense[] @relation("ExpenseVersions")
+
+  @@index([farmId, expenseDate])
+  @@index([fieldSeasonId])
+  @@map("financial_expenses")
+}
+
+model HarvestResult {
+  id               String               @id @default(uuid())
+  farmId           String
+  seasonId         String
+  fieldSeasonId    String
+  activityId       String?              @unique
+  harvestDate      DateTime             @db.Date
+  harvestedAreaHa  Decimal              @db.Decimal(8, 2)
+  grossQuantity    Decimal              @db.Decimal(14, 3)
+  saleableQuantity Decimal?             @db.Decimal(14, 3)
+  unit             HarvestUnit
+  moisturePercent  Decimal?             @db.Decimal(5, 2)
+  qualityGrade     String?
+  storageLocation  String?
+  batchLot         String?
+  wasteLoss        Decimal?             @db.Decimal(14, 3)
+  status           EconomicRecordStatus @default(active)
+  correlationId    String
+  createdAt        DateTime             @default(now())
+  offlineDraftId   String?              @unique
+  idempotencyKey   String?              @unique
+  submissionHash   String?
+  correctionOfId   String?
+  correctionReason String?
+  version          Int                  @default(1)
+
+  farm         Farm            @relation(fields: [farmId], references: [id], onDelete: Cascade)
+  season       Season          @relation(fields: [seasonId], references: [id], onDelete: Cascade)
+  fieldSeason  FieldSeason     @relation(fields: [fieldSeasonId], references: [id], onDelete: Cascade)
+  activity     Activity?       @relation(fields: [activityId], references: [id], onDelete: SetNull)
+  correctionOf HarvestResult?  @relation("HarvestVersions", fields: [correctionOfId], references: [id], onDelete: SetNull)
+  corrections  HarvestResult[] @relation("HarvestVersions")
+
+  @@index([farmId, harvestDate])
+  @@index([fieldSeasonId])
+  @@map("harvest_results")
+}
+
+model RevenueEntry {
+  id               String               @id @default(uuid())
+  farmId           String
+  seasonId         String
+  fieldSeasonId    String?
+  type             RevenueType
+  name             String
+  revenueDate      DateTime             @db.Date
+  quantity         Decimal?             @db.Decimal(14, 3)
+  unit             String?
+  pricePerUnit     Decimal?             @db.Decimal(12, 4)
+  totalAmount      Decimal              @db.Decimal(14, 2)
+  buyer            String?
+  qualityGrade     String?
+  batchReference   String?
+  allocationMethod CostAllocationMethod
+  revenueStatus    RevenueStatus        @default(received)
+  reference        String?
+  notes            String?
+  status           EconomicRecordStatus @default(active)
+  correlationId    String
+  createdAt        DateTime             @default(now())
+  offlineDraftId   String?              @unique
+  idempotencyKey   String?              @unique
+  submissionHash   String?
+  correctionOfId   String?
+  correctionReason String?
+  version          Int                  @default(1)
+
+  farm         Farm           @relation(fields: [farmId], references: [id], onDelete: Cascade)
+  season       Season         @relation(fields: [seasonId], references: [id], onDelete: Cascade)
+  fieldSeason  FieldSeason?   @relation(fields: [fieldSeasonId], references: [id], onDelete: SetNull)
+  correctionOf RevenueEntry?  @relation("RevenueVersions", fields: [correctionOfId], references: [id], onDelete: SetNull)
+  corrections  RevenueEntry[] @relation("RevenueVersions")
+
+  @@index([farmId, revenueDate])
+  @@index([fieldSeasonId])
+  @@map("revenue_entries")
+}
+
+model SoilAnalysis {
+  id               String   @id @default(uuid())
+  fieldId          String
+  analysisDate     DateTime @db.Date
+  phLevel          Decimal? @db.Decimal(3, 1)
+  pIndex           Int?     @db.SmallInt
+  kIndex           Int?     @db.SmallInt
+  mgIndex          Int?     @db.SmallInt
+  organicMatterPct Decimal? @db.Decimal(4, 2)
+  notes            String?
+  createdAt        DateTime @default(now())
+
+  field Field @relation(fields: [fieldId], references: [id], onDelete: Cascade)
+
+  @@index([fieldId])
+  @@map("soil_analyses")
+}

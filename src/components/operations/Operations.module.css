@@ -1,0 +1,34 @@
+.page { padding: 24px; display: grid; gap: 20px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+.card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 12px; padding: 18px; color: var(--color-text); }
+.card h2, .card h3 { margin: 0 0 12px; }
+.form { display: grid; gap: 10px; }
+.form label { display: grid; gap: 5px; font-size: 13px; color: var(--color-text-secondary); }
+.form input, .form select, .form textarea { width: 100%; border: 1px solid var(--color-border); border-radius: 7px; padding: 9px; background: var(--color-bg); color: var(--color-text); }
+.form button, .button { border: 0; border-radius: 7px; padding: 9px 13px; background: var(--color-primary); color: white; cursor: pointer; text-decoration: none; display: inline-block; }
+.muted { color: var(--color-text-secondary); font-size: 13px; }
+.error { color: #dc2626; }
+.success { color: #15803d; }
+.list { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+.row { padding: 12px; border: 1px solid var(--color-border); border-radius: 8px; display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; }
+.badge { border-radius: 999px; padding: 3px 8px; font-size: 12px; background: var(--color-bg); white-space: nowrap; }
+.actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+.mapLayout { display: grid; grid-template-columns: minmax(0, 2fr) minmax(260px, 1fr); gap: 16px; }
+/* isolation:isolate makes .mapPanel a stacking context ROOT, so every Leaflet
+   pane/control z-index (tiles→controls, up to ~1000) is contained INSIDE it and
+   can never paint above the application sidebar/backdrop/drawer, whatever value
+   Leaflet uses internally. This is the root-cause fix for the map/controls
+   escaping over the open sidebar. */
+.mapPanel { position: relative; isolation: isolate; min-width: 0; z-index: 0; }
+.map { min-height: 560px; border-radius: 12px; overflow: hidden; border: 1px solid var(--color-border); }
+.locationBar { position: absolute; z-index: 500; left: 12px; right: 12px; bottom: 12px; display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 9px 12px; border-radius: 9px; background: color-mix(in srgb, var(--color-surface) 92%, transparent); border: 1px solid var(--color-border); color: var(--color-text); box-shadow: 0 3px 12px rgb(0 0 0 / .18); font-size: 13px; }
+.locationBar button { border: 0; border-radius: 7px; padding: 7px 10px; background: var(--color-primary); color: white; white-space: nowrap; cursor: pointer; }
+.fieldButton { width: 100%; text-align: left; padding: 10px; border: 1px solid var(--color-border); border-radius: 8px; background: var(--color-surface); color: var(--color-text); cursor: pointer; }
+@media (max-width: 800px) { .page { padding: 16px; } .mapLayout { grid-template-columns: 1fr; } .map { min-height: 380px; } }
+/* Physical-mobile fix: the fixed nav toggle (top:8px/left:8px, 44px) overlapped
+   Leaflet's top-left zoom control. Push the map's top-left controls clear of it
+   on small screens, and keep the bottom location bar above the iOS browser bar. */
+@media (max-width: 767px) {
+  .mapPanel :global(.leaflet-top.leaflet-left) { margin-top: 52px; margin-left: 8px; }
+  .locationBar { bottom: calc(12px + env(safe-area-inset-bottom, 0px)); }
+}

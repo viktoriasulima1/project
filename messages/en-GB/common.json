@@ -1,0 +1,17 @@
+{
+  "appName": "FarmOS",
+  "language": { "label": "Language", "choose": "Choose language" },
+  "actions": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "retry": "Retry",
+    "tryAgain": "Try again",
+    "returnToToday": "Return to Today",
+    "close": "Close",
+    "add": "Add",
+    "remove": "Remove",
+    "copyDiagnosticId": "Copy diagnostic ID"
+  },
+  "states": { "loading": "Loading…", "saving": "Saving…", "empty": "Nothing here yet." },
+  "pendingSync": "{count} pending"
+}

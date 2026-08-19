@@ -1,0 +1,29 @@
+.placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  padding: var(--space-8) var(--space-4);
+  color: var(--color-text-secondary);
+  text-align: center;
+}
+
+.icon {
+  font-size: 3rem;
+  line-height: 1;
+  color: var(--color-text-muted);
+}
+
+.placeholder h2 {
+  font-size: var(--font-xl);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.placeholder p {
+  font-size: var(--font-base);
+  margin: 0;
+  max-width: 400px;
+}

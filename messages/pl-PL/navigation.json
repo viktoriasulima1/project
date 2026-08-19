@@ -1,0 +1,20 @@
+{
+  "today": "Dziś",
+  "fields": "Pola",
+  "fieldMap": "Mapa pól",
+  "scouting": "Lustracja",
+  "reports": "Raporty",
+  "seasonPlan": "Plan sezonu",
+  "workOrders": "Zlecenia",
+  "activities": "Czynności",
+  "inventory": "Magazyn",
+  "finance": "Finanse",
+  "weather": "Pogoda",
+  "compliance": "Zgodność",
+  "insights": "Analizy gospodarstwa",
+  "offlineSync": "Offline i synchronizacja",
+  "openNav": "Otwórz nawigację",
+  "closeNav": "Zamknij nawigację",
+  "quickLog": "Szybki wpis",
+  "quickLogAria": "Szybko zarejestruj czynność"
+}

@@ -1,0 +1,20 @@
+{
+  "condition": { "good": "Goed", "satisfactory": "Voldoende", "poor": "Slecht", "critical": "Kritiek" },
+  "severity": { "low": "Laag", "moderate": "Matig", "high": "Hoog", "critical": "Kritiek" },
+  "observationStatus": { "open": "Open", "monitoring": "Monitoren", "action_planned": "Actie gepland", "resolved": "Opgelost", "dismissed": "Afgewezen", "superseded": "Vervangen" },
+  "priority": { "urgent": "Urgent", "critical": "Kritiek", "high": "Hoog", "medium": "Middel", "low": "Laag" },
+  "activityType": { "spray": "Spuiten", "fertilise": "Bemesten", "sow": "Zaaien", "tillage": "Grondbewerking", "scout": "Scouten", "harvest": "Oogsten", "irrigate": "Beregenen", "soil_sample": "Grondmonster", "other": "Overig" },
+  "operationType": { "soil_preparation": "Zaaibedbereiding", "sow": "Zaaien", "fertilise": "Bemesten", "spray": "Spuiten", "irrigate": "Beregenen", "scout": "Scouten", "tillage": "Grondbewerking", "harvest": "Oogsten", "custom": "Aangepast" },
+  "workOrderStatus": { "draft": "Concept", "ready": "Klaar", "assigned": "Toegewezen", "in_progress": "Bezig", "blocked": "Geblokkeerd", "completed": "Voltooid", "cancelled": "Geannuleerd" },
+  "complianceStatus": { "compliant": "Conform", "warning": "Waarschuwing", "incomplete": "Onvolledig", "non_compliant": "Niet-conform" },
+  "syncState": { "draft": "Concept", "ready_to_sync": "Klaar om te synchroniseren", "syncing": "Synchroniseren", "synced": "Gesynchroniseerd", "conflict": "Conflict", "failed": "Mislukt", "needs_review": "Vereist controle", "cancelled": "Geannuleerd" },
+  "soilType": { "clay": "Klei", "sandy": "Zand", "loam": "Leem", "peat": "Veen", "silt": "Silt" },
+  "crop": { "wheat": "Tarwe", "potato": "Aardappel", "onion": "Ui", "sugar_beet": "Suikerbiet", "barley": "Gerst", "oilseed_rape": "Koolzaad", "cover_crop": "Groenbemester", "grass": "Gras", "other": "Overig" },
+  "inventoryCategory": { "herbicide": "Herbicide", "fungicide": "Fungicide", "insecticide": "Insecticide", "fertiliser": "Meststof", "seed": "Zaaizaad", "fuel": "Brandstof", "other": "Overig" },
+  "unit": { "L": "L", "kg": "kg", "T": "T", "bag": "Zak", "box": "Doos" },
+  "fieldStatus": { "healthy": "Gezond", "attention": "Aandacht", "critical": "Kritiek", "fallow": "Braak" },
+  "costCategory": { "crop_protection": "Gewasbescherming", "fertiliser": "Meststoffen", "seed": "Zaad en plantmateriaal", "labour": "Arbeid", "machinery": "Machines", "fuel": "Brandstof", "contractor": "Loonwerk", "irrigation_utilities": "Irrigatie en nutsvoorzieningen", "field_expenses": "Perceelkosten", "allocated_overhead": "Toegerekende overhead", "other": "Overig" },
+  "financialSourceType": { "inventory_input": "Activiteitsinput", "labour": "Arbeid uit activiteit", "machinery": "Machine uit activiteit", "fuel": "Brandstof uit activiteit", "contractor": "Loonwerker", "field_rent": "Pacht", "utilities": "Nutsvoorzieningen", "soil_lab": "Bodem en laboratorium", "miscellaneous": "Overige kosten", "manual_expense": "Uitgave", "crop_sale": "Gewasverkoop", "subsidy": "Subsidie", "contract_income": "Contractinkomsten", "insurance_compensation": "Verzekeringsvergoeding", "other_income": "Overige inkomsten", "unknown": "Onbekende bron" },
+  "financialAttribution": { "direct": "Direct", "allocated": "Toegerekend", "unallocated": "Niet toegerekend", "partially_allocated": "Gedeeltelijk toegerekend", "unknown": "Onbekende toerekening" },
+  "financialVersionState": { "original": "Origineel", "corrected": "Gecorrigeerd", "reversed": "Teruggedraaid", "effective": "Huidige geldige versie", "superseded": "Vervangen", "unknown": "Onbekende status" }
+}

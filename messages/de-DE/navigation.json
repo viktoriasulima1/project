@@ -1,0 +1,20 @@
+{
+  "today": "Heute",
+  "fields": "Schläge",
+  "fieldMap": "Schlagkarte",
+  "scouting": "Monitoring",
+  "reports": "Berichte",
+  "seasonPlan": "Saisonplan",
+  "workOrders": "Arbeitsaufträge",
+  "activities": "Tätigkeiten",
+  "inventory": "Bestand",
+  "finance": "Finanzen",
+  "weather": "Wetter",
+  "compliance": "Compliance",
+  "insights": "Betriebs-Insights",
+  "offlineSync": "Offline & Synchronisierung",
+  "openNav": "Navigation öffnen",
+  "closeNav": "Navigation schließen",
+  "quickLog": "Schnellerfassung",
+  "quickLogAria": "Tätigkeit schnell erfassen"
+}

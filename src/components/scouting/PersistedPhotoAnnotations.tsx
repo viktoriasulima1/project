@@ -1,0 +1,13 @@
+'use client';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import type { PhotoAnnotation } from '@/lib/scouting/photo-policy';
+import { PhotoAnnotationEditor } from './PhotoAnnotationEditor';
+
+type Version={id:string;version:number;annotations:PhotoAnnotation[];correctionReason:string|null;isEffective:boolean;createdAt:string};
+export function PersistedPhotoAnnotations({photoId,src,finalized,versions}:{photoId:string;src:string;finalized:boolean;versions:Version[]}){
+ const router=useRouter(),current=versions.find(version=>version.isEffective)??null;
+ const[editing,setEditing]=useState(false),[saving,setSaving]=useState(false),[message,setMessage]=useState(''),[reason,setReason]=useState('');
+ async function save(annotations:PhotoAnnotation[]){if(finalized&&!reason.trim()){setMessage('A correction reason is required for a finalized photo.');return}setSaving(true);setMessage('Saving annotations…');try{const response=await fetch(`/api/scouting/photos/${photoId}/annotations`,{method:'PUT',headers:{'content-type':'application/json'},body:JSON.stringify({annotations,baseVersionId:current?.id??null,correctionReason:reason})}),body=await response.json();if(!response.ok){setMessage(body.error??'Save failed. Local changes remain in the editor.');return}setMessage('Synchronized. Annotation version saved.');setEditing(false);setReason('');router.refresh()}catch{setMessage('Save failed. Check the connection; local changes remain in the editor.')}finally{setSaving(false)}}
+ return <section><h2>Annotations</h2>{finalized&&<p>This photo is finalized. Saving creates a corrected annotation version.</p>}{editing?<><PhotoAnnotationEditor src={src} annotations={current?.annotations??[]} onSave={save} onCancel={()=>setEditing(false)} saving={saving}/>{finalized&&<label>Correction reason <input value={reason} onChange={event=>setReason(event.target.value)} maxLength={500} required/></label>}</>:<><button type="button" onClick={()=>setEditing(true)}>{current?'Edit annotations':'Add annotations'}</button>{current?.annotations.length?<ul>{current.annotations.map(annotation=><li key={annotation.id}>{annotation.type}: {annotation.label||'unlabelled'}</li>)}</ul>:<p>No annotations.</p>}</>}{message&&<p role="status">{message}</p>}{versions.length>0&&<details><summary>Original and corrected versions ({versions.length})</summary><ol>{versions.map(version=><li key={version.id}>Version {version.version}{version.isEffective?' — Current effective':''}{version.correctionReason?` — ${version.correctionReason}`:''}</li>)}</ol></details>}<p>Original image remains unchanged. Annotation history is never destructively deleted.</p></section>
+}

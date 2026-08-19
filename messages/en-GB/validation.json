@@ -1,0 +1,10 @@
+{
+  "required": {
+    "overallCondition": "Choose the overall crop condition before saving.",
+    "field": "Select a field before saving.",
+    "visitDate": "Enter a valid visit date.",
+    "observation": "Add at least one observation with a description before saving."
+  },
+  "invalid": { "overallCondition": "Choose a valid overall crop condition before saving." },
+  "generic": "Please review the highlighted field before saving."
+}

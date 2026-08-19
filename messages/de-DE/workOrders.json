@@ -1,0 +1,37 @@
+{
+  "title": "Arbeitsaufträge",
+  "subtitle": "Feldarbeiten zuweisen, vorbereiten und ausführen",
+  "tabs": { "today": "Heute", "allWork": "Alle Arbeiten", "seasonPlan": "Saisonplan" },
+  "create": { "title": "Arbeitsauftrag erstellen" },
+  "form": {
+    "fieldAndSeason": "Schlag und Saison",
+    "operation": "Arbeitsgang",
+    "title": "Titel",
+    "priority": "Priorität",
+    "dueDate": "Fälligkeitsdatum",
+    "machine": "Maschine",
+    "employee": "Mitarbeiter",
+    "reserveInventory": "Bestand reservieren",
+    "reservationQuantity": "Reservierungsmenge",
+    "instructions": "Anweisungen",
+    "notAssigned": "Nicht zugewiesen",
+    "none": "Keine",
+    "submit": "Arbeitsauftrag erstellen",
+    "saving": "Speichern…",
+    "created": "Arbeitsauftrag erstellt.",
+    "noFieldSeasons": "Keine aktiven Schlag-Saisons verfügbar."
+  },
+  "readiness": {
+    "title": "Bereitschaftsregeln",
+    "explanation": "Reservierter Bestand wird von anderen Aufträgen ausgeschlossen. Maschinen- und Bedienerzuweisungen werden vor der Feldausführung angezeigt. Der Abschluss erfordert eine tatsächlich abgeschlossene Tätigkeit; das bloße Ändern eines Auftragsstatus erzeugt niemals eine."
+  },
+  "queue": { "title": "Betriebswarteschlange", "today": "Heute", "empty": "Keine passenden Arbeitsaufträge." },
+  "row": {
+    "resourcesReady": "Ressourcen bereit",
+    "blocked": "Blockiert: {blockers}",
+    "due": "fällig {date}",
+    "recordActual": "Tatsächliche Tätigkeit erfassen",
+    "actualRecord": "Tatsächliche Tätigkeitserfassung"
+  },
+  "actions": { "start": "Starten", "block": "Blockieren", "cancel": "Abbrechen" }
+}

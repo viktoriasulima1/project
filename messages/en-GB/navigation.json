@@ -1,0 +1,20 @@
+{
+  "today": "Today",
+  "fields": "Fields",
+  "fieldMap": "Field map",
+  "scouting": "Scouting",
+  "reports": "Reports",
+  "seasonPlan": "Season plan",
+  "workOrders": "Work orders",
+  "activities": "Activities",
+  "inventory": "Inventory",
+  "finance": "Finance",
+  "weather": "Weather",
+  "compliance": "Compliance",
+  "insights": "Farm Insights",
+  "offlineSync": "Offline & Sync",
+  "openNav": "Open navigation",
+  "closeNav": "Close navigation",
+  "quickLog": "Quick Log",
+  "quickLogAria": "Quick log an activity"
+}

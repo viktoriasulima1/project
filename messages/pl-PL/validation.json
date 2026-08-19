@@ -1,0 +1,10 @@
+{
+  "required": {
+    "overallCondition": "Wybierz ogólną kondycję uprawy przed zapisaniem.",
+    "field": "Wybierz pole przed zapisaniem.",
+    "visitDate": "Podaj prawidłową datę wizyty.",
+    "observation": "Dodaj co najmniej jedną obserwację z opisem przed zapisaniem."
+  },
+  "invalid": { "overallCondition": "Wybierz prawidłową ogólną kondycję uprawy przed zapisaniem." },
+  "generic": "Sprawdź zaznaczone pole przed zapisaniem."
+}

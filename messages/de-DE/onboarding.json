@@ -1,0 +1,117 @@
+{
+  "brand": "FarmOS-Einrichtung",
+  "progress": "Schritt {current} von {total} · {label}",
+  "steps": {
+    "welcome": "Willkommen",
+    "farm": "Betriebsdaten",
+    "season": "Aktive Saison",
+    "field": "Erster Schlag",
+    "crop": "Kulturzuweisung",
+    "inventory": "Bestand (optional)",
+    "employee": "Mitarbeiter & Lizenz (optional)",
+    "review": "Überprüfung",
+    "complete": "Fertig"
+  },
+  "buttons": { "continue": "Weiter", "back": "Zurück", "skip": "Vorerst überspringen", "getStarted": "Loslegen" },
+  "welcome": {
+    "title": "Willkommen bei FarmOS",
+    "desc": "Richten wir Ihren Betrieb ein. Sie erstellen Ihren Betrieb, eine aktive Saison, Ihren ersten Schlag und dessen Kultur — der Rest ist optional und kann später ergänzt werden. Die meisten Landwirte sind in unter 5 Minuten fertig."
+  },
+  "farm": {
+    "title": "Ihr Betrieb",
+    "desc": "Grunddaten sowie Standort, falls vorhanden — Koordinaten können Sie später hinzufügen.",
+    "nameLabel": "Betriebsname *",
+    "namePlaceholder": "z. B. Maatschap De Ridder",
+    "locationLabel": "Standort (Ort, Provinz) *",
+    "locationPlaceholder": "z. B. Westervoort, Gelderland",
+    "country": "Land",
+    "totalHectares": "Gesamthektar (optional)",
+    "brpNumber": "BRP-Nummer (optional)",
+    "vatNumber": "USt-Nummer (optional)",
+    "latitude": "Breitengrad (optional)",
+    "longitude": "Längengrad (optional)",
+    "coordsHint": "Keine Koordinaten? Kein Problem — fahren Sie ohne fort. Die Wetter-Seite weist darauf hin und lässt Sie sie später ergänzen."
+  },
+  "season": {
+    "title": "Aktive Saison",
+    "desc": "FarmOS ordnet alles nach Saison. Erstellen Sie die aktuelle.",
+    "year": "Jahr",
+    "startDate": "Startdatum",
+    "endDate": "Enddatum"
+  },
+  "field": {
+    "title": "Ihr erster Schlag",
+    "desc": "Fügen Sie einen Schlag hinzu, um zu beginnen — weitere können Sie jederzeit auf der Schläge-Seite hinzufügen.",
+    "nameLabel": "Schlagname *",
+    "namePlaceholder": "z. B. Keetje Noord",
+    "hectares": "Hektar *",
+    "hectaresPlaceholder": "z. B. 12,5",
+    "soilType": "Bodenart"
+  },
+  "crop": {
+    "title": "Was wächst dort?",
+    "desc": "Weisen Sie dem Schlag für diese Saison eine Kultur zu.",
+    "fieldLabel": "Schlag",
+    "newFieldOption": "Ihr neuer Schlag",
+    "cropLabel": "Kultur"
+  },
+  "inventory": {
+    "title": "Erstes Produkt hinzufügen? (optional)",
+    "desc": "Grunddaten dauern unter 30 Sekunden — erweiterte Felder sind optional.",
+    "productName": "Produktname",
+    "productPlaceholder": "z. B. Amistar Opti",
+    "category": "Kategorie",
+    "cropProtectionGroup": "Pflanzenschutz",
+    "unit": "Einheit",
+    "currentStock": "Aktueller Bestand",
+    "minimumStock": "Mindestbestand (optional)",
+    "advancedShow": "+ Erweiterte Felder (optional)",
+    "advancedHide": "− Erweiterte Felder ausblenden",
+    "purchasePrice": "Einkaufspreis / Einheit",
+    "supplier": "Lieferant",
+    "expiryDate": "Verfallsdatum",
+    "registrationNumber": "Zulassungsnummer",
+    "regPlaceholder": "z. B. CTB 13093N",
+    "activeIngredient": "Wirkstoff",
+    "fracCode": "FRAC-Code (optional)",
+    "hracCode": "HRAC-Code (optional)",
+    "phiDays": "Wartezeit (Tage, optional)",
+    "nitrogen": "Stickstoff %",
+    "phosphorus": "Phosphor %",
+    "potassium": "Kalium %",
+    "addProduct": "Produkt hinzufügen"
+  },
+  "employee": {
+    "title": "Bediener hinzufügen? (optional)",
+    "desc": "Erfassen Sie den Betriebsinhaber, Maschinen- oder Spritzbediener. Zertifikatsdaten werden wie eingegeben für Ihre eigenen Aufzeichnungen gespeichert — nicht gegen ein Register geprüft.",
+    "name": "Name",
+    "namePlaceholder": "z. B. Jan de Vries",
+    "role": "Rolle",
+    "rolePlaceholder": "z. B. Spritzbediener",
+    "hasSpraying": "Hat Spritzlizenz",
+    "certNumber": "Zertifikatsnummer",
+    "certPlaceholder": "z. B. NL-123456",
+    "certExpiry": "Zertifikatsablauf",
+    "addOperator": "Bediener hinzufügen"
+  },
+  "review": {
+    "title": "Überprüfung",
+    "desc": "Alles unten ist bereits gespeichert. Schließen Sie ab, um zu Ihrem Dashboard zu gelangen.",
+    "farm": "Betrieb",
+    "activeSeason": "Aktive Saison",
+    "fields": "Schläge",
+    "cropAssigned": "Kultur zugewiesen",
+    "inventory": "Bestand",
+    "operator": "Bediener",
+    "yes": "Ja",
+    "no": "Nein",
+    "added": "Hinzugefügt",
+    "skipped": "Übersprungen",
+    "finish": "Abschließen"
+  },
+  "complete": {
+    "title": "Alles bereit",
+    "desc": "Ihr Betrieb ist bereit. Sie können jederzeit weitere Schläge, Produkte und Bediener auf ihren Seiten hinzufügen.",
+    "goToDashboard": "Zum Dashboard"
+  }
+}

@@ -1,0 +1,99 @@
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-weight: 500;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background var(--transition), border-color var(--transition), color var(--transition);
+  line-height: 1;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* sizes */
+.sm {
+  font-size: var(--font-sm);
+  padding: 4px 10px;
+  height: 28px;
+}
+
+.md {
+  font-size: var(--font-base);
+  padding: 6px 14px;
+  height: 34px;
+}
+
+/* primary */
+.primary {
+  background: var(--color-green);
+  color: var(--color-on-accent);
+  border-color: var(--color-green);
+}
+
+.primary:hover:not(:disabled) {
+  background: var(--color-green-hover);
+  border-color: var(--color-green-hover);
+}
+
+/* secondary */
+.secondary {
+  background: var(--color-surface-elevated);
+  color: var(--color-text-primary);
+  border-color: var(--color-border-subtle);
+}
+
+.secondary:hover:not(:disabled) {
+  background: var(--color-surface-hover);
+  border-color: var(--color-border-hover);
+}
+
+/* ghost */
+.ghost {
+  background: transparent;
+  color: var(--color-text-secondary);
+  border-color: transparent;
+}
+
+.ghost:hover:not(:disabled) {
+  background: var(--color-surface-elevated);
+  color: var(--color-text-primary);
+}
+
+/* danger */
+.danger {
+  background: var(--color-red-subtle);
+  color: var(--color-red);
+  border-color: var(--color-red-border);
+}
+
+.danger:hover:not(:disabled) {
+  background: rgba(248, 81, 73, 0.2);
+}
+
+/* spinner — always present in the DOM (see Button.tsx), display toggled
+   rather than mounted/unmounted, so a loading-state flip is never a node
+   insertion/removal for React to reconcile. */
+.spinner {
+  display: none;
+  width: 12px;
+  height: 12px;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+.spinnerVisible {
+  display: inline-block;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

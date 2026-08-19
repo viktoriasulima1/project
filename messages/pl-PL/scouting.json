@@ -1,0 +1,37 @@
+{
+  "page": {
+    "title": "Lustracja pól",
+    "subtitle": "Zaobserwowane dowody, fazy rozwojowe i wyjaśnialny priorytet zdrowia upraw",
+    "fieldHealthPriority": "Priorytet zdrowia upraw",
+    "noActiveSeason": { "title": "Brak aktywnego sezonu uprawy", "body": "Zaplanuj uprawę dla pola przed zarejestrowaniem lustracji." },
+    "recentVisits": "Ostatnie wizyty",
+    "noVisits": "Nie zarejestrowano jeszcze żadnych lustracji."
+  },
+  "form": {
+    "fieldAndCrop": "Pole i uprawa",
+    "visitDate": "Data wizyty",
+    "overallCondition": "Ogólna kondycja",
+    "useGps": "Użyj bieżącego GPS",
+    "locating": "Ustalanie lokalizacji…",
+    "retryLocation": "Ponów lokalizację",
+    "growthStageLegend": "Zaobserwowana faza rozwojowa (opcjonalnie)",
+    "growthStageHelp": "Tylko wyraźnie potwierdzona obserwacja staje się aktualna.",
+    "bbchCode": "Kod BBCH",
+    "humanLabel": "Czytelny opis",
+    "observationsLegend": "Obserwacje i zdjęcia prywatne",
+    "category": "Kategoria",
+    "observedIssue": "Zaobserwowany problem",
+    "severity": "Nasilenie",
+    "affectedArea": "Obszar dotknięty (%)",
+    "description": "Opis",
+    "takePhoto": "Zrób zdjęcie lub wybierz istniejące",
+    "pointAnnotation": "Adnotacja punktowa",
+    "annotationPlaceholder": "Brązowe plamy na dolnym liściu",
+    "removeBeforeSave": "Usuń przed zapisaniem",
+    "addObservation": "+ Dodaj obserwację",
+    "visitNotes": "Notatki z wizyty",
+    "privacyNotice": "Zdjęcia są prywatne. Oryginalne obrazy są zachowywane. Sugestie pozostają niepotwierdzone i nigdy nie autoryzują zabiegu; Ctgb pozostaje wiążący.",
+    "reviewSave": "Sprawdź i zapisz wizytę",
+    "saving": "Zapisywanie…"
+  }
+}
