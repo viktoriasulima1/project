@@ -1,0 +1,23 @@
+.page { padding: 24px; display: grid; gap: 20px; }
+.card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 12px; padding: 18px; color: var(--color-text); }
+.card h2 { margin: 0 0 6px; }
+.explanation { color: var(--color-text-secondary); font-size: 13px; margin: 0 0 14px; max-width: 62ch; }
+.table { width: 100%; border-collapse: collapse; }
+.table th, .table td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--color-border); font-size: 13px; vertical-align: top; }
+.table th { color: var(--color-text-secondary); font-weight: 500; }
+.muted { color: var(--color-text-secondary); font-size: 12.5px; }
+.warning { color: #b45309; font-size: 12px; margin-top: 4px; }
+.badge { border-radius: 999px; padding: 3px 10px; font-size: 12px; white-space: nowrap; font-weight: 500; }
+.badgeOk { background: color-mix(in srgb, #15803d 16%, transparent); color: #15803d; }
+.badgeNear { background: color-mix(in srgb, #b45309 16%, transparent); color: #b45309; }
+.badgeOver { background: color-mix(in srgb, #dc2626 16%, transparent); color: #dc2626; }
+.badgeNeutral { background: var(--color-bg); color: var(--color-text-secondary); }
+.form { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); align-items: end; }
+.form label { display: grid; gap: 5px; font-size: 13px; color: var(--color-text-secondary); }
+.form input, .form select { width: 100%; border: 1px solid var(--color-border); border-radius: 7px; padding: 8px; background: var(--color-bg); color: var(--color-text); font-size: 13px; }
+.formActions { display: flex; gap: 8px; grid-column: 1 / -1; }
+.button { border: 0; border-radius: 7px; padding: 8px 12px; background: var(--color-primary); color: white; cursor: pointer; font-size: 13px; }
+.error { color: #dc2626; font-size: 12.5px; grid-column: 1 / -1; }
+.normRow { display: grid; grid-template-columns: 140px 1fr; gap: 16px; align-items: start; padding: 12px 0; border-top: 1px solid var(--color-border); }
+.normRow:first-of-type { border-top: none; }
+.normRow h3 { margin: 0; font-size: 14px; padding-top: 8px; }

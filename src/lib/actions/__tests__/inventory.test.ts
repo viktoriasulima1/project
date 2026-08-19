@@ -4,7 +4,7 @@ vi.mock('next/cache', () => ({ revalidatePath: vi.fn() }));
 vi.mock('@/lib/farm', () => ({ getActiveFarmOrThrow: vi.fn() }));
 
 const { mockDb } = vi.hoisted(() => ({
-  mockDb: { inventoryItem: { create: vi.fn() } },
+  mockDb: { inventoryItem: { create: vi.fn(), findFirst: vi.fn(), update: vi.fn() } },
 }));
 vi.mock('@/lib/db', () => ({ db: mockDb }));
 
@@ -18,7 +18,7 @@ vi.mock('@/integrations/ctgb/client', () => ({ searchCtgbProducts: mockSearchCtg
 vi.mock('@/integrations/ctgb/cache', () => ({ upsertCachedProduct: mockUpsertCachedProduct }));
 vi.mock('@/lib/rate-limit', () => ({ isRateLimited: mockIsRateLimited }));
 
-import { createInventoryItem, searchCtgbProductsAction } from '../inventory';
+import { createInventoryItem, searchCtgbProductsAction, updateInventoryNutrients } from '../inventory';
 import { getActiveFarmOrThrow } from '@/lib/farm';
 
 const FARM = { id: 'farm-1' } as never;
@@ -133,5 +133,38 @@ describe('createInventoryItem', () => {
     const provider = await searchCtgbProductsAction('amistar');
     expect(provider.error?.code).toBe('PROVIDER_UNAVAILABLE');
     expect(JSON.stringify(provider)).not.toContain('upstream private detail');
+  });
+});
+
+describe('updateInventoryNutrients', () => {
+  const ITEM_ID = 'a2661b3b-2333-4cdd-82f1-746b9124312f';
+
+  beforeEach(() => {
+    vi.clearAllMocks();
+    vi.mocked(getActiveFarmOrThrow).mockResolvedValue({ id: 'farm-1' } as never);
+    mockDb.inventoryItem.findFirst.mockResolvedValue({ id: ITEM_ID, farmId: 'farm-1' });
+    mockDb.inventoryItem.update.mockResolvedValue({ id: ITEM_ID });
+  });
+
+  it('sets nitrogen/phosphorus/potassium composition on a product owned by the active farm', async () => {
+    const result = await updateInventoryNutrients({ itemId: ITEM_ID, nitrogenPercent: 20, phosphorusPercent: 10, potassiumPercent: 10 });
+    expect(result).toEqual({ success: true, itemId: ITEM_ID });
+    expect(mockDb.inventoryItem.update).toHaveBeenCalledWith({
+      where: { id: ITEM_ID },
+      data: { nitrogenPercent: 20, phosphorusPercent: 10, potassiumPercent: 10 },
+    });
+  });
+
+  it('refuses to update a product belonging to another farm', async () => {
+    mockDb.inventoryItem.findFirst.mockResolvedValue(null);
+    const result = await updateInventoryNutrients({ itemId: ITEM_ID, nitrogenPercent: 20 });
+    expect(result).toMatchObject({ success: false, error: { code: 'NOT_FOUND' } });
+    expect(mockDb.inventoryItem.update).not.toHaveBeenCalled();
+  });
+
+  it('rejects a percentage outside the valid 0-100 range', async () => {
+    const result = await updateInventoryNutrients({ itemId: ITEM_ID, nitrogenPercent: 150 });
+    expect(result).toMatchObject({ success: false, error: { code: 'INVALID_QUANTITY' } });
+    expect(mockDb.inventoryItem.update).not.toHaveBeenCalled();
   });
 });

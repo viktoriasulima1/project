@@ -1,0 +1,37 @@
+{
+  "title": "Bilans składników odżywczych",
+  "subtitle": "Azot i fosfor zastosowane na działce w tym sezonie, w odniesieniu do własnych norm referencyjnych.",
+  "noSeason": "Brak aktywnego sezonu — rozpocznij sezon, aby zobaczyć bilans składników odżywczych.",
+  "balance": {
+    "title": "Ten sezon, wg działki",
+    "field": "Działka",
+    "crop": "Uprawa",
+    "nitrogen": "Azot (kg/ha)",
+    "phosphate": "Fosfor (kg P₂O₅/ha)",
+    "norm": "Norma",
+    "noNorm": "Brak ustawionej normy",
+    "ofNorm": "{pct}% normy",
+    "incompleteWarning": "{count} produkt(y) użyte na tej działce nie mają zapisanego składu azotu/fosforu — ta suma jest niepełna.",
+    "excludedWarning": "{count} zastosowanie(a) zapisane w jednostce, której nie można zsumować (liczą się tylko kg i L)."
+  },
+  "norms": {
+    "title": "Normy referencyjne",
+    "explanation": "Wprowadź rzeczywistą prawną normę stosowania dla danej uprawy — FarmOS nie wyszukuje tego automatycznie. Zapisz źródło liczby i datę sprawdzenia.",
+    "crop": "Uprawa",
+    "nitrogenNorm": "Norma azotu (kg N/ha)",
+    "phosphateNorm": "Norma fosforu (kg P₂O₅/ha)",
+    "source": "Źródło",
+    "sourcePlaceholder": "np. RVO Tabela 2, 2026",
+    "verifiedAt": "Sprawdzono dnia",
+    "save": "Zapisz"
+  },
+  "composition": {
+    "title": "Nawozy bez zapisanego składu",
+    "explanation": "Te produkty są używane w czynnościach nawożenia, ale nie mają zapisanego procentu azotu/fosforu, więc nie są ujęte w sumach powyżej.",
+    "empty": "Każdy produkt nawozowy użyty w tym sezonie ma zapisany skład.",
+    "nitrogenPercent": "N %",
+    "phosphorusPercent": "P₂O₅ %",
+    "potassiumPercent": "K₂O %",
+    "save": "Zapisz"
+  }
+}

@@ -126,3 +126,74 @@ export async function createInventoryItem(
     return { error: safeCaught('createInventoryItem', error), values };
   }
 }
+
+// ── Nutrient composition (Part of nutrient-balance — Sprint 28) ────────────
+// A narrow, dedicated update limited to N/P/K percentages, not a general
+// inventory-item edit action (createInventoryItem's siblings — quantity,
+// price, expiry — have no update path yet; this only unblocks the nitrogen
+// balance page, which needs a way to fill in composition on a fertiliser
+// product that already exists).
+
+const UpdateInventoryNutrientsSchema = z.object({
+  itemId: z.string().uuid(),
+  nitrogenPercent: z.coerce.number().min(0).max(100).optional(),
+  phosphorusPercent: z.coerce.number().min(0).max(100).optional(),
+  potassiumPercent: z.coerce.number().min(0).max(100).optional(),
+});
+
+export type UpdateInventoryNutrientsResult =
+  | { success: true; itemId: string }
+  | { success: false; error: UserFacingError };
+
+export async function updateInventoryNutrients(
+  input: z.infer<typeof UpdateInventoryNutrientsSchema>,
+): Promise<UpdateInventoryNutrientsResult> {
+  const parsed = UpdateInventoryNutrientsSchema.safeParse(input);
+  if (!parsed.success) {
+    const issue = parsed.error.issues[0];
+    const field = issue?.path.join('.') || undefined;
+    const code = field === 'itemId' ? 'NOT_FOUND' : 'INVALID_QUANTITY';
+    return { success: false, error: userError(code, { field }) };
+  }
+
+  let farm;
+  try {
+    farm = await getActiveFarmOrThrow();
+  } catch {
+    return { success: false, error: userError('AUTH_REQUIRED') };
+  }
+
+  const d = parsed.data;
+  try {
+    const existing = await db.inventoryItem.findFirst({ where: { id: d.itemId, farmId: farm.id } });
+    if (!existing) return { success: false, error: userError('NOT_FOUND') };
+
+    const item = await db.inventoryItem.update({
+      where: { id: d.itemId },
+      data: {
+        nitrogenPercent: d.nitrogenPercent ?? null,
+        phosphorusPercent: d.phosphorusPercent ?? null,
+        potassiumPercent: d.potassiumPercent ?? null,
+      },
+    });
+    revalidatePath('/nutrients');
+    return { success: true, itemId: item.id };
+  } catch (error) {
+    return { success: false, error: safeCaught('updateInventoryNutrients', error) };
+  }
+}
+
+export type UpdateInventoryNutrientsFormState = { error?: UserFacingError; success?: boolean };
+
+export async function updateInventoryNutrientsForm(
+  _previous: UpdateInventoryNutrientsFormState,
+  formData: FormData,
+): Promise<UpdateInventoryNutrientsFormState> {
+  const result = await updateInventoryNutrients({
+    itemId: String(formData.get('itemId') ?? ''),
+    nitrogenPercent: formData.get('nitrogenPercent') ? String(formData.get('nitrogenPercent')) : undefined,
+    phosphorusPercent: formData.get('phosphorusPercent') ? String(formData.get('phosphorusPercent')) : undefined,
+    potassiumPercent: formData.get('potassiumPercent') ? String(formData.get('potassiumPercent')) : undefined,
+  } as unknown as z.infer<typeof UpdateInventoryNutrientsSchema>);
+  return result.success ? { success: true } : { error: result.error };
+}

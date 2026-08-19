@@ -14,6 +14,7 @@ import enFields from '../../messages/en-GB/fields.json';
 import enTeam from '../../messages/en-GB/team.json';
 import enMachines from '../../messages/en-GB/machines.json';
 import enSoil from '../../messages/en-GB/soil.json';
+import enNutrients from '../../messages/en-GB/nutrients.json';
 
 import nlCommon from '../../messages/nl-NL/common.json';
 import nlNavigation from '../../messages/nl-NL/navigation.json';
@@ -27,6 +28,7 @@ import nlFields from '../../messages/nl-NL/fields.json';
 import nlTeam from '../../messages/nl-NL/team.json';
 import nlMachines from '../../messages/nl-NL/machines.json';
 import nlSoil from '../../messages/nl-NL/soil.json';
+import nlNutrients from '../../messages/nl-NL/nutrients.json';
 
 import plCommon from '../../messages/pl-PL/common.json';
 import plNavigation from '../../messages/pl-PL/navigation.json';
@@ -40,6 +42,7 @@ import plFields from '../../messages/pl-PL/fields.json';
 import plTeam from '../../messages/pl-PL/team.json';
 import plMachines from '../../messages/pl-PL/machines.json';
 import plSoil from '../../messages/pl-PL/soil.json';
+import plNutrients from '../../messages/pl-PL/nutrients.json';
 
 import deCommon from '../../messages/de-DE/common.json';
 import deNavigation from '../../messages/de-DE/navigation.json';
@@ -53,19 +56,20 @@ import deFields from '../../messages/de-DE/fields.json';
 import deTeam from '../../messages/de-DE/team.json';
 import deMachines from '../../messages/de-DE/machines.json';
 import deSoil from '../../messages/de-DE/soil.json';
+import deNutrients from '../../messages/de-DE/nutrients.json';
 
 /** Namespaces populated in this stage. New namespaces are added here + the four
  *  message folders; components then request them by name. */
-export const NAMESPACES = ['common', 'navigation', 'validation', 'enums', 'errors', 'workOrders', 'scouting', 'onboarding', 'fields', 'team', 'machines', 'soil'] as const;
+export const NAMESPACES = ['common', 'navigation', 'validation', 'enums', 'errors', 'workOrders', 'scouting', 'onboarding', 'fields', 'team', 'machines', 'soil', 'nutrients'] as const;
 export type Namespace = (typeof NAMESPACES)[number];
 
 type NamespaceMap = Record<Namespace, MessageTree>;
 
 export const CATALOG: Record<Locale, NamespaceMap> = {
-  'en-GB': { common: enCommon, navigation: enNavigation, validation: enValidation, enums: enEnums, errors: enErrors, workOrders: enWorkOrders, scouting: enScouting, onboarding: enOnboarding, fields: enFields, team: enTeam, machines: enMachines, soil: enSoil },
-  'nl-NL': { common: nlCommon, navigation: nlNavigation, validation: nlValidation, enums: nlEnums, errors: nlErrors, workOrders: nlWorkOrders, scouting: nlScouting, onboarding: nlOnboarding, fields: nlFields, team: nlTeam, machines: nlMachines, soil: nlSoil },
-  'pl-PL': { common: plCommon, navigation: plNavigation, validation: plValidation, enums: plEnums, errors: plErrors, workOrders: plWorkOrders, scouting: plScouting, onboarding: plOnboarding, fields: plFields, team: plTeam, machines: plMachines, soil: plSoil },
-  'de-DE': { common: deCommon, navigation: deNavigation, validation: deValidation, enums: deEnums, errors: deErrors, workOrders: deWorkOrders, scouting: deScouting, onboarding: deOnboarding, fields: deFields, team: deTeam, machines: deMachines, soil: deSoil },
+  'en-GB': { common: enCommon, navigation: enNavigation, validation: enValidation, enums: enEnums, errors: enErrors, workOrders: enWorkOrders, scouting: enScouting, onboarding: enOnboarding, fields: enFields, team: enTeam, machines: enMachines, soil: enSoil, nutrients: enNutrients },
+  'nl-NL': { common: nlCommon, navigation: nlNavigation, validation: nlValidation, enums: nlEnums, errors: nlErrors, workOrders: nlWorkOrders, scouting: nlScouting, onboarding: nlOnboarding, fields: nlFields, team: nlTeam, machines: nlMachines, soil: nlSoil, nutrients: nlNutrients },
+  'pl-PL': { common: plCommon, navigation: plNavigation, validation: plValidation, enums: plEnums, errors: plErrors, workOrders: plWorkOrders, scouting: plScouting, onboarding: plOnboarding, fields: plFields, team: plTeam, machines: plMachines, soil: plSoil, nutrients: plNutrients },
+  'de-DE': { common: deCommon, navigation: deNavigation, validation: deValidation, enums: deEnums, errors: deErrors, workOrders: deWorkOrders, scouting: deScouting, onboarding: deOnboarding, fields: deFields, team: deTeam, machines: deMachines, soil: deSoil, nutrients: deNutrients },
 } as unknown as Record<Locale, NamespaceMap>;
 
 export function getNamespace(locale: Locale, namespace: Namespace): MessageTree {

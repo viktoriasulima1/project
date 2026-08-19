@@ -1,0 +1,37 @@
+{
+  "title": "Nährstoffbilanz",
+  "subtitle": "Ausgebrachter Stickstoff und Phosphat je Schlag in dieser Saison, gegen deine eigenen Referenznormen.",
+  "noSeason": "Keine aktive Saison — starte eine, um die Nährstoffbilanz dieser Saison zu sehen.",
+  "balance": {
+    "title": "Diese Saison, je Schlag",
+    "field": "Schlag",
+    "crop": "Kultur",
+    "nitrogen": "Stickstoff (kg/ha)",
+    "phosphate": "Phosphat (kg P₂O₅/ha)",
+    "norm": "Norm",
+    "noNorm": "Keine Norm hinterlegt",
+    "ofNorm": "{pct}% der Norm",
+    "incompleteWarning": "{count} Produkt(e) auf diesem Schlag ohne hinterlegte Stickstoff-/Phosphat-Zusammensetzung — diese Summe ist unvollständig.",
+    "excludedWarning": "{count} Anwendung(en) in einer Einheit erfasst, die nicht summiert werden kann (nur kg und L zählen)."
+  },
+  "norms": {
+    "title": "Referenznormen",
+    "explanation": "Trage die tatsächliche gesetzliche Ausbringungsnorm je Kultur ein — FarmOS ruft dies nicht automatisch ab. Vermerke Quelle und Prüfdatum.",
+    "crop": "Kultur",
+    "nitrogenNorm": "Stickstoffnorm (kg N/ha)",
+    "phosphateNorm": "Phosphatnorm (kg P₂O₅/ha)",
+    "source": "Quelle",
+    "sourcePlaceholder": "z. B. RVO Tabelle 2, 2026",
+    "verifiedAt": "Geprüft am",
+    "save": "Speichern"
+  },
+  "composition": {
+    "title": "Düngemittel ohne Zusammensetzung",
+    "explanation": "Diese Produkte werden bei Düngeaktivitäten verwendet, haben aber keinen hinterlegten Stickstoff-/Phosphatanteil und fehlen daher in der Summe oben.",
+    "empty": "Für jedes in dieser Saison verwendete Düngemittel ist die Zusammensetzung hinterlegt.",
+    "nitrogenPercent": "N %",
+    "phosphorusPercent": "P₂O₅ %",
+    "potassiumPercent": "K₂O %",
+    "save": "Speichern"
+  }
+}

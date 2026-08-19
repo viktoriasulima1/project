@@ -1,0 +1,37 @@
+{
+  "title": "Nutrient balance",
+  "subtitle": "Nitrogen and phosphate applied per field this season, against your own reference norms.",
+  "noSeason": "No active season — start one to see this season's nutrient balance.",
+  "balance": {
+    "title": "This season, per field",
+    "field": "Field",
+    "crop": "Crop",
+    "nitrogen": "Nitrogen (kg/ha)",
+    "phosphate": "Phosphate (kg P₂O₅/ha)",
+    "norm": "Norm",
+    "noNorm": "No norm set",
+    "ofNorm": "{pct}% of norm",
+    "incompleteWarning": "{count} product(s) used on this field have no nitrogen/phosphate composition on file — this total is incomplete.",
+    "excludedWarning": "{count} application(s) recorded in a unit that can't be summed (only kg and L are counted)."
+  },
+  "norms": {
+    "title": "Reference norms",
+    "explanation": "Enter your farm's actual legal usage norm per crop (RVO gebruiksnormen) — FarmOS does not look this up automatically. Record where the number came from and when you checked it, so it's clear how current it is.",
+    "crop": "Crop",
+    "nitrogenNorm": "Nitrogen norm (kg N/ha)",
+    "phosphateNorm": "Phosphate norm (kg P₂O₅/ha)",
+    "source": "Source",
+    "sourcePlaceholder": "e.g. RVO Tabel 2, 2026",
+    "verifiedAt": "Checked on",
+    "save": "Save"
+  },
+  "composition": {
+    "title": "Fertiliser products missing composition",
+    "explanation": "These products are used in fertilise activities but have no nitrogen/phosphate percentage on file, so they're left out of the totals above.",
+    "empty": "Every fertiliser product used this season has its composition on file.",
+    "nitrogenPercent": "N %",
+    "phosphorusPercent": "P₂O₅ %",
+    "potassiumPercent": "K₂O %",
+    "save": "Save"
+  }
+}

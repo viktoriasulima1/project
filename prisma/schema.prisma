@@ -459,6 +459,7 @@ model Farm {
   fields                  Field[]
   inventoryItems          InventoryItem[]
   machines                Machine[]
+  nutrientNormReferences  NutrientNormReference[]
   employees               Employee[]
   complianceItems         ComplianceItem[]
   tasks                   Task[]
@@ -1761,6 +1762,30 @@ model RevenueEntry {
   @@index([farmId, revenueDate])
   @@index([fieldSeasonId])
   @@map("revenue_entries")
+}
+
+// Farmer/advisor-entered reference for the legal nitrogen/phosphate usage
+// norm (RVO "gebruiksnormen") per crop this farm grows. Deliberately NOT
+// hardcoded anywhere in the app: the real table (rvo.nl, Tabel 2) depends on
+// crop, soil type and region and changes most years, and this codebase has
+// no way to fetch or verify it live. `source` + `verifiedAt` exist so the
+// UI can show exactly where a number came from and how stale it might be,
+// instead of presenting an unverified figure as fact.
+model NutrientNormReference {
+  id                   String    @id @default(uuid())
+  farmId               String
+  crop                 CropName
+  nitrogenNormKgPerHa  Decimal?  @db.Decimal(6, 1)
+  phosphateNormKgPerHa Decimal?  @db.Decimal(6, 1)
+  source               String?
+  verifiedAt           DateTime? @db.Date
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+
+  farm Farm @relation(fields: [farmId], references: [id], onDelete: Cascade)
+
+  @@unique([farmId, crop])
+  @@map("nutrient_norm_references")
 }
 
 model SoilAnalysis {

@@ -1,0 +1,37 @@
+{
+  "title": "Nutriëntenbalans",
+  "subtitle": "Toegediende stikstof en fosfaat per perceel dit seizoen, tegen je eigen referentienormen.",
+  "noSeason": "Geen actief seizoen — start er een om de nutriëntenbalans van dit seizoen te zien.",
+  "balance": {
+    "title": "Dit seizoen, per perceel",
+    "field": "Perceel",
+    "crop": "Gewas",
+    "nitrogen": "Stikstof (kg/ha)",
+    "phosphate": "Fosfaat (kg P₂O₅/ha)",
+    "norm": "Norm",
+    "noNorm": "Geen norm ingesteld",
+    "ofNorm": "{pct}% van de norm",
+    "incompleteWarning": "{count} product(en) gebruikt op dit perceel hebben geen stikstof/fosfaat-samenstelling geregistreerd — dit totaal is onvolledig.",
+    "excludedWarning": "{count} toediening(en) geregistreerd in een eenheid die niet kan worden opgeteld (alleen kg en L tellen mee)."
+  },
+  "norms": {
+    "title": "Referentienormen",
+    "explanation": "Vul de werkelijke wettelijke gebruiksnorm per gewas in (RVO gebruiksnormen) — FarmOS zoekt dit niet automatisch op. Registreer waar het getal vandaan komt en wanneer je het hebt gecontroleerd.",
+    "crop": "Gewas",
+    "nitrogenNorm": "Stikstofnorm (kg N/ha)",
+    "phosphateNorm": "Fosfaatnorm (kg P₂O₅/ha)",
+    "source": "Bron",
+    "sourcePlaceholder": "bijv. RVO Tabel 2, 2026",
+    "verifiedAt": "Gecontroleerd op",
+    "save": "Opslaan"
+  },
+  "composition": {
+    "title": "Meststoffen zonder samenstelling",
+    "explanation": "Deze producten worden gebruikt bij bemestingsactiviteiten maar hebben geen stikstof/fosfaatpercentage geregistreerd, dus ontbreken ze in het totaal hierboven.",
+    "empty": "Van elk meststofproduct dat dit seizoen is gebruikt, is de samenstelling geregistreerd.",
+    "nitrogenPercent": "N %",
+    "phosphorusPercent": "P₂O₅ %",
+    "potassiumPercent": "K₂O %",
+    "save": "Opslaan"
+  }
+}
