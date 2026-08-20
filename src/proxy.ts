@@ -19,9 +19,15 @@ const { clerkMiddleware, createRouteMatcher } = clerkEnabled
 const isPublicRoute = clerkEnabled ? createRouteMatcher([...PUBLIC_ROUTES]) : null;
 
 const clerkProxy = clerkEnabled
-  ? clerkMiddleware(async (auth: { protect: () => Promise<void> }, request: NextRequest) => {
+  ? clerkMiddleware(async (auth: { protect: (opts?: { unauthenticatedUrl?: string }) => Promise<void> }, request: NextRequest) => {
       if (isPublicRoute && !isPublicRoute(request)) {
-        await auth.protect();
+        // Without this, protect() falls back to Clerk's hosted Account
+        // Portal (accounts.<this-domain>/sign-in) — a subdomain Clerk
+        // expects to provision via DNS we don't control on a shared
+        // *.vercel.app domain, so it 404s/SSL-errors instead of ever
+        // loading. This app has its own real /sign-in page; send
+        // unauthenticated visitors there instead.
+        await auth.protect({ unauthenticatedUrl: new URL('/sign-in', request.url).toString() });
       }
     })
   : null;

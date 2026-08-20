@@ -93,7 +93,20 @@ export default async function RootLayout({
       // benign but noisy CSP-blocked request. Disabling it keeps the CSP strict
       // (no clerk-telemetry.com allowance) and the console clean. Auth FAPI /
       // api.clerk.com / challenge domains are unaffected.
-      <ClerkProvider afterSignOutUrl="/" localization={clerkLocalization(activeLocale)} telemetry={{ disabled: true }}>
+      //
+      // signInUrl/signUpUrl pin every Clerk component (SignInButton,
+      // UserButton, RedirectToSignIn, ...) to this app's own pages instead
+      // of Clerk's hosted Account Portal (accounts.<domain>) — on a shared
+      // *.vercel.app domain we don't control DNS for, so that subdomain
+      // never resolves. proxy.ts's auth.protect() carries the matching
+      // unauthenticatedUrl override for the same reason.
+      <ClerkProvider
+        afterSignOutUrl="/"
+        signInUrl="/sign-in"
+        signUpUrl="/sign-up"
+        localization={clerkLocalization(activeLocale)}
+        telemetry={{ disabled: true }}
+      >
         <AppDocument lang={lang} dir={dir}>{localized}</AppDocument>
       </ClerkProvider>
     );
