@@ -18,8 +18,12 @@ export function GroundedBriefingCard({ briefing }: { briefing: DailyBriefingResu
   });
   const items = (list: typeof briefing.output.primary, secondary = false) => list.map((item) => {
     const fact = facts.get(item.factId);
+    // 'ready'/'none' mean "nothing urgent" — a badge saying so reads as
+    // noise (or, before this fix, as a literal raw "none" label) next to
+    // every ordinary item. Only 'blocked'/'warning' are worth a pill.
+    const statusLabel = item.blockerStatus === 'blocked' ? 'Blocked' : item.blockerStatus === 'warning' ? 'Needs attention' : null;
     return <article className={styles.item} key={item.factId} data-blocked={item.blockerStatus === 'blocked'}>
-      <div className={styles.itemHeader}><span className={styles.status}>{item.blockerStatus}</span><h3>{item.title}</h3></div>
+      <div className={styles.itemHeader}>{statusLabel && <span className={styles.status} data-severity={item.blockerStatus}>{statusLabel}</span>}<h3>{item.title}</h3></div>
       <p className={styles.action}>{item.recommendedAction}</p>
       <p>{item.whyItMatters}</p>
       {item.financialContext && <p className={styles.finance}>{item.financialContext}</p>}

@@ -16,7 +16,7 @@ const isDev = process.env.NODE_ENV === 'development';
 // Namespaces every route's Client Components may need. Small, shared, and
 // loaded once here rather than shipping the whole catalog (Part 2/8). Route
 // segments can layer additional namespaces via their own LocaleProvider later.
-const GLOBAL_NAMESPACES: readonly Namespace[] = ['common', 'navigation', 'validation', 'enums', 'errors', 'workOrders', 'scouting', 'onboarding', 'fields'];
+const GLOBAL_NAMESPACES: readonly Namespace[] = ['common', 'navigation', 'validation', 'enums', 'errors', 'workOrders', 'scouting', 'onboarding', 'fields', 'team', 'machines', 'soil', 'nutrients'];
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

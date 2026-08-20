@@ -26,7 +26,12 @@ function itemFromFact(fact: GroundedFact, locale: NonNullable<DailyFarmContext['
     factId: fact.id,
     title: display?.title ?? String(fact.value),
     recommendedAction: display?.actionLabel ?? (fact.hardBlocker ? 'Review and resolve this blocker before continuing.' : 'Review the related farm record.'),
-    whyItMatters: display?.explanation ?? `${fact.source} identified this from recorded farm data.`,
+    // fact.source is an internal tag (e.g. "OperationalPriority:<evidence
+    // text>") meant for the "Why / evidence" detail disclosure, not a primary
+    // sentence — interpolating it here used to leak raw internal strings
+    // straight into the dashboard ("OperationalPriority:No current stage
+    // record identified this from recorded farm data.").
+    whyItMatters: display?.explanation ?? 'Based on your recorded farm data.',
     affectedEntity: fact.relatedEntityId,
     deadline: null,
     requiredResources: [],
