@@ -9,8 +9,18 @@ async function tryGetClerkUserId(): Promise<string | null> {
       const mod = await import('@clerk/nextjs/server');
       _clerkAuth = mod.auth as unknown as () => Promise<{ userId: string | null }>;
     }
-    const { userId } = await _clerkAuth();
-    return userId;
+    const result = await _clerkAuth();
+    if (!result.userId) {
+      // Temporary diagnostic (see commit that added this): auth() can
+      // return a clean { userId: null } with no exception at all — e.g. no
+      // session cookie reached this request, or Clerk rejected it silently.
+      // The catch block below only fires on a thrown error, so without this
+      // that case is invisible in the logs too. Logging the full result
+      // (not just userId) surfaces whatever else Clerk attaches (session
+      // status, etc.) that explains why.
+      console.warn('[farm] tryGetClerkUserId: no session', result);
+    }
+    return result.userId;
   } catch (e) {
     // Server-side only — never reaches the client, but without this a real
     // cause (e.g. clerkMiddleware() not having run for this request, a
