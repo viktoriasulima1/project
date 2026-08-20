@@ -19,6 +19,7 @@
   "PHOTO_LOCAL_ONLY": "Deze foto is nog veilig op dit apparaat opgeslagen.",
   "WORK_ORDER_COMPLETED": "De geselecteerde werkorder is al afgerond.",
   "OPERATOR_CERTIFICATE_EXPIRED": "Het spuitcertificaat van de gebruiker is verlopen.",
+  "OPERATOR_NOT_CERTIFIED": "Deze gebruiker staat niet geregistreerd als gecertificeerd voor spuiten.",
   "INVALID_CTGB_USE": "Deze toepassing is niet toegestaan voor het geselecteerde middel.",
   "INSUFFICIENT_STOCK": "Onvoldoende voorraad.",
   "PRODUCT_NOT_APPROVED": "Dit middel is niet toegelaten voor het geselecteerde gewas of gebruik.",

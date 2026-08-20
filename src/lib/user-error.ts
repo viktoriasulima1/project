@@ -51,6 +51,7 @@ const DEFINITIONS: Record<SafeErrorCode, ErrorDefinition> = {
   PHOTO_LOCAL_ONLY: { category: 'offline', retryable: true },
   WORK_ORDER_COMPLETED: { category: 'conflict', retryable: false },
   OPERATOR_CERTIFICATE_EXPIRED: { category: 'validation', retryable: false },
+  OPERATOR_NOT_CERTIFIED: { category: 'validation', retryable: false },
   INVALID_CTGB_USE: { category: 'validation', retryable: false },
   INSUFFICIENT_STOCK: { category: 'conflict', retryable: false },
   PRODUCT_NOT_APPROVED: { category: 'validation', retryable: false },
@@ -113,6 +114,8 @@ export function classifyError(error: unknown, correlationId?: string): UserFacin
   }
   if (error instanceof Error) {
     if (/sign in|required authentication/i.test(error.message)) return userError('AUTH_REQUIRED', { correlationId });
+    if (/certificate expired/i.test(error.message)) return userError('OPERATOR_CERTIFICATE_EXPIRED', { correlationId });
+    if (/not recorded as certified/i.test(error.message)) return userError('OPERATOR_NOT_CERTIFIED', { correlationId });
     if (/insufficient stock|not enough (?:unreserved )?inventory|stock was exhausted/i.test(error.message)) return userError('INSUFFICIENT_STOCK', { correlationId });
     if (/already completed|already has an actual activity/i.test(error.message)) return userError('WORK_ORDER_COMPLETED', { correlationId });
     if (/only a planned activity|completed activities cannot be deleted directly/i.test(error.message)) return userError('INVALID_VALUE', { correlationId });

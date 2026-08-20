@@ -313,6 +313,29 @@ export async function createActivity(
       }
       if (d.fuelUsed && !d.fuelInventoryItemId) throw new Error('Select the fuel inventory item used.');
 
+      // 2c. Spraying licence gate — Work Orders already showed this as a
+      // readiness hint (resolveResourceReadiness), but nothing stopped the
+      // activity itself from being logged with an expired or missing
+      // certificate. operatorName is free text (not a foreign key to
+      // Employee — the form has no dropdown), so this can only match on an
+      // exact, case-insensitive name; an unrecognized name is not blocked,
+      // since there is no record to check it against. That is a real limit
+      // of the current data model, not a loophole introduced here.
+      if (d.type === 'spray' && d.operatorName) {
+        const operator = await tx.employee.findFirst({
+          where: { farmId: farm.id, name: { equals: d.operatorName, mode: 'insensitive' } },
+          select: { hasSpraying: true, certExpiry: true },
+        });
+        if (operator) {
+          if (!operator.hasSpraying) {
+            throw new Error(`${d.operatorName} is not recorded as certified to spray — update their record on the Team page before logging this.`);
+          }
+          if (operator.certExpiry && operator.certExpiry < new Date()) {
+            throw new Error(`${d.operatorName}'s spraying certificate expired on ${operator.certExpiry.toLocaleDateString('en-GB')} — renew it on the Team page before logging this spray.`);
+          }
+        }
+      }
+
       // 3. Create the activity record
       const activity = await tx.activity.create({
         data: {

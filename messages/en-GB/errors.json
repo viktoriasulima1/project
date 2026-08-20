@@ -19,6 +19,7 @@
   "PHOTO_LOCAL_ONLY": "This photo is still stored safely on this device.",
   "WORK_ORDER_COMPLETED": "The selected Work Order is already completed.",
   "OPERATOR_CERTIFICATE_EXPIRED": "The operator's spraying certificate has expired.",
+  "OPERATOR_NOT_CERTIFIED": "This operator is not recorded as certified to spray.",
   "INVALID_CTGB_USE": "This use is not permitted for the selected product.",
   "INSUFFICIENT_STOCK": "Insufficient inventory.",
   "PRODUCT_NOT_APPROVED": "This product is not approved for the selected crop or use.",

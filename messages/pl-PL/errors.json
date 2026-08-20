@@ -19,6 +19,7 @@
   "PHOTO_LOCAL_ONLY": "To zdjęcie jest nadal bezpiecznie zapisane na tym urządzeniu.",
   "WORK_ORDER_COMPLETED": "Wybrane zlecenie jest już zakończone.",
   "OPERATOR_CERTIFICATE_EXPIRED": "Certyfikat opryskiwacza operatora wygasł.",
+  "OPERATOR_NOT_CERTIFIED": "Ten operator nie ma odnotowanych uprawnień do wykonywania oprysków.",
   "INVALID_CTGB_USE": "To zastosowanie nie jest dozwolone dla wybranego produktu.",
   "INSUFFICIENT_STOCK": "Niewystarczający stan magazynowy.",
   "PRODUCT_NOT_APPROVED": "Ten produkt nie jest dopuszczony dla wybranej uprawy lub zastosowania.",

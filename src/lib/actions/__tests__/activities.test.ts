@@ -13,6 +13,7 @@ vi.mock('@/lib/db', () => {
     activity: { create: vi.fn(), update: vi.fn(), findFirst: vi.fn() },
     inventoryItem: { findFirst: vi.fn() },
     machine: { findFirst: vi.fn() },
+    employee: { findFirst: vi.fn() },
     stockMovement: { create: vi.fn() },
     complianceRecord: { create: vi.fn() },
     // Sprint 19 — every mutating path now also writes an audit event.
@@ -41,6 +42,7 @@ const tx = (db as any)._tx as {
   activity:        { create: ReturnType<typeof vi.fn>; update: ReturnType<typeof vi.fn>; findFirst: ReturnType<typeof vi.fn> };
   inventoryItem:   { findFirst: ReturnType<typeof vi.fn> };
   machine:         { findFirst: ReturnType<typeof vi.fn> };
+  employee:        { findFirst: ReturnType<typeof vi.fn> };
   stockMovement:   { create: ReturnType<typeof vi.fn> };
   complianceRecord:{ create: ReturnType<typeof vi.fn> };
   auditEvent:      { create: ReturnType<typeof vi.fn> };
@@ -116,6 +118,7 @@ describe('createActivity', () => {
     // fd()'s defaults now always include a machineId (spray requires one) —
     // default it to a machine owned by this farm.
     tx.machine.findFirst.mockResolvedValue({ farmId: IDS.farm });
+    tx.employee.findFirst.mockResolvedValue(null);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (db.$transaction as any).mockImplementation((cb: (tx: unknown) => unknown) => cb(tx));
   });
@@ -205,6 +208,42 @@ describe('createActivity', () => {
     tx.machine.findFirst.mockResolvedValue(null);
     const result = await createActivity({}, fd());
     expect(result.error?.code).toBe('NOT_FOUND');
+  });
+
+  it('blocks a spray when the matched operator has no spraying certification', async () => {
+    tx.employee.findFirst.mockResolvedValue({ hasSpraying: false, certExpiry: null });
+    const result = await createActivity({}, fd());
+    expect(result.error?.code).toBe('OPERATOR_NOT_CERTIFIED');
+    expect(tx.activity.create).not.toHaveBeenCalled();
+  });
+
+  it('blocks a spray when the matched operator\'s certificate has expired', async () => {
+    tx.employee.findFirst.mockResolvedValue({ hasSpraying: true, certExpiry: new Date('2020-01-01') });
+    const result = await createActivity({}, fd());
+    expect(result.error?.code).toBe('OPERATOR_CERTIFICATE_EXPIRED');
+    expect(tx.activity.create).not.toHaveBeenCalled();
+  });
+
+  it('allows a spray when the matched operator is certified and not expired', async () => {
+    const farFuture = new Date(); farFuture.setFullYear(farFuture.getFullYear() + 1);
+    tx.employee.findFirst.mockResolvedValue({ hasSpraying: true, certExpiry: farFuture });
+    const result = await createActivity({}, fd());
+    expect(result.success).toBe(true);
+  });
+
+  it('does not block a spray when the operator name matches no employee record', async () => {
+    tx.employee.findFirst.mockResolvedValue(null);
+    const result = await createActivity({}, fd({ operatorName: 'Contractor Not In Team' }));
+    expect(result.success).toBe(true);
+  });
+
+  it('does not check operator certification for non-spray activity types', async () => {
+    const result = await createActivity({}, fd({
+      type: 'fertilise', machineId: '', nozzleType: '', waterVolumePerHa: '',
+      productId: IDS.fertProduct, dosePerHa: '50', doseUnit: 'kg',
+    }));
+    expect(tx.employee.findFirst).not.toHaveBeenCalled();
+    expect(result.success).toBe(true);
   });
 
   it('returns error when stock is insufficient (app-level pre-check)', async () => {
