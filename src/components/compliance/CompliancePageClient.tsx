@@ -182,8 +182,8 @@ export function CompliancePageClient({
       {records.length === 0 ? (
         <p style={{ color: 'var(--color-text-muted)', fontSize: 'var(--font-sm)' }}>No records match these filters.</p>
       ) : (
-        <div style={{ border: '1px solid var(--color-border)', borderRadius: 'var(--radius-md)', overflow: 'hidden' }}>
-          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 'var(--font-sm)' }}>
+        <div style={{ border: '1px solid var(--color-border)', borderRadius: 'var(--radius-md)', overflowX: 'auto' }}>
+          <table style={{ width: '100%', minWidth: '720px', borderCollapse: 'collapse', fontSize: 'var(--font-sm)' }}>
             <thead>
               <tr style={{ borderBottom: '1px solid var(--color-border)', textAlign: 'left' }}>
                 <th style={{ padding: 'var(--space-2) var(--space-3)' }}>Date</th>

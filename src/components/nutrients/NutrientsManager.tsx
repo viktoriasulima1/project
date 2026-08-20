@@ -52,38 +52,39 @@ function BalanceTable({ rows }: { rows: BalanceRow[] }) {
   const t = useTranslations('nutrients');
   const locale = useLocale();
   return (
-    <table className={styles.table}>
-      <thead>
-        <tr>
-          <th>{t('balance.field')}</th>
-          <th>{t('balance.crop')}</th>
-          <th>{t('balance.nitrogen')}</th>
-          <th>{t('balance.phosphate')}</th>
-          <th>{t('balance.norm')}</th>
-        </tr>
-      </thead>
-      <tbody>
-        {rows.map((row) => (
-          <tr key={row.fieldId}>
-            <td>{row.fieldName}</td>
-            <td>{getEnumLabel(locale as never, 'crop', row.crop)}</td>
-            <td>
-              {row.nitrogenKg}
-              {row.incompleteProducts.length > 0 && <div className={styles.warning}>{t('balance.incompleteWarning', { count: String(row.incompleteProducts.length) })}</div>}
-              {row.excludedUnitActivities > 0 && <div className={styles.warning}>{t('balance.excludedWarning', { count: String(row.excludedUnitActivities) })}</div>}
-            </td>
-            <td>{row.phosphateKg}</td>
-            <td>{usageBadge(row.nitrogenKg, row.nitrogenNormKgPerHa, t)}</td>
+    <div className={styles.tableWrap}>
+      <table className={styles.table}>
+        <thead>
+          <tr>
+            <th>{t('balance.field')}</th>
+            <th>{t('balance.crop')}</th>
+            <th>{t('balance.nitrogen')}</th>
+            <th>{t('balance.phosphate')}</th>
+            <th>{t('balance.norm')}</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {rows.map((row) => (
+            <tr key={row.fieldId}>
+              <td>{row.fieldName}</td>
+              <td>{getEnumLabel(locale as never, 'crop', row.crop)}</td>
+              <td>
+                {row.nitrogenKg}
+                {row.incompleteProducts.length > 0 && <div className={styles.warning}>{t('balance.incompleteWarning', { count: String(row.incompleteProducts.length) })}</div>}
+                {row.excludedUnitActivities > 0 && <div className={styles.warning}>{t('balance.excludedWarning', { count: String(row.excludedUnitActivities) })}</div>}
+              </td>
+              <td>{row.phosphateKg}</td>
+              <td>{usageBadge(row.nitrogenKg, row.nitrogenNormKgPerHa, t)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 }
 
 function NormForm({ norm }: { norm: NormRow }) {
   const t = useTranslations('nutrients');
-  const locale = useLocale();
   const [state, action, pending] = useActionState(upsertNutrientNormReferenceForm, normInitial);
   return (
     <form action={action} className={styles.form}>
@@ -96,7 +97,6 @@ function NormForm({ norm }: { norm: NormRow }) {
         <button type="submit" className={styles.button} disabled={pending}>{t('norms.save')}</button>
       </div>
       {state.error && <ErrorMessage error={state.error} />}
-      {!state.error && <span className={styles.muted}>{getEnumLabel(locale as never, 'crop', norm.crop)}</span>}
     </form>
   );
 }
@@ -121,6 +121,7 @@ function CompositionForm({ product }: { product: IncompleteProduct }) {
 
 export function NutrientsManager({ balance, norms, incompleteProducts }: { balance: BalanceRow[]; norms: NormRow[]; incompleteProducts: IncompleteProduct[] }) {
   const t = useTranslations('nutrients');
+  const locale = useLocale();
 
   return (
     <div className={styles.page}>
@@ -135,7 +136,7 @@ export function NutrientsManager({ balance, norms, incompleteProducts }: { balan
           <p className={styles.explanation}>{t('norms.explanation')}</p>
           {norms.map((norm) => (
             <div className={styles.normRow} key={norm.crop}>
-              <h3>{norm.crop}</h3>
+              <h3>{getEnumLabel(locale as never, 'crop', norm.crop)}</h3>
               <NormForm norm={norm} />
             </div>
           ))}
