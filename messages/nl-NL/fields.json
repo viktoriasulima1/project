@@ -1,18 +1,116 @@
 {
   "title": "Percelen",
-  "sprayWindow":{"status":{"blocked":"Geblokkeerd","poor":"Slecht","marginal":"Matig","good":"Goed","excellent":"Uitstekend"},"confidence":{"low":"Lage betrouwbaarheid","medium":"Gemiddelde betrouwbaarheid","high":"Hoge betrouwbaarheid"},"summary":{"BLOCKED":"Geblokkeerd: {primary}","CONDITIONS":"Omstandigheden: {primary}. Beste venster {start}–{end}.","NO_FORECAST_DATA":"Geen weersgegevens beschikbaar."},"genericProfile":"Generiek indicatief profiel","unknown":"Voorwaarde niet beschikbaar","disclaimer":{"INDICATIVE_ONLY":"Alleen indicatief. Controleer het toegelaten etiket en de wettelijke eisen."},"signals":{"WIND_SPEED_EXCEEDS_LIMIT":"Wind {observedKmh} km/u overschrijdt {limitKmh} km/u.","WIND_GUST_EXCEEDS_LIMIT":"Windstoten {observedKmh} km/u overschrijden {limitKmh} km/u.","WIND_GUST_UNAVAILABLE":"Windstootgegevens ontbreken.","TEMPERATURE_BELOW_MINIMUM":"Temperatuur {observedC} °C ligt onder {limitC} °C.","TEMPERATURE_ABOVE_MAXIMUM":"Temperatuur {observedC} °C ligt boven {limitC} °C.","HUMIDITY_EXCEEDS_PRODUCT_LIMIT":"Luchtvochtigheid {observedPercent}% overschrijdt {limitPercent}%.","RAINFAST_HORIZON_INCOMPLETE":"Regenvastverwachting dekt {availableHours}/{requiredHours} uur.","RAINFAST_PRECIPITATION_EXCEEDS_LIMIT":"Regen {observedMm} mm overschrijdt {limitMm} mm in {periodHours} u.","PRODUCT_NOT_SELECTED":"Geen geverifieerd middel geselecteerd.","GENERIC_PROFILE_USED":"Generieke drempels gebruikt; controleer etiket.","PRODUCT_REGISTRATION_INVALID":"Toelating voor {productName} is ongeldig.","OPERATOR_CERTIFICATION_INVALID":"Spuitlicentie ontbreekt of is verlopen.","OPERATOR_CONTEXT_MISSING":"Spuitlicentie niet opgegeven.","OPERATOR_UNVERIFIED":"Spuitlicentie niet geverifieerd.","INSUFFICIENT_STOCK":"{requiredQuantity} {unit} nodig; {availableStock} {unit} beschikbaar.","INVENTORY_CONTEXT_MISSING":"Voorraadcontext niet opgegeven.","INVENTORY_UNVERIFIED":"Voorraad niet geverifieerd.","CROP_INELIGIBLE":"Gewas {crop} is niet toegelaten.","BBCH_OUTSIDE_RANGE":"BBCH {stage} valt buiten {min}–{max}.","CROP_BBCH_CONTEXT_MISSING":"Gewas/BBCH niet opgegeven.","CROP_BBCH_UNVERIFIED":"Gewas/BBCH niet geverifieerd.","DRIFT_REDUCTION_NOZZLE_REQUIRED":"Vereiste driftreducerende dop niet bevestigd.","DRIFT_CONTEXT_MISSING":"Machine/dop niet opgegeven.","DRIFT_REQUIREMENT_UNVERIFIED":"Driftreductie-eis niet geverifieerd.","LOW_WIND":"Weinig wind ({observedKmh} km/u).","WIND_APPROACHING_LIMIT":"Wind nadert limiet ({observedKmh}/{limitKmh} km/u).","NO_RAIN_FORECAST_THIS_HOUR":"Dit uur geen regen verwacht.","LOW_HUMIDITY":"Lage luchtvochtigheid ({observedPercent}%).","HUMIDITY_ELEVATED":"Hoge luchtvochtigheid ({observedPercent}%).","WIDE_DEW_POINT_MARGIN":"Ruime dauwpuntmarge.","NARROW_DEW_POINT_MARGIN":"Kleine dauwpuntmarge.","LEAF_WETNESS_ELEVATED":"Verhoogd bladnat."}},
+  "sprayWindow": {
+    "status": {
+      "blocked": "Geblokkeerd",
+      "poor": "Slecht",
+      "marginal": "Matig",
+      "good": "Goed",
+      "excellent": "Uitstekend"
+    },
+    "confidence": {
+      "low": "Lage betrouwbaarheid",
+      "medium": "Gemiddelde betrouwbaarheid",
+      "high": "Hoge betrouwbaarheid"
+    },
+    "summary": {
+      "BLOCKED": "Geblokkeerd: {primary}",
+      "CONDITIONS": "Omstandigheden: {primary}. Beste venster {start}–{end}.",
+      "NO_FORECAST_DATA": "Geen weersgegevens beschikbaar."
+    },
+    "genericProfile": "Generiek indicatief profiel",
+    "unknown": "Voorwaarde niet beschikbaar",
+    "disclaimer": {
+      "INDICATIVE_ONLY": "Alleen indicatief. Controleer het toegelaten etiket en de wettelijke eisen."
+    },
+    "signals": {
+      "WIND_SPEED_EXCEEDS_LIMIT": "Wind {observedKmh} km/u overschrijdt {limitKmh} km/u.",
+      "WIND_GUST_EXCEEDS_LIMIT": "Windstoten {observedKmh} km/u overschrijden {limitKmh} km/u.",
+      "WIND_GUST_UNAVAILABLE": "Windstootgegevens ontbreken.",
+      "TEMPERATURE_BELOW_MINIMUM": "Temperatuur {observedC} °C ligt onder {limitC} °C.",
+      "TEMPERATURE_ABOVE_MAXIMUM": "Temperatuur {observedC} °C ligt boven {limitC} °C.",
+      "HUMIDITY_EXCEEDS_PRODUCT_LIMIT": "Luchtvochtigheid {observedPercent}% overschrijdt {limitPercent}%.",
+      "RAINFAST_HORIZON_INCOMPLETE": "Regenvastverwachting dekt {availableHours}/{requiredHours} uur.",
+      "RAINFAST_PRECIPITATION_EXCEEDS_LIMIT": "Regen {observedMm} mm overschrijdt {limitMm} mm in {periodHours} u.",
+      "PRODUCT_NOT_SELECTED": "Geen geverifieerd middel geselecteerd.",
+      "GENERIC_PROFILE_USED": "Generieke drempels gebruikt; controleer etiket.",
+      "PRODUCT_REGISTRATION_INVALID": "Toelating voor {productName} is ongeldig.",
+      "OPERATOR_CERTIFICATION_INVALID": "Spuitlicentie ontbreekt of is verlopen.",
+      "OPERATOR_CONTEXT_MISSING": "Spuitlicentie niet opgegeven.",
+      "OPERATOR_UNVERIFIED": "Spuitlicentie niet geverifieerd.",
+      "INSUFFICIENT_STOCK": "{requiredQuantity} {unit} nodig; {availableStock} {unit} beschikbaar.",
+      "INVENTORY_CONTEXT_MISSING": "Voorraadcontext niet opgegeven.",
+      "INVENTORY_UNVERIFIED": "Voorraad niet geverifieerd.",
+      "CROP_INELIGIBLE": "Gewas {crop} is niet toegelaten.",
+      "BBCH_OUTSIDE_RANGE": "BBCH {stage} valt buiten {min}–{max}.",
+      "CROP_BBCH_CONTEXT_MISSING": "Gewas/BBCH niet opgegeven.",
+      "CROP_BBCH_UNVERIFIED": "Gewas/BBCH niet geverifieerd.",
+      "DRIFT_REDUCTION_NOZZLE_REQUIRED": "Vereiste driftreducerende dop niet bevestigd.",
+      "DRIFT_CONTEXT_MISSING": "Machine/dop niet opgegeven.",
+      "DRIFT_REQUIREMENT_UNVERIFIED": "Driftreductie-eis niet geverifieerd.",
+      "LOW_WIND": "Weinig wind ({observedKmh} km/u).",
+      "WIND_APPROACHING_LIMIT": "Wind nadert limiet ({observedKmh}/{limitKmh} km/u).",
+      "NO_RAIN_FORECAST_THIS_HOUR": "Dit uur geen regen verwacht.",
+      "LOW_HUMIDITY": "Lage luchtvochtigheid ({observedPercent}%).",
+      "HUMIDITY_ELEVATED": "Hoge luchtvochtigheid ({observedPercent}%).",
+      "WIDE_DEW_POINT_MARGIN": "Ruime dauwpuntmarge.",
+      "NARROW_DEW_POINT_MARGIN": "Kleine dauwpuntmarge.",
+      "LEAF_WETNESS_ELEVATED": "Verhoogd bladnat."
+    }
+  },
   "weatherRisk": {
-    "status": { "low": "Laag weerrisico", "moderate": "Matig weerrisico", "high": "Hoog weerrisico", "unavailable": "Weerrisico niet beschikbaar" },
-    "reasons": { "BELOW_RISK_THRESHOLDS": "De gemeten omstandigheden blijven onder de risicodrempels van deze regelset.", "SOME_FAVOURABLE_CONDITIONS": "Sommige gemeten omstandigheden kunnen het risico voor de gewasgezondheid verhogen.", "FAVOURABLE_WARM_HUMID_WET_CONDITIONS": "Warme, vochtige en natte gemeten omstandigheden kunnen het risico voor de gewasgezondheid verhogen.", "INSUFFICIENT_MEASURED_INPUTS": "Het weerrisico kan niet worden berekend omdat {count} verplichte invoerwaarde(n) ontbreken.", "UNKNOWN": "Het weerrisico is niet beschikbaar en mag niet als geen risico worden geïnterpreteerd." },
-    "actions": { "CONTINUE_NORMAL_SCOUTING": "Ga door met de normale gewascontrole", "INSPECT_FIELD": "Inspecteer het perceel en leg zichtbare waarnemingen vast", "SCOUT_MANUALLY": "Controleer het perceel handmatig" },
-    "confidence": { "medium": "Gemiddelde betrouwbaarheid", "low": "Lage betrouwbaarheid" },
-    "freshness": { "current": "Actuele gemeten invoer", "unavailable": "Actualiteit van invoer onbekend" },
-    "evidence": { "cropStage": "{crop}, groeistadium {stage}", "temperature": "Gemeten temperatuur: {value} °C", "humidity": "Gemeten luchtvochtigheid: {value}%", "rain": "Gemeten neerslag: {value} mm", "missing": "{count} verplichte weerinvoerwaarde(n) ontbreken" },
+    "status": {
+      "low": "Laag weerrisico",
+      "moderate": "Matig weerrisico",
+      "high": "Hoog weerrisico",
+      "unavailable": "Weerrisico niet beschikbaar"
+    },
+    "reasons": {
+      "BELOW_RISK_THRESHOLDS": "De gemeten omstandigheden blijven onder de risicodrempels van deze regelset.",
+      "SOME_FAVOURABLE_CONDITIONS": "Sommige gemeten omstandigheden kunnen het risico voor de gewasgezondheid verhogen.",
+      "FAVOURABLE_WARM_HUMID_WET_CONDITIONS": "Warme, vochtige en natte gemeten omstandigheden kunnen het risico voor de gewasgezondheid verhogen.",
+      "INSUFFICIENT_MEASURED_INPUTS": "Het weerrisico kan niet worden berekend omdat {count} verplichte invoerwaarde(n) ontbreken.",
+      "UNKNOWN": "Het weerrisico is niet beschikbaar en mag niet als geen risico worden geïnterpreteerd."
+    },
+    "actions": {
+      "CONTINUE_NORMAL_SCOUTING": "Ga door met de normale gewascontrole",
+      "INSPECT_FIELD": "Inspecteer het perceel en leg zichtbare waarnemingen vast",
+      "SCOUT_MANUALLY": "Controleer het perceel handmatig"
+    },
+    "confidence": {
+      "medium": "Gemiddelde betrouwbaarheid",
+      "low": "Lage betrouwbaarheid"
+    },
+    "freshness": {
+      "current": "Actuele gemeten invoer",
+      "unavailable": "Actualiteit van invoer onbekend"
+    },
+    "evidence": {
+      "cropStage": "{crop}, groeistadium {stage}",
+      "temperature": "Gemeten temperatuur: {value} °C",
+      "humidity": "Gemeten luchtvochtigheid: {value}%",
+      "rain": "Gemeten neerslag: {value} mm",
+      "missing": "{count} verplichte weerinvoerwaarde(n) ontbreken"
+    },
     "disclaimer": "Het weerrisico is een indicator, geen diagnose. Controleer het perceel voordat u handelt."
   },
-  "summary": { "totalFields": "Totaal percelen", "totalArea": "Totale oppervlakte", "healthy": "Gezond", "needAttention": "Aandacht nodig" },
-  "table": { "name": "Naam", "area": "Oppervlakte", "soil": "Grond", "status": "Status", "ndvi": "NDVI" },
-  "empty": { "title": "Nog geen percelen", "desc": "Voeg uw eerste perceel toe om gewassen te plannen en werk vast te leggen." },
+  "summary": {
+    "totalFields": "Totaal percelen",
+    "totalArea": "Totale oppervlakte",
+    "healthy": "Gezond",
+    "needAttention": "Aandacht nodig"
+  },
+  "table": {
+    "name": "Naam",
+    "area": "Oppervlakte",
+    "soil": "Grond",
+    "status": "Status",
+    "ndvi": "NDVI"
+  },
+  "empty": {
+    "title": "Nog geen percelen",
+    "desc": "Voeg uw eerste perceel toe om gewassen te plannen en werk vast te leggen."
+  },
   "addField": "+ Perceel toevoegen",
   "importBrp": "Importeren uit BRP",
   "archive": "Archiveren",
@@ -37,7 +135,13 @@
     "lastSyncedAt": "Gebaseerd op gegevens die voor het laatst zijn gesynchroniseerd op {date}."
   },
   "health": {
-    "status": { "attention_required": "Aandacht nodig", "inspect_soon": "Binnenkort inspecteren", "monitoring": "Monitoren", "no_current_issue": "Geen actueel probleem", "insufficient_data": "Onvoldoende gegevens" },
+    "status": {
+      "attention_required": "Aandacht nodig",
+      "inspect_soon": "Binnenkort inspecteren",
+      "monitoring": "Monitoren",
+      "no_current_issue": "Geen actueel probleem",
+      "insufficient_data": "Onvoldoende gegevens"
+    },
     "reasons": {
       "NO_ACTIVE_CROP_SEASON": "Geen actief teeltseizoen.",
       "RECENT_SEVERE_OBSERVATION": "{count} ernstige waarneming(en) vereisen beoordeling.",
@@ -69,11 +173,47 @@
   },
   "economics": {
     "completeness": {
-      "title": "Volledigheid van gegevens", "summary": "{percentage}% compleet", "recordedLabel": "Geregistreerd", "missingLabel": "Ontbreekt", "unknown": "Details zijn niet beschikbaar.",
-      "status": {"insufficient_data":"Niet beschikbaar","cost_tracking_active":"Kostenregistratie actief","partial_profitability":"Gedeeltelijke rentabiliteit","profitability_ready":"Compleet"},
-      "recorded": {"PRODUCT_PRICES_RECORDED":"Productprijzen","LABOUR_RATES_RECORDED":"Arbeidstarieven","MACHINE_RATES_RECORDED":"Machinetarieven","CONTRACTOR_COSTS_RECORDED":"Loonwerkkosten","HARVEST_RECORDED":"Oogst","REVENUE_RECORDED":"Opbrengsten","OVERHEAD_CHOICE_RECORDED":"Keuze voor overhead","UNITS_COMPATIBLE":"Compatibele eenheden"},
-      "reasons": {"MISSING_PRODUCT_PRICE":"Inkoopprijs ontbreekt","MISSING_LABOUR_RATE":"Arbeidstarief ontbreekt","MISSING_MACHINE_RATE":"Machinetarief ontbreekt","MISSING_CONTRACTOR_COST":"Loonwerkkosten ontbreken","MISSING_HARVEST":"Oogstopbrengst ontbreekt","MISSING_REVENUE":"Gewasopbrengsten ontbreken","MISSING_OVERHEAD_CHOICE":"Keuze voor overheadtoewijzing ontbreekt","INCOMPATIBLE_UNITS":"Eenheden voor opbrengst en omzet zijn niet compatibel"},
-      "actions": {"ADD_PURCHASE_PRICE":"Inkoopprijs toevoegen","ADD_LABOUR_RATE":"Arbeidstarief toevoegen","ADD_MACHINE_RATE":"Machinetarief toevoegen","ADD_CONTRACTOR_COST":"Loonwerkkosten toevoegen","ADD_HARVEST":"Oogst registreren","ADD_REVENUE":"Opbrengst registreren","RECORD_OVERHEAD_CHOICE":"Overheadkeuze registreren","ALIGN_UNITS":"Eenheden afstemmen"}
+      "title": "Volledigheid van gegevens",
+      "summary": "{percentage}% compleet",
+      "recordedLabel": "Geregistreerd",
+      "missingLabel": "Ontbreekt",
+      "unknown": "Details zijn niet beschikbaar.",
+      "status": {
+        "insufficient_data": "Niet beschikbaar",
+        "cost_tracking_active": "Kostenregistratie actief",
+        "partial_profitability": "Gedeeltelijke rentabiliteit",
+        "profitability_ready": "Compleet"
+      },
+      "recorded": {
+        "PRODUCT_PRICES_RECORDED": "Productprijzen",
+        "LABOUR_RATES_RECORDED": "Arbeidstarieven",
+        "MACHINE_RATES_RECORDED": "Machinetarieven",
+        "CONTRACTOR_COSTS_RECORDED": "Loonwerkkosten",
+        "HARVEST_RECORDED": "Oogst",
+        "REVENUE_RECORDED": "Opbrengsten",
+        "OVERHEAD_CHOICE_RECORDED": "Keuze voor overhead",
+        "UNITS_COMPATIBLE": "Compatibele eenheden"
+      },
+      "reasons": {
+        "MISSING_PRODUCT_PRICE": "Inkoopprijs ontbreekt",
+        "MISSING_LABOUR_RATE": "Arbeidstarief ontbreekt",
+        "MISSING_MACHINE_RATE": "Machinetarief ontbreekt",
+        "MISSING_CONTRACTOR_COST": "Loonwerkkosten ontbreken",
+        "MISSING_HARVEST": "Oogstopbrengst ontbreekt",
+        "MISSING_REVENUE": "Gewasopbrengsten ontbreken",
+        "MISSING_OVERHEAD_CHOICE": "Keuze voor overheadtoewijzing ontbreekt",
+        "INCOMPATIBLE_UNITS": "Eenheden voor opbrengst en omzet zijn niet compatibel"
+      },
+      "actions": {
+        "ADD_PURCHASE_PRICE": "Inkoopprijs toevoegen",
+        "ADD_LABOUR_RATE": "Arbeidstarief toevoegen",
+        "ADD_MACHINE_RATE": "Machinetarief toevoegen",
+        "ADD_CONTRACTOR_COST": "Loonwerkkosten toevoegen",
+        "ADD_HARVEST": "Oogst registreren",
+        "ADD_REVENUE": "Opbrengst registreren",
+        "RECORD_OVERHEAD_CHOICE": "Overheadkeuze registreren",
+        "ALIGN_UNITS": "Eenheden afstemmen"
+      }
     },
     "breakEven": {
       "title": "Break-even",
@@ -99,19 +239,214 @@
         "REVIEW_ALLOCATIONS": "Toewijzing bekijken"
       }
     },
-    "grossMargin": { "title":"Brutomarge", "notRecorded":"Niet geregistreerd", "labels":{"revenue":"Geregistreerde opbrengsten","totalCost":"Totale geregistreerde kosten","margin":"Brutomarge","perHa":"Marge per hectare"}, "status":{"positive":"Positieve marge","zero":"Nulmarge","negative":"Negatieve marge","unavailable":"Brutomarge niet beschikbaar","partial":"Brutomarge onvolledig"}, "reasons":{"POSITIVE_MARGIN":"De geregistreerde opbrengsten zijn hoger dan de opgenomen operationele kosten. Dit is geen nettowinst.","ZERO_MARGIN":"De geregistreerde opbrengsten zijn gelijk aan de opgenomen operationele kosten.","NEGATIVE_MARGIN":"De opgenomen operationele kosten zijn hoger dan de geregistreerde opbrengsten.","MISSING_REVENUE":"Voor dit perceel zijn geen opbrengsten geregistreerd.","MISSING_COST":"Er zijn geen volledige perceelkosten geregistreerd.","INCOMPLETE_COST":"Sommige kosten hebben geen prijs, waardoor de brutomarge niet betrouwbaar kan worden berekend."}, "actions":{"ADD_REVENUE":"Opbrengst toevoegen","ADD_EXPENSE":"Onkosten toevoegen","REVIEW_UNPRICED_COSTS":"Ontbrekende prijzen bekijken","NO_ACTION_REQUIRED":"Kostenverdeling bekijken"} },
-    "costCategories": { "title":"Kostenverdeling", "empty":"Voor dit perceel zijn nog geen kosten geregistreerd.", "caption":"Kosten per categorie. Percentages zijn het aandeel van de geregistreerde kosten.", "category":"Categorie", "amount":"Bedrag", "share":"Aandeel geregistreerde kosten", "records":"Records", "attribution":"Toerekening", "completeness":"Compleet", "directAndAllocated":"Direct en toegerekend", "complete":"Ja", "partial":"Gedeeltelijk", "note":"Percentages zijn gebaseerd op geregistreerde kosten. Onvolledige categorieën tellen pas mee wanneer ze geprijsd zijn." },
-    "attribution": { "title":"Direct versus toegerekend", "direct":"Direct op dit perceel geregistreerd", "allocated":"Aan dit perceel toegerekend", "total":"Totale geregistreerde perceelkosten", "reversed":"Uitgesloten (teruggedraaid)", "unallocated":"Niet-toegerekende bedrijfskosten (niet in de marge van dit perceel)", "note":"Niet-toegerekende bedrijfskosten worden nooit stilzwijgend in de perceelmarge opgenomen." },
-    "signals":{"title":"Economische beslissingen","calculated":"Berekend {date}","recordedCosts":"Geregistreerde kosten","recordedRevenue":"Geregistreerde opbrengst","grossMargin":"Brutomarge","completeness":"Volledigheid","notRecorded":"Niet geregistreerd","unit":"eenheid","noSeason":"Nog geen economie voor het actieve seizoen.","none":"Geen economisch signaal vraagt nu aandacht.","more":"Bekijk alle {count} economische signalen","incomplete":"Kostenregistratie actief; winstgevendheid onvolledig.","ruleBased":"Regelgebaseerd · betrouwbaarheid {confidence}","field":"Perceel: {field}","severity":{"critical":"Kritiek","high":"Hoog","medium":"Middel","low":"Laag"},"actions":{"OPEN_FIELD_DETAIL":"Bekijk perceel","OPEN_FINANCE":"Open Financiën","ADD_PURCHASE_PRICE":"Voeg ontbrekende prijs toe","ADD_LABOUR_RATE":"Stel arbeidsuurtarief in","ADD_MACHINE_RATE":"Stel machinetarief in","ALLOCATE_COST":"Kosten toewijzen","ALLOCATE_REVENUE":"Opbrengst toewijzen","ADD_HARVEST":"Oogst registreren","ADD_REVENUE":"Opbrengst registreren","REVIEW_BREAK_EVEN":"Bekijk perceel","REVIEW_COMPLETENESS":"Controleer volledigheid"},"types":{"BUDGET_OVER_LIMIT":{"title":"{count} perce(e)l(en) boven kostenplan","explanation":"{field}: {amount} ({percent}%) boven plan.","evidence":"Geregistreerde kosten tegenover perceelbudget."},"MISSING_PURCHASE_PRICE":{"title":"{count} product(en) missen een inkoopprijs","explanation":"{products} hebben geen prijs; ontbrekende kosten zijn niet nul.","evidence":"Inkoopprijsdekking van productregels."},"MISSING_LABOUR_RATE":{"title":"Arbeidsuurtarief ontbreekt op {count} perce(e)l(en)","explanation":"{field} bevat werk zonder geldig tarief.","evidence":"Canonieke volledigheid: arbeidsuurtarief ontbreekt."},"MISSING_MACHINE_RATE":{"title":"Machinetarief ontbreekt op {count} perce(e)l(en)","explanation":"{field} bevat machinewerk zonder geldig tarief.","evidence":"Canonieke volledigheid: machinetarief ontbreekt."},"UNALLOCATED_COST":{"title":"{amount} kosten niet toegewezen","explanation":"Uitgesloten van perceelmarges tot toewijzing.","evidence":"Geregistreerde niet-toegewezen bedrijfskosten."},"UNALLOCATED_REVENUE":{"title":"{amount} opbrengst niet toegewezen","explanation":"Uitgesloten van perceelmarges tot toewijzing.","evidence":"Geregistreerde niet-toegewezen opbrengst."},"BREAK_EVEN_ABOVE_SALE_PRICE":{"title":"Break-even hoger dan verkoopprijs op {field}","explanation":"{breakEven} per {unit} tegenover {salePrice}.","evidence":"Canonieke break-even tegenover verkoopprijs."},"INCOMPLETE_PROFITABILITY":{"title":"{count} perce(e)l(en) onvolledig winstgevend","explanation":"{field} is {completeness}% volledig; ontbrekend is niet nul.","evidence":"Canoniek resultaat Financiële Volledigheid."},"MARGIN_ON_INCOMPLETE_DATA":{"title":"{count} marge(s) op onvolledige data","explanation":"{field}: voorlopige {amount} bij {completeness}% volledigheid.","evidence":"Canonieke brutomarge en volledigheid."},"MISSING_HARVEST":{"title":"{count} perce(e)l(en) met kosten zonder oogst","explanation":"{field} kan nog geen break-even tonen.","evidence":"Geen oogst geregistreerd."},"MISSING_REVENUE":{"title":"{count} geoogste perce(e)l(en) zonder opbrengst","explanation":"{field} heeft geen ontvangen opbrengst; marge niet beschikbaar.","evidence":"Geen ontvangen opbrengst geregistreerd."},"STRONGEST_COMPLETE_MARGIN":{"title":"{field} heeft de sterkste volledige marge","explanation":"{field} ({crop}): {amount} per hectare.","evidence":"Hoogste canonieke marge per hectare onder volledige percelen."}}},
+    "grossMargin": {
+      "title": "Brutomarge",
+      "notRecorded": "Niet geregistreerd",
+      "labels": {
+        "revenue": "Geregistreerde opbrengsten",
+        "totalCost": "Totale geregistreerde kosten",
+        "margin": "Brutomarge",
+        "perHa": "Marge per hectare"
+      },
+      "status": {
+        "positive": "Positieve marge",
+        "zero": "Nulmarge",
+        "negative": "Negatieve marge",
+        "unavailable": "Brutomarge niet beschikbaar",
+        "partial": "Brutomarge onvolledig"
+      },
+      "reasons": {
+        "POSITIVE_MARGIN": "De geregistreerde opbrengsten zijn hoger dan de opgenomen operationele kosten. Dit is geen nettowinst.",
+        "ZERO_MARGIN": "De geregistreerde opbrengsten zijn gelijk aan de opgenomen operationele kosten.",
+        "NEGATIVE_MARGIN": "De opgenomen operationele kosten zijn hoger dan de geregistreerde opbrengsten.",
+        "MISSING_REVENUE": "Voor dit perceel zijn geen opbrengsten geregistreerd.",
+        "MISSING_COST": "Er zijn geen volledige perceelkosten geregistreerd.",
+        "INCOMPLETE_COST": "Sommige kosten hebben geen prijs, waardoor de brutomarge niet betrouwbaar kan worden berekend."
+      },
+      "actions": {
+        "ADD_REVENUE": "Opbrengst toevoegen",
+        "ADD_EXPENSE": "Onkosten toevoegen",
+        "REVIEW_UNPRICED_COSTS": "Ontbrekende prijzen bekijken",
+        "NO_ACTION_REQUIRED": "Kostenverdeling bekijken"
+      }
+    },
+    "costCategories": {
+      "title": "Kostenverdeling",
+      "empty": "Voor dit perceel zijn nog geen kosten geregistreerd.",
+      "caption": "Kosten per categorie. Percentages zijn het aandeel van de geregistreerde kosten.",
+      "category": "Categorie",
+      "amount": "Bedrag",
+      "share": "Aandeel geregistreerde kosten",
+      "records": "Records",
+      "attribution": "Toerekening",
+      "completeness": "Compleet",
+      "directAndAllocated": "Direct en toegerekend",
+      "complete": "Ja",
+      "partial": "Gedeeltelijk",
+      "note": "Percentages zijn gebaseerd op geregistreerde kosten. Onvolledige categorieën tellen pas mee wanneer ze geprijsd zijn."
+    },
+    "attribution": {
+      "title": "Direct versus toegerekend",
+      "direct": "Direct op dit perceel geregistreerd",
+      "allocated": "Aan dit perceel toegerekend",
+      "total": "Totale geregistreerde perceelkosten",
+      "reversed": "Uitgesloten (teruggedraaid)",
+      "unallocated": "Niet-toegerekende bedrijfskosten (niet in de marge van dit perceel)",
+      "note": "Niet-toegerekende bedrijfskosten worden nooit stilzwijgend in de perceelmarge opgenomen."
+    },
+    "signals": {
+      "title": "Economische beslissingen",
+      "calculated": "Berekend {date}",
+      "recordedCosts": "Geregistreerde kosten",
+      "recordedRevenue": "Geregistreerde opbrengst",
+      "grossMargin": "Brutomarge",
+      "completeness": "Volledigheid",
+      "notRecorded": "Niet geregistreerd",
+      "unit": "eenheid",
+      "noSeason": "Nog geen economie voor het actieve seizoen.",
+      "none": "Geen economisch signaal vraagt nu aandacht.",
+      "more": "Bekijk alle {count} economische signalen",
+      "incomplete": "Kostenregistratie actief; winstgevendheid onvolledig.",
+      "ruleBased": "Regelgebaseerd · betrouwbaarheid {confidence}",
+      "field": "Perceel: {field}",
+      "severity": {
+        "critical": "Kritiek",
+        "high": "Hoog",
+        "medium": "Middel",
+        "low": "Laag"
+      },
+      "actions": {
+        "OPEN_FIELD_DETAIL": "Bekijk perceel",
+        "OPEN_FINANCE": "Open Financiën",
+        "ADD_PURCHASE_PRICE": "Voeg ontbrekende prijs toe",
+        "ADD_LABOUR_RATE": "Stel arbeidsuurtarief in",
+        "ADD_MACHINE_RATE": "Stel machinetarief in",
+        "ALLOCATE_COST": "Kosten toewijzen",
+        "ALLOCATE_REVENUE": "Opbrengst toewijzen",
+        "ADD_HARVEST": "Oogst registreren",
+        "ADD_REVENUE": "Opbrengst registreren",
+        "REVIEW_BREAK_EVEN": "Bekijk perceel",
+        "REVIEW_COMPLETENESS": "Controleer volledigheid"
+      },
+      "types": {
+        "BUDGET_OVER_LIMIT": {
+          "title": "{count} perce(e)l(en) boven kostenplan",
+          "explanation": "{field}: {amount} ({percent}%) boven plan.",
+          "evidence": "Geregistreerde kosten tegenover perceelbudget."
+        },
+        "MISSING_PURCHASE_PRICE": {
+          "title": "{count} product(en) missen een inkoopprijs",
+          "explanation": "{products} hebben geen prijs; ontbrekende kosten zijn niet nul.",
+          "evidence": "Inkoopprijsdekking van productregels."
+        },
+        "MISSING_LABOUR_RATE": {
+          "title": "Arbeidsuurtarief ontbreekt op {count} perce(e)l(en)",
+          "explanation": "{field} bevat werk zonder geldig tarief.",
+          "evidence": "Canonieke volledigheid: arbeidsuurtarief ontbreekt."
+        },
+        "MISSING_MACHINE_RATE": {
+          "title": "Machinetarief ontbreekt op {count} perce(e)l(en)",
+          "explanation": "{field} bevat machinewerk zonder geldig tarief.",
+          "evidence": "Canonieke volledigheid: machinetarief ontbreekt."
+        },
+        "UNALLOCATED_COST": {
+          "title": "{amount} kosten niet toegewezen",
+          "explanation": "Uitgesloten van perceelmarges tot toewijzing.",
+          "evidence": "Geregistreerde niet-toegewezen bedrijfskosten."
+        },
+        "UNALLOCATED_REVENUE": {
+          "title": "{amount} opbrengst niet toegewezen",
+          "explanation": "Uitgesloten van perceelmarges tot toewijzing.",
+          "evidence": "Geregistreerde niet-toegewezen opbrengst."
+        },
+        "BREAK_EVEN_ABOVE_SALE_PRICE": {
+          "title": "Break-even hoger dan verkoopprijs op {field}",
+          "explanation": "{breakEven} per {unit} tegenover {salePrice}.",
+          "evidence": "Canonieke break-even tegenover verkoopprijs."
+        },
+        "INCOMPLETE_PROFITABILITY": {
+          "title": "{count} perce(e)l(en) onvolledig winstgevend",
+          "explanation": "{field} is {completeness}% volledig; ontbrekend is niet nul.",
+          "evidence": "Canoniek resultaat Financiële Volledigheid."
+        },
+        "MARGIN_ON_INCOMPLETE_DATA": {
+          "title": "{count} marge(s) op onvolledige data",
+          "explanation": "{field}: voorlopige {amount} bij {completeness}% volledigheid.",
+          "evidence": "Canonieke brutomarge en volledigheid."
+        },
+        "MISSING_HARVEST": {
+          "title": "{count} perce(e)l(en) met kosten zonder oogst",
+          "explanation": "{field} kan nog geen break-even tonen.",
+          "evidence": "Geen oogst geregistreerd."
+        },
+        "MISSING_REVENUE": {
+          "title": "{count} geoogste perce(e)l(en) zonder opbrengst",
+          "explanation": "{field} heeft geen ontvangen opbrengst; marge niet beschikbaar.",
+          "evidence": "Geen ontvangen opbrengst geregistreerd."
+        },
+        "STRONGEST_COMPLETE_MARGIN": {
+          "title": "{field} heeft de sterkste volledige marge",
+          "explanation": "{field} ({crop}): {amount} per hectare.",
+          "evidence": "Hoogste canonieke marge per hectare onder volledige percelen."
+        }
+      }
+    },
     "budgetVariance": {
-      "title": "Begroting versus werkelijke kosten", "notRecorded": "Niet geregistreerd",
-      "labels": {"budget":"Begroting","actual":"Werkelijk","variance":"Afwijking","line":"Post"},
-      "status": {"within_budget":"Binnen begroting","over_budget":"Boven begroting","under_budget":"Onder begroting","unavailable":"Niet beschikbaar"},
-      "reasons": {"WITHIN_BUDGET":"De werkelijke kosten zijn gelijk aan de begroting.","OVER_BUDGET":"De werkelijke kosten overschrijden de perceelbegroting.","UNDER_BUDGET":"De uitgaven liggen onder de planning.","BUDGET_NOT_RECORDED":"De begroting is niet geregistreerd.","ACTUAL_COST_NOT_RECORDED":"De werkelijke kosten zijn niet geregistreerd.","BUDGET_AND_ACTUAL_NOT_RECORDED":"De begroting en werkelijke kosten zijn niet geregistreerd.","ACTUAL_COST_INCOMPLETE":"De gegevens over werkelijke kosten zijn onvolledig.","CURRENCY_MISMATCH":"De begroting en werkelijke kosten gebruiken verschillende valuta."},
-      "actions": {"ADD_BUDGET":"Begroting toevoegen","RECORD_ACTUAL_COST":"Werkelijke kosten registreren","REVIEW_COSTS":"Kosten bekijken","REVIEW_UNPRICED_COSTS":"Ontbrekende prijzen bekijken","OPEN_FINANCE":"Financiën openen","NO_ACTION_REQUIRED":"Geen actie nodig"},
-      "rows": {"INPUT_COST":"Middelenkosten","LABOUR":"Arbeid","MACHINERY":"Machines","CONTRACTOR":"Loonwerk","TOTAL_COST":"Totale kosten","YIELD":"Opbrengst","REVENUE":"Omzet","GROSS_MARGIN":"Brutomarge"},
-      "notes": {"PLANNED_NOT_RECORDED":"De geplande waarde is niet geregistreerd.","ACTUAL_INCOMPLETE":"De werkelijke kosten zijn onvolledig.","HARVEST_NOT_RECORDED":"De oogst is niet geregistreerd.","REVENUE_NOT_RECORDED":"De omzet is niet geregistreerd.","GROSS_MARGIN_INCOMPLETE":"De brutomarge is onvolledig."},
-      "signal": {"title":"{count} perce(e)l(en) boven de geplande kosten","explanation":"{field} heeft de grootste overschrijding: {amount} ({percent}) boven de planning.","whyItMatters":"Een perceel boven het kostenplan kan de marge verlagen; tussentijdse controle ondersteunt bewuste uitgavenbeslissingen.","evidence":"Geregistreerde kosten tegenover verwachte kosten uit het seizoensplan voor het perceelseizoen."}
+      "title": "Begroting versus werkelijke kosten",
+      "notRecorded": "Niet geregistreerd",
+      "labels": {
+        "budget": "Begroting",
+        "actual": "Werkelijk",
+        "variance": "Afwijking",
+        "line": "Post"
+      },
+      "status": {
+        "within_budget": "Binnen begroting",
+        "over_budget": "Boven begroting",
+        "under_budget": "Onder begroting",
+        "unavailable": "Niet beschikbaar"
+      },
+      "reasons": {
+        "WITHIN_BUDGET": "De werkelijke kosten zijn gelijk aan de begroting.",
+        "OVER_BUDGET": "De werkelijke kosten overschrijden de perceelbegroting.",
+        "UNDER_BUDGET": "De uitgaven liggen onder de planning.",
+        "BUDGET_NOT_RECORDED": "De begroting is niet geregistreerd.",
+        "ACTUAL_COST_NOT_RECORDED": "De werkelijke kosten zijn niet geregistreerd.",
+        "BUDGET_AND_ACTUAL_NOT_RECORDED": "De begroting en werkelijke kosten zijn niet geregistreerd.",
+        "ACTUAL_COST_INCOMPLETE": "De gegevens over werkelijke kosten zijn onvolledig.",
+        "CURRENCY_MISMATCH": "De begroting en werkelijke kosten gebruiken verschillende valuta."
+      },
+      "actions": {
+        "ADD_BUDGET": "Begroting toevoegen",
+        "RECORD_ACTUAL_COST": "Werkelijke kosten registreren",
+        "REVIEW_COSTS": "Kosten bekijken",
+        "REVIEW_UNPRICED_COSTS": "Ontbrekende prijzen bekijken",
+        "OPEN_FINANCE": "Financiën openen",
+        "NO_ACTION_REQUIRED": "Geen actie nodig"
+      },
+      "rows": {
+        "INPUT_COST": "Middelenkosten",
+        "LABOUR": "Arbeid",
+        "MACHINERY": "Machines",
+        "CONTRACTOR": "Loonwerk",
+        "TOTAL_COST": "Totale kosten",
+        "YIELD": "Opbrengst",
+        "REVENUE": "Omzet",
+        "GROSS_MARGIN": "Brutomarge"
+      },
+      "notes": {
+        "PLANNED_NOT_RECORDED": "De geplande waarde is niet geregistreerd.",
+        "ACTUAL_INCOMPLETE": "De werkelijke kosten zijn onvolledig.",
+        "HARVEST_NOT_RECORDED": "De oogst is niet geregistreerd.",
+        "REVENUE_NOT_RECORDED": "De omzet is niet geregistreerd.",
+        "GROSS_MARGIN_INCOMPLETE": "De brutomarge is onvolledig."
+      },
+      "signal": {
+        "title": "{count} perce(e)l(en) boven de geplande kosten",
+        "explanation": "{field} heeft de grootste overschrijding: {amount} ({percent}) boven de planning.",
+        "whyItMatters": "Een perceel boven het kostenplan kan de marge verlagen; tussentijdse controle ondersteunt bewuste uitgavenbeslissingen.",
+        "evidence": "Geregistreerde kosten tegenover verwachte kosten uit het seizoensplan voor het perceelseizoen."
+      }
     }
   },
   "dialog": {
@@ -147,6 +482,16 @@
     "scoutingDisclaimer": "Symptomen en automatische suggesties zijn geen bevestigde diagnoses en autoriseren geen behandeling.",
     "actions": "Acties",
     "offlineActions": "{lastSynced} Herverdeling, correcties, terugboekingen en export vereisen een verbinding en zijn offline niet beschikbaar.",
-    "actionsDisclaimer": "Aankopen kunnen niet worden bewerkt nadat voorraad is gebruikt — boek terug en vervang in plaats daarvan. Perceeleconomie is vastgelegde operationele economie, geen wettelijke boekhouding."
+    "actionsDisclaimer": "Aankopen kunnen niet worden bewerkt nadat voorraad is gebruikt — boek terug en vervang in plaats daarvan. Perceeleconomie is vastgelegde operationele economie, geen wettelijke boekhouding.",
+    "ndviTitle": "Vegetatie-index (NDVI)",
+    "ndviLatest": "Laatst: {date}",
+    "ndviValue": "NDVI {value}",
+    "ndviNoValue": "Geen bruikbare meting (volledig bewolkt)",
+    "ndviCloudCoverage": "{pct}% door wolken gemaskeerd",
+    "ndviEmpty": "Nog geen satellietmetingen.",
+    "ndviNoGeometry": "Dit perceel heeft geen geregistreerde begrenzing — importeer via BRP of teken de vorm om satellietmetingen mogelijk te maken.",
+    "ndviRefresh": "Vernieuwen vanaf satelliet",
+    "ndviRefreshing": "Ophalen...",
+    "ndviDisclaimer": "Sentinel-2 satellietgegevens (Copernicus), ~5-daagse herbezoektijd — metingen kunnen schaars zijn bij aanhoudende bewolking."
   }
 }

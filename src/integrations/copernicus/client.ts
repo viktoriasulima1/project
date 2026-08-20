@@ -1,7 +1,7 @@
 import { getAccessToken } from './token';
 import { CopernicusUnavailableError, CopernicusGeometryError } from './errors';
 import { isCopernicusMockEnabled, mockStatisticalApiResponse } from './mock-fixtures';
-import type { CopernicusGeoJsonPolygon, StatisticalApiResponse } from './types';
+import type { CopernicusGeometry, StatisticalApiResponse } from './types';
 
 // Confirmed against official Copernicus Data Space Ecosystem documentation
 // (documentation.dataspace.copernicus.eu/APIs/SentinelHub/Statistical.html)
@@ -32,8 +32,11 @@ function evaluatePixel(sample) {
   return { ndvi: [ndvi], dataMask: [sample.dataMask] };
 }`;
 
-function isValidPolygon(geometry: CopernicusGeoJsonPolygon): boolean {
-  return geometry?.type === 'Polygon' && Array.isArray(geometry.coordinates) && geometry.coordinates.length > 0 && geometry.coordinates[0].length >= 4;
+function isValidGeometry(geometry: CopernicusGeometry): boolean {
+  if (!geometry || !Array.isArray(geometry.coordinates) || geometry.coordinates.length === 0) return false;
+  if (geometry.type === 'Polygon') return geometry.coordinates[0].length >= 4;
+  if (geometry.type === 'MultiPolygon') return geometry.coordinates.every((polygon) => polygon[0]?.length >= 4);
+  return false;
 }
 
 /**
@@ -43,14 +46,14 @@ function isValidPolygon(geometry: CopernicusGeoJsonPolygon): boolean {
  * normalized FarmOS shape.
  */
 export async function fetchNdviStatistics(
-  geometry: CopernicusGeoJsonPolygon,
+  geometry: CopernicusGeometry,
   fromISO: string,
   toISO: string,
   intervalDays = 10,
 ): Promise<StatisticalApiResponse> {
   if (isCopernicusMockEnabled()) return mockStatisticalApiResponse(fromISO, toISO);
 
-  if (!isValidPolygon(geometry)) throw new CopernicusGeometryError('field has no recorded polygon geometry');
+  if (!isValidGeometry(geometry)) throw new CopernicusGeometryError('field has no recorded polygon geometry');
 
   let token: string;
   try {

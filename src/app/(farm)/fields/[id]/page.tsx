@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { Topbar } from '@/components/layout/Topbar';
 import { FieldEconomicsHistory, type VersionGroup } from '@/components/fields/FieldEconomicsHistory';
 import { FieldActionsBar } from '@/components/fields/FieldActionsBar';
+import { NdviSection, type NdviReadingRow } from '@/components/fields/NdviSection';
 import type { TimelineVersion } from '@/components/fields/FinancialVersionTimeline';
 import { requireFarm } from '@/lib/require-farm';
 import { db } from '@/lib/db';
@@ -37,6 +38,10 @@ export default async function FieldDetailPage({ params }: { params: Promise<{ id
 
   const fsId = detail.fieldSeasonId;
   const scouting = fsId ? await db.fieldSeason.findFirst({ where: { id: fsId, field: { farmId: farm.id } }, include: { cropStageRecords: { orderBy: { observedAt: 'desc' }, take: 10 }, scoutingVisits: { orderBy: { visitDate: 'desc' }, take: 8, include: { observations: { include: { photos: true, followUpWorkOrder: true } } } } } }) : null;
+  const [fieldGeometry, ndviReadings] = await Promise.all([
+    db.field.findFirst({ where: { id: detail.field.id, farmId: farm.id }, select: { coordinates: true } }),
+    db.fieldNdviReading.findMany({ where: { fieldId: detail.field.id }, orderBy: { periodFrom: 'desc' }, take: 12 }),
+  ]);
   const currentStage = scouting?.cropStageRecords.find((record) => record.isEffective);
   const health = resolveFieldHealthStatus({ hasActiveSeason: Boolean(fsId), observations: scouting?.scoutingVisits.flatMap((visit) => visit.observations) ?? [], growthStageObservedAt: currentStage?.observedAt });
   const locale = await getServerLocale();
@@ -84,6 +89,17 @@ export default async function FieldDetailPage({ params }: { params: Promise<{ id
           {currentStage ? <><p><strong>{currentStage.stageSystem} {currentStage.stageCode}</strong> · {currentStage.label}</p><p className={styles.muted}>{t('detail.observed', { date: currentStage.observedAt.toLocaleString(locale), source: currentStage.source.replaceAll('_',' '), confidence: currentStage.confidence })}</p><details><summary>{t('detail.viewStageHistory')}</summary><ul>{scouting?.cropStageRecords.map((record)=><li key={record.id}>{record.stageSystem} {record.stageCode} · {record.label} · {record.observedAt.toLocaleDateString(locale)} {record.isEffective ? t('detail.current') : t('detail.superseded')}</li>)}</ul></details></> : <p className={styles.muted}>{t('detail.noGrowthStage')}</p>}
         </section>
         <section className={styles.card}><h2>{t('detail.recentScouting')}</h2>{scouting?.scoutingVisits.length ? <ul>{scouting.scoutingVisits.map((visit)=><li key={visit.id}>{visit.visitDate.toLocaleString(locale)} · {t('detail.visitSummary', { observations: visit.observations.length, open: visit.observations.filter((o)=>['open','monitoring','action_planned'].includes(o.status)).length, photos: visit.observations.reduce((n,o)=>n+o.photos.length,0) })}</li>)}</ul> : <p className={styles.muted}>{t('detail.noScoutingVisits')}</p>}<p className={styles.disclaimer}>{t('detail.scoutingDisclaimer')}</p></section>
+
+        <NdviSection
+          fieldId={detail.field.id}
+          hasGeometry={Boolean(fieldGeometry?.coordinates)}
+          readings={ndviReadings.map((r): NdviReadingRow => ({
+            id: r.id,
+            periodFrom: r.periodFrom.toISOString(),
+            meanNdvi: r.meanNdvi != null ? r.meanNdvi.toString() : null,
+            cloudCoveragePct: r.cloudCoveragePct != null ? r.cloudCoveragePct.toString() : null,
+          }))}
+        />
 
         {/* Part 2 — summary metrics */}
         <section className={styles.metrics}>

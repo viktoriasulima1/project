@@ -1,18 +1,116 @@
 {
   "title": "Fields",
-  "sprayWindow":{"status":{"blocked":"Blocked","poor":"Poor","marginal":"Marginal","good":"Good","excellent":"Excellent"},"confidence":{"low":"Low confidence","medium":"Medium confidence","high":"High confidence"},"summary":{"BLOCKED":"Blocked: {primary}","CONDITIONS":"Conditions: {primary}. Best window {start}–{end}.","NO_FORECAST_DATA":"No forecast data available."},"genericProfile":"Generic indicative profile","unknown":"Condition unavailable","disclaimer":{"INDICATIVE_ONLY":"Indicative only. Verify the authorised product label and legal requirements."},"signals":{"WIND_SPEED_EXCEEDS_LIMIT":"Wind {observedKmh} km/h exceeds {limitKmh} km/h.","WIND_GUST_EXCEEDS_LIMIT":"Gusts {observedKmh} km/h exceed {limitKmh} km/h.","WIND_GUST_UNAVAILABLE":"Gust data unavailable.","TEMPERATURE_BELOW_MINIMUM":"Temperature {observedC} °C is below {limitC} °C.","TEMPERATURE_ABOVE_MAXIMUM":"Temperature {observedC} °C is above {limitC} °C.","HUMIDITY_EXCEEDS_PRODUCT_LIMIT":"Humidity {observedPercent}% exceeds {limitPercent}%.","RAINFAST_HORIZON_INCOMPLETE":"Rainfast forecast covers {availableHours}/{requiredHours} hours.","RAINFAST_PRECIPITATION_EXCEEDS_LIMIT":"Rain {observedMm} mm exceeds {limitMm} mm in {periodHours} h.","PRODUCT_NOT_SELECTED":"No verified product selected.","GENERIC_PROFILE_USED":"Generic thresholds used; verify the product label.","PRODUCT_REGISTRATION_INVALID":"Registration for {productName} is invalid.","OPERATOR_CERTIFICATION_INVALID":"Operator certificate missing or expired.","OPERATOR_CONTEXT_MISSING":"Operator certification not supplied.","OPERATOR_UNVERIFIED":"Operator certification not verified.","INSUFFICIENT_STOCK":"Need {requiredQuantity} {unit}; {availableStock} {unit} available.","INVENTORY_CONTEXT_MISSING":"Inventory context not supplied.","INVENTORY_UNVERIFIED":"Inventory not verified.","CROP_INELIGIBLE":"Crop {crop} is ineligible.","BBCH_OUTSIDE_RANGE":"BBCH {stage} is outside {min}–{max}.","CROP_BBCH_CONTEXT_MISSING":"Crop/BBCH context not supplied.","CROP_BBCH_UNVERIFIED":"Crop/BBCH not verified.","DRIFT_REDUCTION_NOZZLE_REQUIRED":"Required drift-reduction nozzle not confirmed.","DRIFT_CONTEXT_MISSING":"Machine/nozzle context not supplied.","DRIFT_REQUIREMENT_UNVERIFIED":"Drift requirement not verified.","LOW_WIND":"Low wind ({observedKmh} km/h).","WIND_APPROACHING_LIMIT":"Wind near limit ({observedKmh}/{limitKmh} km/h).","NO_RAIN_FORECAST_THIS_HOUR":"No rain forecast this hour.","LOW_HUMIDITY":"Low humidity ({observedPercent}%).","HUMIDITY_ELEVATED":"Elevated humidity ({observedPercent}%).","WIDE_DEW_POINT_MARGIN":"Wide dew-point margin.","NARROW_DEW_POINT_MARGIN":"Narrow dew-point margin.","LEAF_WETNESS_ELEVATED":"Leaf wetness elevated."}},
+  "sprayWindow": {
+    "status": {
+      "blocked": "Blocked",
+      "poor": "Poor",
+      "marginal": "Marginal",
+      "good": "Good",
+      "excellent": "Excellent"
+    },
+    "confidence": {
+      "low": "Low confidence",
+      "medium": "Medium confidence",
+      "high": "High confidence"
+    },
+    "summary": {
+      "BLOCKED": "Blocked: {primary}",
+      "CONDITIONS": "Conditions: {primary}. Best window {start}–{end}.",
+      "NO_FORECAST_DATA": "No forecast data available."
+    },
+    "genericProfile": "Generic indicative profile",
+    "unknown": "Condition unavailable",
+    "disclaimer": {
+      "INDICATIVE_ONLY": "Indicative only. Verify the authorised product label and legal requirements."
+    },
+    "signals": {
+      "WIND_SPEED_EXCEEDS_LIMIT": "Wind {observedKmh} km/h exceeds {limitKmh} km/h.",
+      "WIND_GUST_EXCEEDS_LIMIT": "Gusts {observedKmh} km/h exceed {limitKmh} km/h.",
+      "WIND_GUST_UNAVAILABLE": "Gust data unavailable.",
+      "TEMPERATURE_BELOW_MINIMUM": "Temperature {observedC} °C is below {limitC} °C.",
+      "TEMPERATURE_ABOVE_MAXIMUM": "Temperature {observedC} °C is above {limitC} °C.",
+      "HUMIDITY_EXCEEDS_PRODUCT_LIMIT": "Humidity {observedPercent}% exceeds {limitPercent}%.",
+      "RAINFAST_HORIZON_INCOMPLETE": "Rainfast forecast covers {availableHours}/{requiredHours} hours.",
+      "RAINFAST_PRECIPITATION_EXCEEDS_LIMIT": "Rain {observedMm} mm exceeds {limitMm} mm in {periodHours} h.",
+      "PRODUCT_NOT_SELECTED": "No verified product selected.",
+      "GENERIC_PROFILE_USED": "Generic thresholds used; verify the product label.",
+      "PRODUCT_REGISTRATION_INVALID": "Registration for {productName} is invalid.",
+      "OPERATOR_CERTIFICATION_INVALID": "Operator certificate missing or expired.",
+      "OPERATOR_CONTEXT_MISSING": "Operator certification not supplied.",
+      "OPERATOR_UNVERIFIED": "Operator certification not verified.",
+      "INSUFFICIENT_STOCK": "Need {requiredQuantity} {unit}; {availableStock} {unit} available.",
+      "INVENTORY_CONTEXT_MISSING": "Inventory context not supplied.",
+      "INVENTORY_UNVERIFIED": "Inventory not verified.",
+      "CROP_INELIGIBLE": "Crop {crop} is ineligible.",
+      "BBCH_OUTSIDE_RANGE": "BBCH {stage} is outside {min}–{max}.",
+      "CROP_BBCH_CONTEXT_MISSING": "Crop/BBCH context not supplied.",
+      "CROP_BBCH_UNVERIFIED": "Crop/BBCH not verified.",
+      "DRIFT_REDUCTION_NOZZLE_REQUIRED": "Required drift-reduction nozzle not confirmed.",
+      "DRIFT_CONTEXT_MISSING": "Machine/nozzle context not supplied.",
+      "DRIFT_REQUIREMENT_UNVERIFIED": "Drift requirement not verified.",
+      "LOW_WIND": "Low wind ({observedKmh} km/h).",
+      "WIND_APPROACHING_LIMIT": "Wind near limit ({observedKmh}/{limitKmh} km/h).",
+      "NO_RAIN_FORECAST_THIS_HOUR": "No rain forecast this hour.",
+      "LOW_HUMIDITY": "Low humidity ({observedPercent}%).",
+      "HUMIDITY_ELEVATED": "Elevated humidity ({observedPercent}%).",
+      "WIDE_DEW_POINT_MARGIN": "Wide dew-point margin.",
+      "NARROW_DEW_POINT_MARGIN": "Narrow dew-point margin.",
+      "LEAF_WETNESS_ELEVATED": "Leaf wetness elevated."
+    }
+  },
   "weatherRisk": {
-    "status": { "low": "Low weather risk", "moderate": "Moderate weather risk", "high": "High weather risk", "unavailable": "Weather risk unavailable" },
-    "reasons": { "BELOW_RISK_THRESHOLDS": "Measured conditions are below this rule set's risk thresholds.", "SOME_FAVOURABLE_CONDITIONS": "Some measured conditions may favour crop-health risk.", "FAVOURABLE_WARM_HUMID_WET_CONDITIONS": "Warm, humid and wet measured conditions may favour crop-health risk.", "INSUFFICIENT_MEASURED_INPUTS": "Weather risk cannot be calculated because {count} required input(s) are missing.", "UNKNOWN": "Weather risk is unavailable and must not be interpreted as no risk." },
-    "actions": { "CONTINUE_NORMAL_SCOUTING": "Continue normal scouting", "INSPECT_FIELD": "Inspect the field and record visible evidence", "SCOUT_MANUALLY": "Scout the field manually" },
-    "confidence": { "medium": "Medium confidence", "low": "Low confidence" },
-    "freshness": { "current": "Current measured inputs", "unavailable": "Input freshness unavailable" },
-    "evidence": { "cropStage": "{crop}, growth stage {stage}", "temperature": "Measured temperature: {value} °C", "humidity": "Measured humidity: {value}%", "rain": "Measured rain: {value} mm", "missing": "{count} required weather input(s) missing" },
+    "status": {
+      "low": "Low weather risk",
+      "moderate": "Moderate weather risk",
+      "high": "High weather risk",
+      "unavailable": "Weather risk unavailable"
+    },
+    "reasons": {
+      "BELOW_RISK_THRESHOLDS": "Measured conditions are below this rule set's risk thresholds.",
+      "SOME_FAVOURABLE_CONDITIONS": "Some measured conditions may favour crop-health risk.",
+      "FAVOURABLE_WARM_HUMID_WET_CONDITIONS": "Warm, humid and wet measured conditions may favour crop-health risk.",
+      "INSUFFICIENT_MEASURED_INPUTS": "Weather risk cannot be calculated because {count} required input(s) are missing.",
+      "UNKNOWN": "Weather risk is unavailable and must not be interpreted as no risk."
+    },
+    "actions": {
+      "CONTINUE_NORMAL_SCOUTING": "Continue normal scouting",
+      "INSPECT_FIELD": "Inspect the field and record visible evidence",
+      "SCOUT_MANUALLY": "Scout the field manually"
+    },
+    "confidence": {
+      "medium": "Medium confidence",
+      "low": "Low confidence"
+    },
+    "freshness": {
+      "current": "Current measured inputs",
+      "unavailable": "Input freshness unavailable"
+    },
+    "evidence": {
+      "cropStage": "{crop}, growth stage {stage}",
+      "temperature": "Measured temperature: {value} °C",
+      "humidity": "Measured humidity: {value}%",
+      "rain": "Measured rain: {value} mm",
+      "missing": "{count} required weather input(s) missing"
+    },
     "disclaimer": "Weather risk is an indicator, not a diagnosis. Confirm conditions in the field before taking action."
   },
-  "summary": { "totalFields": "Total fields", "totalArea": "Total area", "healthy": "Healthy", "needAttention": "Need attention" },
-  "table": { "name": "Name", "area": "Area", "soil": "Soil", "status": "Status", "ndvi": "NDVI" },
-  "empty": { "title": "No fields yet", "desc": "Add your first field to begin planning crops and recording work." },
+  "summary": {
+    "totalFields": "Total fields",
+    "totalArea": "Total area",
+    "healthy": "Healthy",
+    "needAttention": "Need attention"
+  },
+  "table": {
+    "name": "Name",
+    "area": "Area",
+    "soil": "Soil",
+    "status": "Status",
+    "ndvi": "NDVI"
+  },
+  "empty": {
+    "title": "No fields yet",
+    "desc": "Add your first field to begin planning crops and recording work."
+  },
   "addField": "+ Add field",
   "importBrp": "Import from BRP",
   "archive": "Archive",
@@ -37,7 +135,13 @@
     "lastSyncedAt": "Based on data last synchronized at {date}."
   },
   "health": {
-    "status": { "attention_required": "Attention needed", "inspect_soon": "Inspect soon", "monitoring": "Monitoring", "no_current_issue": "No current issue", "insufficient_data": "Insufficient data" },
+    "status": {
+      "attention_required": "Attention needed",
+      "inspect_soon": "Inspect soon",
+      "monitoring": "Monitoring",
+      "no_current_issue": "No current issue",
+      "insufficient_data": "Insufficient data"
+    },
     "reasons": {
       "NO_ACTIVE_CROP_SEASON": "No active crop season.",
       "RECENT_SEVERE_OBSERVATION": "{count} severe observation(s) require review.",
@@ -69,11 +173,47 @@
   },
   "economics": {
     "completeness": {
-      "title": "Data completeness", "summary": "{percentage}% complete", "recordedLabel": "Recorded", "missingLabel": "Missing", "unknown": "Details are unavailable.",
-      "status": {"insufficient_data":"Unavailable","cost_tracking_active":"Cost tracking active","partial_profitability":"Partial profitability","profitability_ready":"Complete"},
-      "recorded": {"PRODUCT_PRICES_RECORDED":"Product prices","LABOUR_RATES_RECORDED":"Labour rates","MACHINE_RATES_RECORDED":"Machinery rates","CONTRACTOR_COSTS_RECORDED":"Contractor costs","HARVEST_RECORDED":"Harvest","REVENUE_RECORDED":"Revenue","OVERHEAD_CHOICE_RECORDED":"Overhead choice","UNITS_COMPATIBLE":"Compatible units"},
-      "reasons": {"MISSING_PRODUCT_PRICE":"Purchase price is missing","MISSING_LABOUR_RATE":"Labour rate is missing","MISSING_MACHINE_RATE":"Machinery rate is missing","MISSING_CONTRACTOR_COST":"Contractor cost is missing","MISSING_HARVEST":"Harvest yield is missing","MISSING_REVENUE":"Crop revenue is missing","MISSING_OVERHEAD_CHOICE":"Overhead allocation choice is missing","INCOMPATIBLE_UNITS":"Yield and revenue units are incompatible"},
-      "actions": {"ADD_PURCHASE_PRICE":"Add purchase price","ADD_LABOUR_RATE":"Add labour rate","ADD_MACHINE_RATE":"Add machinery rate","ADD_CONTRACTOR_COST":"Add contractor cost","ADD_HARVEST":"Record harvest","ADD_REVENUE":"Record revenue","RECORD_OVERHEAD_CHOICE":"Record overhead choice","ALIGN_UNITS":"Align units"}
+      "title": "Data completeness",
+      "summary": "{percentage}% complete",
+      "recordedLabel": "Recorded",
+      "missingLabel": "Missing",
+      "unknown": "Details are unavailable.",
+      "status": {
+        "insufficient_data": "Unavailable",
+        "cost_tracking_active": "Cost tracking active",
+        "partial_profitability": "Partial profitability",
+        "profitability_ready": "Complete"
+      },
+      "recorded": {
+        "PRODUCT_PRICES_RECORDED": "Product prices",
+        "LABOUR_RATES_RECORDED": "Labour rates",
+        "MACHINE_RATES_RECORDED": "Machinery rates",
+        "CONTRACTOR_COSTS_RECORDED": "Contractor costs",
+        "HARVEST_RECORDED": "Harvest",
+        "REVENUE_RECORDED": "Revenue",
+        "OVERHEAD_CHOICE_RECORDED": "Overhead choice",
+        "UNITS_COMPATIBLE": "Compatible units"
+      },
+      "reasons": {
+        "MISSING_PRODUCT_PRICE": "Purchase price is missing",
+        "MISSING_LABOUR_RATE": "Labour rate is missing",
+        "MISSING_MACHINE_RATE": "Machinery rate is missing",
+        "MISSING_CONTRACTOR_COST": "Contractor cost is missing",
+        "MISSING_HARVEST": "Harvest yield is missing",
+        "MISSING_REVENUE": "Crop revenue is missing",
+        "MISSING_OVERHEAD_CHOICE": "Overhead allocation choice is missing",
+        "INCOMPATIBLE_UNITS": "Yield and revenue units are incompatible"
+      },
+      "actions": {
+        "ADD_PURCHASE_PRICE": "Add purchase price",
+        "ADD_LABOUR_RATE": "Add labour rate",
+        "ADD_MACHINE_RATE": "Add machinery rate",
+        "ADD_CONTRACTOR_COST": "Add contractor cost",
+        "ADD_HARVEST": "Record harvest",
+        "ADD_REVENUE": "Record revenue",
+        "RECORD_OVERHEAD_CHOICE": "Record overhead choice",
+        "ALIGN_UNITS": "Align units"
+      }
     },
     "breakEven": {
       "title": "Break-even",
@@ -99,19 +239,214 @@
         "REVIEW_ALLOCATIONS": "Review allocation"
       }
     },
-    "grossMargin": { "title":"Gross margin", "notRecorded":"Not recorded", "labels":{"revenue":"Recorded revenue","totalCost":"Total recorded cost","margin":"Gross margin","perHa":"Margin per hectare"}, "status":{"positive":"Positive margin","zero":"Zero margin","negative":"Negative margin","unavailable":"Gross margin unavailable","partial":"Gross margin incomplete"}, "reasons":{"POSITIVE_MARGIN":"Recorded revenue exceeds included operational costs. This is not net profit.","ZERO_MARGIN":"Recorded revenue equals included operational costs.","NEGATIVE_MARGIN":"Included operational costs exceed recorded revenue.","MISSING_REVENUE":"Revenue is not recorded for this field.","MISSING_COST":"No complete field cost is recorded.","INCOMPLETE_COST":"Some costs are unpriced, so gross margin cannot be calculated reliably."}, "actions":{"ADD_REVENUE":"Add revenue","ADD_EXPENSE":"Add expense","REVIEW_UNPRICED_COSTS":"Review missing prices","NO_ACTION_REQUIRED":"View cost breakdown"} },
-    "costCategories": { "title":"Cost breakdown", "empty":"No costs recorded on this field yet.", "caption":"Cost by category. Percentages are share of recorded cost, not of a complete total.", "category":"Category", "amount":"Amount", "share":"Share of recorded cost", "records":"Records", "attribution":"Attribution", "completeness":"Complete", "directAndAllocated":"Direct and allocated", "complete":"Yes", "partial":"Partial", "note":"Percentages are based on recorded cost. Partial categories are excluded from the total until priced." },
-    "attribution": { "title":"Direct versus allocated", "direct":"Recorded directly on this field", "allocated":"Allocated to this field", "total":"Total recorded field cost", "reversed":"Excluded (reversed)", "unallocated":"Farm-level unallocated cost (not in this field's margin)", "note":"Farm-level unallocated cost is never silently included in this field's margin." },
-    "signals":{"title":"Economics decisions","calculated":"Calculated {date}","recordedCosts":"Recorded costs","recordedRevenue":"Recorded revenue","grossMargin":"Gross margin","completeness":"Completeness","notRecorded":"Not recorded","unit":"unit","noSeason":"No active-season economics yet.","none":"No economic signals need attention now.","more":"View all {count} economic signals","incomplete":"Cost tracking is active; profitability is incomplete.","ruleBased":"Rule-based · {confidence} confidence","field":"Field: {field}","severity":{"critical":"Critical","high":"High","medium":"Medium","low":"Low"},"actions":{"OPEN_FIELD_DETAIL":"Review field","OPEN_FINANCE":"Open Finance","ADD_PURCHASE_PRICE":"Add missing price","ADD_LABOUR_RATE":"Configure labour rate","ADD_MACHINE_RATE":"Configure machinery rate","ALLOCATE_COST":"Allocate cost","ALLOCATE_REVENUE":"Allocate revenue","ADD_HARVEST":"Record harvest","ADD_REVENUE":"Record revenue","REVIEW_BREAK_EVEN":"Review field","REVIEW_COMPLETENESS":"Review completeness"},"types":{"BUDGET_OVER_LIMIT":{"title":"{count} field(s) over planned cost","explanation":"{field}: {amount} ({percent}%) over plan.","evidence":"Recorded cost versus field budget."},"MISSING_PURCHASE_PRICE":{"title":"{count} product(s) need a purchase price","explanation":"{products} have no price; missing cost is not zero.","evidence":"Purchase-price coverage of product lines."},"MISSING_LABOUR_RATE":{"title":"Labour rate missing on {count} field(s)","explanation":"{field} contains labour without an effective rate.","evidence":"Canonical completeness: missing labour rate."},"MISSING_MACHINE_RATE":{"title":"Machinery rate missing on {count} field(s)","explanation":"{field} contains machine work without an effective rate.","evidence":"Canonical completeness: missing machinery rate."},"UNALLOCATED_COST":{"title":"{amount} of cost is unallocated","explanation":"Excluded from field margins until allocated.","evidence":"Recorded farm-level unallocated cost."},"UNALLOCATED_REVENUE":{"title":"{amount} of revenue is unallocated","explanation":"Excluded from field margins until allocated.","evidence":"Recorded farm-level unallocated revenue."},"BREAK_EVEN_ABOVE_SALE_PRICE":{"title":"Break-even exceeds sale price on {field}","explanation":"{breakEven} per {unit} versus {salePrice}.","evidence":"Canonical break-even versus sale price."},"INCOMPLETE_PROFITABILITY":{"title":"{count} field(s) have incomplete profitability","explanation":"{field} is {completeness}% complete; missing is not zero.","evidence":"Canonical Financial Completeness result."},"MARGIN_ON_INCOMPLETE_DATA":{"title":"{count} margin(s) use incomplete data","explanation":"{field}: provisional {amount} at {completeness}% completeness.","evidence":"Canonical Gross Margin and completeness."},"MISSING_HARVEST":{"title":"{count} field(s) have cost but no harvest","explanation":"{field} cannot show break-even yet.","evidence":"No harvest recorded for the field season."},"MISSING_REVENUE":{"title":"{count} harvested field(s) have no revenue","explanation":"{field} has no received revenue; margin is unavailable.","evidence":"No received revenue recorded."},"STRONGEST_COMPLETE_MARGIN":{"title":"{field} has the strongest complete margin","explanation":"{field} ({crop}): {amount} per hectare.","evidence":"Highest canonical margin per hectare among complete fields."}}},
+    "grossMargin": {
+      "title": "Gross margin",
+      "notRecorded": "Not recorded",
+      "labels": {
+        "revenue": "Recorded revenue",
+        "totalCost": "Total recorded cost",
+        "margin": "Gross margin",
+        "perHa": "Margin per hectare"
+      },
+      "status": {
+        "positive": "Positive margin",
+        "zero": "Zero margin",
+        "negative": "Negative margin",
+        "unavailable": "Gross margin unavailable",
+        "partial": "Gross margin incomplete"
+      },
+      "reasons": {
+        "POSITIVE_MARGIN": "Recorded revenue exceeds included operational costs. This is not net profit.",
+        "ZERO_MARGIN": "Recorded revenue equals included operational costs.",
+        "NEGATIVE_MARGIN": "Included operational costs exceed recorded revenue.",
+        "MISSING_REVENUE": "Revenue is not recorded for this field.",
+        "MISSING_COST": "No complete field cost is recorded.",
+        "INCOMPLETE_COST": "Some costs are unpriced, so gross margin cannot be calculated reliably."
+      },
+      "actions": {
+        "ADD_REVENUE": "Add revenue",
+        "ADD_EXPENSE": "Add expense",
+        "REVIEW_UNPRICED_COSTS": "Review missing prices",
+        "NO_ACTION_REQUIRED": "View cost breakdown"
+      }
+    },
+    "costCategories": {
+      "title": "Cost breakdown",
+      "empty": "No costs recorded on this field yet.",
+      "caption": "Cost by category. Percentages are share of recorded cost, not of a complete total.",
+      "category": "Category",
+      "amount": "Amount",
+      "share": "Share of recorded cost",
+      "records": "Records",
+      "attribution": "Attribution",
+      "completeness": "Complete",
+      "directAndAllocated": "Direct and allocated",
+      "complete": "Yes",
+      "partial": "Partial",
+      "note": "Percentages are based on recorded cost. Partial categories are excluded from the total until priced."
+    },
+    "attribution": {
+      "title": "Direct versus allocated",
+      "direct": "Recorded directly on this field",
+      "allocated": "Allocated to this field",
+      "total": "Total recorded field cost",
+      "reversed": "Excluded (reversed)",
+      "unallocated": "Farm-level unallocated cost (not in this field's margin)",
+      "note": "Farm-level unallocated cost is never silently included in this field's margin."
+    },
+    "signals": {
+      "title": "Economics decisions",
+      "calculated": "Calculated {date}",
+      "recordedCosts": "Recorded costs",
+      "recordedRevenue": "Recorded revenue",
+      "grossMargin": "Gross margin",
+      "completeness": "Completeness",
+      "notRecorded": "Not recorded",
+      "unit": "unit",
+      "noSeason": "No active-season economics yet.",
+      "none": "No economic signals need attention now.",
+      "more": "View all {count} economic signals",
+      "incomplete": "Cost tracking is active; profitability is incomplete.",
+      "ruleBased": "Rule-based · {confidence} confidence",
+      "field": "Field: {field}",
+      "severity": {
+        "critical": "Critical",
+        "high": "High",
+        "medium": "Medium",
+        "low": "Low"
+      },
+      "actions": {
+        "OPEN_FIELD_DETAIL": "Review field",
+        "OPEN_FINANCE": "Open Finance",
+        "ADD_PURCHASE_PRICE": "Add missing price",
+        "ADD_LABOUR_RATE": "Configure labour rate",
+        "ADD_MACHINE_RATE": "Configure machinery rate",
+        "ALLOCATE_COST": "Allocate cost",
+        "ALLOCATE_REVENUE": "Allocate revenue",
+        "ADD_HARVEST": "Record harvest",
+        "ADD_REVENUE": "Record revenue",
+        "REVIEW_BREAK_EVEN": "Review field",
+        "REVIEW_COMPLETENESS": "Review completeness"
+      },
+      "types": {
+        "BUDGET_OVER_LIMIT": {
+          "title": "{count} field(s) over planned cost",
+          "explanation": "{field}: {amount} ({percent}%) over plan.",
+          "evidence": "Recorded cost versus field budget."
+        },
+        "MISSING_PURCHASE_PRICE": {
+          "title": "{count} product(s) need a purchase price",
+          "explanation": "{products} have no price; missing cost is not zero.",
+          "evidence": "Purchase-price coverage of product lines."
+        },
+        "MISSING_LABOUR_RATE": {
+          "title": "Labour rate missing on {count} field(s)",
+          "explanation": "{field} contains labour without an effective rate.",
+          "evidence": "Canonical completeness: missing labour rate."
+        },
+        "MISSING_MACHINE_RATE": {
+          "title": "Machinery rate missing on {count} field(s)",
+          "explanation": "{field} contains machine work without an effective rate.",
+          "evidence": "Canonical completeness: missing machinery rate."
+        },
+        "UNALLOCATED_COST": {
+          "title": "{amount} of cost is unallocated",
+          "explanation": "Excluded from field margins until allocated.",
+          "evidence": "Recorded farm-level unallocated cost."
+        },
+        "UNALLOCATED_REVENUE": {
+          "title": "{amount} of revenue is unallocated",
+          "explanation": "Excluded from field margins until allocated.",
+          "evidence": "Recorded farm-level unallocated revenue."
+        },
+        "BREAK_EVEN_ABOVE_SALE_PRICE": {
+          "title": "Break-even exceeds sale price on {field}",
+          "explanation": "{breakEven} per {unit} versus {salePrice}.",
+          "evidence": "Canonical break-even versus sale price."
+        },
+        "INCOMPLETE_PROFITABILITY": {
+          "title": "{count} field(s) have incomplete profitability",
+          "explanation": "{field} is {completeness}% complete; missing is not zero.",
+          "evidence": "Canonical Financial Completeness result."
+        },
+        "MARGIN_ON_INCOMPLETE_DATA": {
+          "title": "{count} margin(s) use incomplete data",
+          "explanation": "{field}: provisional {amount} at {completeness}% completeness.",
+          "evidence": "Canonical Gross Margin and completeness."
+        },
+        "MISSING_HARVEST": {
+          "title": "{count} field(s) have cost but no harvest",
+          "explanation": "{field} cannot show break-even yet.",
+          "evidence": "No harvest recorded for the field season."
+        },
+        "MISSING_REVENUE": {
+          "title": "{count} harvested field(s) have no revenue",
+          "explanation": "{field} has no received revenue; margin is unavailable.",
+          "evidence": "No received revenue recorded."
+        },
+        "STRONGEST_COMPLETE_MARGIN": {
+          "title": "{field} has the strongest complete margin",
+          "explanation": "{field} ({crop}): {amount} per hectare.",
+          "evidence": "Highest canonical margin per hectare among complete fields."
+        }
+      }
+    },
     "budgetVariance": {
-      "title": "Budget versus actual", "notRecorded": "Not recorded",
-      "labels": {"budget":"Budget","actual":"Actual","variance":"Variance","line":"Line"},
-      "status": {"within_budget":"Within budget","over_budget":"Over budget","under_budget":"Under budget","unavailable":"Unavailable"},
-      "reasons": {"WITHIN_BUDGET":"Actual cost matches the budget.","OVER_BUDGET":"Actual costs exceed the field budget.","UNDER_BUDGET":"Spending is below plan.","BUDGET_NOT_RECORDED":"Budget is not recorded.","ACTUAL_COST_NOT_RECORDED":"Actual cost is not recorded.","BUDGET_AND_ACTUAL_NOT_RECORDED":"Budget and actual cost are not recorded.","ACTUAL_COST_INCOMPLETE":"Actual cost data is incomplete.","CURRENCY_MISMATCH":"Budget and actual cost use different currencies."},
-      "actions": {"ADD_BUDGET":"Add budget","RECORD_ACTUAL_COST":"Record actual cost","REVIEW_COSTS":"Review costs","REVIEW_UNPRICED_COSTS":"Review missing prices","OPEN_FINANCE":"Open Finance","NO_ACTION_REQUIRED":"No action required"},
-      "rows": {"INPUT_COST":"Input cost","LABOUR":"Labour","MACHINERY":"Machinery","CONTRACTOR":"Contractor","TOTAL_COST":"Total cost","YIELD":"Yield","REVENUE":"Revenue","GROSS_MARGIN":"Gross margin"},
-      "notes": {"PLANNED_NOT_RECORDED":"Planned value is not recorded.","ACTUAL_INCOMPLETE":"Actual cost is incomplete.","HARVEST_NOT_RECORDED":"Harvest is not recorded.","REVENUE_NOT_RECORDED":"Revenue is not recorded.","GROSS_MARGIN_INCOMPLETE":"Gross margin is incomplete."},
-      "signal": {"title":"{count} field(s) over planned cost","explanation":"{field} has the largest overrun: {amount} ({percent}) over plan.","whyItMatters":"A field above its cost plan can erode margin; reviewing it mid-season supports informed spending decisions.","evidence":"Recorded cost versus season-plan expected cost for the field season."}
+      "title": "Budget versus actual",
+      "notRecorded": "Not recorded",
+      "labels": {
+        "budget": "Budget",
+        "actual": "Actual",
+        "variance": "Variance",
+        "line": "Line"
+      },
+      "status": {
+        "within_budget": "Within budget",
+        "over_budget": "Over budget",
+        "under_budget": "Under budget",
+        "unavailable": "Unavailable"
+      },
+      "reasons": {
+        "WITHIN_BUDGET": "Actual cost matches the budget.",
+        "OVER_BUDGET": "Actual costs exceed the field budget.",
+        "UNDER_BUDGET": "Spending is below plan.",
+        "BUDGET_NOT_RECORDED": "Budget is not recorded.",
+        "ACTUAL_COST_NOT_RECORDED": "Actual cost is not recorded.",
+        "BUDGET_AND_ACTUAL_NOT_RECORDED": "Budget and actual cost are not recorded.",
+        "ACTUAL_COST_INCOMPLETE": "Actual cost data is incomplete.",
+        "CURRENCY_MISMATCH": "Budget and actual cost use different currencies."
+      },
+      "actions": {
+        "ADD_BUDGET": "Add budget",
+        "RECORD_ACTUAL_COST": "Record actual cost",
+        "REVIEW_COSTS": "Review costs",
+        "REVIEW_UNPRICED_COSTS": "Review missing prices",
+        "OPEN_FINANCE": "Open Finance",
+        "NO_ACTION_REQUIRED": "No action required"
+      },
+      "rows": {
+        "INPUT_COST": "Input cost",
+        "LABOUR": "Labour",
+        "MACHINERY": "Machinery",
+        "CONTRACTOR": "Contractor",
+        "TOTAL_COST": "Total cost",
+        "YIELD": "Yield",
+        "REVENUE": "Revenue",
+        "GROSS_MARGIN": "Gross margin"
+      },
+      "notes": {
+        "PLANNED_NOT_RECORDED": "Planned value is not recorded.",
+        "ACTUAL_INCOMPLETE": "Actual cost is incomplete.",
+        "HARVEST_NOT_RECORDED": "Harvest is not recorded.",
+        "REVENUE_NOT_RECORDED": "Revenue is not recorded.",
+        "GROSS_MARGIN_INCOMPLETE": "Gross margin is incomplete."
+      },
+      "signal": {
+        "title": "{count} field(s) over planned cost",
+        "explanation": "{field} has the largest overrun: {amount} ({percent}) over plan.",
+        "whyItMatters": "A field above its cost plan can erode margin; reviewing it mid-season supports informed spending decisions.",
+        "evidence": "Recorded cost versus season-plan expected cost for the field season."
+      }
     }
   },
   "dialog": {
@@ -147,6 +482,16 @@
     "scoutingDisclaimer": "Symptoms and automated suggestions are not confirmed diagnoses and do not authorize treatment.",
     "actions": "Actions",
     "offlineActions": "{lastSynced} Reallocation, corrections, reversals and export need a connection and are unavailable offline.",
-    "actionsDisclaimer": "Purchases cannot be edited after stock has been used — reverse and replace instead. Field economics are recorded operational economics, not statutory accounting."
+    "actionsDisclaimer": "Purchases cannot be edited after stock has been used — reverse and replace instead. Field economics are recorded operational economics, not statutory accounting.",
+    "ndviTitle": "Vegetation index (NDVI)",
+    "ndviLatest": "Latest: {date}",
+    "ndviValue": "NDVI {value}",
+    "ndviNoValue": "No usable reading (fully cloud-covered)",
+    "ndviCloudCoverage": "{pct}% cloud-masked",
+    "ndviEmpty": "No satellite readings yet.",
+    "ndviNoGeometry": "This field has no recorded boundary — import it via BRP or draw its shape to enable satellite readings.",
+    "ndviRefresh": "Refresh from satellite",
+    "ndviRefreshing": "Fetching...",
+    "ndviDisclaimer": "Sentinel-2 satellite data (Copernicus), ~5-day revisit — readings can be sparse under persistent cloud cover."
   }
 }

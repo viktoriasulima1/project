@@ -8,16 +8,17 @@
 // is not a stub, but it has not yet been exercised against a live response.
 // ─────────────────────────────────────────────────────────────────────────────
 
-export interface CopernicusGeoJsonPolygon {
-  type: 'Polygon';
-  /** [ring][point][lon, lat] — GeoJSON winding order, EPSG:4326. */
-  coordinates: number[][][];
-}
+/** Matches PdokGeometry's shape — a Field's `coordinates` column can be
+ * either, depending on whether the parcel came in as a single ring or a
+ * multi-part BRP geometry. */
+export type CopernicusGeometry =
+  | { type: 'Polygon'; coordinates: number[][][] }
+  | { type: 'MultiPolygon'; coordinates: number[][][][] };
 
 export interface StatisticalApiRequestBody {
   input: {
     bounds: {
-      geometry: CopernicusGeoJsonPolygon;
+      geometry: CopernicusGeometry;
       properties: { crs: string };
     };
     data: Array<{ type: string }>;

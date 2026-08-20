@@ -1,6 +1,6 @@
 import { fetchNdviStatistics } from './client';
 import { mapNdviStatistics } from './mapper';
-import type { CopernicusGeoJsonPolygon, NdviReading } from './types';
+import type { CopernicusGeometry, NdviReading } from './types';
 
 // Sentinel-2's revisit time is ~5 days and cloud-free coverage is often
 // sparser than that — there is no benefit re-fetching the same field/period
@@ -9,17 +9,17 @@ import type { CopernicusGeoJsonPolygon, NdviReading } from './types';
 // time-sensitive than BRP's annual republish).
 const CACHE_REVALIDATE_SECONDS = 24 * 60 * 60;
 
-type CachedFn = (geometry: CopernicusGeoJsonPolygon, from: string, to: string) => Promise<NdviReading[]>;
+type CachedFn = (geometry: CopernicusGeometry, from: string, to: string) => Promise<NdviReading[]>;
 let _cached: CachedFn | null = null;
 let _cachedInitFailed = false;
 
-async function fetchAndMap(geometry: CopernicusGeoJsonPolygon, from: string, to: string): Promise<NdviReading[]> {
+async function fetchAndMap(geometry: CopernicusGeometry, from: string, to: string): Promise<NdviReading[]> {
   const raw = await fetchNdviStatistics(geometry, from, to);
   return mapNdviStatistics(raw, new Date().toISOString());
 }
 
 export async function fetchNdviStatisticsCached(
-  geometry: CopernicusGeoJsonPolygon,
+  geometry: CopernicusGeometry,
   from: string,
   to: string,
 ): Promise<NdviReading[]> {

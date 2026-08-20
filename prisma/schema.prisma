@@ -623,6 +623,7 @@ model Field {
   soilAnalyses       SoilAnalysis[]
   externalProvenance FieldExternalProvenance?
   scoutingVisits     ScoutingVisit[]
+  ndviReadings       FieldNdviReading[]
 
   @@index([farmId])
   @@index([deletedAt])
@@ -1786,6 +1787,28 @@ model NutrientNormReference {
 
   @@unique([farmId, crop])
   @@map("nutrient_norm_references")
+}
+
+// One row per aggregation period returned by Copernicus's Statistical API
+// (src/integrations/copernicus) for a field — a time series, not a single
+// current-value snapshot, since the whole point is seeing a trend. Never
+// backfilled with a guessed value: meanNdvi is null exactly when the source
+// reading itself was null (fully cloud-masked period).
+model FieldNdviReading {
+  id               String   @id @default(uuid())
+  fieldId          String
+  periodFrom       DateTime @db.Date
+  periodTo         DateTime @db.Date
+  meanNdvi         Decimal? @db.Decimal(5, 3)
+  sampleCount      Int
+  cloudCoveragePct Decimal? @db.Decimal(4, 1)
+  fetchedAt        DateTime @default(now())
+
+  field Field @relation(fields: [fieldId], references: [id], onDelete: Cascade)
+
+  @@unique([fieldId, periodFrom])
+  @@index([fieldId, periodFrom])
+  @@map("field_ndvi_readings")
 }
 
 model SoilAnalysis {
