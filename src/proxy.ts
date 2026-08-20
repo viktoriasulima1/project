@@ -41,5 +41,14 @@ export const config = {
   matcher: [
     '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
     '/(api|trpc)(.*)',
+    // Clerk's auto-proxy for *.vercel.app domains (see proxy.ts's clerkProxy
+    // above — clerkMiddleware() forwards these to Clerk's backend itself,
+    // before our handler runs) serves clerk-js as a proxied .js file, e.g.
+    // /__clerk/npm/@clerk/clerk-js@6/dist/clerk.browser.js — the general
+    // matcher above explicitly excludes .js paths (to skip our own static
+    // chunks), which silently 404'd every one of these and left the sign-in
+    // widget with no script to render. Matched here unconditionally, ahead
+    // of that exclusion, exactly as Clerk's own dashboard requires.
+    '/__clerk/:path*',
   ],
 };
