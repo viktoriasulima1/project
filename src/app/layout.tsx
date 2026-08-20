@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Figtree, Geist_Mono } from "next/font/google";
 import { isClerkConfigured } from "@/lib/clerk-config";
 import { ClerkBootBoundary } from "@/components/dev/ClerkBootBoundary";
 import { getActiveLocale } from "@/i18n/active-locale";
@@ -18,9 +18,15 @@ const isDev = process.env.NODE_ENV === 'development';
 // segments can layer additional namespaces via their own LocaleProvider later.
 const GLOBAL_NAMESPACES: readonly Namespace[] = ['common', 'navigation', 'validation', 'enums', 'errors', 'workOrders', 'scouting', 'onboarding', 'fields', 'team', 'machines', 'soil', 'nutrients'];
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+// Figtree, not Geist — Geist is GitHub/Vercel's own product typeface, and
+// pairing it with a colour palette also lifted from GitHub was the core of
+// the "looks like a dev tool" complaint. Figtree's rounder terminals match
+// the warm/agrarian direction (softer cards, bigger radii) already applied
+// via globals.css. latin-ext covers the diacritics in the nl-NL/pl-PL/de-DE
+// locales this app ships.
+const fontSans = Figtree({
+  variable: "--font-sans",
+  subsets: ["latin", "latin-ext"],
 });
 
 const geistMono = Geist_Mono({
@@ -50,7 +56,7 @@ function AppDocument({ lang, dir, children }: { lang: string; dir: 'ltr' | 'rtl'
   // It does NOT hide the locale/text mismatch this change fixes — that fix is the
   // single server locale snapshot + moving the init script out of React's tree.
   return (
-    <html lang={lang} dir={dir} data-theme="dark" suppressHydrationWarning className={`${geistSans.variable} ${geistMono.variable}`}>
+    <html lang={lang} dir={dir} data-theme="dark" suppressHydrationWarning className={`${fontSans.variable} ${geistMono.variable}`}>
       <body>
         {/* next/script beforeInteractive is injected into <head> by Next OUTSIDE
             React's hydrated tree, so React no longer "encounters a script tag"

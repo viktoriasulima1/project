@@ -4,7 +4,7 @@
   justify-content: center;
   min-height: 100vh;
   background: var(--color-bg);
-  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  font-family: var(--font-sans), system-ui, sans-serif;
 }
 
 .main {
