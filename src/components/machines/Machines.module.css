@@ -10,13 +10,13 @@
 .button { border: 0; border-radius: 7px; padding: 9px 13px; background: var(--color-primary); color: white; cursor: pointer; }
 .buttonSecondary { border: 1px solid var(--color-border); border-radius: 7px; padding: 9px 13px; background: transparent; color: var(--color-text); cursor: pointer; }
 .muted { color: var(--color-text-secondary); font-size: 13px; }
-.error { color: #dc2626; font-size: 13px; grid-column: 1 / -1; }
-.success { color: #15803d; font-size: 13px; grid-column: 1 / -1; }
+.error { color: var(--color-red); font-size: 13px; grid-column: 1 / -1; }
+.success { color: var(--color-green); font-size: 13px; grid-column: 1 / -1; }
 .list { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
 .row { padding: 12px 14px; border: 1px solid var(--color-border); border-radius: 8px; display: flex; justify-content: space-between; gap: 12px; align-items: center; flex-wrap: wrap; }
 .rowActions { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
 .badge { border-radius: 999px; padding: 3px 10px; font-size: 12px; white-space: nowrap; font-weight: 500; }
-.badgeOk { background: color-mix(in srgb, #15803d 16%, transparent); color: #15803d; }
-.badgeDueSoon { background: color-mix(in srgb, #b45309 16%, transparent); color: #b45309; }
-.badgeOverdue { background: color-mix(in srgb, #dc2626 16%, transparent); color: #dc2626; }
+.badgeOk { background: var(--color-green-subtle); color: var(--color-green); }
+.badgeDueSoon { background: var(--color-amber-subtle); color: var(--color-amber); }
+.badgeOverdue { background: var(--color-red-subtle); color: var(--color-red); }
 .badgeNeutral { background: var(--color-bg); color: var(--color-text-secondary); }

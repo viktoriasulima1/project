@@ -6,10 +6,10 @@
 .form input, .form select, .form textarea { width: 100%; border: 1px solid var(--color-border); border-radius: 7px; padding: 9px; background: var(--color-bg); color: var(--color-text); }
 .formActions { display: flex; gap: 8px; grid-column: 1 / -1; }
 .button { border: 0; border-radius: 7px; padding: 9px 13px; background: var(--color-primary); color: white; cursor: pointer; }
-.buttonDanger { border: 1px solid var(--color-border); border-radius: 7px; padding: 6px 10px; background: transparent; color: #dc2626; cursor: pointer; font-size: 12px; }
+.buttonDanger { border: 1px solid var(--color-border); border-radius: 7px; padding: 6px 10px; background: transparent; color: var(--color-red); cursor: pointer; font-size: 12px; }
 .muted { color: var(--color-text-secondary); font-size: 13px; }
-.error { color: #dc2626; font-size: 13px; grid-column: 1 / -1; }
-.success { color: #15803d; font-size: 13px; grid-column: 1 / -1; }
+.error { color: var(--color-red); font-size: 13px; grid-column: 1 / -1; }
+.success { color: var(--color-green); font-size: 13px; grid-column: 1 / -1; }
 .fieldGroup { display: grid; gap: 10px; }
 .fieldGroup h3 { margin: 0; font-size: 14px; }
 .table { width: 100%; border-collapse: collapse; }

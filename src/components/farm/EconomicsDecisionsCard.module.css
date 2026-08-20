@@ -12,9 +12,9 @@
 .signalHead{display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap}
 .title{font-weight:600;font-size:14px}
 .sev{font-size:11px;padding:1px 8px;border-radius:999px;border:1px solid var(--color-border);text-transform:capitalize}
-.sevCritical{background:var(--color-red-subtle,#fee2e2);color:#991b1b;border-color:transparent}
-.sevHigh{background:var(--color-yellow-subtle,#fef9c3);color:#854d0e;border-color:transparent}
-.sevMedium{background:var(--color-blue-subtle,#dbeafe);color:#1e40af;border-color:transparent}
+.sevCritical{background:var(--color-red-subtle,#fee2e2);color:var(--color-red);border-color:transparent}
+.sevHigh{background:var(--color-yellow-subtle,#fef9c3);color:var(--color-yellow-dark,#854d0e);border-color:transparent}
+.sevMedium{background:var(--color-blue-subtle,#dbeafe);color:var(--color-blue);border-color:transparent}
 .sevLow{background:var(--color-border);color:var(--color-text-muted);border-color:transparent}
 .meta{display:flex;flex-wrap:wrap;gap:6px 14px;color:var(--color-text-muted);font-size:12px}
 .explain{font-size:13px;color:var(--color-text)}

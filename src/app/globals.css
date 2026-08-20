@@ -8,64 +8,77 @@
 :root {
   color-scheme: dark;
 
-  /* Surfaces */
-  --color-bg: #0d1117;
-  --color-surface: #161b22;
-  --color-surface-elevated: #1c2128;
-  --color-surface-hover: #21262d;
+  /* Surfaces — warm dusk brown, not GitHub's cold blue-black */
+  --color-bg: #191510;
+  --color-surface: #221c15;
+  --color-surface-elevated: #2a2319;
+  --color-surface-hover: #31291b;
   /* Dialog scrim */
-  --color-overlay: rgba(1, 4, 9, 0.7);
+  --color-overlay: rgba(12, 9, 5, 0.72);
 
   /* Borders */
-  --color-border: #21262d;
-  --color-border-subtle: #30363d;
-  --color-border-hover: #484f58;
+  --color-border: #3a3021;
+  --color-border-subtle: #453a27;
+  --color-border-hover: #5d4d34;
 
   /* Text */
-  --color-text-primary: #e6edf3;
-  --color-text-secondary: #8b949e;
+  --color-text-primary: #f0e9d8;
+  --color-text-secondary: #b7a98c;
   /* Was #6e7681 — measured 3.76:1 against --color-surface (#161b22), below
      WCAG AA's 4.5:1 minimum for normal text (found via Sprint 12's axe-core
      pass, which flagged it on nearly every page). This value clears 4.5:1
      while staying visibly dimmer than --color-text-secondary. */
-  --color-text-muted: #828a94;
+  --color-text-muted: #9d8f73;
   /* Text ON a solid accent background (primary buttons, FAB) — dark text on
      the bright dark-theme green; the light theme flips this to white text
      on its darker green. */
-  --color-on-accent: #0d1117;
+  --color-on-accent: #191510;
 
-  /* Accent: green (healthy, success) */
-  --color-green: #3fb950;
-  --color-green-hover: #52c96a;
-  --color-green-subtle: rgba(63, 185, 80, 0.12);
-  --color-green-border: rgba(63, 185, 80, 0.3);
+  /* Accent: green (healthy, success) — olive/moss, not GitHub's mint-lime */
+  --color-green: #74ab4c;
+  --color-green-hover: #86c05d;
+  --color-green-subtle: rgba(116, 171, 76, 0.14);
+  --color-green-border: rgba(116, 171, 76, 0.32);
 
-  /* Accent: amber (warning) */
-  --color-amber: #d29922;
-  --color-amber-subtle: rgba(210, 153, 34, 0.12);
-  --color-amber-border: rgba(210, 153, 34, 0.3);
+  /* Accent: amber (warning) — warm harvest gold */
+  --color-amber: #dba43f;
+  --color-amber-subtle: rgba(219, 164, 63, 0.14);
+  --color-amber-border: rgba(219, 164, 63, 0.32);
   /* Aliases used by the Compliance page's "incomplete" status pill */
-  --color-yellow-subtle: rgba(210, 153, 34, 0.15);
-  --color-yellow-dark: #d29922;
+  --color-yellow-subtle: rgba(219, 164, 63, 0.16);
+  --color-yellow-dark: #dba43f;
 
-  /* Accent: red (danger, alert) */
-  --color-red: #f85149;
-  --color-red-subtle: rgba(248, 81, 73, 0.12);
-  --color-red-border: rgba(248, 81, 73, 0.3);
+  /* Accent: red (danger, alert) — brick/terracotta, softer than a pure alarm red */
+  --color-red: #e2685a;
+  --color-red-subtle: rgba(226, 104, 90, 0.14);
+  --color-red-border: rgba(226, 104, 90, 0.32);
 
-  /* Accent: blue (info, AI) */
-  --color-blue: #58a6ff;
-  --color-blue-hover: #79bbff;
-  --color-blue-subtle: rgba(88, 166, 255, 0.12);
-  --color-blue-border: rgba(88, 166, 255, 0.3);
+  /* Accent: blue (info, AI) — muted slate-teal, not a bright corporate blue */
+  --color-blue: #6fb0c4;
+  --color-blue-hover: #85bfd1;
+  --color-blue-subtle: rgba(111, 176, 196, 0.14);
+  --color-blue-border: rgba(111, 176, 196, 0.32);
 
   /* Accent: purple (AI assistant) */
-  --color-purple: #bc8cff;
-  --color-purple-subtle: rgba(188, 140, 255, 0.12);
-  --color-purple-border: rgba(188, 140, 255, 0.3);
+  --color-purple: #b79bd8;
+  --color-purple-subtle: rgba(183, 155, 216, 0.14);
+  --color-purple-border: rgba(183, 155, 216, 0.32);
+
+  /* Aliases — several page CSS modules (Team, Soil, Machines, Nutrients,
+     Finance, Scouting, Operations, FieldEconomics...) reference
+     --color-primary / --color-text directly. Neither was ever defined, so
+     every "primary" submit button on those pages rendered with no
+     background at all (an invalid var() with no fallback computes to the
+     property's initial value — transparent for background-color) and text
+     colors were silently riding on inheritance instead of an explicit
+     value. Aliasing rather than renaming every call site: cheapest fix
+     that can't miss one. */
+  --color-primary: var(--color-green);
+  --color-primary-hover: var(--color-green-hover);
+  --color-text: var(--color-text-primary);
 
   /* Scrollbar */
-  --color-scrollbar-hover: #484f58;
+  --color-scrollbar-hover: #5d4d34;
 
   /* Layout */
   --sidebar-width: 216px;
@@ -90,10 +103,11 @@
   --space-6: 24px;
   --space-8: 32px;
 
-  /* Radius */
-  --radius-sm: 4px;
-  --radius-md: 6px;
-  --radius-lg: 10px;
+  /* Radius — slightly softer/rounder than the GitHub-derived defaults, part
+     of the warm/agrarian direction (less "developer tool", more approachable) */
+  --radius-sm: 5px;
+  --radius-md: 8px;
+  --radius-lg: 14px;
 
   /* Font sizes */
   --font-xs: 11px;
@@ -109,39 +123,40 @@
 }
 
 /* ─── Light theme ──────────────────────────────────────────────────────────────
-   GitHub-light-derived, mirroring the GitHub-dark-derived defaults above so
-   both themes keep the same visual hierarchy. Accent hues are the darker
-   "text-safe" variants: every accent doubles as text (status pills, links,
-   error copy) and must clear WCAG AA 4.5:1 on white — the bright dark-theme
-   accents don't. */
+   Warm/agrarian: parchment background and tan borders instead of GitHub's
+   cold blue-gray, olive-forest green as the brand accent instead of GitHub's
+   mint-lime. Mirrors the dark theme above so both keep the same visual
+   hierarchy. Accent hues are the darker "text-safe" variants: every accent
+   doubles as text (status pills, links, error copy) and must clear WCAG AA
+   4.5:1 on white — the bright dark-theme accents don't. */
 :root[data-theme='light'] {
   color-scheme: light;
 
   /* Surfaces */
-  --color-bg: #f6f8fa;
+  --color-bg: #f6f2e9;
   --color-surface: #ffffff;
   --color-surface-elevated: #ffffff;
-  --color-surface-hover: #eef1f4;
-  --color-overlay: rgba(31, 35, 40, 0.5);
+  --color-surface-hover: #f0e9d9;
+  --color-overlay: rgba(43, 36, 26, 0.5);
 
   /* Borders */
-  --color-border: #d0d7de;
-  --color-border-subtle: #c4ccd4;
-  --color-border-hover: #8c959f;
+  --color-border: #e2d8c2;
+  --color-border-subtle: #ece3d0;
+  --color-border-hover: #c2b18c;
 
   /* Text — primary ~15:1, secondary ~7.5:1, muted ~5.9:1 on --color-bg;
      all clear WCAG AA 4.5:1 (same requirement the dark muted token was
      fixed for in Sprint 12). */
-  --color-text-primary: #1f2328;
-  --color-text-secondary: #454c54;
-  --color-text-muted: #57606a;
+  --color-text-primary: #2a2318;
+  --color-text-secondary: #5a4f3c;
+  --color-text-muted: #6f6249;
   --color-on-accent: #ffffff;
 
   /* Accents */
-  --color-green: #116329;
-  --color-green-hover: #0d5424;
-  --color-green-subtle: rgba(26, 127, 55, 0.1);
-  --color-green-border: rgba(26, 127, 55, 0.35);
+  --color-green: #3d6b2c;
+  --color-green-hover: #325823;
+  --color-green-subtle: rgba(61, 107, 44, 0.1);
+  --color-green-border: rgba(61, 107, 44, 0.35);
 
   /* Sprint 25 E2E accessibility fix — #9a6700 on the amber-subtle fill was
      4.28:1 (below WCAG AA 4.5). Darkened to #8a5d00 (~5.07:1) so amber status
@@ -153,21 +168,21 @@
   --color-yellow-subtle: rgba(154, 103, 0, 0.12);
   --color-yellow-dark: #9a6700;
 
-  --color-red: #d1242f;
-  --color-red-subtle: rgba(209, 36, 47, 0.08);
-  --color-red-border: rgba(209, 36, 47, 0.35);
+  --color-red: #b3372a;
+  --color-red-subtle: rgba(179, 55, 42, 0.08);
+  --color-red-border: rgba(179, 55, 42, 0.35);
 
-  --color-blue: #0550ae;
-  --color-blue-hover: #033d8b;
-  --color-blue-subtle: rgba(9, 105, 218, 0.08);
-  --color-blue-border: rgba(9, 105, 218, 0.35);
+  --color-blue: #206a80;
+  --color-blue-hover: #185369;
+  --color-blue-subtle: rgba(32, 106, 128, 0.08);
+  --color-blue-border: rgba(32, 106, 128, 0.35);
 
-  --color-purple: #8250df;
-  --color-purple-subtle: rgba(130, 80, 223, 0.08);
-  --color-purple-border: rgba(130, 80, 223, 0.35);
+  --color-purple: #7250b5;
+  --color-purple-subtle: rgba(114, 80, 181, 0.08);
+  --color-purple-border: rgba(114, 80, 181, 0.35);
 
   /* Scrollbar */
-  --color-scrollbar-hover: #8c959f;
+  --color-scrollbar-hover: #c2b18c;
 }
 
 *,
@@ -209,6 +224,11 @@ button {
 input, textarea, select {
   font-family: inherit;
   font-size: inherit;
+}
+
+input[type='checkbox'],
+input[type='radio'] {
+  accent-color: var(--color-green);
 }
 
 ::-webkit-scrollbar {
