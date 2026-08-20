@@ -21,6 +21,7 @@
   "farm": {
     "title": "Ihr Betrieb",
     "desc": "Grunddaten sowie Standort, falls vorhanden — Koordinaten können Sie später hinzufügen.",
+    "alreadySaved": "Ihre Betriebsdaten sind bereits gespeichert.",
     "nameLabel": "Betriebsname *",
     "namePlaceholder": "z. B. Maatschap De Ridder",
     "locationLabel": "Standort (Ort, Provinz) *",
@@ -43,6 +44,7 @@
   "field": {
     "title": "Ihr erster Schlag",
     "desc": "Fügen Sie einen Schlag hinzu, um zu beginnen — weitere können Sie jederzeit auf der Schläge-Seite hinzufügen.",
+    "alreadyAdded": "Ihr erster Schlag wurde bereits hinzugefügt. Weitere können Sie jederzeit auf der Schläge-Seite hinzufügen.",
     "nameLabel": "Schlagname *",
     "namePlaceholder": "z. B. Keetje Noord",
     "hectares": "Hektar *",

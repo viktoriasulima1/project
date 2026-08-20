@@ -21,6 +21,7 @@
   "farm": {
     "title": "Uw bedrijf",
     "desc": "Basisgegevens, plus locatie als u die heeft — u kunt coördinaten later toevoegen.",
+    "alreadySaved": "Uw bedrijfsgegevens zijn al opgeslagen.",
     "nameLabel": "Bedrijfsnaam *",
     "namePlaceholder": "bijv. Maatschap De Ridder",
     "locationLabel": "Locatie (plaats, provincie) *",
@@ -43,6 +44,7 @@
   "field": {
     "title": "Uw eerste perceel",
     "desc": "Voeg één perceel toe om te beginnen — u kunt er altijd meer toevoegen via de Percelen-pagina.",
+    "alreadyAdded": "Uw eerste perceel is al toegevoegd. U kunt er altijd meer toevoegen via de Percelen-pagina.",
     "nameLabel": "Perceelnaam *",
     "namePlaceholder": "bijv. Keetje Noord",
     "hectares": "Hectare *",

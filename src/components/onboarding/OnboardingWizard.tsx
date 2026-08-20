@@ -251,9 +251,36 @@ export function OnboardingWizard({ setupStateName, requestedStep, farm, fields, 
         {step === 'farm' && (
           <>
             <h1 className={styles.stepTitle}>{t('farm.title')}</h1>
-            <p className={styles.stepDesc}>{t('farm.desc')}</p>
-            <form action={farmAction} className={styles.form}>
-              <OnboardingError errorCode={farmState.errorCode} />
+            {farmState.success ? (
+              // Reachable via the side nav once this step is done.
+              // createFarm is idempotent — resubmitting just returns the
+              // existing farm without applying any edits made here — and the
+              // forward-advance effect below keys off farmState.success,
+              // which doesn't change value on a second identical `true`, so
+              // it wouldn't even fire again. Re-showing the live form here
+              // would silently discard edits and appear to hang. Confirm
+              // and let Continue just move forward instead.
+              <>
+                <p className={styles.stepDesc}>{t('farm.alreadySaved')}</p>
+                <div className={styles.footer}>
+                  <span />
+                  <Button
+                    type="button"
+                    variant="primary"
+                    onClick={() => {
+                      setStep('season');
+                      router.replace('/onboarding?step=season');
+                    }}
+                  >
+                    {t('buttons.continue')}
+                  </Button>
+                </div>
+              </>
+            ) : (
+              <>
+                <p className={styles.stepDesc}>{t('farm.desc')}</p>
+                <form action={farmAction} className={styles.form}>
+                  <OnboardingError errorCode={farmState.errorCode} />
 
               <div className={styles.fieldGroup}>
                 <label className={styles.label} htmlFor="name">{t('farm.nameLabel')}</label>
@@ -310,9 +337,11 @@ export function OnboardingWizard({ setupStateName, requestedStep, farm, fields, 
 
               <div className={styles.footer}>
                 <span />
-                <Button type="submit" variant="primary" loading={farmPending}>{t('buttons.continue')}</Button>
-              </div>
-            </form>
+                    <Button type="submit" variant="primary" loading={farmPending}>{t('buttons.continue')}</Button>
+                  </div>
+                </form>
+              </>
+            )}
           </>
         )}
 
@@ -349,32 +378,59 @@ export function OnboardingWizard({ setupStateName, requestedStep, farm, fields, 
         {step === 'field' && (
           <>
             <h1 className={styles.stepTitle}>{t('field.title')}</h1>
-            <p className={styles.stepDesc}>{t('field.desc')}</p>
-            <form action={fieldAction} className={styles.form}>
-              {fieldState.error && <div className={styles.globalError} role="alert">{fieldState.error}</div>}
-              <div className={styles.fieldGroup}>
-                <label className={styles.label} htmlFor="fname">{t('field.nameLabel')}</label>
-                <input id="fname" name="name" className={`${styles.input}${fieldState.fieldErrors?.name ? ` ${styles.hasError}` : ''}`} placeholder={t('field.namePlaceholder')} />
-                {fieldState.fieldErrors?.name && <span className={styles.errorMsg}>{fieldState.fieldErrors.name[0]}</span>}
-              </div>
-              <div className={styles.row}>
-                <div className={styles.fieldGroup}>
-                  <label className={styles.label} htmlFor="hectares">{t('field.hectares')}</label>
-                  <input id="hectares" name="hectares" type="number" step="0.01" min="0.01" className={`${styles.input}${fieldState.fieldErrors?.hectares ? ` ${styles.hasError}` : ''}`} placeholder={t('field.hectaresPlaceholder')} />
-                  {fieldState.fieldErrors?.hectares && <span className={styles.errorMsg}>{fieldState.fieldErrors.hectares[0]}</span>}
+            {fieldState.success ? (
+              // Reachable by clicking this already-completed step in the side
+              // nav (or repeated Back clicks). createField has no dedup the
+              // way createFarm/createSeason/addFieldToSeason do, so
+              // re-rendering the blank create form here would silently add a
+              // second field on re-submit. Show a static confirmation and let
+              // Continue just move forward instead.
+              <>
+                <p className={styles.stepDesc}>{t('field.alreadyAdded')}</p>
+                <div className={styles.footer}>
+                  <Button type="button" variant="ghost" onClick={goBack}>{t('buttons.back')}</Button>
+                  <Button
+                    type="button"
+                    variant="primary"
+                    onClick={() => {
+                      setStep('crop');
+                      router.replace('/onboarding?step=crop');
+                    }}
+                  >
+                    {t('buttons.continue')}
+                  </Button>
                 </div>
-                <div className={styles.fieldGroup}>
-                  <label className={styles.label} htmlFor="soilType">{t('field.soilType')}</label>
-                  <select id="soilType" name="soilType" className={styles.select} defaultValue="loam">
-                    {SOIL_OPTIONS.map((s) => <option key={s} value={s}>{te(`soilType.${s}`)}</option>)}
-                  </select>
-                </div>
-              </div>
-              <div className={styles.footer}>
-                <Button type="button" variant="ghost" onClick={goBack}>{t('buttons.back')}</Button>
-                <Button type="submit" variant="primary" loading={fieldPending}>{t('buttons.continue')}</Button>
-              </div>
-            </form>
+              </>
+            ) : (
+              <>
+                <p className={styles.stepDesc}>{t('field.desc')}</p>
+                <form action={fieldAction} className={styles.form}>
+                  {fieldState.error && <div className={styles.globalError} role="alert">{fieldState.error}</div>}
+                  <div className={styles.fieldGroup}>
+                    <label className={styles.label} htmlFor="fname">{t('field.nameLabel')}</label>
+                    <input id="fname" name="name" className={`${styles.input}${fieldState.fieldErrors?.name ? ` ${styles.hasError}` : ''}`} placeholder={t('field.namePlaceholder')} />
+                    {fieldState.fieldErrors?.name && <span className={styles.errorMsg}>{fieldState.fieldErrors.name[0]}</span>}
+                  </div>
+                  <div className={styles.row}>
+                    <div className={styles.fieldGroup}>
+                      <label className={styles.label} htmlFor="hectares">{t('field.hectares')}</label>
+                      <input id="hectares" name="hectares" type="number" step="0.01" min="0.01" className={`${styles.input}${fieldState.fieldErrors?.hectares ? ` ${styles.hasError}` : ''}`} placeholder={t('field.hectaresPlaceholder')} />
+                      {fieldState.fieldErrors?.hectares && <span className={styles.errorMsg}>{fieldState.fieldErrors.hectares[0]}</span>}
+                    </div>
+                    <div className={styles.fieldGroup}>
+                      <label className={styles.label} htmlFor="soilType">{t('field.soilType')}</label>
+                      <select id="soilType" name="soilType" className={styles.select} defaultValue="loam">
+                        {SOIL_OPTIONS.map((s) => <option key={s} value={s}>{te(`soilType.${s}`)}</option>)}
+                      </select>
+                    </div>
+                  </div>
+                  <div className={styles.footer}>
+                    <Button type="button" variant="ghost" onClick={goBack}>{t('buttons.back')}</Button>
+                    <Button type="submit" variant="primary" loading={fieldPending}>{t('buttons.continue')}</Button>
+                  </div>
+                </form>
+              </>
+            )}
           </>
         )}
 

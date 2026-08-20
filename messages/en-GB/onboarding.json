@@ -21,6 +21,7 @@
   "farm": {
     "title": "Your farm",
     "desc": "Basic details, plus location if you have it — you can add coordinates later.",
+    "alreadySaved": "Your farm details are already saved.",
     "nameLabel": "Farm name *",
     "namePlaceholder": "e.g. Maatschap De Ridder",
     "locationLabel": "Location (city, province) *",
@@ -43,6 +44,7 @@
   "field": {
     "title": "Your first field",
     "desc": "Add one field to get started — you can add more any time from the Fields page.",
+    "alreadyAdded": "Your first field is already added. You can add more any time from the Fields page.",
     "nameLabel": "Field name *",
     "namePlaceholder": "e.g. Keetje Noord",
     "hectares": "Hectares *",

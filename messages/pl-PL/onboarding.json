@@ -21,6 +21,7 @@
   "farm": {
     "title": "Twoje gospodarstwo",
     "desc": "Podstawowe dane oraz lokalizacja, jeśli ją masz — współrzędne możesz dodać później.",
+    "alreadySaved": "Dane Twojego gospodarstwa zostały już zapisane.",
     "nameLabel": "Nazwa gospodarstwa *",
     "namePlaceholder": "np. Maatschap De Ridder",
     "locationLabel": "Lokalizacja (miasto, region) *",
@@ -43,6 +44,7 @@
   "field": {
     "title": "Twoje pierwsze pole",
     "desc": "Dodaj jedno pole na początek — więcej możesz dodać w każdej chwili na stronie Pola.",
+    "alreadyAdded": "Twoje pierwsze pole zostało już dodane. Więcej możesz dodać w każdej chwili na stronie Pola.",
     "nameLabel": "Nazwa pola *",
     "namePlaceholder": "np. Keetje Noord",
     "hectares": "Hektary *",
