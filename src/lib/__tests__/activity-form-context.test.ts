@@ -56,8 +56,9 @@ describe('getActivityFormContext', () => {
   });
 
   it('maps field seasons, products, and machines from Decimal/db shape to plain option lists', async () => {
+    const geometry = { type: 'Polygon', coordinates: [[[5, 52], [6, 52], [6, 53], [5, 53], [5, 52]]] };
     mockDb.fieldSeason.findMany.mockResolvedValue([
-      { id: 'fs-1', crop: 'wheat', field: { name: 'Rijnkamp Noord', hectares: '12.50' } },
+      { id: 'fs-1', crop: 'wheat', field: { name: 'Rijnkamp Noord', hectares: '12.50', coordinates: geometry } },
     ] as never);
     mockDb.inventoryItem.findMany.mockResolvedValue([
       { id: 'prod-1', name: 'Amistar Opti', unit: 'L', category: 'fungicide', currentStock: '500.000', minimumStock: '50.000' },
@@ -66,11 +67,21 @@ describe('getActivityFormContext', () => {
 
     const result = await getActivityFormContext(FARM_WITH_COORDS);
 
-    expect(result.fieldSeasons).toEqual([{ id: 'fs-1', fieldName: 'Rijnkamp Noord', crop: 'wheat', hectares: 12.5 }]);
+    expect(result.fieldSeasons).toEqual([{ id: 'fs-1', fieldName: 'Rijnkamp Noord', crop: 'wheat', hectares: 12.5, geometry }]);
     expect(result.products).toEqual([
       { id: 'prod-1', name: 'Amistar Opti', unit: 'L', category: 'fungicide', currentStock: 500, minimumStock: 50 },
     ]);
     expect(result.machines).toEqual([{ id: 'mach-1', name: 'Sprayer 1' }]);
+  });
+
+  it('maps a field with no boundary drawn to null geometry, not an error', async () => {
+    mockDb.fieldSeason.findMany.mockResolvedValue([
+      { id: 'fs-1', crop: 'wheat', field: { name: 'Rijnkamp Noord', hectares: '12.50', coordinates: null } },
+    ] as never);
+
+    const result = await getActivityFormContext(FARM_WITH_COORDS);
+
+    expect(result.fieldSeasons[0].geometry).toBeNull();
   });
 
   it('surfaces the most recent activity operator/machine as safe prefill suggestions', async () => {

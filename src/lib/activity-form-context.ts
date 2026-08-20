@@ -8,6 +8,10 @@ export interface FieldSeasonOption {
   fieldName: string;
   crop: string;
   hectares: number;
+  // Same GeoJSON the field map already renders (Field.coordinates) — null
+  // for a field with no boundary drawn or imported yet. Powers GPS
+  // auto-select in the activity form; never required.
+  geometry: unknown | null;
 }
 
 export interface ProductOption {
@@ -67,7 +71,7 @@ export async function getActivityFormContext(farm: Farm): Promise<ActivityFormCo
         field: { farmId: farm.id, deletedAt: null },
         season: { farmId: farm.id, isActive: true },
       },
-      include: { field: { select: { name: true, hectares: true } } },
+      include: { field: { select: { name: true, hectares: true, coordinates: true } } },
       orderBy: { field: { name: 'asc' } },
     }),
     db.inventoryItem.findMany({
@@ -109,6 +113,7 @@ export async function getActivityFormContext(farm: Farm): Promise<ActivityFormCo
       fieldName: fs.field.name,
       crop: fs.crop,
       hectares: Number(fs.field.hectares),
+      geometry: fs.field.coordinates,
     })),
     products: products.map((p) => ({
       id: p.id,

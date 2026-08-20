@@ -16,6 +16,7 @@ import type {
   RecentActivityContext,
 } from '@/lib/activity-form-context';
 import { computeStockPreview, composeScoutingNotes } from '@/lib/activity-form-logic';
+import { findFieldContainingPoint } from '@/lib/geo';
 import { useOffline } from '@/offline/OfflineProvider';
 import { applyDraftToForm, createLocalDraft, createSplitActivityDrafts, draftAge, formDataToRecord } from '@/offline/drafts';
 import type { LocalActivityDraft, OfflineActivityType } from '@/offline/types';
@@ -352,6 +353,40 @@ export function ActivityDialog({
     if (fs) setAreaHa(String(fs.hectares));
   }
 
+  // GPS auto-select — the same field geometry already drawn/imported for
+  // the map (fields/map/page.tsx), just consumed here instead. Never
+  // required: a field with no boundary, or a location outside every known
+  // boundary, just falls back to the manual dropdown with a plain message,
+  // never an error.
+  const [locating, setLocating] = useState(false);
+  const [locationMessage, setLocationMessage] = useState<string | null>(null);
+
+  function handleUseLocation() {
+    if (typeof navigator === 'undefined' || !navigator.geolocation) {
+      setLocationMessage('Location is not available in this browser.');
+      return;
+    }
+    setLocating(true);
+    setLocationMessage(null);
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        setLocating(false);
+        const match = findFieldContainingPoint(position.coords.longitude, position.coords.latitude, fieldSeasons);
+        if (match) {
+          handleFieldChange(match.id);
+          setLocationMessage(`Selected ${match.fieldName} from your current location.`);
+        } else {
+          setLocationMessage('Your current location does not match any field boundary — select the field manually.');
+        }
+      },
+      () => {
+        setLocating(false);
+        setLocationMessage('Could not get your location — check your browser or device location permission.');
+      },
+      { enableHighAccuracy: true, timeout: 10000 },
+    );
+  }
+
   // Suggest the field already selected once, if any, but never force it —
   // area still needs a real field pick to prefill from.
   useEffect(() => {
@@ -648,7 +683,12 @@ export function ActivityDialog({
               {/* ── Required: field, date, area ── */}
               <div className={styles.section}>
                 <div className={styles.fieldGroup}>
-                  <label className={styles.label} htmlFor="fieldSeasonId">Field *</label>
+                  <div className={styles.labelRow}>
+                    <label className={styles.label} htmlFor="fieldSeasonId">Field *</label>
+                    <button type="button" className={styles.locationButton} onClick={handleUseLocation} disabled={locating}>
+                      {locating ? 'Locating…' : '📍 Use my location'}
+                    </button>
+                  </div>
                   <select
                     id="fieldSeasonId" name="fieldSeasonId"
                     className={`${styles.select}${state.fieldErrors?.fieldSeasonId ? ` ${styles.hasError}` : ''}`}
@@ -661,6 +701,7 @@ export function ActivityDialog({
                       <option key={fs.id} value={fs.id}>{fs.fieldName} ({fs.crop.replace(/_/g, ' ')})</option>
                     ))}
                   </select>
+                  {locationMessage && <span className={styles.hint}>{locationMessage}</span>}
                   {fieldError('fieldSeasonId') && <span id="activity-field-season-error" className={styles.errorMsg}>{fieldError('fieldSeasonId')}</span>}
                 </div>
 

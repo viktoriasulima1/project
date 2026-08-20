@@ -169,6 +169,28 @@
   color: var(--color-text-secondary);
 }
 
+.labelRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.locationButton {
+  background: none;
+  border: none;
+  color: var(--color-blue);
+  font-size: var(--font-xs);
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0;
+}
+
+.locationButton:disabled {
+  color: var(--color-text-muted);
+  cursor: default;
+}
+
 .prefillHint {
   font-weight: 400;
   color: var(--color-blue);
