@@ -37,6 +37,7 @@ export default async function InventoryPage() {
     currentStock: Number(i.currentStock),
     minimumStock: Number(i.minimumStock),
     purchasePricePerUnit: i.purchasePricePerUnit != null ? Number(i.purchasePricePerUnit) : null,
+    expiryDate: i.expiryDate ? i.expiryDate.toISOString() : null,
     registrationNumber: i.registrationNumber,
     isManualEntry: i.isManualEntry,
     ctgbAuthorisationStatus: i.ctgbProductReference?.authorisationStatus ?? null,
