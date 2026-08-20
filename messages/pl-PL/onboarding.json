@@ -12,7 +12,7 @@
     "review": "Przegląd",
     "complete": "Gotowe"
   },
-  "buttons": { "continue": "Dalej", "back": "Wstecz", "skip": "Pomiń na razie", "getStarted": "Rozpocznij" },
+  "buttons": { "continue": "Dalej", "back": "Wstecz", "skip": "Pomiń na razie", "getStarted": "Rozpocznij", "signIn": "Zaloguj się" },
   "welcome": {
     "title": "Witamy w FarmOS",
     "desc": "Skonfigurujmy Twoje gospodarstwo. Utworzysz gospodarstwo, aktywny sezon, pierwsze pole i jego uprawę — reszta jest opcjonalna i można ją dodać później. Większość rolników kończy to w niecałe 5 minut."

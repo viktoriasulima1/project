@@ -12,7 +12,7 @@
     "review": "Überprüfung",
     "complete": "Fertig"
   },
-  "buttons": { "continue": "Weiter", "back": "Zurück", "skip": "Vorerst überspringen", "getStarted": "Loslegen" },
+  "buttons": { "continue": "Weiter", "back": "Zurück", "skip": "Vorerst überspringen", "getStarted": "Loslegen", "signIn": "Anmelden" },
   "welcome": {
     "title": "Willkommen bei FarmOS",
     "desc": "Richten wir Ihren Betrieb ein. Sie erstellen Ihren Betrieb, eine aktive Saison, Ihren ersten Schlag und dessen Kultur — der Rest ist optional und kann später ergänzt werden. Die meisten Landwirte sind in unter 5 Minuten fertig."

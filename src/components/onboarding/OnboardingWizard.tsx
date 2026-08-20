@@ -3,7 +3,9 @@
 import { useActionState, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { SignInButton } from '@clerk/nextjs';
 import { Button } from '@/components/ui/Button';
+import { isClerkConfigured } from '@/lib/clerk-config';
 import { createFarm, addOnboardingInventoryItem, addOnboardingEmployee } from '@/lib/actions/onboarding';
 import type { OnboardingFormState } from '@/lib/actions/onboarding';
 import { createSeason, addFieldToSeason } from '@/lib/actions/seasons';
@@ -25,6 +27,36 @@ const SOIL_OPTIONS = ['clay', 'sandy', 'loam', 'peat', 'silt'];
 const INVENTORY_UNITS = ['L', 'kg', 'T', 'bag', 'box'];
 const CROP_PROTECTION_CATEGORIES = ['herbicide', 'fungicide', 'insecticide'];
 const OTHER_CATEGORIES = ['fertiliser', 'seed', 'fuel', 'other'];
+
+const clerkEnabled = isClerkConfigured(process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY);
+
+/**
+ * This page is behind clerkMiddleware's auth.protect(), so reaching this
+ * error at all means the middleware's own (optimistic, cookie-presence)
+ * check passed but the Server Action's real auth() check didn't — a
+ * session that expired while this form was being filled in is the
+ * ordinary way that happens. Before this, AUTH_REQUIRED was a dead end:
+ * nothing on the page pointed back to /sign-in, and navigating there
+ * manually would have thrown away everything already typed. The modal
+ * re-authenticates without leaving the page, so the form state survives.
+ */
+function OnboardingError({ errorCode }: { errorCode?: string }) {
+  const t = useTranslations('onboarding');
+  const terr = useTranslations('errors');
+  if (!errorCode) return null;
+  return (
+    <div className={styles.globalError} role="alert">
+      {terr(errorCode)}
+      {errorCode === 'AUTH_REQUIRED' && clerkEnabled && (
+        <div className={styles.globalErrorAction}>
+          <SignInButton mode="modal">
+            <Button type="button" variant="secondary" size="sm">{t('buttons.signIn')}</Button>
+          </SignInButton>
+        </div>
+      )}
+    </div>
+  );
+}
 
 function stepFromSetupState(state: FarmSetupStateName): Step {
   switch (state) {
@@ -187,7 +219,7 @@ export function OnboardingWizard({ setupStateName, requestedStep, farm, fields, 
             <h1 className={styles.stepTitle}>{t('farm.title')}</h1>
             <p className={styles.stepDesc}>{t('farm.desc')}</p>
             <form action={farmAction} className={styles.form}>
-              {farmState.errorCode && <div className={styles.globalError} role="alert">{terr(farmState.errorCode)}</div>}
+              <OnboardingError errorCode={farmState.errorCode} />
 
               <div className={styles.fieldGroup}>
                 <label className={styles.label} htmlFor="name">{t('farm.nameLabel')}</label>
@@ -353,7 +385,7 @@ export function OnboardingWizard({ setupStateName, requestedStep, farm, fields, 
             <h1 className={styles.stepTitle}>{t('inventory.title')}</h1>
             <p className={styles.stepDesc}>{t('inventory.desc')}</p>
             <form action={inventoryAction} className={styles.form}>
-              {inventoryState.errorCode && <div className={styles.globalError} role="alert">{terr(inventoryState.errorCode)}</div>}
+              <OnboardingError errorCode={inventoryState.errorCode} />
               <div className={styles.fieldGroup}>
                 <label className={styles.label} htmlFor="pname">{t('inventory.productName')}</label>
                 <input id="pname" name="name" className={styles.input} placeholder={t('inventory.productPlaceholder')} />
@@ -476,7 +508,7 @@ export function OnboardingWizard({ setupStateName, requestedStep, farm, fields, 
             <h1 className={styles.stepTitle}>{t('employee.title')}</h1>
             <p className={styles.stepDesc}>{t('employee.desc')}</p>
             <form action={employeeAction} className={styles.form}>
-              {employeeState.errorCode && <div className={styles.globalError} role="alert">{terr(employeeState.errorCode)}</div>}
+              <OnboardingError errorCode={employeeState.errorCode} />
               <div className={styles.fieldGroup}>
                 <label className={styles.label} htmlFor="ename">{t('employee.name')}</label>
                 <input id="ename" name="name" className={styles.input} placeholder={t('employee.namePlaceholder')} />

@@ -12,7 +12,7 @@
     "review": "Review",
     "complete": "Done"
   },
-  "buttons": { "continue": "Continue", "back": "Back", "skip": "Skip for now", "getStarted": "Get started" },
+  "buttons": { "continue": "Continue", "back": "Back", "skip": "Skip for now", "getStarted": "Get started", "signIn": "Sign in" },
   "welcome": {
     "title": "Welcome to FarmOS",
     "desc": "Let's get your farm set up. You'll create your farm, an active season, your first field and its crop — the rest is optional and can be added later. Most farmers finish this in under 5 minutes."

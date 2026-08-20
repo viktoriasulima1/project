@@ -12,7 +12,7 @@
     "review": "Controleren",
     "complete": "Klaar"
   },
-  "buttons": { "continue": "Doorgaan", "back": "Terug", "skip": "Nu overslaan", "getStarted": "Aan de slag" },
+  "buttons": { "continue": "Doorgaan", "back": "Terug", "skip": "Nu overslaan", "getStarted": "Aan de slag", "signIn": "Inloggen" },
   "welcome": {
     "title": "Welkom bij FarmOS",
     "desc": "Laten we uw bedrijf instellen. U maakt uw bedrijf, een actief seizoen, uw eerste perceel en het gewas — de rest is optioneel en kan later worden toegevoegd. De meeste boeren zijn hier binnen 5 minuten mee klaar."
