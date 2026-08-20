@@ -6,6 +6,17 @@
 .form label { display: grid; gap: 5px; font-size: 13px; color: var(--color-text-secondary); }
 .form input, .form select, .form textarea { width: 100%; border: 1px solid var(--color-border); border-radius: 7px; padding: 9px; background: var(--color-bg); color: var(--color-text); }
 .form button, .button { border: 0; border-radius: 7px; padding: 9px 13px; background: var(--color-primary); color: white; cursor: pointer; text-decoration: none; display: inline-block; }
+/* A list of many peer options (e.g. the Reports page's PDF/CSV export
+   links) reads as a wall of urgent CTAs if every item uses the solid
+   .button style meant for a single primary action — outline instead. */
+.reportLink { border: 1px solid var(--color-border); border-radius: 7px; padding: 9px 13px; background: var(--color-surface); color: var(--color-text); cursor: pointer; text-decoration: none; display: block; }
+.reportLink:hover { background: var(--color-surface-hover); border-color: var(--color-border-hover); }
+/* Tab-style nav links (e.g. Work orders' Today/All work/Season plan) — only
+   the current view should read as "selected"; every tab using the solid
+   .button style made all three look like equally-urgent primary actions. */
+.tab { border: 1px solid var(--color-border); border-radius: 7px; padding: 9px 13px; background: var(--color-surface); color: var(--color-text); cursor: pointer; text-decoration: none; display: inline-block; }
+.tab:hover { background: var(--color-surface-hover); }
+.tabActive { background: var(--color-primary); color: white; border-color: transparent; }
 .muted { color: var(--color-text-secondary); font-size: 13px; }
 .error { color: var(--color-red); }
 .success { color: var(--color-green); }
