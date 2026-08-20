@@ -65,14 +65,25 @@ describe('checkClerkProductionSafety', () => {
     expect(result.safe).toBe(true);
   });
 
-  it('is safe in production when Clerk is not configured at all', () => {
+  it('rejects a real production run where Clerk is not configured at all', () => {
     const result = checkClerkProductionSafety({
       nodeEnv: 'production',
       publishableKey: undefined,
       secretKey: undefined,
       isE2eRun: false,
     });
-    expect(result.safe).toBe(true);
+    expect(result.safe).toBe(false);
+    expect(result.message).toContain('NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY');
+  });
+
+  it('rejects a real production run where the publishable key is a placeholder', () => {
+    const result = checkClerkProductionSafety({
+      nodeEnv: 'production',
+      publishableKey: 'pk_test_...',
+      secretKey: undefined,
+      isE2eRun: false,
+    });
+    expect(result.safe).toBe(false);
   });
 
   it('rejects a real production run using a test-mode publishable key', () => {

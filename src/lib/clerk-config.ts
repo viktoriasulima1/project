@@ -33,7 +33,26 @@ export interface ClerkProductionSafetyEnv {
 export function checkClerkProductionSafety(env: ClerkProductionSafetyEnv): { safe: boolean; message?: string } {
   if (env.nodeEnv !== 'production') return { safe: true };
   if (env.isE2eRun) return { safe: true };
-  if (!isClerkConfigured(env.publishableKey)) return { safe: true }; // Clerk not enabled — nothing to check
+
+  if (!isClerkConfigured(env.publishableKey)) {
+    // A missing/invalid publishable key doesn't fail the build (Clerk is
+    // imported conditionally), so without this check a production deploy
+    // silently runs with auth fully disabled: proxy.ts's middleware never
+    // protects any route, and UserMenu renders nothing — the app looks and
+    // navigates completely normally, right up until a Server Action that
+    // needs a real clerkUserId (e.g. onboarding) rejects every request with
+    // AUTH_REQUIRED. Failing loudly at boot turns that confusing runtime
+    // dead end into an immediate, actionable deploy failure instead.
+    return {
+      safe: false,
+      message:
+        'Refusing to start: NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY is missing or invalid in a production ' +
+        'environment (NODE_ENV=production, E2E_RUN not set). Without it, auth is silently disabled ' +
+        'app-wide — pages load normally but every action that requires a signed-in user will fail. ' +
+        'Set real pk_live_/sk_live_ Clerk keys (NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY and CLERK_SECRET_KEY) ' +
+        'in the deployment environment variables and redeploy.',
+    };
+  }
 
   const usesTestKey = env.publishableKey?.startsWith('pk_test_') || env.secretKey?.startsWith('sk_test_');
   if (!usesTestKey) return { safe: true };
