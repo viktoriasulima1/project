@@ -11,7 +11,14 @@ async function tryGetClerkUserId(): Promise<string | null> {
     }
     const { userId } = await _clerkAuth();
     return userId;
-  } catch {
+  } catch (e) {
+    // Server-side only — never reaches the client, but without this a real
+    // cause (e.g. clerkMiddleware() not having run for this request, a
+    // session-token verification failure) is indistinguishable in the logs
+    // from "no session", which is what every one of these previously showed
+    // up as: a silent null that surfaces to the user as a generic
+    // "sign in to continue" with no way to diagnose it from Vercel logs.
+    console.error('[farm] tryGetClerkUserId failed:', e);
     return null;
   }
 }
