@@ -1,5 +1,6 @@
 {
   "brand": "FarmOS-Einrichtung",
+  "sidebarTagline": "Ein paar kurze Schritte, und Ihr Betrieb ist startklar.",
   "progress": "Schritt {current} von {total} · {label}",
   "steps": {
     "welcome": "Willkommen",

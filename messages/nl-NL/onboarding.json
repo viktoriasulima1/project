@@ -1,5 +1,6 @@
 {
   "brand": "FarmOS instellen",
+  "sidebarTagline": "Een paar korte stappen om uw bedrijf op te starten.",
   "progress": "Stap {current} van {total} · {label}",
   "steps": {
     "welcome": "Welkom",

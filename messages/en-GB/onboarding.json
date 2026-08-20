@@ -1,5 +1,6 @@
 {
   "brand": "FarmOS setup",
+  "sidebarTagline": "A few quick steps to get your farm running.",
   "progress": "Step {current} of {total} · {label}",
   "steps": {
     "welcome": "Welcome",

@@ -1,11 +1,152 @@
+/* Desktop gets a persistent split layout — a step navigator that always
+   fills the left side, so the page reads as a real product screen instead
+   of one small mobile-width card floating in a sea of empty canvas. Below
+   the breakpoint the sidebar collapses and the old compact brand+progress
+   header (still built below) takes over, unchanged from the original
+   single-column mobile flow. */
+.shell {
+  display: flex;
+  min-height: 100dvh;
+  width: 100%;
+}
+
+.side {
+  flex: 0 0 320px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  padding: var(--space-8) var(--space-6);
+  background:
+    radial-gradient(circle at 15% 12%, var(--color-green-subtle), transparent 55%),
+    var(--color-surface);
+  border-right: 1px solid var(--color-border);
+}
+
+@media (max-width: 900px) {
+  .side {
+    display: none;
+  }
+}
+
+.sideTop {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.sideBrand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.sideBrandIcon {
+  font-size: 22px;
+  line-height: 1;
+}
+
+.sideBrandName {
+  font-size: var(--font-md);
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.sideTagline {
+  font-size: var(--font-sm);
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+}
+
+.stepNav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.stepNavItem {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  border: none;
+  border-radius: var(--radius-md);
+  background: none;
+  color: var(--color-text-muted);
+  font-size: var(--font-sm);
+  text-align: left;
+  cursor: default;
+}
+
+.stepNavItem[data-state='done'] {
+  color: var(--color-text-secondary);
+  cursor: pointer;
+}
+
+.stepNavItem[data-state='done']:hover {
+  background: var(--color-surface-hover);
+}
+
+.stepNavItem[data-state='current'] {
+  color: var(--color-text-primary);
+  font-weight: 600;
+  background: var(--color-surface-elevated);
+}
+
+.stepNavBadge {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 1.5px solid var(--color-border-hover);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+.stepNavItem[data-state='done'] .stepNavBadge {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: white;
+}
+
+.stepNavItem[data-state='current'] .stepNavBadge {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: var(--space-8) var(--space-4);
+  min-width: 0;
+}
+
+@media (max-width: 900px) {
+  .main {
+    padding: var(--space-6) var(--space-4);
+  }
+}
+
 .wrap {
   width: 100%;
   max-width: 560px;
 }
 
 .header {
+  display: none;
   margin-bottom: var(--space-5);
   text-align: center;
+}
+
+@media (max-width: 900px) {
+  .header {
+    display: block;
+  }
 }
 
 .brand {
@@ -27,7 +168,7 @@
 
 .progressFill {
   height: 100%;
-  background: var(--color-blue);
+  background: var(--color-primary);
   transition: width 0.25s ease;
 }
 
@@ -107,7 +248,7 @@
   align-self: flex-start;
   background: none;
   border: none;
-  color: var(--color-blue);
+  color: var(--color-primary);
   font-size: var(--font-sm);
   font-weight: 500;
   cursor: pointer;

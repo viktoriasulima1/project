@@ -1,5 +1,6 @@
 {
   "brand": "Konfiguracja FarmOS",
+  "sidebarTagline": "Kilka krótkich kroków i Twoje gospodarstwo jest gotowe.",
   "progress": "Krok {current} z {total} · {label}",
   "steps": {
     "welcome": "Powitanie",

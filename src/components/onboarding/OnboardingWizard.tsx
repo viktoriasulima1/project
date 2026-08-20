@@ -20,6 +20,10 @@ type Step = 'welcome' | 'farm' | 'season' | 'field' | 'crop' | 'inventory' | 'em
 
 const STEP_ORDER: Step[] = ['welcome', 'farm', 'season', 'field', 'crop', 'inventory', 'employee', 'review', 'complete'];
 
+// The persistent desktop side nav lists every real step but not the
+// destination screen — 'complete' has nothing left to navigate back to.
+const SIDE_STEPS = STEP_ORDER.filter((s) => s !== 'complete');
+
 // Canonical tokens only — visible labels come from the `enums` namespace, so a
 // translated label can never be submitted as the value.
 const CROP_VALUES = ['wheat', 'potato', 'onion', 'sugar_beet', 'barley', 'oilseed_rape', 'cover_crop', 'grass', 'other'];
@@ -187,22 +191,52 @@ export function OnboardingWizard({ setupStateName, requestedStep, farm, fields, 
   }
 
   return (
-    <div className={styles.wrap}>
-      <div className={styles.header}>
-        <div className={styles.brand}>{t('brand')}</div>
-        {step !== 'welcome' && step !== 'complete' && (
-          <>
-            <div className={styles.progressTrack}>
-              <div className={styles.progressFill} style={{ width: `${progressPercent}%` }} />
-            </div>
-            <div className={styles.progressLabel}>
-              {t('progress', { current: currentIndex + 1, total: STEP_ORDER.length - 1, label: t(`steps.${step}`) })}
-            </div>
-          </>
-        )}
-      </div>
+    <div className={styles.shell}>
+      <aside className={styles.side}>
+        <div className={styles.sideTop}>
+          <div className={styles.sideBrand}>
+            <span className={styles.sideBrandIcon}>🌾</span>
+            <span className={styles.sideBrandName}>{t('brand')}</span>
+          </div>
+          <p className={styles.sideTagline}>{t('sidebarTagline')}</p>
+        </div>
+        <nav className={styles.stepNav}>
+          {SIDE_STEPS.map((s, i) => {
+            const state = i < currentIndex ? 'done' : i === currentIndex ? 'current' : undefined;
+            return (
+              <button
+                key={s}
+                type="button"
+                className={styles.stepNavItem}
+                data-state={state}
+                disabled={state !== 'done'}
+                onClick={() => state === 'done' && setStep(s)}
+              >
+                <span className={styles.stepNavBadge}>{state === 'done' ? '✓' : i + 1}</span>
+                {t(`steps.${s}`)}
+              </button>
+            );
+          })}
+        </nav>
+      </aside>
 
-      <div className={styles.card}>
+      <div className={styles.main}>
+        <div className={styles.wrap}>
+          <div className={styles.header}>
+            <div className={styles.brand}>{t('brand')}</div>
+            {step !== 'welcome' && step !== 'complete' && (
+              <>
+                <div className={styles.progressTrack}>
+                  <div className={styles.progressFill} style={{ width: `${progressPercent}%` }} />
+                </div>
+                <div className={styles.progressLabel}>
+                  {t('progress', { current: currentIndex + 1, total: STEP_ORDER.length - 1, label: t(`steps.${step}`) })}
+                </div>
+              </>
+            )}
+          </div>
+
+          <div className={styles.card}>
         {/* ── Welcome ── */}
         {step === 'welcome' && (
           <>
@@ -600,6 +634,8 @@ export function OnboardingWizard({ setupStateName, requestedStep, farm, fields, 
             </Link>
           </>
         )}
+          </div>
+        </div>
       </div>
     </div>
   );
