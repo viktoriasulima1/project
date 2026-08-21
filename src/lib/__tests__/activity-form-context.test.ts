@@ -91,15 +91,15 @@ describe('getActivityFormContext', () => {
 
   it('maps the active team roster for the operator autocomplete', async () => {
     mockDb.employee.findMany.mockResolvedValue([
-      { id: 'emp-1', name: 'Jan de Vries', hasSpraying: true, certExpiry: new Date('2027-06-01') },
-      { id: 'emp-2', name: 'Piet Bakker', hasSpraying: false, certExpiry: null },
+      { id: 'emp-1', name: 'Jan de Vries', hasSpraying: true, certExpiry: new Date('2027-06-01'), certNumber: 'NL-123456' },
+      { id: 'emp-2', name: 'Piet Bakker', hasSpraying: false, certExpiry: null, certNumber: null },
     ] as never);
 
     const result = await getActivityFormContext(FARM_WITH_COORDS);
 
     expect(result.employees).toEqual([
-      { id: 'emp-1', name: 'Jan de Vries', hasSpraying: true, certExpiry: '2027-06-01T00:00:00.000Z' },
-      { id: 'emp-2', name: 'Piet Bakker', hasSpraying: false, certExpiry: null },
+      { id: 'emp-1', name: 'Jan de Vries', hasSpraying: true, certExpiry: '2027-06-01T00:00:00.000Z', certNumber: 'NL-123456' },
+      { id: 'emp-2', name: 'Piet Bakker', hasSpraying: false, certExpiry: null, certNumber: null },
     ]);
   });
 

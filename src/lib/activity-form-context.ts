@@ -45,6 +45,7 @@ export interface EmployeeOption {
   hasSpraying: boolean;
   // ISO date string, or null when the employee has no certificate on file.
   certExpiry: string | null;
+  certNumber: string | null;
 }
 
 export interface WeatherSnapshot {
@@ -109,7 +110,7 @@ export async function getActivityFormContext(farm: Farm): Promise<ActivityFormCo
     db.employee.findMany({
       where: { farmId: farm.id, isActive: true },
       orderBy: { name: 'asc' },
-      select: { id: true, name: true, hasSpraying: true, certExpiry: true },
+      select: { id: true, name: true, hasSpraying: true, certExpiry: true, certNumber: true },
     }),
     db.activity.findFirst({
       where: { fieldSeason: { field: { farmId: farm.id } }, deletedAt: null },
@@ -177,7 +178,7 @@ export async function getActivityFormContext(farm: Farm): Promise<ActivityFormCo
       unitCost: p.purchasePricePerUnit != null ? Number(p.purchasePricePerUnit) : null,
     })),
     machines: machines.map((m) => ({ id: m.id, name: m.name })),
-    employees: employees.map((e) => ({ id: e.id, name: e.name, hasSpraying: e.hasSpraying, certExpiry: e.certExpiry ? e.certExpiry.toISOString() : null })),
+    employees: employees.map((e) => ({ id: e.id, name: e.name, hasSpraying: e.hasSpraying, certExpiry: e.certExpiry ? e.certExpiry.toISOString() : null, certNumber: e.certNumber })),
     recentOperatorName: mostRecentActivity?.operatorName || null,
     recentMachineId: mostRecentActivity?.machineId ?? null,
     weather,

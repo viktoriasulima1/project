@@ -197,6 +197,7 @@ export function ActivityDialog({
   const [dosePerHa, setDosePerHa] = useState('');
   const [showAdvanced, setShowAdvanced] = useState(false);
   const [operatorName, setOperatorName] = useState(recentOperatorName ?? '');
+  const [certificateNumber, setCertificateNumber] = useState('');
   const [activityDate, setActivityDate] = useState(() => new Date().toISOString().slice(0, 10));
   const [nozzleType, setNozzleType] = useState('');
 
@@ -352,6 +353,20 @@ export function ActivityDialog({
   const selectedFieldSeason = fieldSeasons.find((fs) => fs.id === fieldSeasonId);
   const selectedProduct = products.find((p) => p.id === productId);
 
+  // Shared by the operator input's onChange and handleFieldChange's own
+  // per-field prefill below, so the certificate number stays in sync with
+  // whichever employee operatorName currently names, however it got set —
+  // typed, per-field default, or (once added) AI-parsed. A match with no
+  // certNumber on file syncs to blank (correctly reflecting reality, not a
+  // stale leftover from whoever was named before); an unmatched name
+  // (contractor, typo) leaves whatever the farmer already typed alone,
+  // since there's no Team record to sync it against.
+  function applyOperatorName(name: string) {
+    setOperatorName(name);
+    const match = employees.find((e) => e.name.toLowerCase() === name.trim().toLowerCase());
+    if (match) setCertificateNumber(match.certNumber ?? '');
+  }
+
   function handleFieldChange(id: string) {
     setFieldSeasonId(id);
     const fs = fieldSeasons.find((f) => f.id === id);
@@ -362,7 +377,7 @@ export function ActivityDialog({
     // field isn't necessarily who last worked some other field) — but only
     // when this field actually has one; an unworked field keeps whatever
     // was already there rather than clearing it.
-    if (fs.recentOperatorName) setOperatorName(fs.recentOperatorName);
+    if (fs.recentOperatorName) applyOperatorName(fs.recentOperatorName);
     if (fs.recentMachineId) setMachineId(fs.recentMachineId);
   }
 
@@ -441,16 +456,19 @@ export function ActivityDialog({
   // isn't flagged here either; there's nothing to check it against. Warns
   // before the farmer even tries to save, instead of only after a
   // rejected submit.
+  const matchedOperator = useMemo(
+    () => employees.find((e) => e.name.toLowerCase() === operatorName.trim().toLowerCase()) ?? null,
+    [operatorName, employees],
+  );
+
   const operatorWarning = useMemo(() => {
-    if (!isSpray || !operatorName.trim()) return null;
-    const match = employees.find((e) => e.name.toLowerCase() === operatorName.trim().toLowerCase());
-    if (!match) return null;
-    if (!match.hasSpraying) return `${match.name} is not recorded as certified to spray.`;
-    if (match.certExpiry && new Date(match.certExpiry) < new Date()) {
-      return `${match.name}'s spraying certificate expired on ${new Date(match.certExpiry).toLocaleDateString('en-GB')}.`;
+    if (!isSpray || !matchedOperator) return null;
+    if (!matchedOperator.hasSpraying) return `${matchedOperator.name} is not recorded as certified to spray.`;
+    if (matchedOperator.certExpiry && new Date(matchedOperator.certExpiry) < new Date()) {
+      return `${matchedOperator.name}'s spraying certificate expired on ${new Date(matchedOperator.certExpiry).toLocaleDateString('en-GB')}.`;
     }
     return null;
-  }, [isSpray, operatorName, employees]);
+  }, [isSpray, matchedOperator]);
 
   const combinedNotes = isScout
     ? composeScoutingNotes({ category: scoutCategory, severity: scoutSeverity, affectedHa: scoutAffectedHa, userNotes })
@@ -879,7 +897,7 @@ export function ActivityDialog({
                         id="operatorName" name="operatorName" list="operator-suggestions"
                         className={`${styles.input}${state.fieldErrors?.operatorName || operatorWarning ? ` ${styles.hasError}` : ''}`}
                         aria-describedby={state.fieldErrors?.operatorName ? 'activity-operator-error' : operatorWarning ? 'activity-operator-warning' : undefined}
-                        value={operatorName} onChange={(e) => setOperatorName(e.target.value)} placeholder="Full name"
+                        value={operatorName} onChange={(e) => applyOperatorName(e.target.value)} placeholder="Full name"
                       />
                       {fieldError('operatorName') && <span id="activity-operator-error" className={styles.errorMsg}>{fieldError('operatorName')}</span>}
                       {!fieldError('operatorName') && operatorWarning && <span id="activity-operator-warning" className={styles.errorMsg}>⚠ {operatorWarning}</span>}
@@ -925,6 +943,21 @@ export function ActivityDialog({
                         </div>
                       )}
                       {machineErrorDisplay && <span className={styles.errorMsg} role="alert">{machineErrorDisplay.message}</span>}
+                    </div>
+                  </div>
+                  <div className={styles.row}>
+                    <div className={styles.fieldGroup}>
+                      <label className={styles.label} htmlFor="certificateNumber">
+                        Certificate number
+                        {matchedOperator && <span className={styles.prefillHint}> · from Team record</span>}
+                      </label>
+                      <input
+                        id="certificateNumber" name="certificateNumber"
+                        className={styles.input}
+                        value={certificateNumber} onChange={(e) => setCertificateNumber(e.target.value)}
+                        placeholder="e.g. NL-123456"
+                      />
+                      <span className={styles.hint}>Not required to save, but the compliance record shows it as missing without one.</span>
                     </div>
                   </div>
                   <div className={styles.row}>
