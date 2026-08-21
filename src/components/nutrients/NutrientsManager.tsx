@@ -29,7 +29,13 @@ export interface NormRow {
   verifiedAt: string | null; // ISO date
 }
 
-export interface IncompleteProduct { id: string; name: string }
+export interface IncompleteProduct {
+  id: string;
+  name: string;
+  nitrogenPercent: number | null;
+  phosphorusPercent: number | null;
+  potassiumPercent: number | null;
+}
 
 const normInitial: NutrientNormFormState = {};
 const invInitial: UpdateInventoryNutrientsFormState = {};
@@ -108,9 +114,9 @@ function CompositionForm({ product }: { product: IncompleteProduct }) {
     <form action={action} className={styles.form}>
       <input type="hidden" name="itemId" value={product.id} />
       <strong style={{ gridColumn: '1 / -1' }}>{product.name}</strong>
-      <label>{t('composition.nitrogenPercent')}<input type="number" name="nitrogenPercent" min={0} max={100} step={0.1} /></label>
-      <label>{t('composition.phosphorusPercent')}<input type="number" name="phosphorusPercent" min={0} max={100} step={0.1} /></label>
-      <label>{t('composition.potassiumPercent')}<input type="number" name="potassiumPercent" min={0} max={100} step={0.1} /></label>
+      <label>{t('composition.nitrogenPercent')}<input type="number" name="nitrogenPercent" min={0} max={100} step={0.1} defaultValue={product.nitrogenPercent ?? undefined} /></label>
+      <label>{t('composition.phosphorusPercent')}<input type="number" name="phosphorusPercent" min={0} max={100} step={0.1} defaultValue={product.phosphorusPercent ?? undefined} /></label>
+      <label>{t('composition.potassiumPercent')}<input type="number" name="potassiumPercent" min={0} max={100} step={0.1} defaultValue={product.potassiumPercent ?? undefined} /></label>
       <div className={styles.formActions}>
         <button type="submit" className={styles.button} disabled={pending}>{t('composition.save')}</button>
       </div>

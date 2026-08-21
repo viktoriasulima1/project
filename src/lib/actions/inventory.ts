@@ -171,9 +171,15 @@ export async function updateInventoryNutrients(
     const item = await db.inventoryItem.update({
       where: { id: d.itemId },
       data: {
-        nitrogenPercent: d.nitrogenPercent ?? null,
-        phosphorusPercent: d.phosphorusPercent ?? null,
-        potassiumPercent: d.potassiumPercent ?? null,
+        // A blank field means "don't know yet," not "clear this" — this form
+        // has no way to distinguish the two, and the composition list only
+        // ever shows a product while N/P is still unset, so leaving one
+        // field blank while filling in another (entirely plausible: a
+        // farmer often knows N/P from the bag but not K, or vice versa)
+        // must never wipe a value already recorded in an earlier visit.
+        nitrogenPercent: d.nitrogenPercent ?? (existing.nitrogenPercent != null ? Number(existing.nitrogenPercent) : null),
+        phosphorusPercent: d.phosphorusPercent ?? (existing.phosphorusPercent != null ? Number(existing.phosphorusPercent) : null),
+        potassiumPercent: d.potassiumPercent ?? (existing.potassiumPercent != null ? Number(existing.potassiumPercent) : null),
       },
     });
     revalidatePath('/nutrients');

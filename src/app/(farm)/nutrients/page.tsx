@@ -26,7 +26,7 @@ export default async function NutrientsPage() {
             phosphorusPercent: null,
             activities: { some: { type: 'fertilise', deletedAt: null, fieldSeason: { seasonId: activeSeason.id } } },
           },
-          select: { id: true, name: true },
+          select: { id: true, name: true, nitrogenPercent: true, phosphorusPercent: true, potassiumPercent: true },
           orderBy: { name: 'asc' },
         })
       : Promise.resolve([]),
@@ -55,7 +55,13 @@ export default async function NutrientsPage() {
     };
   });
 
-  const incompleteProducts: IncompleteProduct[] = incompleteItems;
+  const incompleteProducts: IncompleteProduct[] = incompleteItems.map((item) => ({
+    id: item.id,
+    name: item.name,
+    nitrogenPercent: item.nitrogenPercent != null ? Number(item.nitrogenPercent) : null,
+    phosphorusPercent: item.phosphorusPercent != null ? Number(item.phosphorusPercent) : null,
+    potassiumPercent: item.potassiumPercent != null ? Number(item.potassiumPercent) : null,
+  }));
 
   return (
     <>

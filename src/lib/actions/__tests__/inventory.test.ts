@@ -155,6 +155,20 @@ describe('updateInventoryNutrients', () => {
     });
   });
 
+  it('preserves an existing nutrient value when the form only resubmits the others', async () => {
+    // CompositionForm has no way to distinguish "left blank because unknown"
+    // from "explicitly clearing" — a farmer filling in nitrogen/phosphorus on
+    // a later visit, having already recorded potassium earlier, must not
+    // wipe that potassium value just because this submission omits it.
+    mockDb.inventoryItem.findFirst.mockResolvedValue({ id: ITEM_ID, farmId: 'farm-1', nitrogenPercent: null, phosphorusPercent: null, potassiumPercent: 5 });
+    const result = await updateInventoryNutrients({ itemId: ITEM_ID, nitrogenPercent: 20, phosphorusPercent: 10 });
+    expect(result).toEqual({ success: true, itemId: ITEM_ID });
+    expect(mockDb.inventoryItem.update).toHaveBeenCalledWith({
+      where: { id: ITEM_ID },
+      data: { nitrogenPercent: 20, phosphorusPercent: 10, potassiumPercent: 5 },
+    });
+  });
+
   it('refuses to update a product belonging to another farm', async () => {
     mockDb.inventoryItem.findFirst.mockResolvedValue(null);
     const result = await updateInventoryNutrients({ itemId: ITEM_ID, nitrogenPercent: 20 });
