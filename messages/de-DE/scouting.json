@@ -5,7 +5,13 @@
     "fieldHealthPriority": "Priorität Bestandesgesundheit",
     "noActiveSeason": { "title": "Keine aktive Anbausaison", "body": "Planen Sie eine Kultur für einen Schlag, bevor Sie ein Monitoring erfassen." },
     "recentVisits": "Letzte Besuche",
-    "noVisits": "Noch keine Monitorings erfasst."
+    "noVisits": "Noch keine Monitorings erfasst.",
+    "status": {
+      "change": "Status ändern",
+      "cancel": "Abbrechen",
+      "reasonPlaceholder": "Warum ändert sich das? (wird als Nachweis gespeichert)",
+      "save": "Status speichern"
+    }
   },
   "form": {
     "fieldAndCrop": "Schlag und Kultur",

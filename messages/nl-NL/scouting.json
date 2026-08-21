@@ -5,7 +5,13 @@
     "fieldHealthPriority": "Prioriteit gewasgezondheid",
     "noActiveSeason": { "title": "Geen actief teeltseizoen", "body": "Plan een gewas voor een perceel voordat u een inspectiebezoek vastlegt." },
     "recentVisits": "Recente bezoeken",
-    "noVisits": "Nog geen inspectiebezoeken vastgelegd."
+    "noVisits": "Nog geen inspectiebezoeken vastgelegd.",
+    "status": {
+      "change": "Status wijzigen",
+      "cancel": "Annuleren",
+      "reasonPlaceholder": "Waarom verandert dit? (wordt bewaard als bewijs)",
+      "save": "Status opslaan"
+    }
   },
   "form": {
     "fieldAndCrop": "Perceel en gewas",

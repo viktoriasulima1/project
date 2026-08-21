@@ -5,7 +5,13 @@
     "fieldHealthPriority": "Field health priority",
     "noActiveSeason": { "title": "No active crop season", "body": "Plan a crop for a field before recording a scouting visit." },
     "recentVisits": "Recent visits",
-    "noVisits": "No scouting visits recorded yet."
+    "noVisits": "No scouting visits recorded yet.",
+    "status": {
+      "change": "Change status",
+      "cancel": "Cancel",
+      "reasonPlaceholder": "Why is this changing? (kept as evidence)",
+      "save": "Save status"
+    }
   },
   "form": {
     "fieldAndCrop": "Field and crop",

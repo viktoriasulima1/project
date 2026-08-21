@@ -5,7 +5,13 @@
     "fieldHealthPriority": "Priorytet zdrowia upraw",
     "noActiveSeason": { "title": "Brak aktywnego sezonu uprawy", "body": "Zaplanuj uprawę dla pola przed zarejestrowaniem lustracji." },
     "recentVisits": "Ostatnie wizyty",
-    "noVisits": "Nie zarejestrowano jeszcze żadnych lustracji."
+    "noVisits": "Nie zarejestrowano jeszcze żadnych lustracji.",
+    "status": {
+      "change": "Zmień status",
+      "cancel": "Anuluj",
+      "reasonPlaceholder": "Dlaczego ta zmiana? (zachowywane jako dowód)",
+      "save": "Zapisz status"
+    }
   },
   "form": {
     "fieldAndCrop": "Pole i uprawa",
