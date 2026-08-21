@@ -22,9 +22,9 @@ const actionHref: Record<FinancialCompletenessActionCode, string> = {
   ADD_LABOUR_RATE: '/finance#rates',
   ADD_MACHINE_RATE: '/finance#rates',
   ADD_CONTRACTOR_COST: '/finance',
-  ADD_HARVEST: '/activities',
+  ADD_HARVEST: '/finance#add-financial-data',
   ADD_REVENUE: '/finance',
-  RECORD_OVERHEAD_CHOICE: '/settings',
+  RECORD_OVERHEAD_CHOICE: '/finance#add-financial-data',
   ALIGN_UNITS: '/finance',
 };
 
@@ -112,15 +112,17 @@ export default async function FinancePage() {
 
         <section className={styles.grid}>
           {finance.seasonId && (
-            <EconomicsForms
-              seasonId={finance.seasonId}
-              fields={fieldSeasons.map((item) => ({ id: item.id, label: `${item.field.name} · ${item.crop}` }))}
-              inventory={inventory.map((item) => ({
-                id: item.id,
-                label: `${item.name} · ${item.currentStock} ${item.unit} · ${item.purchasePricePerUnit ?? 'unvalued'}`,
-                unit: item.unit,
-              }))}
-            />
+            <div id="add-financial-data">
+              <EconomicsForms
+                seasonId={finance.seasonId}
+                fields={fieldSeasons.map((item) => ({ id: item.id, label: `${item.field.name} · ${item.crop}` }))}
+                inventory={inventory.map((item) => ({
+                  id: item.id,
+                  label: `${item.name} · ${item.currentStock} ${item.unit} · ${item.purchasePricePerUnit ?? 'unvalued'}`,
+                  unit: item.unit,
+                }))}
+              />
+            </div>
           )}
           <div className={styles.card}>
             <h2>Unallocated and pending</h2>
