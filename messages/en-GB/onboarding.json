@@ -37,6 +37,7 @@
   "season": {
     "title": "Active season",
     "desc": "FarmOS organises everything by season. Create the current one.",
+    "alreadySaved": "Your active season is already set up.",
     "year": "Year",
     "startDate": "Start date",
     "endDate": "End date"
@@ -54,6 +55,7 @@
   "crop": {
     "title": "What's growing there?",
     "desc": "Assign a crop to the field for this season.",
+    "alreadyAssigned": "A crop is already assigned for this season. You can add more fields any time from the Activities page.",
     "fieldLabel": "Field",
     "newFieldOption": "Your new field",
     "cropLabel": "Crop"

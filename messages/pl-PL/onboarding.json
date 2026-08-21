@@ -37,6 +37,7 @@
   "season": {
     "title": "Aktywny sezon",
     "desc": "FarmOS porządkuje wszystko według sezonu. Utwórz bieżący.",
+    "alreadySaved": "Twój aktywny sezon jest już skonfigurowany.",
     "year": "Rok",
     "startDate": "Data początkowa",
     "endDate": "Data końcowa"
@@ -54,6 +55,7 @@
   "crop": {
     "title": "Co tam rośnie?",
     "desc": "Przypisz uprawę do pola w tym sezonie.",
+    "alreadyAssigned": "Uprawa jest już przypisana na ten sezon. Kolejne pola możesz dodać w dowolnym momencie na stronie Czynności.",
     "fieldLabel": "Pole",
     "newFieldOption": "Twoje nowe pole",
     "cropLabel": "Uprawa"

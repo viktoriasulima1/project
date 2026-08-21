@@ -349,28 +349,59 @@ export function OnboardingWizard({ setupStateName, requestedStep, farm, fields, 
         {step === 'season' && (
           <>
             <h1 className={styles.stepTitle}>{t('season.title')}</h1>
-            <p className={styles.stepDesc}>{t('season.desc')}</p>
-            <form action={seasonAction} className={styles.form}>
-              {seasonState.error && <div className={styles.globalError} role="alert">{seasonState.error}</div>}
-              <div className={styles.fieldGroup}>
-                <label className={styles.label} htmlFor="year">{t('season.year')}</label>
-                <input id="year" name="year" type="number" className={styles.input} value={seasonYear} onChange={(e) => setSeasonYear(Number(e.target.value))} />
-              </div>
-              <div className={styles.row}>
-                <div className={styles.fieldGroup}>
-                  <label className={styles.label} htmlFor="startDate">{t('season.startDate')}</label>
-                  <input id="startDate" name="startDate" type="date" className={styles.input} defaultValue={`${seasonYear}-01-01`} />
+            {(seasonState.success || seasonId) ? (
+              // Same class of bug as field/farm above, and reachable the same
+              // ways (side nav, Back, or a fresh reload of ?step=season) —
+              // seasonState itself resets to {} on a fresh mount, so success
+              // alone missed it. createSeason enforces one active season per
+              // farm/year, so resubmitting this form unchanged doesn't create
+              // a duplicate, but it DID hit that conflict and leave the user
+              // stuck on a form with no forward path. seasonId (seeded from
+              // the activeSeason prop) already tells us a season exists —
+              // check that instead of forcing a real resubmission just to
+              // discover the same thing.
+              <>
+                <p className={styles.stepDesc}>{t('season.alreadySaved')}</p>
+                <div className={styles.footer}>
+                  <Button type="button" variant="ghost" onClick={goBack}>{t('buttons.back')}</Button>
+                  <Button
+                    type="button"
+                    variant="primary"
+                    onClick={() => {
+                      setStep('field');
+                      router.replace('/onboarding?step=field');
+                    }}
+                  >
+                    {t('buttons.continue')}
+                  </Button>
                 </div>
-                <div className={styles.fieldGroup}>
-                  <label className={styles.label} htmlFor="endDate">{t('season.endDate')}</label>
-                  <input id="endDate" name="endDate" type="date" className={styles.input} defaultValue={`${seasonYear}-12-31`} />
-                </div>
-              </div>
-              <div className={styles.footer}>
-                <Button type="button" variant="ghost" onClick={goBack}>{t('buttons.back')}</Button>
-                <Button type="submit" variant="primary" loading={seasonPending}>{t('buttons.continue')}</Button>
-              </div>
-            </form>
+              </>
+            ) : (
+              <>
+                <p className={styles.stepDesc}>{t('season.desc')}</p>
+                <form action={seasonAction} className={styles.form}>
+                  {seasonState.error && <div className={styles.globalError} role="alert">{seasonState.error}</div>}
+                  <div className={styles.fieldGroup}>
+                    <label className={styles.label} htmlFor="year">{t('season.year')}</label>
+                    <input id="year" name="year" type="number" className={styles.input} value={seasonYear} onChange={(e) => setSeasonYear(Number(e.target.value))} />
+                  </div>
+                  <div className={styles.row}>
+                    <div className={styles.fieldGroup}>
+                      <label className={styles.label} htmlFor="startDate">{t('season.startDate')}</label>
+                      <input id="startDate" name="startDate" type="date" className={styles.input} defaultValue={`${seasonYear}-01-01`} />
+                    </div>
+                    <div className={styles.fieldGroup}>
+                      <label className={styles.label} htmlFor="endDate">{t('season.endDate')}</label>
+                      <input id="endDate" name="endDate" type="date" className={styles.input} defaultValue={`${seasonYear}-12-31`} />
+                    </div>
+                  </div>
+                  <div className={styles.footer}>
+                    <Button type="button" variant="ghost" onClick={goBack}>{t('buttons.back')}</Button>
+                    <Button type="submit" variant="primary" loading={seasonPending}>{t('buttons.continue')}</Button>
+                  </div>
+                </form>
+              </>
+            )}
           </>
         )}
 
@@ -378,10 +409,14 @@ export function OnboardingWizard({ setupStateName, requestedStep, farm, fields, 
         {step === 'field' && (
           <>
             <h1 className={styles.stepTitle}>{t('field.title')}</h1>
-            {fieldState.success ? (
+            {(fieldState.success || fieldsList.length > 0) ? (
               // Reachable by clicking this already-completed step in the side
-              // nav (or repeated Back clicks). createField has no dedup the
-              // way createFarm/createSeason/addFieldToSeason do, so
+              // nav, repeated Back clicks, OR a fresh page load/reload of
+              // ?step=field once a field already exists (fieldState itself
+              // resets to {} on a fresh mount, so success alone missed this
+              // case — a reload mid-wizard, or a bookmarked/shared link,
+              // landed back on the blank form every time). createField has
+              // no dedup the way createFarm/createSeason/addFieldToSeason do, so
               // re-rendering the blank create form here would silently add a
               // second field on re-submit. Show a static confirmation and let
               // Continue just move forward instead.
@@ -438,34 +473,65 @@ export function OnboardingWizard({ setupStateName, requestedStep, farm, fields, 
         {step === 'crop' && (
           <>
             <h1 className={styles.stepTitle}>{t('crop.title')}</h1>
-            <p className={styles.stepDesc}>{t('crop.desc')}</p>
-            <form action={cropAction} className={styles.form}>
-              {cropState.error && <div className={styles.globalError} role="alert">{cropState.error}</div>}
-              <input type="hidden" name="seasonId" value={seasonId ?? ''} />
-              <div className={styles.fieldGroup}>
-                <label className={styles.label} htmlFor="fieldId">{t('crop.fieldLabel')}</label>
-                <select
-                  id="fieldId" name="fieldId" className={styles.select}
-                  value={selectedFieldId ?? ''} onChange={(e) => setSelectedFieldId(e.target.value)}
-                >
-                  {fieldsList.map((f) => (
-                    <option key={f.id} value={f.id}>{f.name !== '(new field)' ? f.name : t('crop.newFieldOption')}</option>
-                  ))}
-                </select>
-              </div>
-              <div className={styles.fieldGroup}>
-                <label className={styles.label} htmlFor="crop">{t('crop.cropLabel')}</label>
-                <select id="crop" name="crop" className={styles.select} defaultValue="wheat">
-                  {CROP_VALUES.map((c) => <option key={c} value={c}>{te(`crop.${c}`)}</option>)}
-                </select>
-              </div>
-              <div className={styles.footer}>
-                <Button type="button" variant="ghost" onClick={goBack}>{t('buttons.back')}</Button>
-                <Button type="submit" variant="primary" loading={cropPending} disabled={!seasonId || !selectedFieldId}>
-                  {t('buttons.continue')}
-                </Button>
-              </div>
-            </form>
+            {(cropState.success || cropAssigned) ? (
+              // Same class of bug as season/field above. cropAssigned starts
+              // true when setupStateName was already 'ready' at mount (i.e.
+              // some field in this season already has a crop) — a fresh
+              // reload of ?step=crop, or Back/side-nav after finishing this
+              // step once, used to always show the live form again. Every
+              // field this farm has is already offered elsewhere (the
+              // Activities page's "+ Add to season" guide) for a genuinely
+              // NEW field/crop pairing — this step only ever needs to prove
+              // "at least one," so confirming and moving on is correct here,
+              // never a silent overwrite of whatever crop is already set.
+              <>
+                <p className={styles.stepDesc}>{t('crop.alreadyAssigned')}</p>
+                <div className={styles.footer}>
+                  <Button type="button" variant="ghost" onClick={goBack}>{t('buttons.back')}</Button>
+                  <Button
+                    type="button"
+                    variant="primary"
+                    onClick={() => {
+                      setStep('inventory');
+                      router.replace('/onboarding?step=inventory');
+                    }}
+                  >
+                    {t('buttons.continue')}
+                  </Button>
+                </div>
+              </>
+            ) : (
+              <>
+                <p className={styles.stepDesc}>{t('crop.desc')}</p>
+                <form action={cropAction} className={styles.form}>
+                  {cropState.error && <div className={styles.globalError} role="alert">{cropState.error}</div>}
+                  <input type="hidden" name="seasonId" value={seasonId ?? ''} />
+                  <div className={styles.fieldGroup}>
+                    <label className={styles.label} htmlFor="fieldId">{t('crop.fieldLabel')}</label>
+                    <select
+                      id="fieldId" name="fieldId" className={styles.select}
+                      value={selectedFieldId ?? ''} onChange={(e) => setSelectedFieldId(e.target.value)}
+                    >
+                      {fieldsList.map((f) => (
+                        <option key={f.id} value={f.id}>{f.name !== '(new field)' ? f.name : t('crop.newFieldOption')}</option>
+                      ))}
+                    </select>
+                  </div>
+                  <div className={styles.fieldGroup}>
+                    <label className={styles.label} htmlFor="crop">{t('crop.cropLabel')}</label>
+                    <select id="crop" name="crop" className={styles.select} defaultValue="wheat">
+                      {CROP_VALUES.map((c) => <option key={c} value={c}>{te(`crop.${c}`)}</option>)}
+                    </select>
+                  </div>
+                  <div className={styles.footer}>
+                    <Button type="button" variant="ghost" onClick={goBack}>{t('buttons.back')}</Button>
+                    <Button type="submit" variant="primary" loading={cropPending} disabled={!seasonId || !selectedFieldId}>
+                      {t('buttons.continue')}
+                    </Button>
+                  </div>
+                </form>
+              </>
+            )}
           </>
         )}
 

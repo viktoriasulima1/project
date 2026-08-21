@@ -37,6 +37,7 @@
   "season": {
     "title": "Aktive Saison",
     "desc": "FarmOS ordnet alles nach Saison. Erstellen Sie die aktuelle.",
+    "alreadySaved": "Ihre aktive Saison ist bereits eingerichtet.",
     "year": "Jahr",
     "startDate": "Startdatum",
     "endDate": "Enddatum"
@@ -54,6 +55,7 @@
   "crop": {
     "title": "Was wächst dort?",
     "desc": "Weisen Sie dem Schlag für diese Saison eine Kultur zu.",
+    "alreadyAssigned": "Für diese Saison ist bereits eine Kultur zugewiesen. Sie können jederzeit weitere Schläge über die Seite Aktivitäten hinzufügen.",
     "fieldLabel": "Schlag",
     "newFieldOption": "Ihr neuer Schlag",
     "cropLabel": "Kultur"

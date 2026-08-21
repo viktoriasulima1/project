@@ -37,6 +37,7 @@
   "season": {
     "title": "Actief seizoen",
     "desc": "FarmOS organiseert alles per seizoen. Maak het huidige seizoen aan.",
+    "alreadySaved": "Uw actieve seizoen is al ingesteld.",
     "year": "Jaar",
     "startDate": "Startdatum",
     "endDate": "Einddatum"
@@ -54,6 +55,7 @@
   "crop": {
     "title": "Wat groeit daar?",
     "desc": "Wijs een gewas toe aan het perceel voor dit seizoen.",
+    "alreadyAssigned": "Er is al een gewas toegewezen voor dit seizoen. U kunt op elk moment meer percelen toevoegen via de pagina Activiteiten.",
     "fieldLabel": "Perceel",
     "newFieldOption": "Uw nieuwe perceel",
     "cropLabel": "Gewas"
