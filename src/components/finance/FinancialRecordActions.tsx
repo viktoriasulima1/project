@@ -9,8 +9,13 @@ import { useRouter } from 'next/navigation';
 import { correctFinancialRecord, reverseFinancialRecord } from '@/lib/actions/economics';
 import styles from './Finance.module.css';
 
-type Entry = { id: string; date: string; label: string; kind: 'cost' | 'revenue'; recordType: 'expense' | 'revenue'; amount: number; status: string; version: number };
+type CostRevenueEntry = { id: string; date: string; label: string; kind: 'cost' | 'revenue'; recordType: 'expense' | 'revenue'; amount: number; status: string; version: number };
+type HarvestEntry = { id: string; date: string; label: string; kind: 'harvest'; recordType: 'harvest'; grossQuantity: number; saleableQuantity: number | null; unit: string; status: string; version: number };
+type Entry = CostRevenueEntry | HarvestEntry;
+
 const eur = (value: number) => new Intl.NumberFormat('nl-NL', { style: 'currency', currency: 'EUR' }).format(value);
+const quantity = (value: number, unit: string) => `${value} ${unit}`;
+const summaryValue = (entry: Entry) => entry.recordType === 'harvest' ? quantity(entry.grossQuantity, entry.unit) : eur(entry.amount);
 
 export function FinancialRecordActions({ entries }: { entries: Entry[] }) {
   const [correcting, setCorrecting] = useState<Entry | null>(null);
@@ -21,7 +26,7 @@ export function FinancialRecordActions({ entries }: { entries: Entry[] }) {
       <ul className={styles.recordList}>
         {entries.map(entry => (
           <li key={entry.id} className={styles.recordRow}>
-            <span>{entry.date} · {entry.label} · {eur(entry.amount)} · {entry.status.replaceAll('_', ' ')}{entry.version > 1 ? ` · v${entry.version}` : ''}</span>
+            <span>{entry.date} · {entry.label} · {summaryValue(entry)} · {entry.status.replaceAll('_', ' ')}{entry.version > 1 ? ` · v${entry.version}` : ''}</span>
             <span className={styles.recordActions}>
               <button type="button" className={styles.linkButton} onClick={() => setCorrecting(entry)}>Correct</button>
               <button type="button" className={styles.linkButtonDanger} onClick={() => setReversing(entry)}>Reverse</button>
@@ -37,13 +42,22 @@ export function FinancialRecordActions({ entries }: { entries: Entry[] }) {
 
 function CorrectDialog({ entry, onClose }: { entry: Entry; onClose: () => void }) {
   const router = useRouter();
-  const [amount, setAmount] = useState(String(entry.amount));
+  const isHarvest = entry.recordType === 'harvest';
+  const [amount, setAmount] = useState(isHarvest ? '' : String((entry as CostRevenueEntry).amount));
+  const [grossQuantity, setGrossQuantity] = useState(isHarvest ? String((entry as HarvestEntry).grossQuantity) : '');
+  const [saleableQuantity, setSaleableQuantity] = useState(isHarvest ? String((entry as HarvestEntry).saleableQuantity ?? '') : '');
   const [revenueStatus, setRevenueStatus] = useState<'expected' | 'approved' | 'received' | ''>('');
   const [reason, setReason] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [pending, start] = useTransition();
   const newAmount = Number(amount);
-  const canSubmit = reason.trim().length >= 10 && Number.isFinite(newAmount) && newAmount >= 0 && !pending;
+  const newGross = Number(grossQuantity);
+  const newSaleable = saleableQuantity === '' ? null : Number(saleableQuantity);
+  const canSubmit = reason.trim().length >= 10 && !pending && (
+    isHarvest
+      ? Number.isFinite(newGross) && newGross >= 0 && (newSaleable == null || (Number.isFinite(newSaleable) && newSaleable >= 0))
+      : Number.isFinite(newAmount) && newAmount >= 0
+  );
 
   function submit() {
     setError(null);
@@ -51,8 +65,9 @@ function CorrectDialog({ entry, onClose }: { entry: Entry; onClose: () => void }
       const result = await correctFinancialRecord({
         type: entry.recordType, id: entry.id, expectedVersion: entry.version, reason: reason.trim(),
         idempotencyKey: crypto.randomUUID(),
-        ...(entry.recordType === 'expense' ? { amount: newAmount } : { totalAmount: newAmount }),
-        ...(entry.recordType === 'revenue' && revenueStatus ? { revenueStatus } : {}),
+        ...(entry.recordType === 'expense' ? { amount: newAmount } : {}),
+        ...(entry.recordType === 'revenue' ? { totalAmount: newAmount, ...(revenueStatus ? { revenueStatus } : {}) } : {}),
+        ...(isHarvest ? { grossQuantity: newGross, saleableQuantity: newSaleable ?? undefined } : {}),
       });
       if (result.error) { setError(result.error); return; }
       onClose(); router.refresh();
@@ -64,10 +79,24 @@ function CorrectDialog({ entry, onClose }: { entry: Entry; onClose: () => void }
       <div className={styles.dialog} onClick={e => e.stopPropagation()}>
         <h2>Correct: {entry.label}</h2>
         <p className={styles.muted}>Creates a new effective version. The original stays in history — it is never overwritten.</p>
-        <label>New {entry.recordType === 'expense' ? 'amount' : 'total'} (€)
-          <input type="number" step="0.01" min="0" value={amount} onChange={e => setAmount(e.target.value)} />
-        </label>
-        <p className={styles.muted}>Was {eur(entry.amount)} → {Number.isFinite(newAmount) ? eur(newAmount) : '—'}</p>
+        {isHarvest ? (
+          <>
+            <label>Gross quantity ({(entry as HarvestEntry).unit})
+              <input type="number" step="0.001" min="0" value={grossQuantity} onChange={e => setGrossQuantity(e.target.value)} />
+            </label>
+            <label>Saleable quantity ({(entry as HarvestEntry).unit}, optional)
+              <input type="number" step="0.001" min="0" value={saleableQuantity} onChange={e => setSaleableQuantity(e.target.value)} />
+            </label>
+            <p className={styles.muted}>Was {quantity((entry as HarvestEntry).grossQuantity, (entry as HarvestEntry).unit)} → {Number.isFinite(newGross) ? quantity(newGross, (entry as HarvestEntry).unit) : '—'}</p>
+          </>
+        ) : (
+          <>
+            <label>New {entry.recordType === 'expense' ? 'amount' : 'total'} (€)
+              <input type="number" step="0.01" min="0" value={amount} onChange={e => setAmount(e.target.value)} />
+            </label>
+            <p className={styles.muted}>Was {eur((entry as CostRevenueEntry).amount)} → {Number.isFinite(newAmount) ? eur(newAmount) : '—'}</p>
+          </>
+        )}
         {entry.recordType === 'revenue' && (
           <label>New revenue status (optional)
             <select value={revenueStatus} onChange={e => setRevenueStatus(e.target.value as typeof revenueStatus)}>
@@ -109,7 +138,7 @@ function ReverseDialog({ entry, onClose }: { entry: Entry; onClose: () => void }
       <div className={styles.dialog} onClick={e => e.stopPropagation()}>
         <h2>Reverse: {entry.label}</h2>
         <p className={styles.muted}>Use when this {entry.recordType} did not actually happen or was recorded by mistake. It stays visible in history and is excluded from effective totals. This is not ordinary editing — to change a value, use Correct.</p>
-        <p>{entry.date} · {eur(entry.amount)}</p>
+        <p>{entry.date} · {summaryValue(entry)}</p>
         <label>Reversal reason (required, ≥10 characters)
           <textarea value={reason} onChange={e => setReason(e.target.value)} rows={2} />
         </label>
