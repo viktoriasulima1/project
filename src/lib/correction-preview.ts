@@ -86,6 +86,7 @@ export function computeCorrectionPreview(
   noteDiff('doseUnit', previous.doseUnit, submitted.doseUnit || null);
   noteDiff('waterVolumePerHa', previous.waterVolumePerHa != null ? Number(previous.waterVolumePerHa) : null, submitted.waterVolumePerHa || null);
   noteDiff('operatorName', previous.operatorName, submitted.operatorName);
+  noteDiff('certificateNumber', previous.certificateNumber, submitted.certificateNumber || null);
   noteDiff('machineId', previous.machine?.name ?? null, submitted.machineId || null);
   noteDiff('nozzleType', previous.nozzleType, submitted.nozzleType || null);
   noteDiff('bbchStage', previous.bbchStage, submitted.bbchStage || null);

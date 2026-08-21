@@ -122,6 +122,10 @@ export function CorrectionDialog({ record, products, machines, onClose, onSucces
             <input id="c-operatorName" name="operatorName" defaultValue={data.operatorName ?? ''} style={{ width: '100%', padding: '6px' }} />
           </div>
           <div>
+            <label htmlFor="c-certificateNumber" style={{ fontSize: 'var(--font-xs)' }}>Certificate number</label>
+            <input id="c-certificateNumber" name="certificateNumber" defaultValue={data.certificateNumber ?? ''} style={{ width: '100%', padding: '6px' }} />
+          </div>
+          <div>
             <label htmlFor="c-machineId" style={{ fontSize: 'var(--font-xs)' }}>Machine</label>
             <select id="c-machineId" name="machineId" defaultValue={record.machineId ?? ''} style={{ width: '100%', padding: '6px' }}>
               <option value="">— none —</option>

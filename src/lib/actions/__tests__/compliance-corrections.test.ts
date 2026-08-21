@@ -192,6 +192,37 @@ describe('correctActivity', () => {
     expect(call.data.correctionDiff.operatorName).toBeUndefined();
   });
 
+  it('carries the resubmitted certificate number onto both the new activity row and its compliance record', async () => {
+    await correctActivity({}, correctionFd({ certificateNumber: 'NL-999888' }));
+    expect(tx.activity.create).toHaveBeenCalledWith(
+      expect.objectContaining({ data: expect.objectContaining({ certificateNumber: 'NL-999888' }) }),
+    );
+    expect(tx.complianceRecord.create).toHaveBeenCalledWith(
+      expect.objectContaining({ data: expect.objectContaining({ data: expect.objectContaining({ certificateNumber: 'NL-999888' }) }) }),
+    );
+  });
+
+  it('preserves an existing certificate number across a correction to an unrelated field, since CorrectionDialog always resubmits its current value', async () => {
+    tx.activity.findFirst.mockImplementation(({ where }: { where: { correctionOfId?: string } }) => {
+      if (where.correctionOfId) return Promise.resolve(null);
+      return Promise.resolve({ ...PREVIOUS_ACTIVITY, certificateNumber: 'NL-111111' });
+    });
+    // Mirrors what CorrectionDialog's <input defaultValue={data.certificateNumber}>
+    // actually sends: the field's current value, unless the user changes it —
+    // never omitted, which is what silently nulled this field before the fix.
+    await correctActivity({}, correctionFd({ areaHa: '12', certificateNumber: 'NL-111111' }));
+    expect(tx.activity.create).toHaveBeenCalledWith(
+      expect.objectContaining({ data: expect.objectContaining({ certificateNumber: 'NL-111111' }) }),
+    );
+  });
+
+  it('clears the certificate number when the correction form explicitly submits it blank', async () => {
+    await correctActivity({}, correctionFd({ certificateNumber: '' }));
+    expect(tx.activity.create).toHaveBeenCalledWith(
+      expect.objectContaining({ data: expect.objectContaining({ certificateNumber: null }) }),
+    );
+  });
+
   // Test 10
   it('rejects a correction submitted against a stale (already-corrected) version', async () => {
     const alreadyCorrected = { ...PREVIOUS_ACTIVITY, id: 'newer-version-id', version: 2, correctionOfId: IDS.activity, createdAt: new Date('2026-06-02T00:00:00.000Z') };
@@ -383,6 +414,13 @@ describe('previewActivityCorrection', () => {
     vi.mocked(db.activity.findFirst).mockResolvedValue(null);
     const result = await previewActivityCorrection('someone-elses-id', correctionFd());
     expect(result.error).toContain('not found');
+  });
+
+  it('surfaces a certificate-number change in the diff, so the user sees it before confirming', async () => {
+    vi.mocked(db.activity.findFirst).mockResolvedValue({ ...PREVIOUS_ACTIVITY, certificateNumber: 'NL-111111' } as never);
+    const fd = correctionFd({ certificateNumber: 'NL-222222' });
+    const result = await previewActivityCorrection(IDS.activity, fd);
+    expect(result.preview?.diff.certificateNumber).toEqual({ old: 'NL-111111', new: 'NL-222222' });
   });
 });
 
