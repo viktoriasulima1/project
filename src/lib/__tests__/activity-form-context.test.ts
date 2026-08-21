@@ -5,7 +5,7 @@ const { mockDb } = vi.hoisted(() => {
     fieldSeason: { findMany: vi.fn() },
     inventoryItem: { findMany: vi.fn() },
     machine: { findMany: vi.fn() },
-    activity: { findFirst: vi.fn() },
+    activity: { findFirst: vi.fn(), findMany: vi.fn() },
   };
   return { mockDb };
 });
@@ -42,6 +42,7 @@ function setupDefaultMocks() {
   mockDb.inventoryItem.findMany.mockResolvedValue([]);
   mockDb.machine.findMany.mockResolvedValue([]);
   mockDb.activity.findFirst.mockResolvedValue(null);
+  mockDb.activity.findMany.mockResolvedValue([]);
   mockFetchWeather.mockResolvedValue({
     hourly: [
       { time: '2026-07-12T12:00', temperature: 21, windSpeed: 12, windDirection: 180, relativeHumidity: 60 },
@@ -67,7 +68,7 @@ describe('getActivityFormContext', () => {
 
     const result = await getActivityFormContext(FARM_WITH_COORDS);
 
-    expect(result.fieldSeasons).toEqual([{ id: 'fs-1', fieldName: 'Rijnkamp Noord', crop: 'wheat', hectares: 12.5, geometry }]);
+    expect(result.fieldSeasons).toEqual([{ id: 'fs-1', fieldName: 'Rijnkamp Noord', crop: 'wheat', hectares: 12.5, geometry, recentOperatorName: null, recentMachineId: null }]);
     expect(result.products).toEqual([
       { id: 'prod-1', name: 'Amistar Opti', unit: 'L', category: 'fungicide', currentStock: 500, minimumStock: 50 },
     ]);
@@ -82,6 +83,27 @@ describe('getActivityFormContext', () => {
     const result = await getActivityFormContext(FARM_WITH_COORDS);
 
     expect(result.fieldSeasons[0].geometry).toBeNull();
+  });
+
+  it('gives each field its own most recent operator/machine, not the farm-wide one', async () => {
+    mockDb.fieldSeason.findMany.mockResolvedValue([
+      { id: 'fs-1', crop: 'wheat', field: { name: 'Field A', hectares: '10.00', coordinates: null } },
+      { id: 'fs-2', crop: 'barley', field: { name: 'Field B', hectares: '8.00', coordinates: null } },
+    ] as never);
+    // Newest first, as the real query orders by createdAt desc — fs-1's
+    // newest is 'Anna' even though a later (older) fs-1 row says 'Bram',
+    // and fs-2 never appears at all (no prior activity on that field yet).
+    mockDb.activity.findMany.mockResolvedValue([
+      { fieldSeasonId: 'fs-1', operatorName: 'Anna', machineId: 'mach-a' },
+      { fieldSeasonId: 'fs-1', operatorName: 'Bram', machineId: 'mach-b' },
+    ] as never);
+
+    const result = await getActivityFormContext(FARM_WITH_COORDS);
+
+    const fieldA = result.fieldSeasons.find((fs) => fs.id === 'fs-1');
+    const fieldB = result.fieldSeasons.find((fs) => fs.id === 'fs-2');
+    expect(fieldA).toMatchObject({ recentOperatorName: 'Anna', recentMachineId: 'mach-a' });
+    expect(fieldB).toMatchObject({ recentOperatorName: null, recentMachineId: null });
   });
 
   it('surfaces the most recent activity operator/machine as safe prefill suggestions', async () => {

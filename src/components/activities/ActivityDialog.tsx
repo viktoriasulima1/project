@@ -350,7 +350,15 @@ export function ActivityDialog({
   function handleFieldChange(id: string) {
     setFieldSeasonId(id);
     const fs = fieldSeasons.find((f) => f.id === id);
-    if (fs) setAreaHa(String(fs.hectares));
+    if (!fs) return;
+    setAreaHa(String(fs.hectares));
+    // This field's own last operator/machine beat the farm-wide guess used
+    // for the form's initial state (the operator who last sprayed this
+    // field isn't necessarily who last worked some other field) — but only
+    // when this field actually has one; an unworked field keeps whatever
+    // was already there rather than clearing it.
+    if (fs.recentOperatorName) setOperatorName(fs.recentOperatorName);
+    if (fs.recentMachineId) setMachineId(fs.recentMachineId);
   }
 
   // GPS auto-select — the same field geometry already drawn/imported for

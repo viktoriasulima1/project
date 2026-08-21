@@ -12,6 +12,13 @@ export interface FieldSeasonOption {
   // for a field with no boundary drawn or imported yet. Powers GPS
   // auto-select in the activity form; never required.
   geometry: unknown | null;
+  // This field's own most recent operator/machine — deliberately excludes
+  // dose, same boundary getRecentActivityForRepeat already draws below
+  // ("never includes ... dose"): a wrong operator name is a minor
+  // inconvenience to fix, a silently-carried-forward spray dose is a
+  // safety hazard. null when this field-season has no prior activity.
+  recentOperatorName: string | null;
+  recentMachineId: string | null;
 }
 
 export interface ProductOption {
@@ -65,7 +72,7 @@ function degreesToLabel(deg: number): string {
  * own version of "recent operator" or "current weather."
  */
 export async function getActivityFormContext(farm: Farm): Promise<ActivityFormContext> {
-  const [fieldSeasons, products, machines, mostRecentActivity, weatherData] = await Promise.all([
+  const [fieldSeasons, products, machines, mostRecentActivity, recentPerFieldSeason, weatherData] = await Promise.all([
     db.fieldSeason.findMany({
       where: {
         field: { farmId: farm.id, deletedAt: null },
@@ -87,10 +94,31 @@ export async function getActivityFormContext(farm: Farm): Promise<ActivityFormCo
       orderBy: { createdAt: 'desc' },
       select: { operatorName: true, machineId: true },
     }),
+    // Most recent activity per field-season, for per-field prefills
+    // (Sprint 12 finding: the single farm-wide "recent operator" above is a
+    // materially weaker default — the operator who last sprayed field A
+    // isn't necessarily who last worked field B). Ordered newest-first and
+    // reduced to one row per fieldSeasonId below, rather than a DISTINCT ON
+    // query, to stay in plain Prisma; `take` is generous relative to a
+    // realistic field-season count per farm, not a hard guarantee every
+    // field has recent-enough history to appear.
+    db.activity.findMany({
+      where: { fieldSeason: { field: { farmId: farm.id } }, deletedAt: null },
+      orderBy: { createdAt: 'desc' },
+      select: { fieldSeasonId: true, operatorName: true, machineId: true },
+      take: 500,
+    }),
     farm.latitude != null && farm.longitude != null
       ? fetchWeather(Number(farm.latitude), Number(farm.longitude)).catch(() => null)
       : Promise.resolve(null),
   ]);
+
+  const recentByFieldSeason = new Map<string, { operatorName: string | null; machineId: string | null }>();
+  for (const activity of recentPerFieldSeason) {
+    if (!recentByFieldSeason.has(activity.fieldSeasonId)) {
+      recentByFieldSeason.set(activity.fieldSeasonId, { operatorName: activity.operatorName || null, machineId: activity.machineId });
+    }
+  }
 
   let weather: WeatherSnapshot | null = null;
   if (weatherData) {
@@ -114,6 +142,8 @@ export async function getActivityFormContext(farm: Farm): Promise<ActivityFormCo
       crop: fs.crop,
       hectares: Number(fs.field.hectares),
       geometry: fs.field.coordinates,
+      recentOperatorName: recentByFieldSeason.get(fs.id)?.operatorName ?? null,
+      recentMachineId: recentByFieldSeason.get(fs.id)?.machineId ?? null,
     })),
     products: products.map((p) => ({
       id: p.id,
