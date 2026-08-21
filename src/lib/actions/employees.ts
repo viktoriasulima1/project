@@ -140,11 +140,16 @@ export async function createEmployeeForm(_previous: EmployeeFormState, formData:
 
 export async function updateEmployeeForm(_previous: EmployeeFormState, formData: FormData): Promise<EmployeeFormState> {
   const employeeId = String(formData.get('employeeId') ?? '');
+  // EditForm always renders this checkbox, so an unchecked box (which HTML
+  // omits from FormData entirely, indistinguishable at this point from
+  // "never rendered") unambiguously means false here — never treat its
+  // absence as "leave unchanged," or deactivating a team member silently
+  // does nothing.
   const isActiveRaw = formData.get('isActive');
   const result = await updateEmployee({
     ...readFields(formData),
     employeeId,
-    isActive: isActiveRaw === null ? undefined : isActiveRaw === 'on' || isActiveRaw === 'true',
+    isActive: isActiveRaw === 'on' || isActiveRaw === 'true',
   });
   return result.success ? { success: true } : { error: result.error };
 }
