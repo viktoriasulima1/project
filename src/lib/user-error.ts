@@ -54,6 +54,7 @@ const DEFINITIONS: Record<SafeErrorCode, ErrorDefinition> = {
   OPERATOR_NOT_CERTIFIED: { category: 'validation', retryable: false },
   INVALID_CTGB_USE: { category: 'validation', retryable: false },
   INSUFFICIENT_STOCK: { category: 'conflict', retryable: false },
+  PRODUCT_ALREADY_EXISTS: { category: 'conflict', retryable: false },
   PRODUCT_NOT_APPROVED: { category: 'validation', retryable: false },
   AI_REQUIRES_CONNECTION: { category: 'offline', retryable: true },
   OFFLINE_UNAVAILABLE: { category: 'offline', retryable: true },

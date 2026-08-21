@@ -22,6 +22,7 @@
   "OPERATOR_NOT_CERTIFIED": "Für diesen Anwender ist keine Sachkunde für die Anwendung von Pflanzenschutzmitteln hinterlegt.",
   "INVALID_CTGB_USE": "Diese Anwendung ist für das gewählte Mittel nicht zulässig.",
   "INSUFFICIENT_STOCK": "Nicht genügend Bestand.",
+  "PRODUCT_ALREADY_EXISTS": "Dieses Produkt ist bereits in Ihrem Bestand vorhanden. Fügen Sie dem vorhandenen Eintrag Bestand hinzu, anstatt einen neuen zu erstellen.",
   "PRODUCT_NOT_APPROVED": "Dieses Mittel ist für die gewählte Kultur oder Anwendung nicht zugelassen.",
   "AI_REQUIRES_CONNECTION": "Die KI-Verarbeitung erfordert eine Internetverbindung.",
   "OFFLINE_UNAVAILABLE": "Diese Aktion ist offline nicht verfügbar.",

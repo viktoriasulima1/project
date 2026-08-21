@@ -22,6 +22,7 @@
   "OPERATOR_NOT_CERTIFIED": "Deze gebruiker staat niet geregistreerd als gecertificeerd voor spuiten.",
   "INVALID_CTGB_USE": "Deze toepassing is niet toegestaan voor het geselecteerde middel.",
   "INSUFFICIENT_STOCK": "Onvoldoende voorraad.",
+  "PRODUCT_ALREADY_EXISTS": "Dit product staat al in uw voorraad. Voeg voorraad toe aan het bestaande item in plaats van een nieuw item aan te maken.",
   "PRODUCT_NOT_APPROVED": "Dit middel is niet toegelaten voor het geselecteerde gewas of gebruik.",
   "AI_REQUIRES_CONNECTION": "AI-verwerking vereist een internetverbinding.",
   "OFFLINE_UNAVAILABLE": "Deze actie is offline niet beschikbaar.",

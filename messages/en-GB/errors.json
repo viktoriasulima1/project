@@ -22,6 +22,7 @@
   "OPERATOR_NOT_CERTIFIED": "This operator is not recorded as certified to spray.",
   "INVALID_CTGB_USE": "This use is not permitted for the selected product.",
   "INSUFFICIENT_STOCK": "Insufficient inventory.",
+  "PRODUCT_ALREADY_EXISTS": "This product is already in your inventory. Add stock to the existing entry instead of creating a new one.",
   "PRODUCT_NOT_APPROVED": "This product is not approved for the selected crop or use.",
   "AI_REQUIRES_CONNECTION": "AI parsing requires an internet connection.",
   "OFFLINE_UNAVAILABLE": "This action is unavailable offline.",

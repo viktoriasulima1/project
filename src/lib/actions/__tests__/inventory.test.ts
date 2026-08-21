@@ -42,6 +42,7 @@ describe('createInventoryItem', () => {
     vi.clearAllMocks();
     vi.mocked(getActiveFarmOrThrow).mockResolvedValue(FARM);
     mockDb.inventoryItem.create.mockResolvedValue({ id: 'item-1' });
+    mockDb.inventoryItem.findFirst.mockResolvedValue(null);
     mockIsRateLimited.mockReturnValue(false);
     mockSearchCtgbProducts.mockResolvedValue({ state: 'ok', products: [] });
   });
@@ -85,6 +86,22 @@ describe('createInventoryItem', () => {
     await createInventoryItem({}, tampered);
     expect(mockDb.inventoryItem.create).toHaveBeenCalledWith(
       expect.objectContaining({ data: expect.objectContaining({ farmId: 'farm-1' }) }),
+    );
+  });
+
+  it('blocks re-adding a Ctgb product already in this farm\'s inventory, instead of creating a duplicate row', async () => {
+    mockGetCtgbProductById.mockResolvedValue({
+      state: 'ok',
+      products: [{ sourceProductId: 'ctgb-1', officialName: 'Amistar Opti', authorisationNumber: 'NL-1', uses: [] }],
+    });
+    mockUpsertCachedProduct.mockResolvedValue('local-ref-1');
+    mockDb.inventoryItem.findFirst.mockResolvedValue({ id: 'existing-item' });
+
+    const result = await createInventoryItem({}, fd({ ctgbSourceProductId: 'ctgb-1' }));
+    expect(result.error?.code).toBe('PRODUCT_ALREADY_EXISTS');
+    expect(mockDb.inventoryItem.create).not.toHaveBeenCalled();
+    expect(mockDb.inventoryItem.findFirst).toHaveBeenCalledWith(
+      expect.objectContaining({ where: { farmId: 'farm-1', ctgbProductReferenceId: 'local-ref-1' } }),
     );
   });
 

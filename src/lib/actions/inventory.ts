@@ -102,6 +102,17 @@ export async function createInventoryItem(
       ctgbProductReferenceId = await upsertCachedProduct(product);
       registrationNumber = product.authorisationNumber;
       officialName = product.officialName;
+
+      // The only reliable identity a re-added CTGB product has — a manual
+      // entry has no such anchor, so this check is deliberately scoped to
+      // the CTGB path only. Without it, searching and re-adding a product
+      // already on file silently fragments its stock across two rows
+      // instead of restocking the one that exists.
+      const existing = await db.inventoryItem.findFirst({
+        where: { farmId: farm.id, ctgbProductReferenceId },
+        select: { id: true },
+      });
+      if (existing) return { error: userError('PRODUCT_ALREADY_EXISTS'), values };
     }
 
     const item = await db.inventoryItem.create({

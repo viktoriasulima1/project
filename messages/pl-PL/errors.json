@@ -22,6 +22,7 @@
   "OPERATOR_NOT_CERTIFIED": "Ten operator nie ma odnotowanych uprawnień do wykonywania oprysków.",
   "INVALID_CTGB_USE": "To zastosowanie nie jest dozwolone dla wybranego produktu.",
   "INSUFFICIENT_STOCK": "Niewystarczający stan magazynowy.",
+  "PRODUCT_ALREADY_EXISTS": "Ten produkt jest już w Twoim magazynie. Dodaj zapas do istniejącej pozycji zamiast tworzyć nową.",
   "PRODUCT_NOT_APPROVED": "Ten produkt nie jest dopuszczony dla wybranej uprawy lub zastosowania.",
   "AI_REQUIRES_CONNECTION": "Analiza AI wymaga połączenia z internetem.",
   "OFFLINE_UNAVAILABLE": "Ta czynność jest niedostępna w trybie offline.",
