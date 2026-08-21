@@ -62,7 +62,8 @@ describe('getActivityFormContext', () => {
       { id: 'fs-1', crop: 'wheat', field: { name: 'Rijnkamp Noord', hectares: '12.50', coordinates: geometry } },
     ] as never);
     mockDb.inventoryItem.findMany.mockResolvedValue([
-      { id: 'prod-1', name: 'Amistar Opti', unit: 'L', category: 'fungicide', currentStock: '500.000', minimumStock: '50.000' },
+      { id: 'prod-1', name: 'Amistar Opti', unit: 'L', category: 'fungicide', currentStock: '500.000', minimumStock: '50.000', purchasePricePerUnit: '34.50' },
+      { id: 'prod-2', name: 'Manual Entry', unit: 'kg', category: 'other', currentStock: '10.000', minimumStock: '0.000', purchasePricePerUnit: null },
     ] as never);
     mockDb.machine.findMany.mockResolvedValue([{ id: 'mach-1', name: 'Sprayer 1' }] as never);
 
@@ -70,7 +71,8 @@ describe('getActivityFormContext', () => {
 
     expect(result.fieldSeasons).toEqual([{ id: 'fs-1', fieldName: 'Rijnkamp Noord', crop: 'wheat', hectares: 12.5, geometry, recentOperatorName: null, recentMachineId: null }]);
     expect(result.products).toEqual([
-      { id: 'prod-1', name: 'Amistar Opti', unit: 'L', category: 'fungicide', currentStock: 500, minimumStock: 50 },
+      { id: 'prod-1', name: 'Amistar Opti', unit: 'L', category: 'fungicide', currentStock: 500, minimumStock: 50, unitCost: 34.5 },
+      { id: 'prod-2', name: 'Manual Entry', unit: 'kg', category: 'other', currentStock: 10, minimumStock: 0, unitCost: null },
     ]);
     expect(result.machines).toEqual([{ id: 'mach-1', name: 'Sprayer 1' }]);
   });

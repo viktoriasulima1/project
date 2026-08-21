@@ -15,7 +15,7 @@ import type {
   WeatherSnapshot,
   RecentActivityContext,
 } from '@/lib/activity-form-context';
-import { computeStockPreview, composeScoutingNotes } from '@/lib/activity-form-logic';
+import { computeStockPreview, computeCostPreview, composeScoutingNotes } from '@/lib/activity-form-logic';
 import { findFieldContainingPoint } from '@/lib/geo';
 import { useOffline } from '@/offline/OfflineProvider';
 import { applyDraftToForm, createLocalDraft, createSplitActivityDrafts, draftAge, formDataToRecord } from '@/offline/drafts';
@@ -39,6 +39,8 @@ const TYPE_TILES: { key: QuickType; label: string; icon: string; dbType: string 
   { key: 'harvest', label: 'Harvesting', icon: '▽', dbType: 'harvest' },
   { key: 'other', label: 'Other', icon: '⋯', dbType: 'other' },
 ];
+
+const eur = (v: number) => new Intl.NumberFormat('nl-NL', { style: 'currency', currency: 'EUR' }).format(v);
 
 const CROP_PROTECTION_CATEGORIES = new Set(['herbicide', 'fungicide', 'insecticide']);
 const SCOUT_CATEGORIES = ['Disease', 'Pest', 'Weed pressure', 'Nutrient deficiency', 'Water stress', 'Other'];
@@ -420,6 +422,13 @@ export function ActivityDialog({
   // no server round-trip needed just to show this before submit.
   const stockPreview = useMemo(
     () => computeStockPreview(selectedProduct?.currentStock, dosePerHa, areaHa),
+    [selectedProduct, dosePerHa, areaHa],
+  );
+
+  // Same idea, product cost instead of stock — null (shows nothing) when
+  // the product has no recorded price, never a fabricated €0.
+  const costPreview = useMemo(
+    () => computeCostPreview(selectedProduct?.unitCost, dosePerHa, areaHa),
     [selectedProduct, dosePerHa, areaHa],
   );
 
@@ -818,11 +827,16 @@ export function ActivityDialog({
                     </div>
                   </div>
 
-                  {stockPreview && (
-                    <div className={`${styles.stockPreview} ${stockPreview.insufficient ? styles.stockPreviewWarn : ''}`}>
-                      {stockPreview.insufficient
-                        ? `⚠ Not enough stock: needs ${stockPreview.totalUsed.toFixed(2)} ${selectedProduct?.unit}, only ${selectedProduct?.currentStock} available.`
-                        : `Stock after this activity: ${stockPreview.resultingStock.toFixed(2)} ${selectedProduct?.unit} (using ${stockPreview.totalUsed.toFixed(2)} ${selectedProduct?.unit}).`}
+                  {(stockPreview || costPreview) && (
+                    <div className={`${styles.stockPreview} ${stockPreview?.insufficient ? styles.stockPreviewWarn : ''}`}>
+                      {stockPreview && (
+                        stockPreview.insufficient
+                          ? `⚠ Not enough stock: needs ${stockPreview.totalUsed.toFixed(2)} ${selectedProduct?.unit}, only ${selectedProduct?.currentStock} available.`
+                          : `Stock after this activity: ${stockPreview.resultingStock.toFixed(2)} ${selectedProduct?.unit} (using ${stockPreview.totalUsed.toFixed(2)} ${selectedProduct?.unit}).`
+                      )}
+                      {costPreview && (
+                        <div>Estimated product cost: {eur(costPreview.totalCost)}</div>
+                      )}
                     </div>
                   )}
                 </div>

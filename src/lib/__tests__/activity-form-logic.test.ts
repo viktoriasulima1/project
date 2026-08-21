@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { computeStockPreview, composeScoutingNotes } from '../activity-form-logic';
+import { computeStockPreview, computeCostPreview, composeScoutingNotes } from '../activity-form-logic';
 
 describe('computeStockPreview', () => {
   it('returns null when there is no product stock to compare against', () => {
@@ -32,6 +32,34 @@ describe('computeStockPreview', () => {
   it('treats an exact zero remaining as sufficient, not insufficient', () => {
     const result = computeStockPreview(20, '2', '10');
     expect(result).toEqual({ totalUsed: 20, resultingStock: 0, insufficient: false });
+  });
+});
+
+describe('computeCostPreview', () => {
+  it('returns null when the product has no recorded price, never a fabricated €0', () => {
+    expect(computeCostPreview(null, '2', '10')).toBeNull();
+    expect(computeCostPreview(undefined, '2', '10')).toBeNull();
+  });
+
+  it('returns null when dose is not yet entered', () => {
+    expect(computeCostPreview(34.5, '', '10')).toBeNull();
+  });
+
+  it('returns null when area is not yet entered', () => {
+    expect(computeCostPreview(34.5, '2', '')).toBeNull();
+  });
+
+  it('returns null when dose or area are not valid numbers', () => {
+    expect(computeCostPreview(34.5, 'abc', '10')).toBeNull();
+    expect(computeCostPreview(34.5, '2', 'xyz')).toBeNull();
+  });
+
+  it('computes dose × area × unit price for a normal case', () => {
+    expect(computeCostPreview(34.5, '2', '10')).toEqual({ totalCost: 690 });
+  });
+
+  it('computes a zero total for a genuinely free product, distinct from an unknown price', () => {
+    expect(computeCostPreview(0, '2', '10')).toEqual({ totalCost: 0 });
   });
 });
 

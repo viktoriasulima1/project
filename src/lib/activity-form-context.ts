@@ -28,6 +28,10 @@ export interface ProductOption {
   category: string;
   currentStock: number;
   minimumStock: number;
+  // The product's own current purchase price — null when never recorded
+  // (a manually-added product with no price entered). Powers the activity
+  // form's cost preview; never guessed when absent.
+  unitCost: number | null;
 }
 
 export interface MachineOption {
@@ -152,6 +156,7 @@ export async function getActivityFormContext(farm: Farm): Promise<ActivityFormCo
       category: p.category,
       currentStock: Number(p.currentStock),
       minimumStock: Number(p.minimumStock),
+      unitCost: p.purchasePricePerUnit != null ? Number(p.purchasePricePerUnit) : null,
     })),
     machines: machines.map((m) => ({ id: m.id, name: m.name })),
     recentOperatorName: mostRecentActivity?.operatorName || null,

@@ -20,6 +20,27 @@ export function computeStockPreview(
   return { totalUsed, resultingStock, insufficient: resultingStock < 0 };
 }
 
+/** Pure client-side product-cost projection — dose × area × the product's
+ * own current purchase price. Returns null whenever there isn't enough
+ * input to compute anything, INCLUDING when the product has no recorded
+ * price — this mirrors economics-recording.ts's own totalCost rule
+ * (unitCost == null → no total, never a fabricated €0) so the preview
+ * never promises a number the saved record won't actually have. Preview
+ * only, and product cost only — machine/labour/fuel cost aren't included,
+ * since actualHours/machineHours/fuelUsed are optional, often-blank
+ * fields at the point of logging, not this activity's real total cost. */
+export function computeCostPreview(
+  unitCost: number | null | undefined,
+  dosePerHa: string,
+  areaHa: string,
+): { totalCost: number } | null {
+  if (unitCost == null || !dosePerHa || !areaHa) return null;
+  const dose = parseFloat(dosePerHa);
+  const area = parseFloat(areaHa);
+  if (!Number.isFinite(dose) || !Number.isFinite(area)) return null;
+  return { totalCost: dose * area * unitCost };
+}
+
 export interface ScoutingNotesInput {
   category: string;
   severity: string;
