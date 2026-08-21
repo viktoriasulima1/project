@@ -11,6 +11,7 @@ import type {
   FieldSeasonOption,
   ProductOption,
   MachineOption,
+  EmployeeOption,
   WeatherSnapshot,
   RecentActivityContext,
 } from '@/lib/activity-form-context';
@@ -44,6 +45,7 @@ interface Props {
   fieldSeasons: FieldSeasonOption[];
   products: ProductOption[];
   machines: MachineOption[];
+  employees: EmployeeOption[];
   farmId: string;
   recentOperatorName: string | null;
   recentMachineId: string | null;
@@ -75,6 +77,7 @@ export function ActivitiesClient({
   fieldSeasons,
   products,
   machines,
+  employees,
   farmId,
   recentOperatorName,
   recentMachineId,
@@ -171,6 +174,7 @@ export function ActivitiesClient({
           fieldSeasons={fieldSeasons}
           products={products}
           machines={machines}
+          employees={employees}
           recentOperatorName={recentOperatorName}
           recentMachineId={recentMachineId}
           weather={weather}

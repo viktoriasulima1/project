@@ -12,6 +12,7 @@ import type {
   FieldSeasonOption,
   ProductOption,
   MachineOption,
+  EmployeeOption,
   WeatherSnapshot,
   RecentActivityContext,
 } from '@/lib/activity-form-context';
@@ -58,6 +59,7 @@ interface Props {
   fieldSeasons: FieldSeasonOption[];
   products: ProductOption[];
   machines: MachineOption[];
+  employees: EmployeeOption[];
   defaultFieldSeasonId?: string;
   recentOperatorName?: string | null;
   recentMachineId?: string | null;
@@ -100,6 +102,7 @@ export function ActivityDialog({
   fieldSeasons,
   products,
   machines,
+  employees,
   defaultFieldSeasonId,
   recentOperatorName,
   recentMachineId,
@@ -432,6 +435,23 @@ export function ActivityDialog({
     [selectedProduct, dosePerHa, areaHa],
   );
 
+  // Live echo of createActivity's own spray-licence gate — same exact,
+  // case-insensitive name match (operatorName is free text, not a real
+  // link to Employee), so a typo or a contractor with no Team record still
+  // isn't flagged here either; there's nothing to check it against. Warns
+  // before the farmer even tries to save, instead of only after a
+  // rejected submit.
+  const operatorWarning = useMemo(() => {
+    if (!isSpray || !operatorName.trim()) return null;
+    const match = employees.find((e) => e.name.toLowerCase() === operatorName.trim().toLowerCase());
+    if (!match) return null;
+    if (!match.hasSpraying) return `${match.name} is not recorded as certified to spray.`;
+    if (match.certExpiry && new Date(match.certExpiry) < new Date()) {
+      return `${match.name}'s spraying certificate expired on ${new Date(match.certExpiry).toLocaleDateString('en-GB')}.`;
+    }
+    return null;
+  }, [isSpray, operatorName, employees]);
+
   const combinedNotes = isScout
     ? composeScoutingNotes({ category: scoutCategory, severity: scoutSeverity, affectedHa: scoutAffectedHa, userNotes })
     : userNotes;
@@ -682,6 +702,9 @@ export function ActivityDialog({
             <input type="hidden" name="type" value={dbType} />
             {linkedWorkOrder && <><input type="hidden" name="workOrderId" value={linkedWorkOrder.id} /><input type="hidden" name="workOrderVersion" value={linkedWorkOrder.version} /></>}
             <input type="hidden" name="notes" value={combinedNotes} />
+            <datalist id="operator-suggestions">
+              {employees.map((e) => <option key={e.id} value={e.name} />)}
+            </datalist>
 
             <div className={styles.body}>
               {aiParse && <div className={styles.localSaveStatus}>AI-prefilled draft — review every highlighted suggestion. Original description: “{activityText}”</div>}
@@ -853,12 +876,13 @@ export function ActivityDialog({
                         {recentOperatorName && <span className={styles.prefillHint}> · suggested</span>}
                       </label>
                       <input
-                        id="operatorName" name="operatorName"
-                        className={`${styles.input}${state.fieldErrors?.operatorName ? ` ${styles.hasError}` : ''}`}
-                        aria-describedby={state.fieldErrors?.operatorName ? 'activity-operator-error' : undefined}
+                        id="operatorName" name="operatorName" list="operator-suggestions"
+                        className={`${styles.input}${state.fieldErrors?.operatorName || operatorWarning ? ` ${styles.hasError}` : ''}`}
+                        aria-describedby={state.fieldErrors?.operatorName ? 'activity-operator-error' : operatorWarning ? 'activity-operator-warning' : undefined}
                         value={operatorName} onChange={(e) => setOperatorName(e.target.value)} placeholder="Full name"
                       />
                       {fieldError('operatorName') && <span id="activity-operator-error" className={styles.errorMsg}>{fieldError('operatorName')}</span>}
+                      {!fieldError('operatorName') && operatorWarning && <span id="activity-operator-warning" className={styles.errorMsg}>⚠ {operatorWarning}</span>}
                     </div>
                     <div className={styles.fieldGroup}>
                       <label className={styles.label} htmlFor="machineId">
@@ -1046,7 +1070,7 @@ export function ActivityDialog({
                         <div className={styles.row}>
                           <div className={styles.fieldGroup}>
                             <label className={styles.label} htmlFor="operatorNameAdv">Operator (optional)</label>
-                            <input id="operatorNameAdv" name="operatorName" className={styles.input} defaultValue={recentOperatorName ?? ''} />
+                            <input id="operatorNameAdv" name="operatorName" list="operator-suggestions" className={styles.input} defaultValue={recentOperatorName ?? ''} />
                           </div>
                           {machines.length > 0 && (
                             <div className={styles.fieldGroup}>
@@ -1102,7 +1126,7 @@ export function ActivityDialog({
                   Save activity. */}
               <Button
                 type="submit" name="status" value="completed"
-                variant="primary" loading={isPending} disabled={stockPreview?.insufficient}
+                variant="primary" loading={isPending} disabled={stockPreview?.insufficient || Boolean(operatorWarning)}
                 style={{ order: 2 }}
               >
                 Save activity
@@ -1110,7 +1134,7 @@ export function ActivityDialog({
               {isSpray && (
                 <Button
                   type="submit" name="status" value="planned"
-                  variant="secondary" loading={isPending}
+                  variant="secondary" loading={isPending} disabled={Boolean(operatorWarning)}
                   style={{ order: 1 }}
                 >
                   Save as planned

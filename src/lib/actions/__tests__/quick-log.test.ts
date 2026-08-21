@@ -9,7 +9,7 @@ import { getActivityFormContext } from '@/lib/activity-form-context';
 
 const farm = { id: 'farm-1', name: 'Safe farm' };
 const context = {
-  fieldSeasons: [], products: [], machines: [], recentOperatorName: null,
+  fieldSeasons: [], products: [], machines: [], employees: [], recentOperatorName: null,
   recentMachineId: null, weather: null,
 };
 

@@ -5,6 +5,7 @@ const { mockDb } = vi.hoisted(() => {
     fieldSeason: { findMany: vi.fn() },
     inventoryItem: { findMany: vi.fn() },
     machine: { findMany: vi.fn() },
+    employee: { findMany: vi.fn() },
     activity: { findFirst: vi.fn(), findMany: vi.fn() },
   };
   return { mockDb };
@@ -41,6 +42,7 @@ function setupDefaultMocks() {
   mockDb.fieldSeason.findMany.mockResolvedValue([]);
   mockDb.inventoryItem.findMany.mockResolvedValue([]);
   mockDb.machine.findMany.mockResolvedValue([]);
+  mockDb.employee.findMany.mockResolvedValue([]);
   mockDb.activity.findFirst.mockResolvedValue(null);
   mockDb.activity.findMany.mockResolvedValue([]);
   mockFetchWeather.mockResolvedValue({
@@ -85,6 +87,28 @@ describe('getActivityFormContext', () => {
     const result = await getActivityFormContext(FARM_WITH_COORDS);
 
     expect(result.fieldSeasons[0].geometry).toBeNull();
+  });
+
+  it('maps the active team roster for the operator autocomplete', async () => {
+    mockDb.employee.findMany.mockResolvedValue([
+      { id: 'emp-1', name: 'Jan de Vries', hasSpraying: true, certExpiry: new Date('2027-06-01') },
+      { id: 'emp-2', name: 'Piet Bakker', hasSpraying: false, certExpiry: null },
+    ] as never);
+
+    const result = await getActivityFormContext(FARM_WITH_COORDS);
+
+    expect(result.employees).toEqual([
+      { id: 'emp-1', name: 'Jan de Vries', hasSpraying: true, certExpiry: '2027-06-01T00:00:00.000Z' },
+      { id: 'emp-2', name: 'Piet Bakker', hasSpraying: false, certExpiry: null },
+    ]);
+  });
+
+  it('only queries active team members for the operator autocomplete', async () => {
+    await getActivityFormContext(FARM_WITH_COORDS);
+
+    expect(mockDb.employee.findMany).toHaveBeenCalledWith(
+      expect.objectContaining({ where: { farmId: 'farm-1', isActive: true } }),
+    );
   });
 
   it('gives each field its own most recent operator/machine, not the farm-wide one', async () => {

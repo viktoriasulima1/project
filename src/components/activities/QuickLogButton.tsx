@@ -88,6 +88,7 @@ export function QuickLogButton() {
           fieldSeasons={context.fieldSeasons}
           products={context.products}
           machines={context.machines}
+          employees={context.employees}
           recentOperatorName={context.recentOperatorName}
           recentMachineId={context.recentMachineId}
           weather={context.weather}

@@ -144,6 +144,7 @@ export default async function ActivitiesPage({
         fieldSeasons={formContext.fieldSeasons}
         products={formContext.products}
         machines={formContext.machines}
+        employees={formContext.employees}
         farmId={farm.id}
         recentOperatorName={formContext.recentOperatorName}
         recentMachineId={formContext.recentMachineId}

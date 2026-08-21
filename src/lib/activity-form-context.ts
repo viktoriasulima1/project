@@ -39,6 +39,14 @@ export interface MachineOption {
   name: string;
 }
 
+export interface EmployeeOption {
+  id: string;
+  name: string;
+  hasSpraying: boolean;
+  // ISO date string, or null when the employee has no certificate on file.
+  certExpiry: string | null;
+}
+
 export interface WeatherSnapshot {
   tempC: number;
   windKmh: number;
@@ -59,6 +67,11 @@ export interface ActivityFormContext {
   fieldSeasons: FieldSeasonOption[];
   products: ProductOption[];
   machines: MachineOption[];
+  // Team roster, for the operator field's autocomplete — operatorName stays
+  // free text (no schema change), but suggesting real names nudges toward
+  // an exact match, which is what both the per-field prefill and the
+  // spray-licence gate in createActivity key off.
+  employees: EmployeeOption[];
   recentOperatorName: string | null;
   recentMachineId: string | null;
   weather: WeatherSnapshot | null;
@@ -76,7 +89,7 @@ function degreesToLabel(deg: number): string {
  * own version of "recent operator" or "current weather."
  */
 export async function getActivityFormContext(farm: Farm): Promise<ActivityFormContext> {
-  const [fieldSeasons, products, machines, mostRecentActivity, recentPerFieldSeason, weatherData] = await Promise.all([
+  const [fieldSeasons, products, machines, employees, mostRecentActivity, recentPerFieldSeason, weatherData] = await Promise.all([
     db.fieldSeason.findMany({
       where: {
         field: { farmId: farm.id, deletedAt: null },
@@ -92,6 +105,11 @@ export async function getActivityFormContext(farm: Farm): Promise<ActivityFormCo
     db.machine.findMany({
       where: { farmId: farm.id },
       orderBy: { name: 'asc' },
+    }),
+    db.employee.findMany({
+      where: { farmId: farm.id, isActive: true },
+      orderBy: { name: 'asc' },
+      select: { id: true, name: true, hasSpraying: true, certExpiry: true },
     }),
     db.activity.findFirst({
       where: { fieldSeason: { field: { farmId: farm.id } }, deletedAt: null },
@@ -159,6 +177,7 @@ export async function getActivityFormContext(farm: Farm): Promise<ActivityFormCo
       unitCost: p.purchasePricePerUnit != null ? Number(p.purchasePricePerUnit) : null,
     })),
     machines: machines.map((m) => ({ id: m.id, name: m.name })),
+    employees: employees.map((e) => ({ id: e.id, name: e.name, hasSpraying: e.hasSpraying, certExpiry: e.certExpiry ? e.certExpiry.toISOString() : null })),
     recentOperatorName: mostRecentActivity?.operatorName || null,
     recentMachineId: mostRecentActivity?.machineId ?? null,
     weather,
