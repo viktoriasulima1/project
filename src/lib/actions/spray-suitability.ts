@@ -14,9 +14,6 @@ import { getCachedProductByLocalId } from '@/integrations/ctgb/cache';
 import { checkCtgbCompliance } from '@/lib/ctgb-compliance-check';
 import type { CtgbComplianceResult } from '@/lib/ctgb-compliance-check';
 
-const FALLBACK_LAT = parseFloat(process.env.NEXT_PUBLIC_FARM_LATITUDE ?? '51.9652');
-const FALLBACK_LON = parseFloat(process.env.NEXT_PUBLIC_FARM_LONGITUDE ?? '5.9307');
-
 // prisma's CropName enum has a wider/different vocabulary than the engine's
 // own CropName type (see dashboard-data.ts's identical PRISMA_CROP_MAP) —
 // crops with no real mapping are honestly omitted, not guessed.
@@ -113,8 +110,16 @@ export async function evaluateSpraySuitability(
       return { success: false, error: 'Machine not found or does not belong to this farm.' };
     }
 
-    const lat = farm.latitude != null ? Number(farm.latitude) : FALLBACK_LAT;
-    const lon = farm.longitude != null ? Number(farm.longitude) : FALLBACK_LON;
+    // No fallback to a default location — this is a suitability check for a
+    // real planned spray, fail-closed like every other missing-context case
+    // in this function. Silently substituting an unrelated location's
+    // weather could tell a farmer conditions are safe (or unsafe) based on
+    // weather that was never actually theirs.
+    if (farm.latitude == null || farm.longitude == null) {
+      return { success: false, error: 'Weather suitability cannot be calculated — add your farm\'s location on the Weather page first.' };
+    }
+    const lat = Number(farm.latitude);
+    const lon = Number(farm.longitude);
     let weather;
     try {
       weather = await fetchWeather(lat, lon);

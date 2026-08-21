@@ -99,6 +99,18 @@ describe('getFarmInsights', () => {
   });
 
   // Test 20: Cross-farm insight access is rejected
+  it('never fetches weather for a farm with no coordinates, rather than falling back to a default location', async () => {
+    // Farm Insights used to fall back to a hardcoded NL coordinate when
+    // farm.latitude/longitude were unset, silently feeding spray-window
+    // insight cards from weather at a location that isn't this farm's —
+    // with no indication of that in the copy. The Weather page's own rule
+    // is that no coordinates means no local weather, not a stand-in.
+    const farmNoCoords = { id: 'farm-1', latitude: null, longitude: null } as never;
+    const result = await getFarmInsights(farmNoCoords);
+    expect(mockFetchWeather).not.toHaveBeenCalled();
+    expect(result.insights.some((i) => i.id === 'spray-window-open' || i.id === 'spray-window-blocked')).toBe(false);
+  });
+
   it('scopes every underlying query to the current farm only', async () => {
     await getFarmInsights(FARM);
     expect(mockDb.task.findMany.mock.calls[0][0].where.farmId).toBe('farm-1');

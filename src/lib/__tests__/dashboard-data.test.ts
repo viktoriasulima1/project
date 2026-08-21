@@ -173,7 +173,13 @@ describe('getRealDashboardData', () => {
     expect(mockFetchWeather).toHaveBeenCalledWith(52.5, 6.1);
   });
 
-  it('uses the fallback coordinates when the farm has none set', async () => {
+  it('never fetches weather for a farm with no coordinates, rather than substituting a default location', async () => {
+    // A fetched forecast is shown labeled with this farm's own location text
+    // — silently fetching a hardcoded fallback coordinate here would show
+    // real-looking weather numbers under this farm's name that were never
+    // actually for its location. No coordinates must mean the same generic
+    // "weather unavailable" placeholder as any other fetch failure, not a
+    // forecast for somewhere else.
     const farmNoCoords = {
       id: 'farm-2',
       clerkUserId: 'user-2',
@@ -186,8 +192,13 @@ describe('getRealDashboardData', () => {
       latitude: null,
       longitude: null,
     } as never;
-    await getRealDashboardData(farmNoCoords);
-    // Fallback constants default to 51.9652 / 5.9307 per dashboard-data.ts
-    expect(mockFetchWeather).toHaveBeenCalledWith(51.9652, 5.9307);
+    const result = await getRealDashboardData(farmNoCoords);
+    expect(mockFetchWeather).not.toHaveBeenCalled();
+    expect(result.weather).toEqual({
+      location: 'Somewhere, NL',
+      currentTempCelsius: 15,
+      currentCondition: 'partly_cloudy',
+      days: [],
+    });
   });
 });

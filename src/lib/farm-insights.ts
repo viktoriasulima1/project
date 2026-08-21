@@ -125,9 +125,6 @@ interface RawInsight {
   sprayWindow?: SprayWindowSummary;
 }
 
-const FALLBACK_LAT = parseFloat(process.env.NEXT_PUBLIC_FARM_LATITUDE ?? '51.9652');
-const FALLBACK_LON = parseFloat(process.env.NEXT_PUBLIC_FARM_LONGITUDE ?? '5.9307');
-
 // English grounding text for the AI-briefing / Insights list, derived from the
 // canonical Field Health CODES + structured evidence (the resolver no longer
 // emits prose — Stage 2B). The Insights surface is English for every insight type
@@ -186,9 +183,15 @@ export async function getFarmInsights(farm: Farm): Promise<FarmInsightsResult> {
       where: { activity: { fieldSeason: { field: { farmId: farm.id } } }, confirmed: false },
       select: { id: true },
     }),
+    // No fallback to a default location — the Weather page's own rule
+    // (src/app/(farm)/weather/page.tsx) is that a farm with no coordinates
+    // gets no local weather, not a stand-in from somewhere else. This
+    // resolver used to fetch a hardcoded NL coordinate here, which fed
+    // "spray window open now" / "blocked" cards below with no indication
+    // the weather behind them wasn't for this farm's actual location.
     farm.latitude != null && farm.longitude != null
       ? fetchWeather(Number(farm.latitude), Number(farm.longitude)).catch(() => null)
-      : fetchWeather(FALLBACK_LAT, FALLBACK_LON).catch(() => null),
+      : Promise.resolve(null),
     db.fieldSeason.findMany({where:{field:{farmId:farm.id,deletedAt:null},season:{isActive:true}},include:{field:{select:{id:true,name:true}},cropStageRecords:{where:{isEffective:true},take:1},scoutingVisits:{orderBy:{visitDate:'desc'},take:20,include:{observations:{include:{suggestions:true,followUpWorkOrder:true}}}}}}),
   ]);
 

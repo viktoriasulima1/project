@@ -17,9 +17,6 @@ import type {
   CropName,
 } from '@/types/farm';
 
-const FALLBACK_LAT = parseFloat(process.env.NEXT_PUBLIC_FARM_LATITUDE ?? '51.9652');
-const FALLBACK_LON = parseFloat(process.env.NEXT_PUBLIC_FARM_LONGITUDE ?? '5.9307');
-
 // ─── Type mappers ─────────────────────────────────────────────────────────────
 
 const PRISMA_CATEGORY_MAP: Record<string, InventoryCategory> = {
@@ -73,10 +70,14 @@ export async function buildWeatherForecast(
   latitude: number | null,
   longitude: number | null,
 ): Promise<WeatherForecast | null> {
+  // No fallback to a default location — the caller already has a generic
+  // "weather unavailable" placeholder for a null return (getRealDashboardData
+  // below), which is the honest thing to show a farm with no coordinates on
+  // file, not a specific-looking forecast that's actually for somewhere else
+  // while the location label still reads as this farm's own.
+  if (latitude == null || longitude == null) return null;
   try {
-    const lat = latitude ?? FALLBACK_LAT;
-    const lon = longitude ?? FALLBACK_LON;
-    const data = await fetchWeather(lat, lon);
+    const data = await fetchWeather(latitude, longitude);
 
     const days: WeatherDay[] = data.daily.map((d) => ({
       date: d.date,

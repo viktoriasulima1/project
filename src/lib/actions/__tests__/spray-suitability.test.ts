@@ -128,6 +128,18 @@ describe('evaluateSpraySuitability', () => {
     if (!result.success) expect(result.error).toContain('Field not found');
   });
 
+  it('fails closed with an honest error, never a fallback-location forecast, when the farm has no coordinates', async () => {
+    // A suitability check without the farm's real location must never
+    // silently substitute an unrelated coordinate — a farmer could read
+    // "conditions are safe" or "blocked" based on weather that was never
+    // actually theirs. Missing context is a hard blocker here by design.
+    vi.mocked(getActiveFarmOrThrow).mockResolvedValue({ id: 'farm-1', latitude: null, longitude: null } as never);
+    const result = await evaluateSpraySuitability({ fieldSeasonId: 'fs-1', date: '2026-07-07' });
+    expect(result.success).toBe(false);
+    if (!result.success) expect(result.error).toContain('location');
+    expect(fetchWeather).not.toHaveBeenCalled();
+  });
+
   // Test 17: Raw internal errors do not reach UI
   it('never leaks a raw internal error message when the weather fetch fails', async () => {
     vi.mocked(fetchWeather).mockRejectedValue(new Error('ECONNREFUSED 10.0.0.5:443 — internal socket detail'));

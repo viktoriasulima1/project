@@ -13,9 +13,6 @@ import { buildCtgbSnapshotExtra } from '@/lib/ctgb-snapshot';
 import { createHash } from 'node:crypto';
 import { recordActivityInputEconomics, recordActivityOperationalEconomics } from '@/lib/economics-recording';
 
-const FALLBACK_LAT = parseFloat(process.env.NEXT_PUBLIC_FARM_LATITUDE ?? '51.9652');
-const FALLBACK_LON = parseFloat(process.env.NEXT_PUBLIC_FARM_LONGITUDE ?? '5.9307');
-
 // Base shape is intentionally permissive — DB-required columns (operatorName,
 // areaHa) get safe defaults here, and the *actual* per-type requirements
 // (Sprint 11 Parts 4–6: spray needs product/dose/water volume/machine/nozzle;
@@ -717,18 +714,23 @@ export async function completeActivity(id: string): Promise<{ error?: UserFacing
         weatherHumidity: number;
       } | null = null;
       try {
-        const lat = farm.latitude != null ? Number(farm.latitude) : FALLBACK_LAT;
-        const lon = farm.longitude != null ? Number(farm.longitude) : FALLBACK_LON;
-        const weather = await fetchWeather(lat, lon);
-        const today = getAmsterdamDateString();
-        const currentHour = weather.hourly.find((h) => h.time.startsWith(today));
-        if (currentHour) {
-          freshWeather = {
-            weatherTempC: currentHour.temperature,
-            weatherWindKmh: Math.round(currentHour.windSpeed),
-            weatherWindDir: windDirectionLabel(currentHour.windDirection),
-            weatherHumidity: Math.round(currentHour.relativeHumidity),
-          };
+        // No fallback to a default location — this snapshot is written onto
+        // a compliance record as if it were the real conditions at this
+        // farm. A farm with no coordinates on file gets no fresh snapshot,
+        // same as any other weather-unavailable case below, rather than a
+        // fabricated reading from an unrelated location.
+        if (farm.latitude != null && farm.longitude != null) {
+          const weather = await fetchWeather(Number(farm.latitude), Number(farm.longitude));
+          const today = getAmsterdamDateString();
+          const currentHour = weather.hourly.find((h) => h.time.startsWith(today));
+          if (currentHour) {
+            freshWeather = {
+              weatherTempC: currentHour.temperature,
+              weatherWindKmh: Math.round(currentHour.windSpeed),
+              weatherWindDir: windDirectionLabel(currentHour.windDirection),
+              weatherHumidity: Math.round(currentHour.relativeHumidity),
+            };
+          }
         }
       } catch {
         // Weather unavailable at completion time — keep whatever snapshot
